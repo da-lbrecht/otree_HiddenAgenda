@@ -1,12 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="db" uuid="40c34dc7-e75b-48a4-9cbe-34f6572bfb19">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/hiddenagenda/db.sqlite3</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-  </component>
-</project>
+version https://git-lfs.github.com/spec/v1
+oid sha256:6af5f663e1ecb05165308b837bf2bd74ce6cfa362e46f750ae388f2aef01630e
+size 530

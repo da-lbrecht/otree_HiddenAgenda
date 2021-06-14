@@ -1,18 +1,3 @@
-console.log("basics ready!")
-
-let timeout  = js_vars.timeout || 999999999999;
-
-// tooltip
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-
-// popover
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
-
-// submit in case you don't use buttons
-function submitPage() {
-    document.forms[0].submit()
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:0cdc23eb7708d836a9ad32e84e8b4fe9f313789aa8ee5a674dbe25724f4c257c
+size 320
