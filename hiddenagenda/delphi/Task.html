@@ -8,8 +8,8 @@
 
     <script>
         function saveTime() {
-            let beginRound2Time = new Date().getTime();
-            document.getElementById("beginround2_time").value = beginRound2Time;
+            let endroundtime = new Date().getTime();
+            document.getElementById("endround_time").value = endroundtime;
         }
     </script>
 {% endblock %}
@@ -156,10 +156,22 @@
                 <div class="card-body">
                     <div>
                         <p>
-                            At first, all members of your group will give their own estimate of the chance that Kara will
+                            At first, all members of your group will give their individual estimate of the chance that Kara will
                             reach the target area, when the program is executed for the next time. What is your own
                             estimate?
                         </p>
+
+                            {{ formfield 'first_indivestim' }} in 100
+
+                        <br>
+
+                        <p>
+                            Now that you have seen the estimates by the other group members, and their reasoning you have
+                            the chance to revise your own estimate. What is your new estimate?
+                        </p>
+
+                            {{ formfield 'second_indivestim' }} in 100
+
 
                     </div>
 
@@ -179,7 +191,7 @@
                             <button class="btn btn-primary btn-large" onclick="saveTime()">Continue with next round</button>
                         </div>
 
-                        <input id="beginround2_time" name="beginround2_time" type="hidden" value=""/>
+                        <input id="endround_time" name="endround_time" type="hidden" value=""/>
 
                     </div>
                 </div>

@@ -27,7 +27,12 @@ class Player(BasePlayer):
     starting_time = models.LongStringField(doc="Time at which Informed Consent is given and experiment starts")
     begintrial_time = models.LongStringField(doc="Time at which trial round is started")
 
-    beginround2_time = models.LongStringField(doc="Time at which round2 is started")
+    endround_time = models.LongStringField(doc="Time at which a task round is started")
+
+
+    first_indivestim = models.FloatField(label="My first estimate:")
+    second_indivestim = models.FloatField(label="My second estimate:")
+
 
 
 # PAGES
@@ -35,18 +40,14 @@ class Welcome(Page):
     form_model = 'player'
     form_fields = ['starting_time']
 
-class Welcome2(Page):
-    form_model = 'player'
-    form_fields = ['starting_time']
-    form_fields = ['beginround2_time']
-
 class TaskIntro(Page):
     form_model = 'player'
     form_fields = ['begintrial_time']
 
-class Round1(Page):
+class Task(Page):
     form_model = 'player'
-    form_fields = ['beginround2_time']
+    form_fields = ['endround_time', 'first_indivestim', 'second_indivestim']
+
 
 class MyPage(Page):
     pass
@@ -60,4 +61,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [Welcome, TaskIntro, Round1, MyPage, ResultsWaitPage, Results]
+page_sequence = [Welcome, TaskIntro, Task, MyPage, ResultsWaitPage, Results]
