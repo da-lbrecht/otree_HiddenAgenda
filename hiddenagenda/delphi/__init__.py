@@ -66,15 +66,36 @@ class Welcome(Page):
     form_model = 'player'
     form_fields = ['starting_time']
 
+    @staticmethod
+    def is_displayed(subsession: Subsession):
+        return subsession.round_number == 1
+
 class TaskIntro(Page):
     form_model = 'player'
     form_fields = ['begintrial_time',
                    'attention_check_1', 'attention_check_2', 'attention_check_3', 'attention_check_4', 'attention_check_5']
 
+    @staticmethod
+    def is_displayed(subsession: Subsession):
+        return subsession.round_number == 1
 
-class Task(Page):
+
+class Task_Round_1(Page):
     form_model = 'player'
     form_fields = ['endround_time', 'first_indivestim', 'second_indivestim']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_displayed == 1
+
+
+class Task_Round_2(Page):
+    form_model = 'player'
+    form_fields = ['endround_time', 'first_indivestim', 'second_indivestim']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_displayed == 2
 
 
 class MyPage(Page):
@@ -86,7 +107,11 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-    pass
+    @staticmethod
+    def is_displayed(subsession: Subsession):
+        return subsession.round_number == Constants.num_rounds
 
 
-page_sequence = [Welcome, TaskIntro, Task, MyPage, ResultsWaitPage, Results]
+page_sequence = [Welcome, TaskIntro,
+                 Task_Round_1, Task_Round_2,
+                 Results]
