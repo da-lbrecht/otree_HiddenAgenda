@@ -77,8 +77,33 @@ class TaskIntro(Page):
 
     @staticmethod
     def is_displayed(subsession: Subsession):
-        return subsession.round_number == 1
+        if subsession.round_number == 1:
+            return True
+        else:
+            return player.participant.vars["failed_attention_check"]
 
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        if (
+            player.attention_check_1 == Constants.num_rounds
+        ):
+            player.participant.vars["failed_attention_check"] = False
+        else:
+            player.participant.vars["failed_attention_check"] = True
+
+    @staticmethod
+    def error_message(player, values):
+        print('values is', values)
+        if values['attention_check_1'] != Constants.num_rounds:
+            return 'You did not enter the right number of rounds. Please take a second look at the instructions.'
+        if values['attention_check_2'] != Constants.num_rounds:
+            return 'You did not enter the right number of rounds. Please take a second look at the instructions.'
+        if values['attention_check_3'] != Constants.num_rounds:
+            return 'You did not enter the right number of rounds. Please take a second look at the instructions.'
+        if values['attention_check_4'] != Constants.num_rounds:
+            return 'You did not enter the right number of rounds. Please take a second look at the instructions.'
+        if values['attention_check_5'] != Constants.num_rounds:
+            return 'You did not enter the right number of rounds. Please take a second look at the instructions.'
 
 class Task_Round_1(Page):
     form_model = 'player'
@@ -87,6 +112,7 @@ class Task_Round_1(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_displayed == 1
+
 
 
 class Task_Round_2(Page):
