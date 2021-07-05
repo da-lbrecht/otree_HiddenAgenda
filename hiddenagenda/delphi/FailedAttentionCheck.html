@@ -18,12 +18,15 @@
 {% block title %}
     <table class="table">
         <tr>
-            <td style="width:70%;border-color:transparent">Welcome to this study!</td>
+            <td style="width:70%;border-color:transparent">Please have another look at the instructions!</td>
             <td style="width:30%;border-color:transparent;text-align: right;">
                 <img src="{% static 'img/um_logo.jpg' %}" style="width:30%;">
             </td>
         </tr>
     </table>
+    <div class="alert alert-danger" role="alert" style="font-size:medium;">
+        You did not answer all questions correctly. Please correct your answers.
+    </div>
 {% endblock %}
 
 
@@ -183,6 +186,7 @@
                         </p>
 
                         {{ formfield 'attention_check_1' }}
+                        {{ formfield_errors 'attention_check_1' }}
                         {{ formfield 'attention_check_2' }}
                         {{ formfield 'attention_check_3' }}
                         {{ formfield 'attention_check_4' }}

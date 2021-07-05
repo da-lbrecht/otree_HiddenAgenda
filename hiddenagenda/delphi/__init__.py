@@ -36,19 +36,19 @@ class Player(BasePlayer):
                                               "num_rounds")
 
     # Response variables for attention checks
-    attention_check_1 = models.IntegerField(label="How many rounds of the task will you play after the trial round?",
+    attention_check_1 = models.IntegerField(label="Q1: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
-    attention_check_2 = models.IntegerField(label="How many rounds of the task will you play after the trial round?",
+    attention_check_2 = models.IntegerField(label="Q2: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
-    attention_check_3 = models.IntegerField(label="How many rounds of the task will you play after the trial round?",
+    attention_check_3 = models.IntegerField(label="Q3: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
-    attention_check_4 = models.IntegerField(label="How many rounds of the task will you play after the trial round?",
+    attention_check_4 = models.IntegerField(label="Q4: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
-    attention_check_5 = models.IntegerField(label="How many rounds of the task will you play after the trial round?",
+    attention_check_5 = models.IntegerField(label="Q5: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
     failed_attention_check = models.BooleanField(initial=False,
@@ -115,33 +115,6 @@ class TaskIntro(Page):
             player.failed_attention_check = True
             player.attention_check_tries = player.attention_check_tries + 1
 
-    #@staticmethod
-    #def error_message(player, values):
-    #    print('values is', values)
-    #    if (
-    #        values['attention_check_1'] != Constants.num_rounds
-    #        or values['attention_check_2'] != Constants.num_rounds
-    #        or values['attention_check_3'] != Constants.num_rounds
-    #        or values['attention_check_4'] != Constants.num_rounds
-    #        or values['attention_check_5'] != Constants.num_rounds
-    #    ):
-    #        return 'You did not answer all questions correctly. Please take a second look at the instructions.'
-
-    #@staticmethod
-    #def error_message(player, values):
-    #    print('values is', values)
-    #    if values['attention_check_1'] != Constants.num_rounds:
-    #        return 'You did not enter the 1 correct number of rounds.'
-    #    if values['attention_check_2'] != Constants.num_rounds:
-    #        return 'You did not enter the 2 correct number of rounds.'
-    #    if values['attention_check_3'] != Constants.num_rounds:
-    #        return 'You did not enter the 3 correct number of rounds.'
-    #    if values['attention_check_4'] != Constants.num_rounds:
-    #        return 'You did not enter the 4 correct number of rounds.'
-    #    if values['attention_check_5'] != Constants.num_rounds:
-    #        return 'You did not enter the 5 correct number of rounds.'
-
-
 
 class FailedAttentionCheck(Page):
     form_model = 'player'
@@ -155,26 +128,30 @@ class FailedAttentionCheck(Page):
     @staticmethod
     def is_displayed(player: Player):
         if (
-                player.round_number == 1
-                and player.failed_attention_check == True
+                player.failed_attention_check == True
         ):
             return True
 
     @staticmethod
-    def error_message(player, values):
-        print('values is', values)
-        if player.failed_attention_check == True:
-            return 'You did not answer all questions correctly. Please take a second look at the instructions.'
+    def before_next_page(player: Player, timeout_happened):
+        if (
+                player.attention_check_1 == Constants.num_rounds
+                and player.attention_check_2 == Constants.num_rounds
+                and player.attention_check_3 == Constants.num_rounds
+                and player.attention_check_4 == Constants.num_rounds
+                and player.attention_check_5 == Constants.num_rounds
+        ):
+            player.failed_attention_check = False
+        else:
+            player.failed_attention_check = True
+            player.attention_check_tries = player.attention_check_tries + 1
 
-    #@staticmethod
-    #def before_next_page(player: Player, timeout_happened):
-    #    if (
-    #        player.attention_check_1 == Constants.num_rounds
-    #    ):
-    #        player.participant.vars["failed_attention_check"] = False
-    #    else:
-    #        player.participant.vars["failed_attention_check"] = True
-    #        player.attention_check_tries = player.attention_check_tries + 1
+    @staticmethod
+    def error_message(player: Player, values):
+        if (
+                values['attention_check_1'] != Constants.num_rounds:
+            return 'Your answer to Q1 is still incorrect.'
+
 
 class Task_Round_1(Page):
     form_model = 'player'
