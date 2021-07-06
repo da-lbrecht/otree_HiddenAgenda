@@ -149,8 +149,21 @@ class FailedAttentionCheck(Page):
     @staticmethod
     def error_message(player: Player, values):
         if (
-                values['attention_check_1'] != Constants.num_rounds:
-            return 'Your answer to Q1 is still incorrect.'
+                player.attention_check_1 != Constants.num_rounds
+                or player.attention_check_2 != Constants.num_rounds
+                or player.attention_check_3 != Constants.num_rounds
+                or player.attention_check_4 != Constants.num_rounds
+                or player.attention_check_5 != Constants.num_rounds
+        ):
+            incorrect_answers = np.array([ values['attention_check_1'] != Constants.num_rounds,
+                                values['attention_check_2'] != Constants.num_rounds,
+                                values['attention_check_3'] != Constants.num_rounds,
+                                values['attention_check_4'] != Constants.num_rounds,
+                                values['attention_check_5'] != Constants.num_rounds,
+                                ], dtype=bool)
+            # incorrect_answers.np.astype(int)
+            questions  = ' and '.join(np.array(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'])[incorrect_answers])
+            return 'Your answers to the following questions are still incorrect: ' + questions
 
 
 class Task_Round_1(Page):
