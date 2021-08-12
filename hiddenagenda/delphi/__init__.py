@@ -64,7 +64,7 @@ class Player(BasePlayer):
     # Response variables for estimation
     first_indivestim = models.FloatField(label="My first estimate:",
                                          doc="First individual estimate given in Delphi procedure")
-    indivarg = models.IntegerField(label="My reasoning behind my first estimate",
+    indivarg = models.StringField(label="My reasoning behind my first estimate",
                                    doc="Reasoning given for first individual estimate given in Delphi procedure")
     second_indivestim = models.FloatField(label="My second estimate:",
                                           doc="Second individual estimate given in Delphi procedure")
@@ -187,30 +187,39 @@ class Task_Round_1(Page):
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
-            if player.id_in_group == 1:
-                player.first_indivestim = data["estimate"]
-                Subsession.estimate_a = player.first_indivestim
-                Subsession.num_estims = Subsession.num_estims + 1
-                # player.indivarg = data["indivarg"]
-            elif player.id_in_group == 2:
-                player.first_indivestim = data["estimate"]
-                Subsession.estimate_b = player.first_indivestim
-                Subsession.num_estims = Subsession.num_estims + 1
-                # player.indivarg = data["indivarg"]
-            elif player.id_in_group == 3:
-                player.first_indivestim = data["estimate"]
-                Subsession.estimate_c = player.first_indivestim
-                Subsession.num_estims = Subsession.num_estims + 1
-                # player.indivarg = data["indivarg"]
-            elif player.id_in_group == 4:
-                player.first_indivestim = data["estimate"]
-                Subsession.estimate_d = player.first_indivestim
-                Subsession.num_estims = Subsession.num_estims + 1
-                # player.indivarg = data["indivarg"]
+            player.first_indivestim = data["estimate"]
 
-        if Subsession.num_estims == 4:
-            return {0: {"information_type": "estimate_a", "estimate_a": Subsession.estimate_a},
-            }
+        if data["information_type"] == "reasoning":
+            player.indivarg = data["reasoning"]
+
+        #     if player.id_in_group == 1:
+        #         player.first_indivestim = data["estimate"]
+        #         # Subsession.estimate_a = player.first_indivestim
+
+        #     if player.id_in_group == 1:
+        #         player.first_indivestim = data["estimate"]
+        #         # Subsession.estimate_a = player.first_indivestim
+        #         # Subsession.num_estims = Subsession.num_estims + 1
+        #         # player.indivarg = data["indivarg"]
+        #     elif player.id_in_group == 2:
+        #         player.first_indivestim = data["estimate"]
+        #         # Subsession.estimate_b = player.first_indivestim
+        #         # Subsession.num_estims = Subsession.num_estims + 1
+        #         # player.indivarg = data["indivarg"]
+        #     elif player.id_in_group == 3:
+        #         player.first_indivestim = data["estimate"]
+        #         # Subsession.estimate_c = player.first_indivestim
+        #         # Subsession.num_estims = Subsession.num_estims + 1
+        #         # player.indivarg = data["indivarg"]
+        #     elif player.id_in_group == 4:
+        #         player.first_indivestim = data["estimate"]
+        #         Subsession.estimate_d = player.first_indivestim
+        #         Subsession.num_estims = Subsession.num_estims + 1
+        #         # player.indivarg = data["indivarg"]
+        #
+        # if Subsession.num_estims == 4:
+        #     return {0: {"information_type": "estimate_a", "estimate_a": Subsession.estimate_a},
+        #     }
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):

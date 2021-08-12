@@ -21,8 +21,9 @@
 
     function make_first_indivestim() {
         first_indivestim = parseFloat(document.getElementById("first_indivestim").value)
-        indivarg = document.getElementById("indivarg")
+        indivarg = document.getElementById("indivarg").value
         liveSend({"information_type": "estimate", "estimate": first_indivestim})
+        liveSend({"information_type": "reasoning", "reasoning": indivarg})
         document.getElementById("first_estimate").style.display = "none";
         document.getElementById("wait_for_others").style.display = "block";
     }
