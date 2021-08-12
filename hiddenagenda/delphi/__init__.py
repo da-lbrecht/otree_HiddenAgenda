@@ -18,12 +18,16 @@ class Constants(BaseConstants):
     num_attention_checks = 5
 
 class Subsession(BaseSubsession):
-    pass
+    # Temporarily stored variables during Delphi process
+    estimate_a = models.FloatField
+    estimate_b = models.FloatField
+    estimate_c = models.FloatField
+    estimate_d = models.FloatField
+    num_estims = models.FloatField
 
 
 class Group(BaseGroup):
     pass
-
 
 class Player(BasePlayer):
     # Process variables
@@ -58,8 +62,12 @@ class Player(BasePlayer):
                                                 doc="Number of attempts needed to pass attention check questions")
 
     # Response variables for estimation
-    first_indivestim = models.FloatField(label="My first estimate:")
-    second_indivestim = models.FloatField(label="My second estimate:")
+    first_indivestim = models.FloatField(label="My first estimate:",
+                                         doc="First individual estimate given in Delphi procedure")
+    indivarg = models.IntegerField(label="My reasoning behind my first estimate",
+                                   doc="Reasoning given for first individual estimate given in Delphi procedure")
+    second_indivestim = models.FloatField(label="My second estimate:",
+                                          doc="Second individual estimate given in Delphi procedure")
 
 
 # FUNCTIONS
@@ -141,9 +149,9 @@ class FailedAttentionCheck(Page):
                 and player.attention_check_4 == Constants.num_rounds
                 and player.attention_check_5 == Constants.num_rounds
         ):
-            player.failed_attention_check = False
+            player.failed_second_attention_check = False
         else:
-            player.failed_attention_check = True
+            player.failed_second_attention_check = True
             player.attention_check_tries = player.attention_check_tries + 1
 
     @staticmethod
@@ -168,12 +176,47 @@ class FailedAttentionCheck(Page):
 
 class Task_Round_1(Page):
     form_model = 'player'
-    form_fields = ['endround_time', 'first_indivestim', 'second_indivestim']
+    form_fields = ['endround_time', 'first_indivestim', 'indivarg', 'second_indivestim']
 
     @staticmethod
     def is_displayed(player: Player):
         return player.round_displayed == 1
 
+    @staticmethod
+    def live_method(player: Player, data):
+        group = player.group
+        players = group.get_players()
+        if player.id_in_group == 1:
+            player.first_indivestim = data["first_indivestim"]
+            Subsession.estimate_a = player.first_indivestim
+            Subsession.num_estims = Subsession.num_estims + 1
+            #player.indivarg = data["indivarg"]
+        elif player.id_in_group == 2:
+            player.first_indivestim = data["first_indivestim"]
+            Subsession.estimate_b = player.first_indivestim
+            Subsession.num_estims = Subsession.num_estims + 1
+            #player.indivarg = data["indivarg"]
+        elif player.id_in_group == 3:
+            player.first_indivestim = data["first_indivestim"]
+            Subsession.estimate_c = player.first_indivestim
+            Subsession.num_estims = Subsession.num_estims + 1
+            #player.indivarg = data["indivarg"]
+        elif player.id_in_group == 4:
+            player.first_indivestim = data["first_indivestim"]
+            Subsession.estimate_d = player.first_indivestim
+            Subsession.num_estims = Subsession.num_estims + 1
+            #player.indivarg = data["indivarg"]
+        if  Subsession.num_estims == 4:
+            return {
+                p.id_in_group: dict(
+                    estimate_a=Subsession.estimate_a,
+                )
+                for p in players
+            }
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        Subsession.num_estims = 0
 
 
 class Task_Round_2(Page):
@@ -199,6 +242,6 @@ class Results(Page):
         return subsession.round_number == Constants.num_rounds
 
 
-page_sequence = [Welcome, TaskIntro, FailedAttentionCheck,
+page_sequence = [#Welcome, TaskIntro, FailedAttentionCheck,
                  Task_Round_1, Task_Round_2,
                  Results]

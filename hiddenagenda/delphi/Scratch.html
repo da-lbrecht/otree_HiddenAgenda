@@ -12,49 +12,6 @@
             document.getElementById("endround_time").value = endroundtime;
         }
     </script>
-
-    <!-- Live Interaction in Delphi Estimation -->
-    <script>
-        var first_indivestim
-        var indivarg
-        var second_indivestim
-
-        function make_first_indivestim() {
-            first_indivestim = parseFloat(document.getElementById("first_indivestim").value)
-            indivarg = document.getElementById("indivarg")
-            liveSend({"information_type": "estimate", "first_indivestim": first_indivestim},
-                     {"information_type": "argument", "indivarg": indivarg})
-            document.getElementById("first_estimate").style.display = "none";
-            document.getElementById("wait_for_others").style.display = "block";
-        }
-
-        function livRecv(data) {
-            first_indivestim_a = data["estimate_a"]
-            document.getElementById("first_indivestim_a").innerHTML = first_indivestim_a;
-        }
-
-/*        function liveRecv(data) {
-            if (data["information_type"] == "estimate_a") {
-                first_indivestim_a = data["estimate_a"];
-                document.getElementById("first_indivestim_a").innerHTML = first_indivestim_a;
-            }
-
-            if (data["information_type"] == "estimate_b") {
-                first_indivestim_b = data["estimate_b"];
-                document.getElementById("first_indivestim_b").innerHTML = first_indivestim_b;
-            }
-
-            if (data["information_type"] == "estimate_c") {
-                first_indivestim_c = data["estimate_c"];
-                document.getElementById("first_indivestim_c").innerHTML = first_indivestim_c;
-            }
-
-            if (data["information_type"] == "estimate_d") {
-                first_indivestim_d = data["estimate_d"];
-                document.getElementById("first_indivestim_d").innerHTML = first_indivestim_d;
-            }
-        }*/
-    </script>
 {% endblock %}
 
 
@@ -197,64 +154,26 @@
                     <p class="h4">Deriving an estimate</p>
                 </div>
                 <div class="card-body">
-                    <div id="first_estimate" style="display: block">
+                    <div>
                         <p>
                             At first, all members of your group will give their individual estimate of the chance that Kara will
-                            reach the target area, when the program is executed for the next time. What is your estimate?
+                            reach the target area, when the program is executed for the next time. What is your own
+                            estimate?
                         </p>
 
-                            <input id="first_indivestim"> in 100
-
-                        <p>
+                            {{ formfield 'first_indivestim' }} in 100
 
                         <br>
 
-                            Along the estimate you may also outline your reasoning behind the estimate in a brief text.
-                            Both your estimate and the reasoning will be presented anonymously to your fellow group
-                            members in the next step. What is your reasoning?
-                        </p>
-                            <input id="indivarg">
-                        <br>
-                        <br>
-                            <button type="button" onclick="make_first_indivestim()">Sent estimate and reasoning</button>
-                    </div>
-
-                    <div id="second_estimate" style="display: block">
-                        <br>
-
-                        <p>
-                            You and all your fellow group members completed their first estimate. Below you can see
-                            all four estimates.
-                        </p>
-
-                        <br>
-
-                        <p>
-                            The estimate of person A in the group was
-                            <span id="first_indivestim_a"></span> in 100.
-                            <br>
-                            The estimate of person B in the group was <span id="first_indivestim_b"></span> in 100.
-                            <br>
-                            The estimate of person C in the group was <span id="first_indivestim_c"></span> in 100.
-                            <br>
-                            The estimate of person D in the group was <span id="first_indivestim_d"></span> in 100.
-                        </p>
                         <p>
                             Now that you have seen the estimates by the other group members, and their reasoning you have
                             the chance to revise your own estimate. What is your new estimate?
                         </p>
 
-                            <input id="second_indivestim"> in 100
-                        <br>
-                        <br>
-                            <button type="button" onclick="make_second_indivestim()">Sent estimate</button>
+                            {{ formfield 'second_indivestim' }} in 100
 
 
                     </div>
-
-                    {{ formfield_errors "first_indivestim" }}
-                    {{ formfield_errors "indivarg" }}
-                    {{ formfield_errors "second_indivestim" }}
 
 
                     <!-- on Card Navigation  Arrows -->
@@ -284,3 +203,72 @@
 </body>
 
 {% endblock %}
+
+<!--
+                    <div id="first_estimate" style="display: block">
+                        <p>
+                            At first, all members of your group will give their individual estimate of the chance that Kara will
+                            reach the target area, when the program is executed for the next time.
+
+                            What is your own estimate?
+                        </p>
+
+                        <input id="first_indivestim">
+                        <input id="indivarg">
+                        <button type="button" onclick="make_first_indivestim()">Sent estimate</button>
+
+                        <br>
+                    </div>
+
+                    <div id="wait_for_others" style="display: none">
+                        Please wait until all your fellow group members completed their first estimate.
+                    </div>
+
+                    <div id="second estimate" style="display: none">
+
+                        <p>
+                            You and all your fellow group members completed their first estimate. Below you can see
+                            all four estimates.
+                        </p>
+
+                        <br>
+
+                        <p>
+                            Now that you have seen the estimates by the other group members, and their reasoning you have
+                            the chance to revise your own estimate. What is your new estimate?
+                        </p>
+
+                        <input id="second_indivestim">
+                        <button type="button" onclick="make_second_indivestim()">Sent estimate</button>
+                    </div>
+
+                    {{ formfield_errors "first_indivestim" }}
+                    {{ formfield_errors "indivarg" }}
+                    {{ formfield_errors "second_indivestim" }}
+-->
+
+<!--
+
+
+{% block scripts %}
+<script>
+    var first_indivestim
+    var indivarg
+    var second_indivestim
+
+    function make_first_indivestim(){
+        first_indivestim = parseFloat(document.getElementById("first_indivestim").value)
+        indivarg = document.getElementById("indivarg")
+        liveSend({"first_indivestim": first_indivestim}; "indivarg": indivarg)
+        document.getElementById("first_estimate").style.display = "none";
+        document.getElementById("wait_for_others").style.display = "block";
+    }
+
+    function make_second_indivestim(){
+        second_indivestim = parseFloat(document.getElementById("second_indivestim").value)
+        liveSend({"second_indivestim": second_indivestim})
+    }
+</script>
+
+{% endblock %}
+-->
