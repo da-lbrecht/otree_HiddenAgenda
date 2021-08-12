@@ -186,32 +186,30 @@ class Task_Round_1(Page):
     def live_method(player: Player, data):
         group = player.group
         players = group.get_players()
-        if player.id_in_group == 1:
-            player.first_indivestim = data["first_indivestim"]
-            Subsession.estimate_a = player.first_indivestim
-            Subsession.num_estims = Subsession.num_estims + 1
-            #player.indivarg = data["indivarg"]
-        elif player.id_in_group == 2:
-            player.first_indivestim = data["first_indivestim"]
-            Subsession.estimate_b = player.first_indivestim
-            Subsession.num_estims = Subsession.num_estims + 1
-            #player.indivarg = data["indivarg"]
-        elif player.id_in_group == 3:
-            player.first_indivestim = data["first_indivestim"]
-            Subsession.estimate_c = player.first_indivestim
-            Subsession.num_estims = Subsession.num_estims + 1
-            #player.indivarg = data["indivarg"]
-        elif player.id_in_group == 4:
-            player.first_indivestim = data["first_indivestim"]
-            Subsession.estimate_d = player.first_indivestim
-            Subsession.num_estims = Subsession.num_estims + 1
-            #player.indivarg = data["indivarg"]
-        if  Subsession.num_estims == 4:
-            return {
-                p.id_in_group: dict(
-                    estimate_a=Subsession.estimate_a,
-                )
-                for p in players
+        if data["information_type"] == "estimate":
+            if player.id_in_group == 1:
+                player.first_indivestim = data["estimate"]
+                Subsession.estimate_a = player.first_indivestim
+                Subsession.num_estims = Subsession.num_estims + 1
+                # player.indivarg = data["indivarg"]
+            elif player.id_in_group == 2:
+                player.first_indivestim = data["estimate"]
+                Subsession.estimate_b = player.first_indivestim
+                Subsession.num_estims = Subsession.num_estims + 1
+                # player.indivarg = data["indivarg"]
+            elif player.id_in_group == 3:
+                player.first_indivestim = data["estimate"]
+                Subsession.estimate_c = player.first_indivestim
+                Subsession.num_estims = Subsession.num_estims + 1
+                # player.indivarg = data["indivarg"]
+            elif player.id_in_group == 4:
+                player.first_indivestim = data["estimate"]
+                Subsession.estimate_d = player.first_indivestim
+                Subsession.num_estims = Subsession.num_estims + 1
+                # player.indivarg = data["indivarg"]
+
+        if Subsession.num_estims == 4:
+            return {0: {"information_type": "estimate_a", "estimate_a": Subsession.estimate_a},
             }
 
     @staticmethod

@@ -19,19 +19,20 @@
         var indivarg
         var second_indivestim
 
-        function make_first_indivestim() {
-            first_indivestim = parseFloat(document.getElementById("first_indivestim").value)
-            indivarg = document.getElementById("indivarg")
-            liveSend({"information_type": "estimate", "first_indivestim": first_indivestim},
-                     {"information_type": "argument", "indivarg": indivarg})
-            document.getElementById("first_estimate").style.display = "none";
-            document.getElementById("wait_for_others").style.display = "block";
-        }
+    function make_first_indivestim() {
+        first_indivestim = parseFloat(document.getElementById("first_indivestim").value)
+        indivarg = document.getElementById("indivarg")
+        liveSend({"information_type": "estimate", "estimate": first_indivestim})
+        document.getElementById("first_estimate").style.display = "none";
+        document.getElementById("wait_for_others").style.display = "block";
+    }
 
-        function livRecv(data) {
-            first_indivestim_a = data["estimate_a"]
-            document.getElementById("first_indivestim_a").innerHTML = first_indivestim_a;
-        }
+        // function liveRecv(data) {
+        //     if (data["information_type"] == "estimate_a") {
+        //         first_indivestim_a = data["estimate_a"]
+        //         document.getElementById("first_indivestim_a").innerHTML = first_indivestim_a;
+        //     }
+        // }
 
 /*        function liveRecv(data) {
             if (data["information_type"] == "estimate_a") {
@@ -217,9 +218,13 @@
                         <br>
                         <br>
                             <button type="button" onclick="make_first_indivestim()">Sent estimate and reasoning</button>
+                    </div id="first_estimate" style="display: block">
+
+                    <div id="wait_for_others" style="display: none">
+                        Please wait until all your fellow group members completed their first estimate.
                     </div>
 
-                    <div id="second_estimate" style="display: block">
+                    <div id="second_estimate" style="display: none">
                         <br>
 
                         <p>
