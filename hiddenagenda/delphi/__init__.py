@@ -6,6 +6,11 @@ doc = """
 Your app description
 """
 
+# Temporarily stored variables during Delphi process
+estimate_a = 999
+estimate_b = 999
+estimate_c = 999
+estimate_d = 999
 
 class Constants(BaseConstants):
     name_in_url = 'delphi'
@@ -19,12 +24,11 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     # Temporarily stored variables during Delphi process
-    estimate_a = models.FloatField
-    estimate_b = models.FloatField
-    estimate_c = models.FloatField
-    estimate_d = models.FloatField
-    num_estims = models.FloatField
-
+    estimate_a = models.FloatField(initial=999)
+    estimate_b = models.FloatField(initial=999)
+    estimate_c = models.FloatField(initial=999)
+    estimate_d = models.FloatField(initial=999)
+    num_estims = models.IntegerField(initial=0)
 
 class Group(BaseGroup):
     pass
@@ -178,19 +182,73 @@ class Task_Round_1(Page):
     form_model = 'player'
     form_fields = ['endround_time', 'first_indivestim', 'indivarg', 'second_indivestim']
 
+
     @staticmethod
     def is_displayed(player: Player):
         return player.round_displayed == 1
 
     @staticmethod
     def live_method(player: Player, data):
+        global estimate_a, estimate_b, estimate_c, estimate_d
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
             player.first_indivestim = data["estimate"]
-
+            Subsession.num_estims += 1
+            if player.id_in_group == 1:
+                 estimate_a = data["estimate"]
+            elif player.id_in_group == 2:
+                estimate_b = data["estimate"]
+            elif player.id_in_group == 3:
+                estimate_c = data["estimate"]
+            elif player.id_in_group == 4:
+                estimate_d = data["estimate"]
+            return {
+                0: {"estimate_a": estimate_a,
+                    "estimate_b": estimate_b,
+                    "estimate_c": estimate_c,
+                    "estimate_d": estimate_d}
+            }
         if data["information_type"] == "reasoning":
             player.indivarg = data["reasoning"]
+
+        # if Subsession.num_estims == 1:
+        #     return {
+        #         1: {"information_type": "message", "message": "test"}
+        #     }
+            # return {
+            #     0: {"information_type": "estimate_a", "estimate_a": estimate_a},
+            #     0: {"information_type": "estimate_b", "estimate_b": estimate_b},
+            #     0: {"information_type": "estimate_c", "estimate_c": estimate_c},
+            #     0: {"information_type": "estimate_d", "estimate_d": estimate_d},
+            # }
+
+        # @staticmethod
+        # def live_method(player: Player, data):
+        #     group = player.group
+        #     players = group.get_players()
+        #     if data["information_type"] == "estimate":
+        #         player.first_indivestim = data["estimate"]
+        #         if player.id_in_group == 1:
+        #             Subsession.estimate_a = player.first_indivestim
+        #             Subsession.num_estims += 1
+        #         elif player.id_in_group == 2:
+        #             Subsession.estimate_b = player.first_indivestim
+        #             Subsession.num_estims += 1
+        #         elif player.id_in_group == 3:
+        #             Subsession.estimate_c = player.first_indivestim
+        #             Subsession.num_estims += 1
+        #         elif player.id_in_group == 4:
+        #             Subsession.estimate_d = player.first_indivestim
+        #             Subsession.num_estims += 1
+        #
+        #     if data["information_type"] == "reasoning":
+        #         player.indivarg = data["reasoning"]
+        #
+        #     if Subsession.num_estims == 4:
+        #         return {
+        #             0: {"information_type": "estimate_a", "estimate_a": Subsession.estimate_a},
+        #         }
 
         #     if player.id_in_group == 1:
         #         player.first_indivestim = data["estimate"]
