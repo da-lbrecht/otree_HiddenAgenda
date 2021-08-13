@@ -29,12 +29,7 @@ class Constants(BaseConstants):
     num_attention_checks = 5
 
 class Subsession(BaseSubsession):
-    # Temporarily stored variables during Delphi process
-    estimate_a = models.FloatField(initial=999)
-    estimate_b = models.FloatField(initial=999)
-    estimate_c = models.FloatField(initial=999)
-    estimate_d = models.FloatField(initial=999)
-    num_estims = models.IntegerField(initial=0)
+    pass
 
 class Group(BaseGroup):
     pass
