@@ -220,7 +220,7 @@ class Task_Round_1(Page):
                 indivarg_c = data["reasoning"]
             elif player.id_in_group == 4:
                 indivarg_d = data["reasoning"]
-        if 1 == 1:
+        if num_estims == 4:
             return {
                 0: {"estimate_a": estimate_a,
                     "estimate_b": estimate_b,
