@@ -46,46 +46,13 @@
             indivarg_d = data["reasoning_d"]
             document.getElementById("indivarg_d").innerHTML = indivarg_d;
             document.getElementById("wait_for_others").style.display = "none";
-            document.getElementById("second_estimate").style.display = "block";
+            {% if player.id_in_group == 1 %}
+                document.getElementById("second_estimate_a").style.display = "block";
+            {% endif %}
+            {% if player.id_in_group == 2 %}
+                document.getElementById("second_estimate_b").style.display = "block";
+            {% endif %}
     }
-
-/*    function liveRecv(data) {
-            if (data["information_type"] == "message") {
-                message = data["message"]
-                document.getElementById("message").innerHTML = message;
-            }
-            if (data["information_type"] == "estimate") {
-                first_indivestim_a = data["estimate_a"]
-                document.getElementById("first_indivestim_a").innerHTML = first_indivestim_a;
-                first_indivestim_b = data["estimate_b"]
-                document.getElementById("first_indivestim_b").innerHTML = first_indivestim_b;
-                // document.getElementById("wait_for_others").style.display = "none";
-                // document.getElementById("second_estimate").style.display = "block";
-            }
-    }*/
-
-
-/*        function liveRecv(data) {
-            if (data["information_type"] == "estimate_a") {
-                first_indivestim_a = data["estimate_a"];
-                document.getElementById("first_indivestim_a").innerHTML = first_indivestim_a;
-            }
-
-            if (data["information_type"] == "estimate_b") {
-                first_indivestim_b = data["estimate_b"];
-                document.getElementById("first_indivestim_b").innerHTML = first_indivestim_b;
-            }
-
-            if (data["information_type"] == "estimate_c") {
-                first_indivestim_c = data["estimate_c"];
-                document.getElementById("first_indivestim_c").innerHTML = first_indivestim_c;
-            }
-
-            if (data["information_type"] == "estimate_d") {
-                first_indivestim_d = data["estimate_d"];
-                document.getElementById("first_indivestim_d").innerHTML = first_indivestim_d;
-            }
-        }*/
     </script>
 {% endblock %}
 
@@ -256,7 +223,8 @@
                         <span id="message"></span>
                     </div>
 
-                    <div id="second_estimate" style="display: none">
+                    <!-- Feedback and second estimate for player 1 in group -->
+                    <div id="second_estimate_a" style="display: none">
                         <br>
 
                         <p>
@@ -313,8 +281,66 @@
                         <br>
                         <br>
                             <button type="button" onclick="make_second_indivestim()">Sent estimate</button>
+                    </div>
 
+                    <!-- Feedback and second estimate for player 2 in group -->
+                    <div id="second_estimate_b" style="display: none">
+                        <br>
 
+                        <p>
+                            You and all your fellow group members completed their input. Below
+                            you can see all the estimates and corresponding reasoning.
+                        </p>
+
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Your own input </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_b"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_b"></span>
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Input of your fellow group members </b>
+                        </p>
+                        <hr>
+
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_a"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_a"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_c"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_c"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_d"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_d"></span>
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                        <p>
+                            Now that you have seen the estimates by the other group members, and their reasoning you have
+                            the chance to revise your own estimate. What is your new estimate?
+                        </p>
+
+                            <input id="second_indivestim"> in 100
+                        <br>
+                        <br>
+                            <button type="button" onclick="make_second_indivestim()">Sent estimate</button>
                     </div>
 
                     {{ formfield_errors "first_indivestim" }}
