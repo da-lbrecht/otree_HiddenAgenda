@@ -222,7 +222,7 @@ class Task_Round_1(Page):
                 indivarg_d = data["reasoning"]
         if num_estims == 4:
             return {
-                1: {"player.id_in_group": 1,
+                1: {"player.id_in_group": "a",
                     "estimate_a": estimate_a,
                     "estimate_b": estimate_b,
                     "estimate_c": estimate_c,
@@ -231,7 +231,7 @@ class Task_Round_1(Page):
                     "reasoning_b": indivarg_b,
                     "reasoning_c": indivarg_c,
                     "reasoning_d": indivarg_d},
-                2: {"player.id_in_group": 2,
+                2: {"player.id_in_group": "b",
                     "estimate_a": estimate_a,
                     "estimate_b": estimate_b,
                     "estimate_c": estimate_c,
@@ -240,7 +240,7 @@ class Task_Round_1(Page):
                     "reasoning_b": indivarg_b,
                     "reasoning_c": indivarg_c,
                     "reasoning_d": indivarg_d},
-                3: {"player.id_in_group": 3,
+                3: {"player.id_in_group": "c",
                     "estimate_a": estimate_a,
                     "estimate_b": estimate_b,
                     "estimate_c": estimate_c,
@@ -249,7 +249,7 @@ class Task_Round_1(Page):
                     "reasoning_b": indivarg_b,
                     "reasoning_c": indivarg_c,
                     "reasoning_d": indivarg_d},
-                4: {"player.id_in_group": 4,
+                4: {"player.id_in_group": "d",
                     "estimate_a": estimate_a,
                     "estimate_b": estimate_b,
                     "estimate_c": estimate_c,
@@ -257,7 +257,7 @@ class Task_Round_1(Page):
                     "reasoning_a": indivarg_a,
                     "reasoning_b": indivarg_b,
                     "reasoning_c": indivarg_c,
-                    "reasoning_d": indivarg_d}
+                    "reasoning_d": indivarg_d},
             }
 
     @staticmethod
