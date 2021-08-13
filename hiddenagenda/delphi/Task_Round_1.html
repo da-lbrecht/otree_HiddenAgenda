@@ -46,12 +46,15 @@
             indivarg_d = data["reasoning_d"]
             document.getElementById("indivarg_d").innerHTML = indivarg_d;
             document.getElementById("wait_for_others").style.display = "none";
-            {% if player.id_in_group == 1 %}
+            if (data["player"] == 1) {
                 document.getElementById("second_estimate_a").style.display = "block";
-            {% endif %}
-            {% if player.id_in_group == 2 %}
+            } else if (data["player"] == 2) {
                 document.getElementById("second_estimate_b").style.display = "block";
-            {% endif %}
+            } else if (data["player"] == 3) {
+                document.getElementById("second_estimate_c").style.display = "block";
+            } else if (data["player"] == 4) {
+                document.getElementById("second_estimate_d").style.display = "block";
+            }
     }
     </script>
 {% endblock %}
@@ -328,6 +331,126 @@
                             <span id="first_indivestim_d"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_d"></span>
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                        <p>
+                            Now that you have seen the estimates by the other group members, and their reasoning you have
+                            the chance to revise your own estimate. What is your new estimate?
+                        </p>
+
+                            <input id="second_indivestim"> in 100
+                        <br>
+                        <br>
+                            <button type="button" onclick="make_second_indivestim()">Sent estimate</button>
+                    </div>
+
+                    <!-- Feedback and second estimate for player 3 in group -->
+                    <div id="second_estimate_c" style="display: none">
+                        <br>
+
+                        <p>
+                            You and all your fellow group members completed their input. Below
+                            you can see all the estimates and corresponding reasoning.
+                        </p>
+
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Your own input </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_c"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_c"></span>
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Input of your fellow group members </b>
+                        </p>
+                        <hr>
+
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_a"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_a"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_b"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_b"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_d"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_d"></span>
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                        <p>
+                            Now that you have seen the estimates by the other group members, and their reasoning you have
+                            the chance to revise your own estimate. What is your new estimate?
+                        </p>
+
+                            <input id="second_indivestim"> in 100
+                        <br>
+                        <br>
+                            <button type="button" onclick="make_second_indivestim()">Sent estimate</button>
+                    </div>
+
+                    <!-- Feedback and second estimate for player 4 in group -->
+                    <div id="second_estimate_b" style="display: none">
+                        <br>
+
+                        <p>
+                            You and all your fellow group members completed their input. Below
+                            you can see all the estimates and corresponding reasoning.
+                        </p>
+
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Your own input </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_d"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_d"></span>
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Input of your fellow group members </b>
+                        </p>
+                        <hr>
+
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_a"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_a"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_b"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_b"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_c"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_c"></span>
                             <br>
                             <br>
                         </p>
