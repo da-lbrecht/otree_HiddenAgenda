@@ -7,10 +7,16 @@ Your app description
 """
 
 # Temporarily stored variables during Delphi process
+num_estims = 0
 estimate_a = 999
 estimate_b = 999
 estimate_c = 999
 estimate_d = 999
+indivarg_a = "none"
+indivarg_b = "none"
+indivarg_c = "none"
+indivarg_d = "none"
+
 
 class Constants(BaseConstants):
     name_in_url = 'delphi'
@@ -189,12 +195,13 @@ class Task_Round_1(Page):
 
     @staticmethod
     def live_method(player: Player, data):
-        global estimate_a, estimate_b, estimate_c, estimate_d
+        global estimate_a, estimate_b, estimate_c, estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,\
+            num_estims
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
             player.first_indivestim = data["estimate"]
-            Subsession.num_estims += 1
+            num_estims += 1
             if player.id_in_group == 1:
                  estimate_a = data["estimate"]
             elif player.id_in_group == 2:
@@ -203,81 +210,27 @@ class Task_Round_1(Page):
                 estimate_c = data["estimate"]
             elif player.id_in_group == 4:
                 estimate_d = data["estimate"]
+        if data["information_type"] == "reasoning":
+            player.indivarg = data["reasoning"]
+            if player.id_in_group == 1:
+                 indivarg_a = data["reasoning"]
+            elif player.id_in_group == 2:
+                indivarg_b = data["reasoning"]
+            elif player.id_in_group == 3:
+                indivarg_c = data["reasoning"]
+            elif player.id_in_group == 4:
+                indivarg_d = data["reasoning"]
+        if 1 == 1:
             return {
                 0: {"estimate_a": estimate_a,
                     "estimate_b": estimate_b,
                     "estimate_c": estimate_c,
-                    "estimate_d": estimate_d}
+                    "estimate_d": estimate_d,
+                    "reasoning_a": indivarg_a,
+                    "reasoning_b": indivarg_b,
+                    "reasoning_c": indivarg_c,
+                    "reasoning_d": indivarg_d}
             }
-        if data["information_type"] == "reasoning":
-            player.indivarg = data["reasoning"]
-
-        # if Subsession.num_estims == 1:
-        #     return {
-        #         1: {"information_type": "message", "message": "test"}
-        #     }
-            # return {
-            #     0: {"information_type": "estimate_a", "estimate_a": estimate_a},
-            #     0: {"information_type": "estimate_b", "estimate_b": estimate_b},
-            #     0: {"information_type": "estimate_c", "estimate_c": estimate_c},
-            #     0: {"information_type": "estimate_d", "estimate_d": estimate_d},
-            # }
-
-        # @staticmethod
-        # def live_method(player: Player, data):
-        #     group = player.group
-        #     players = group.get_players()
-        #     if data["information_type"] == "estimate":
-        #         player.first_indivestim = data["estimate"]
-        #         if player.id_in_group == 1:
-        #             Subsession.estimate_a = player.first_indivestim
-        #             Subsession.num_estims += 1
-        #         elif player.id_in_group == 2:
-        #             Subsession.estimate_b = player.first_indivestim
-        #             Subsession.num_estims += 1
-        #         elif player.id_in_group == 3:
-        #             Subsession.estimate_c = player.first_indivestim
-        #             Subsession.num_estims += 1
-        #         elif player.id_in_group == 4:
-        #             Subsession.estimate_d = player.first_indivestim
-        #             Subsession.num_estims += 1
-        #
-        #     if data["information_type"] == "reasoning":
-        #         player.indivarg = data["reasoning"]
-        #
-        #     if Subsession.num_estims == 4:
-        #         return {
-        #             0: {"information_type": "estimate_a", "estimate_a": Subsession.estimate_a},
-        #         }
-
-        #     if player.id_in_group == 1:
-        #         player.first_indivestim = data["estimate"]
-        #         # Subsession.estimate_a = player.first_indivestim
-
-        #     if player.id_in_group == 1:
-        #         player.first_indivestim = data["estimate"]
-        #         # Subsession.estimate_a = player.first_indivestim
-        #         # Subsession.num_estims = Subsession.num_estims + 1
-        #         # player.indivarg = data["indivarg"]
-        #     elif player.id_in_group == 2:
-        #         player.first_indivestim = data["estimate"]
-        #         # Subsession.estimate_b = player.first_indivestim
-        #         # Subsession.num_estims = Subsession.num_estims + 1
-        #         # player.indivarg = data["indivarg"]
-        #     elif player.id_in_group == 3:
-        #         player.first_indivestim = data["estimate"]
-        #         # Subsession.estimate_c = player.first_indivestim
-        #         # Subsession.num_estims = Subsession.num_estims + 1
-        #         # player.indivarg = data["indivarg"]
-        #     elif player.id_in_group == 4:
-        #         player.first_indivestim = data["estimate"]
-        #         Subsession.estimate_d = player.first_indivestim
-        #         Subsession.num_estims = Subsession.num_estims + 1
-        #         # player.indivarg = data["indivarg"]
-        #
-        # if Subsession.num_estims == 4:
-        #     return {0: {"information_type": "estimate_a", "estimate_a": Subsession.estimate_a},
-        #     }
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
