@@ -197,7 +197,7 @@ class Task_Round_1(Page):
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
-            if data["estimate"] >= 0 or data["estimate"] <= 100:
+            if data["estimate"] >= 0 and data["estimate"] <= 100:
                 player.first_indivestim = data["estimate"]
                 num_estims += 1
                 if player.id_in_group == 1:
@@ -210,8 +210,8 @@ class Task_Round_1(Page):
                     estimate_d = data["estimate"]
             else:
                 return{
-                    player.id_in_group: {"information_type" == "error",
-                                         "error" == "estimate out of range"}
+                    player.id_in_group: {"information_type": "error",
+                                         "error": "estimate out of range"},
                 }
         if data["information_type"] == "reasoning":
             player.indivarg = data["reasoning"]

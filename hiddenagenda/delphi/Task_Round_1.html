@@ -38,7 +38,10 @@
     }
 
     function liveRecv(data) {
-            if (data["player.id_in_group"] == "a") {
+            if (data["information_type"] == "error") {
+                document.getElementById("wait_for_others").style.display = "none";
+                document.getElementById("first_estimate_error").style.display = "block";
+            } else if (data["player.id_in_group"] == "a") {
                 first_indivestim_a = data["estimate_a"]
                 document.getElementById("first_indivestim_a_a").innerHTML = first_indivestim_a;
                 first_indivestim_b = data["estimate_b"]
