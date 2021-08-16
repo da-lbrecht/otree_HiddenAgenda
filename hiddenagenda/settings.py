@@ -5,6 +5,7 @@ SESSION_CONFIGS = [
         name='delphi',
         app_sequence=['delphi'],
         num_demo_participants=4,
+        num_participants=4,
     ),
 ]
 
