@@ -68,11 +68,13 @@ class Player(BasePlayer):
 
     # Response variables for estimation
     first_indivestim = models.FloatField(label="My first estimate:",
-                                         doc="First individual estimate given in Delphi procedure")
+                                         doc="First individual estimate given in Delphi procedure",
+                                         min=0, max=100)
     indivarg = models.StringField(label="My reasoning behind my first estimate",
                                    doc="Reasoning given for first individual estimate given in Delphi procedure")
     second_indivestim = models.FloatField(label="My second estimate:",
-                                          doc="Second individual estimate given in Delphi procedure")
+                                          doc="Second individual estimate given in Delphi procedure",
+                                          min=0, max=100)
 
 
 # FUNCTIONS
@@ -198,7 +200,7 @@ class Task_Round_1(Page):
             player.first_indivestim = data["estimate"]
             num_estims += 1
             if player.id_in_group == 1:
-                 estimate_a = data["estimate"]
+                estimate_a = data["estimate"]
             elif player.id_in_group == 2:
                 estimate_b = data["estimate"]
             elif player.id_in_group == 3:
@@ -208,7 +210,7 @@ class Task_Round_1(Page):
         if data["information_type"] == "reasoning":
             player.indivarg = data["reasoning"]
             if player.id_in_group == 1:
-                 indivarg_a = data["reasoning"]
+                indivarg_a = data["reasoning"]
             elif player.id_in_group == 2:
                 indivarg_b = data["reasoning"]
             elif player.id_in_group == 3:
