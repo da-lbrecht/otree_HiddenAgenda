@@ -28,6 +28,15 @@
         document.getElementById("wait_for_others").style.display = "block";
     }
 
+    function make_first_indivestim_error() {
+        first_indivestim = parseFloat(document.getElementById("first_indivestim_error").value)
+        indivarg = document.getElementById("indivarg_error").value
+        liveSend({"information_type": "estimate", "estimate": first_indivestim})
+        liveSend({"information_type": "reasoning", "reasoning": indivarg})
+        document.getElementById("first_estimate_error").style.display = "none";
+        document.getElementById("wait_for_others").style.display = "block";
+    }
+
     function liveRecv(data) {
             if (data["player.id_in_group"] == "a") {
                 first_indivestim_a = data["estimate_a"]
@@ -271,6 +280,35 @@
                         <br>
                             <button type="button" onclick="make_first_indivestim()">Sent estimate and reasoning</button>
                     </div id="first_estimate" style="display: block">
+
+                    <div id="first_estimate_error" style="display: none">
+                        <p>
+                            At first, all members of your group will give their individual estimate of the chance that
+                            Kara will reach the target area, when the program is executed for the next time. What is
+                            your estimate?
+                        </p>
+
+                        <p style="color:red;">
+                            <b> Your estimate needs to be in the range from 0 to 100.</b>
+                        </p>
+
+                            <input id="first_indivestim_error"> in 100
+
+                        <p>
+
+                        <br>
+
+                            Along the estimate you may also outline your reasoning behind the estimate in a brief text.
+                            Both your estimate and the reasoning will be presented anonymously to your fellow group
+                            members in the next step. What is your reasoning?
+                        </p>
+                            <input id="indivarg_error">
+                        <br>
+                        <br>
+                            <button type="button" onclick="make_first_indivestim_error()">
+                                Sent estimate and reasoning
+                            </button>
+                    </div id="first_estimate_error" style="display: none">
 
                     <div id="wait_for_others" style="display: none">
                         Please wait until all your fellow group members completed their first estimate.
