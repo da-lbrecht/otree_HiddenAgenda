@@ -197,7 +197,7 @@ class Task_Round_1(Page):
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
-            if data["estimate"] >= 0 and data["estimate"] <= 100:
+            if 0 <= data["estimate"] <= 100:
                 player.first_indivestim = data["estimate"]
                 num_estims += 1
                 if player.id_in_group == 1:
@@ -210,7 +210,7 @@ class Task_Round_1(Page):
                     estimate_d = data["estimate"]
             else:
                 return{
-                    player.id_in_group: {"information_type": "error",
+                    player.id_in_group: {"information_type": "error_1",
                                          "error": "estimate out of range"},
                 }
         if data["information_type"] == "reasoning":
@@ -223,7 +223,7 @@ class Task_Round_1(Page):
                 indivarg_c = data["reasoning"]
             elif player.id_in_group == 4:
                 indivarg_d = data["reasoning"]
-        if num_estims == 4:
+        if num_estims == 4 and data["information_type"] != "final_estimate":
             return {
                 1: {"player.id_in_group": "a",
                     "estimate_a": estimate_a,
@@ -262,6 +262,14 @@ class Task_Round_1(Page):
                     "reasoning_c": indivarg_c,
                     "reasoning_d": indivarg_d},
             }
+        elif data["information_type"] == "final_estimate":
+            if 0 <= data["final_estimate"] <= 100:
+                player.second_indivestim = data["final_estimate"]
+            else:
+                return{
+                    player.id_in_group: {"information_type": "error_2",
+                                         "error": "estimate out of range"},
+                }
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
