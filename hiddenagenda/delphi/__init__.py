@@ -213,16 +213,16 @@ class Task_Round_1(Page):
                     player.id_in_group: {"information_type": "error",
                                          "error": "estimate out of range"},
                 }
-        if data["information_type"] == "reasoning":
-            player.indivarg = data["reasoning"]
-            if player.id_in_group == 1:
-                indivarg_a = data["reasoning"]
-            elif player.id_in_group == 2:
-                indivarg_b = data["reasoning"]
-            elif player.id_in_group == 3:
-                indivarg_c = data["reasoning"]
-            elif player.id_in_group == 4:
-                indivarg_d = data["reasoning"]
+            if data["information_type"] == "reasoning":
+                player.indivarg = data["reasoning"]
+                if player.id_in_group == 1:
+                    indivarg_a = data["reasoning"]
+                elif player.id_in_group == 2:
+                    indivarg_b = data["reasoning"]
+                elif player.id_in_group == 3:
+                    indivarg_c = data["reasoning"]
+                elif player.id_in_group == 4:
+                    indivarg_d = data["reasoning"]
         if num_estims == 4:
             return {
                 1: {"player.id_in_group": "a",

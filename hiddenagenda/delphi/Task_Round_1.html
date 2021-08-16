@@ -39,6 +39,8 @@
 
     function liveRecv(data) {
             if (data["information_type"] == "error") {
+                // indivarg = document.getElementById("indivarg").value
+                // document.getElementById("indivarg_error").innerHTML = indivarg;
                 document.getElementById("wait_for_others").style.display = "none";
                 document.getElementById("first_estimate_error").style.display = "block";
             } else if (data["player.id_in_group"] == "a") {
