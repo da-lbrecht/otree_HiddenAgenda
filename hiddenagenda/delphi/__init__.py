@@ -262,9 +262,9 @@ class Task_Round_1(Page):
                     "reasoning_c": indivarg_c,
                     "reasoning_d": indivarg_d},
             }
-        elif data["information_type"] == "final_estimate":
-            if 0 <= data["final_estimate"] <= 100:
-                player.second_indivestim = data["final_estimate"]
+        if num_estims == 4 and data["information_type"] == "estimate":
+            if 0 <= data["estimate"] <= 100:
+                player.second_indivestim = data["estimate"]
             else:
                 return{
                     player.id_in_group: {"information_type": "error_2",

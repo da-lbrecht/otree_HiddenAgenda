@@ -38,8 +38,8 @@
     }
 
     function make_second_indivestim() {
-        second_indivestim = parseFloat(document.getElementById("second_indivestim").value)
-        liveSend({"information_type": "final_estimate", "final_estimate": second_indivestim})
+        second_indivestim = parseFloat(document.getElementById("estimate").value)
+        liveSend({"information_type": "estimate", "estimate": second_indivestim})
     }
 
 
@@ -68,7 +68,8 @@
                 document.getElementById("indivarg_d_a").innerHTML = indivarg_d;
                 document.getElementById("wait_for_others").style.display = "none";
                 document.getElementById("first_header").style.display = "none";
-                document.getElementById("second_estimate_a").style.display = "block";
+                document.getElementById("feedback_a").style.display = "block";
+                document.getElementById("second_estimate").style.display = "block";
                 document.getElementById("second_header").style.display = "block";
             } else if (data["player.id_in_group"] == "b") {
                 first_indivestim_a = data["estimate_a"]
@@ -89,7 +90,8 @@
                 document.getElementById("indivarg_d_b").innerHTML = indivarg_d;
                 document.getElementById("wait_for_others").style.display = "none";
                 document.getElementById("first_header").style.display = "none";
-                document.getElementById("second_estimate_b").style.display = "block";
+                document.getElementById("feedback_b").style.display = "block";
+                document.getElementById("second_estimate").style.display = "block";
                 document.getElementById("second_header").style.display = "block";
             } else if (data["player.id_in_group"] == "c") {
                 first_indivestim_a = data["estimate_a"]
@@ -110,10 +112,10 @@
                 document.getElementById("indivarg_d_c").innerHTML = indivarg_d;
                 document.getElementById("wait_for_others").style.display = "none";
                 document.getElementById("first_header").style.display = "none";
-                document.getElementById("second_estimate_c").style.display = "block";
+                document.getElementById("feedback_c").style.display = "block";
+                document.getElementById("second_estimate").style.display = "block";
                 document.getElementById("second_header").style.display = "block";
             } else if (data["player.id_in_group"] == "d") {
-                document.getElementById("second_estimate_d").style.display = "block";
                 first_indivestim_a = data["estimate_a"]
                 document.getElementById("first_indivestim_a_d").innerHTML = first_indivestim_a;
                 first_indivestim_b = data["estimate_b"]
@@ -132,7 +134,8 @@
                 document.getElementById("indivarg_d_d").innerHTML = indivarg_d;
                 document.getElementById("wait_for_others").style.display = "none";
                 document.getElementById("first_header").style.display = "none";
-                document.getElementById("second_estimate_d").style.display = "block";
+                document.getElementById("feedback_d").style.display = "block";
+                document.getElementById("second_estimate").style.display = "block";
                 document.getElementById("second_header").style.display = "block";
             } else if (data["information_type"] == "error_2") {
             // indivarg = document.getElementById("indivarg").value
@@ -346,8 +349,8 @@
                         <span id="message"></span>
                     </div>
 
-                    <!-- Feedback and second estimate for player 1 in group -->
-                    <div id="second_estimate_a" style="display: none">
+                    <!-- Feedback  for player 1 in group -->
+                    <div id="feedback_a" style="display: none">
                         <br>
 
                         <p>
@@ -395,19 +398,10 @@
                             <br>
                         </p>
                         <hr>
-                        <p>
-                            Now that you have seen the estimates by the other group members, and their reasoning you have
-                            the chance to revise your own estimate. What is your new estimate?
-                        </p>
-
-                            <input id="second_indivestim"> in 100
-                        <br>
-                        <br>
-                            <button type="button" onclick="make_second_indivestim()">Sent estimate</button>
                     </div>
 
-                    <!-- Feedback and second estimate for player 2 in group -->
-                    <div id="second_estimate_b" style="display: none">
+                    <!-- Feedback  for player 2 in group -->
+                    <div id="feedback_b" style="display: none">
                         <br>
 
                         <p>
@@ -455,19 +449,10 @@
                             <br>
                         </p>
                         <hr>
-                        <p>
-                            Now that you have seen the estimates by the other group members, and their reasoning you have
-                            the chance to revise your own estimate. What is your new estimate?
-                        </p>
-
-                            <input id="second_indivestim"> in 100
-                        <br>
-                        <br>
-                            <button type="button" onclick="make_second_indivestim()">Sent estimate</button>
                     </div>
 
-                    <!-- Feedback and second estimate for player 3 in group -->
-                    <div id="second_estimate_c" style="display: none">
+                    <!-- Feedback  for player 3 in group -->
+                    <div id="feedback_c" style="display: none">
                         <br>
 
                         <p>
@@ -515,19 +500,10 @@
                             <br>
                         </p>
                         <hr>
-                        <p>
-                            Now that you have seen the estimates by the other group members, and their reasoning you have
-                            the chance to revise your own estimate. What is your new estimate?
-                        </p>
-
-                            <input id="second_indivestim"> in 100
-                        <br>
-                        <br>
-                            <button type="button" onclick="make_second_indivestim()">Sent estimate</button>
                     </div>
 
-                    <!-- Feedback and second estimate for player 4 in group -->
-                    <div id="second_estimate_d" style="display: none">
+                    <!-- Feedback  for player 4 in group -->
+                    <div id="feedback_d" style="display: none">
                         <br>
 
                         <p>
@@ -575,6 +551,10 @@
                             <br>
                         </p>
                         <hr>
+                    </div>
+
+                    <!-- Second_estimate -->
+                    <div id="second_estimate" style="display: none">
                         <p>
                             Now that you have seen the estimates by the other group members, and their reasoning you have
                             the chance to revise your own estimate. What is your new estimate?
