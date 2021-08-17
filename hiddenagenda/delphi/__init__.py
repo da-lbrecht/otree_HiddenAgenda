@@ -183,7 +183,7 @@ class FailedAttentionCheck(Page):
 
 class Task_Round_1(Page):
     form_model = 'player'
-    form_fields = ['endround_time', 'first_indivestim', 'indivarg', 'second_indivestim']
+    form_fields = ['first_indivestim', 'indivarg', 'second_indivestim'] # 'endround_time',
 
 
     @staticmethod
@@ -265,6 +265,9 @@ class Task_Round_1(Page):
         if data["information_type"] == "second_estimate":
             if 0 <= data["second_estimate"] <= 100:
                 player.second_indivestim = data["second_estimate"]
+                return{
+                    player.id_in_group: {"information_type": "completion_indicator"},
+                }
             else:
                 return{
                     player.id_in_group: {"information_type": "error_2",
@@ -299,6 +302,6 @@ class Results(Page):
         return subsession.round_number == Constants.num_rounds
 
 
-page_sequence = [#Welcome, TaskIntro, FailedAttentionCheck,
+page_sequence = [  # Welcome, TaskIntro, FailedAttentionCheck,
                  Task_Round_1, Task_Round_2,
                  Results]

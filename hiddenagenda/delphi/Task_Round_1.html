@@ -8,8 +8,8 @@
 
     <script>
         function saveTime() {
-            let endroundtime = new Date().getTime();
-            document.getElementById("endround_time").value = endroundtime;
+            let endround_time = new Date().getTime();
+            document.getElementById("endround_time").value = endround_time;
         }
     </script>
 
@@ -141,7 +141,9 @@
             // document.getElementById("indivarg_error").innerHTML = indivarg;
             document.getElementById("second_indivestim_error").style.display = "block";
             } else if (data["information_type"] == "completion_indicator") {
+            var form = document.getElementById("form");
             form.submit()
+            saveTime()
         }
     }
     </script>
@@ -573,7 +575,6 @@
                         </p>
                     </div>
 
-
                     {{ formfield_errors "first_indivestim" }}
                     {{ formfield_errors "indivarg" }}
                     {{ formfield_errors "second_indivestim" }}
@@ -591,7 +592,9 @@
                         </div>
 
                         <div class="col col-lg-2">
-                            <button class="btn btn-primary btn-large" onclick="saveTime()">Continue with next round</button>
+                            <button class="btn btn-primary btn-large" onclick="saveTime()" style="display:none">
+                                Continue with next round
+                            </button>
                         </div>
 
                         <input id="endround_time" name="endround_time" type="hidden" value=""/>
