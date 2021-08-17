@@ -223,7 +223,7 @@ class Task_Round_1(Page):
                 indivarg_c = data["reasoning"]
             elif player.id_in_group == 4:
                 indivarg_d = data["reasoning"]
-        if num_estims == 4 and data["information_type"] != "final_estimate":
+        if num_estims == 4 and data["information_type"] != "second_estimate":
             return {
                 1: {"player.id_in_group": "a",
                     "estimate_a": estimate_a,
@@ -262,9 +262,9 @@ class Task_Round_1(Page):
                     "reasoning_c": indivarg_c,
                     "reasoning_d": indivarg_d},
             }
-        if num_estims == 4 and data["information_type"] == "estimate":
-            if 0 <= data["estimate"] <= 100:
-                player.second_indivestim = data["estimate"]
+        if data["information_type"] == "second_estimate":
+            if 0 <= data["second_estimate"] <= 100:
+                player.second_indivestim = data["second_estimate"]
             else:
                 return{
                     player.id_in_group: {"information_type": "error_2",

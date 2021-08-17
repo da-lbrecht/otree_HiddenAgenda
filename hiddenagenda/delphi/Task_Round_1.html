@@ -38,10 +38,9 @@
     }
 
     function make_second_indivestim() {
-        second_indivestim = parseFloat(document.getElementById("estimate").value)
-        liveSend({"information_type": "estimate", "estimate": second_indivestim})
+        second_indivestim = parseFloat(document.getElementById("second_indivestim").value)
+        liveSend({"information_type": "second_estimate", "second_estimate": second_indivestim})
     }
-
 
     function liveRecv(data) {
         if (data["information_type"] == "error_1") {
@@ -140,7 +139,9 @@
             } else if (data["information_type"] == "error_2") {
             // indivarg = document.getElementById("indivarg").value
             // document.getElementById("indivarg_error").innerHTML = indivarg;
-            document.getElementById("second_estimate_error").style.display = "block";
+            document.getElementById("second_indivestim_error").style.display = "block";
+            } else if (data["information_type"] == "completion_indicator") {
+            form.submit()
         }
     }
     </script>
