@@ -39,7 +39,12 @@ class Player(BasePlayer):
     starting_time = models.LongStringField(doc="Time at which Informed Consent is given and experiment starts")
     begintrial_time = models.LongStringField(doc="Time at which trial round is started")
 
-    endround_time = models.LongStringField(doc="Time at which a task round ends and the next round is started")
+    endround_time = models.LongStringField(initial=999,
+                                           doc="Time at which a task round ends and the next round is started")
+    start_of_round = models.StringField(initial=999,
+                                        doc="Starting time of an estimation round.")
+    end_of_round = models.StringField(initial=999,
+                                      doc="Time at which an estimation round is completed")
 
     round_displayed = models.IntegerField(doc="Position in which estimation task was displayed, ranging from 1 to "
                                               "num_rounds")
@@ -183,7 +188,7 @@ class FailedAttentionCheck(Page):
 
 class Task_Round_1(Page):
     form_model = 'player'
-    form_fields = ['first_indivestim', 'indivarg', 'second_indivestim'] # 'endround_time',
+    # form_fields = ['end_of_round', 'first_indivestim', 'indivarg', 'second_indivestim']
 
 
     @staticmethod

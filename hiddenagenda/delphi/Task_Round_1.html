@@ -6,12 +6,6 @@
     <script src="{% static 'global/js/basics.js' %}"></script>
     <script src="{% static 'global/js/navbuttons.js' %}"></script>
 
-    <script>
-        function saveTime() {
-            document.getElementById("endround_time").value = new Date().getTime();
-        }
-    </script>
-
     <!-- Live Interaction in Delphi Estimation -->
     <script>
         var first_indivestim
@@ -39,6 +33,9 @@
     function make_second_indivestim() {
         second_indivestim = parseFloat(document.getElementById("second_indivestim").value)
         liveSend({"information_type": "second_estimate", "second_estimate": second_indivestim})
+    }
+    function saveTime() {
+        document.getElementById("end_of_round_input").value = new Date().getTime();
     }
 
     function liveRecv(data) {
@@ -581,12 +578,6 @@
                             </button>
                     </div>
 
-                    {{ formfield_errors "endround_time" }}
-                    {{ formfield_errors "first_indivestim" }}
-                    {{ formfield_errors "indivarg" }}
-                    {{ formfield_errors "second_indivestim" }}
-
-
                     <!-- on Card Navigation  Arrows -->
                     <div class="row justify-content-md-center mt-5">
                         <div class="col col-lg-2">
@@ -604,7 +595,7 @@
                             </button>
                         </div>
 
-                        <input id="endround_time" name="endround_time" type="hidden" value=""/>
+                        <input id="end_of_round_input" name="end_of_round" type="hidden" value=""/>
 
                     </div>
                 </div>
