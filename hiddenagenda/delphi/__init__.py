@@ -39,7 +39,7 @@ class Player(BasePlayer):
     starting_time = models.LongStringField(doc="Time at which Informed Consent is given and experiment starts")
     begintrial_time = models.LongStringField(doc="Time at which trial round is started")
 
-    endround_time = models.LongStringField(doc="Time at which a task round is started")
+    endround_time = models.LongStringField(doc="Time at which a task round ends and the next round is started")
 
     round_displayed = models.IntegerField(doc="Position in which estimation task was displayed, ranging from 1 to "
                                               "num_rounds")

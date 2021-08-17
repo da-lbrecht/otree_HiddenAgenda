@@ -8,8 +8,7 @@
 
     <script>
         function saveTime() {
-            let endround_time = new Date().getTime();
-            document.getElementById("endround_time").value = endround_time;
+            document.getElementById("endround_time").value = new Date().getTime();
         }
     </script>
 
@@ -582,7 +581,7 @@
                             </button>
                     </div>
 
-
+                    {{ formfield_errors "endround_time" }}
                     {{ formfield_errors "first_indivestim" }}
                     {{ formfield_errors "indivarg" }}
                     {{ formfield_errors "second_indivestim" }}
