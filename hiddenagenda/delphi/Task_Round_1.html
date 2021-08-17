@@ -149,6 +149,8 @@
             document.getElementById("feedback_d").style.display = "none";
             document.getElementById("second_estimate").style.display = "none";
             document.getElementById("second_estimate_button").style.display = "none";
+            document.getElementById("third_header").style.display = "block";
+            document.getElementById("completion_message").style.display = "block";
             document.getElementById("next_button").style.display = "block";
         }
     }
@@ -297,6 +299,10 @@
 
                 <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: none" id="second_header">
                     <p class="h4">Feedback and second estimate</p>
+                </div>
+
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: none" id="third_header">
+                    <p class="h4">Done!</p>
                 </div>
 
                 <div class="card-body">
@@ -584,6 +590,10 @@
                         <button type="button" onclick="make_second_indivestim()" class="btn btn-primary btn-large">
                                 Sent estimate
                             </button>
+                    </div>
+
+                    <div id="completion_message" style="display: none">
+                        You completed round X. Please click the blue button to continue.
                     </div>
 
                     <!-- on Card Navigation  Arrows -->
