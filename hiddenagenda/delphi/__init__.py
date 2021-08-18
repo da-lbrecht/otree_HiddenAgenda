@@ -188,8 +188,6 @@ class FailedAttentionCheck(Page):
 
 class Task_Round_1(Page):
     form_model = 'player'
-    # form_fields = ['end_of_round', 'first_indivestim', 'indivarg', 'second_indivestim']
-
 
     @staticmethod
     def is_displayed(player: Player):
@@ -281,7 +279,8 @@ class Task_Round_1(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        Subsession.num_estims = 0
+        global num_estims
+        num_estims = 0
 
 
 class Task_Round_2(Page):
