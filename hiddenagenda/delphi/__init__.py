@@ -228,7 +228,7 @@ class Task_Round_1(Page):
                 indivarg_c = data["reasoning"]
             elif player.id_in_group == 4:
                 indivarg_d = data["reasoning"]
-        if num_estims == 4 and data["information_type"] != "second_estimate":
+        if num_estims >= 4 and data["information_type"] != "second_estimate":
             return {
                 1: {"player.id_in_group": "a",
                     "estimate_a": estimate_a,

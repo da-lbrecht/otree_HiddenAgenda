@@ -149,6 +149,7 @@
             document.getElementById("feedback_d").style.display = "none";
             document.getElementById("second_estimate").style.display = "none";
             document.getElementById("second_estimate_button").style.display = "none";
+            document.getElementById("second_indivestim_error").style.display = "none";
             document.getElementById("third_header").style.display = "block";
             document.getElementById("completion_message").style.display = "block";
             document.getElementById("next_button").style.display = "block";
@@ -312,7 +313,9 @@
                             reach the target area, when the program is executed for the next time. What is your estimate?
                         </p>
 
-                            <input id="first_indivestim"> in 100
+                            <input id="first_indivestim"
+                                   type="text"
+                                   size="3"> in 100
 
                         <p>
 
@@ -322,7 +325,10 @@
                             Both your estimate and the reasoning will be presented anonymously to your fellow group
                             members in the next step. What is your reasoning?
                         </p>
-                            <input id="indivarg">
+                            <textarea id="indivarg"
+                                      name="indivarg"
+                                      placeholder="My estimate is based on the following line of thought ..."
+                                      rows="5" cols="100"></textarea>
                         <br>
                         <br>
                             <button type="button" onclick="make_first_indivestim()" class="btn btn-primary btn-large">
@@ -337,7 +343,9 @@
                             your estimate?
                         </p>
 
-                            <input id="first_indivestim_error"> in 100
+                            <input id="first_indivestim_error"
+                                   type="text"
+                                   size="3"> in 100
 
                         <p style="color:red;">
                             <b> Your estimate needs to be in the range from 0 to 100.</b>
@@ -351,7 +359,10 @@
                             Both your estimate and the reasoning will be presented anonymously to your fellow group
                             members in the next step. What is your reasoning?
                         </p>
-                            <input id="indivarg_error">
+                            <textarea id="indivarg_error"
+                                      name="indivarg_error"
+                                      placeholder="My estimate is based on the following line of thought ..."
+                                      rows="5" cols="100"></textarea>
                         <br>
                         <br>
                             <button type="button" onclick="make_first_indivestim_error()" class="btn btn-primary btn-large">
@@ -575,7 +586,9 @@
                             the chance to revise your own estimate. What is your new estimate?
                         </p>
 
-                            <input id="second_indivestim"> in 100
+                            <input id="second_indivestim"
+                                   type="text"
+                                   size="3"> in 100
                     </div>
 
                     <div id="second_indivestim_error" style="display: none">
