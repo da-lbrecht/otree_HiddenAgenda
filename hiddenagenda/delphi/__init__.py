@@ -194,6 +194,10 @@ class Task_Round_1(Page):
         return player.round_displayed == 1
 
     @staticmethod
+    def vars_for_template(player: Player):
+        return {"round_number": player.round_number}
+
+    @staticmethod
     def live_method(player: Player, data):
         global estimate_a, estimate_b, estimate_c, estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,\
             num_estims
@@ -285,11 +289,103 @@ class Task_Round_1(Page):
 
 class Task_Round_2(Page):
     form_model = 'player'
-    form_fields = ['endround_time', 'first_indivestim', 'second_indivestim']
 
     @staticmethod
     def is_displayed(player: Player):
         return player.round_displayed == 2
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return {"round_number": player.round_number}
+
+    @staticmethod
+    def live_method(player: Player, data):
+        global estimate_a, estimate_b, estimate_c, estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, \
+            num_estims
+        group = player.group
+        players = group.get_players()
+        if data["information_type"] == "estimate":
+            if 0 <= data["estimate"] <= 100:
+                player.first_indivestim = data["estimate"]
+                num_estims += 1
+                if player.id_in_group == 1:
+                    estimate_a = data["estimate"]
+                elif player.id_in_group == 2:
+                    estimate_b = data["estimate"]
+                elif player.id_in_group == 3:
+                    estimate_c = data["estimate"]
+                elif player.id_in_group == 4:
+                    estimate_d = data["estimate"]
+            else:
+                return {
+                    player.id_in_group: {"information_type": "error_1",
+                                         "error": "estimate out of range"},
+                }
+        if data["information_type"] == "reasoning":
+            player.indivarg = data["reasoning"]
+            if player.id_in_group == 1:
+                indivarg_a = data["reasoning"]
+            elif player.id_in_group == 2:
+                indivarg_b = data["reasoning"]
+            elif player.id_in_group == 3:
+                indivarg_c = data["reasoning"]
+            elif player.id_in_group == 4:
+                indivarg_d = data["reasoning"]
+        if num_estims >= 4 and data["information_type"] != "second_estimate":
+            return {
+                1: {"player.id_in_group": "a",
+                    "estimate_a": estimate_a,
+                    "estimate_b": estimate_b,
+                    "estimate_c": estimate_c,
+                    "estimate_d": estimate_d,
+                    "reasoning_a": indivarg_a,
+                    "reasoning_b": indivarg_b,
+                    "reasoning_c": indivarg_c,
+                    "reasoning_d": indivarg_d},
+                2: {"player.id_in_group": "b",
+                    "estimate_a": estimate_a,
+                    "estimate_b": estimate_b,
+                    "estimate_c": estimate_c,
+                    "estimate_d": estimate_d,
+                    "reasoning_a": indivarg_a,
+                    "reasoning_b": indivarg_b,
+                    "reasoning_c": indivarg_c,
+                    "reasoning_d": indivarg_d},
+                3: {"player.id_in_group": "c",
+                    "estimate_a": estimate_a,
+                    "estimate_b": estimate_b,
+                    "estimate_c": estimate_c,
+                    "estimate_d": estimate_d,
+                    "reasoning_a": indivarg_a,
+                    "reasoning_b": indivarg_b,
+                    "reasoning_c": indivarg_c,
+                    "reasoning_d": indivarg_d},
+                4: {"player.id_in_group": "d",
+                    "estimate_a": estimate_a,
+                    "estimate_b": estimate_b,
+                    "estimate_c": estimate_c,
+                    "estimate_d": estimate_d,
+                    "reasoning_a": indivarg_a,
+                    "reasoning_b": indivarg_b,
+                    "reasoning_c": indivarg_c,
+                    "reasoning_d": indivarg_d},
+            }
+        if data["information_type"] == "second_estimate":
+            if 0 <= data["second_estimate"] <= 100:
+                player.second_indivestim = data["second_estimate"]
+                return {
+                    player.id_in_group: {"information_type": "completion_indicator"},
+                }
+            else:
+                return {
+                    player.id_in_group: {"information_type": "error_2",
+                                         "error": "estimate out of range"},
+                }
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        global num_estims
+        num_estims = 0
 
 
 class MyPage(Page):
