@@ -162,7 +162,7 @@
 {% block title %}
     <table class="table">
         <tr>
-            <td style="width:70%;border-color:transparent">Let's go - Round 1 out of 10</td>
+            <td style="width:70%;border-color:transparent">Let's go - Round {{ player.round_number }} out of 10</td>
             <td style="width:30%;border-color:transparent;text-align: right;">
                 <img src="{% static 'img/um_logo.jpg' %}" style="width:30%;">
             </td>
@@ -606,7 +606,7 @@
                     </div>
 
                     <div id="completion_message" style="display: none">
-                        You completed round X. Please click the blue button to continue.
+                        You completed round {{ player.round_number }}. Please click the blue button to continue.
                     </div>
 
                     <!-- on Card Navigation  Arrows -->
