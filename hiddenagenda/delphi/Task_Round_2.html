@@ -35,7 +35,9 @@
         liveSend({"information_type": "second_estimate", "second_estimate": second_indivestim})
     }
     function saveTime() {
-        document.getElementById("end_of_round_input").value = new Date().getTime();
+        var d = new Date();
+        var n = d.getTime();
+        document.getElementById("end_of_round_input").value = n;
     }
 
     function liveRecv(data) {

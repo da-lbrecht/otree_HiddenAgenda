@@ -42,7 +42,7 @@ class Player(BasePlayer):
     endround_time = models.LongStringField(initial=999,
                                            doc="Time at which a task round ends and the next round is started")
     start_of_round = models.StringField(initial=999,
-                                        doc="Starting time of an estimation round.")
+                                        doc="Starting time of an estimation round")
     end_of_round = models.StringField(initial=999,
                                       doc="Time at which an estimation round is completed")
 
@@ -188,6 +188,7 @@ class FailedAttentionCheck(Page):
 
 class Task_Round_1(Page):
     form_model = 'player'
+    form_fields = ['end_of_round']
 
     @staticmethod
     def is_displayed(player: Player):
