@@ -323,7 +323,8 @@
 
                             Along the estimate you may also outline your reasoning behind the estimate in a brief text.
                             Both your estimate and the reasoning will be presented anonymously to your fellow group
-                            members in the next step. What is your reasoning?
+                            members in the next step. In the same way, you will see estimates and reasoning of others in
+                            the next step. What is your reasoning?
                         </p>
                             <textarea id="indivarg"
                                       name="indivarg"
@@ -357,7 +358,8 @@
 
                             Along the estimate you may also outline your reasoning behind the estimate in a brief text.
                             Both your estimate and the reasoning will be presented anonymously to your fellow group
-                            members in the next step. What is your reasoning?
+                            members in the next step. In the same way, you will see estimates and reasoning of others in
+                            the next step. What is your reasoning?
                         </p>
                             <textarea id="indivarg_error"
                                       name="indivarg_error"
@@ -606,7 +608,23 @@
                     </div>
 
                     <div id="completion_message" style="display: none">
-                        You completed round {{ player.round_number }}. Please click the blue button to continue.
+                        <p>
+                            You completed the trial round. This round was just to illustrate the process.
+                        </p>
+
+                        <p>
+                            For the trial round, as well as for all the following rounds you will not receive any
+                            feedback on your estimates until the end of the experiment. As such,
+                            you can always directly continue to the next round after sending your second estimate.
+                        </p>
+
+                        <p>
+                            Please click the blue button to continue. You will then start with the first out of ten
+                            rounds of the experiment. All these ten rounds count towards your earnings in the experiment
+                            as outlined in the introductory video.
+                        </p>
+
+
                     </div>
 
                     <!-- on Card Navigation  Arrows -->
@@ -622,7 +640,7 @@
 
                         <div class="col col-lg-2" id="next_button" style="display: none">
                             <button class="btn btn-primary btn-large" onclick="saveTime()">
-                                Continue to next round
+                                Continue to first round
                             </button>
                         </div>
 
