@@ -25,20 +25,25 @@
         attention_check_4 = parseFloat(document.getElementById("attention_check_4_input").value)
         attention_check_5 = parseFloat(document.getElementById("attention_check_5_input").value)
         //indivarg = document.getElementById("indivarg").value
-        liveSend({"information_type": "answer_q1", "answer_q1": attention_check_1})
-        liveSend({"information_type": "answer_q2", "answer_q2": attention_check_2})
-        liveSend({"information_type": "answer_q3", "answer_q3": attention_check_3})
-        liveSend({"information_type": "answer_q4", "answer_q4": attention_check_4})
-        liveSend({"information_type": "answer_q5", "answer_q5": attention_check_5})
+        liveSend({"information_type": "answer", "answer_q1": attention_check_1,
+                                                "answer_q2": attention_check_2,
+                                                "answer_q3": attention_check_3,
+                                                "answer_q4": attention_check_4,
+                                                "answer_q5": attention_check_5})
         //liveSend({"information_type": "reasoning", "reasoning": indivarg})
         }
 
-         if (data["information_type"] == "error") {
-            document.getElementById("wrong_answers").style.display = "block";
-        } else if (data["information_type"] == "no_error") {
-            document.getElementById("completion_message").style.display = "block";
-            document.getElementById("next_button").style.display = "block";
-         }
+        function liveRecv(data) {
+            if (data["information_type"] == "error") {
+                document.getElementById("wrong_answers").style.display = "block";
+            } else if (data["information_type"] == "no_error") {
+                document.getElementById("completion_message").style.display = "block";
+                document.getElementById("next_button").style.display = "block";
+                document.getElementById("attention_questions").style.display = "none";
+                document.getElementById("check_answers").style.display = "none";
+            }
+        }
+
 
     </script>
 {% endblock %}
@@ -206,17 +211,73 @@
                     <p class="h4">Let's make sure everything was explained well.</p>
                 </div>
                 <div class="card-body">
-                    <div>
+                    <div id="attention_questions" style="display: block">
                         <p>
-                            Some control questions
+                            Please answer the following questions. Feel free to go back to the instruction videos if
+                            needed.
                         </p>
 
-                        {{ formfield 'attention_check_1' }}
-                        {{ formfield 'attention_check_2' }}
-                        {{ formfield 'attention_check_3' }}
-                        {{ formfield 'attention_check_4' }}
-                        {{ formfield 'attention_check_5' }}
 
+                        <p>
+                            Q1: How many rounds of the task will you play after the trial round?
+                            <br>
+
+                        <input id="attention_check_1_input"
+                               type="text"
+                               size="3">
+                        </p>
+
+                        <p>
+                            Q2: How many rounds of the task will you play after the trial round?
+                            <br>
+
+                        <input id="attention_check_2_input"
+                               type="text"
+                               size="3">
+                        </p>
+
+
+                        <p>
+                            Q3: How many rounds of the task will you play after the trial round?
+                            <br>
+
+                        <input id="attention_check_3_input"
+                               type="text"
+                               size="3">
+                        </p>
+
+                        <p>
+                            Q4: How many rounds of the task will you play after the trial round?
+                            <br>
+
+                        <input id="attention_check_4_input"
+                               type="text"
+                               size="3">
+                        </p>
+
+                        <p>
+                            Q5: How many rounds of the task will you play after the trial round?
+                            <br>
+
+                        <input id="attention_check_5_input"
+                               type="text"
+                               size="3">
+                        </p>
+
+                    </div>
+
+                    <div id="error" style="display: none">
+                        <p style="color:red;">
+                            <b> You did not answer all questions correctly</b>
+                        </p>
+                    </div>
+
+                    <div id="check_answers" style="display: block">
+                        <br>
+                        <br>
+                        <button type="button" onclick="check_answers()" class="btn btn-primary btn-large">
+                                Check answers
+                            </button>
                     </div>
 
                     <div id="completion_message" style="display: none">

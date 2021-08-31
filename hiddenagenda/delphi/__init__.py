@@ -50,19 +50,24 @@ class Player(BasePlayer):
                                               "num_rounds")
 
     # Response variables for attention checks
-    attention_check_1 = models.IntegerField(label="Q1: How many rounds of the task will you play after the trial round?",
+    attention_check_1 = models.FloatField(initial=999,
+                                          label="Q1: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
-    attention_check_2 = models.IntegerField(label="Q2: How many rounds of the task will you play after the trial round?",
+    attention_check_2 = models.FloatField(initial=999,
+                                          label="Q2: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
-    attention_check_3 = models.IntegerField(label="Q3: How many rounds of the task will you play after the trial round?",
+    attention_check_3 = models.FloatField(initial=999,
+                                          label="Q3: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
-    attention_check_4 = models.IntegerField(label="Q4: How many rounds of the task will you play after the trial round?",
+    attention_check_4 = models.FloatField(initial=999,
+                                          label="Q4: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
-    attention_check_5 = models.IntegerField(label="Q5: How many rounds of the task will you play after the trial round?",
+    attention_check_5 = models.FloatField(initial=999,
+                                          label="Q5: How many rounds of the task will you play after the trial round?",
                                             doc="Attention check: How many rounds of the task will you play after the "
                                                 "trial round?")
     failed_attention_check = models.BooleanField(initial=False,
@@ -111,7 +116,8 @@ class TaskIntro(Page):
                    # 'attention_check_2',
                    # 'attention_check_3',
                    # 'attention_check_4',
-                   # 'attention_check_5']
+                   # 'attention_check_5'
+                   ]
 
     @staticmethod
     def is_displayed(player: Player):
@@ -123,28 +129,39 @@ class TaskIntro(Page):
 
     @staticmethod
     def live_method(player: Player, data):
+        if data["information_type"] == "answer":
+            player.attention_check_1 = data["answer_q1"]
+            player.attention_check_2 = data["answer_q2"]
+            player.attention_check_3 = data["answer_q3"]
+            player.attention_check_4 = data["answer_q4"]
+            player.attention_check_5 = data["answer_q5"]
+
         if (
-            data["answer_q1"] == Constants.num_rounds &
-            data["answer_q2"] == Constants.num_rounds &
-            data["answer_q3"] == Constants.num_rounds &
-            data["answer_q4"] == Constants.num_rounds &
-            data["answer_q5"] == Constants.num_rounds
+                player.attention_check_1 == Constants.num_rounds and
+                player.attention_check_2 == Constants.num_rounds and
+                player.attention_check_3 == Constants.num_rounds and
+                player.attention_check_4 == Constants.num_rounds and
+                player.attention_check_5 == Constants.num_rounds
         ):
-            incorrect_answers = np.array([ values['attention_check_1'] != Constants.num_rounds,
-                                values['attention_check_2'] != Constants.num_rounds,
-                                values['attention_check_3'] != Constants.num_rounds,
-                                values['attention_check_4'] != Constants.num_rounds,
-                                values['attention_check_5'] != Constants.num_rounds,
-                                ], dtype=bool)
-            # incorrect_answers.np.astype(int)
-            questions  = ' and '.join(np.array(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'])[incorrect_answers])
             return{
-            player.id_in_group: {"information_type": "error", "error": questions},
+                player.id_in_group: {"information_type": "no_error", "no_error": "Yeah!"},
             }
         else:
+            player.attention_check_tries = player.attention_check_tries + 1
+            incorrect_answers = np.array([
+                                player.attention_check_1 != Constants.num_rounds,
+                                player.attention_check_2 != Constants.num_rounds,
+                                player.attention_check_3 != Constants.num_rounds,
+                                player.attention_check_4 != Constants.num_rounds,
+                                player.attention_check_5 != Constants.num_rounds,
+                                ], dtype=bool)
+            # incorrect_answers.np.astype(int)
+            questions = ' and '.join(np.array(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'])[incorrect_answers])
             return{
-                player.id_in_group: {"information_type": "no_error"},
+                player.id_in_group: {"information_type": "error", "error": questions},
             }
+
+
 
 
 
