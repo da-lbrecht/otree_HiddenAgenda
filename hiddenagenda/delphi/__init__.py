@@ -106,12 +106,12 @@ class Welcome(Page):
 
 class TaskIntro(Page):
     form_model = 'player'
-    form_fields = ['begintrial_time',
-                   'attention_check_1',
-                   'attention_check_2',
-                   'attention_check_3',
-                   'attention_check_4',
-                   'attention_check_5']
+    form_fields = ['begintrial_time' # ,
+                   # 'attention_check_1',
+                   # 'attention_check_2',
+                   # 'attention_check_3',
+                   # 'attention_check_4',
+                   # 'attention_check_5']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -122,18 +122,45 @@ class TaskIntro(Page):
             return True
 
     @staticmethod
-    def before_next_page(player: Player, timeout_happened):
+    def live_method(player: Player, data):
         if (
-                player.attention_check_1 == Constants.num_rounds
-                and player.attention_check_2 == Constants.num_rounds
-                and player.attention_check_3 == Constants.num_rounds
-                and player.attention_check_4 == Constants.num_rounds
-                and player.attention_check_5 == Constants.num_rounds
+            data["answer_q1"] == Constants.num_rounds &
+            data["answer_q2"] == Constants.num_rounds &
+            data["answer_q3"] == Constants.num_rounds &
+            data["answer_q4"] == Constants.num_rounds &
+            data["answer_q5"] == Constants.num_rounds
         ):
-            player.failed_attention_check = False
+            incorrect_answers = np.array([ values['attention_check_1'] != Constants.num_rounds,
+                                values['attention_check_2'] != Constants.num_rounds,
+                                values['attention_check_3'] != Constants.num_rounds,
+                                values['attention_check_4'] != Constants.num_rounds,
+                                values['attention_check_5'] != Constants.num_rounds,
+                                ], dtype=bool)
+            # incorrect_answers.np.astype(int)
+            questions  = ' and '.join(np.array(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'])[incorrect_answers])
+            return{
+            player.id_in_group: {"information_type": "error", "error": questions},
+            }
         else:
-            player.failed_attention_check = True
-            player.attention_check_tries = player.attention_check_tries + 1
+            return{
+                player.id_in_group: {"information_type": "no_error"},
+            }
+
+
+
+    # @staticmethod
+    # def before_next_page(player: Player, timeout_happened):
+    #     if (
+    #             player.attention_check_1 == Constants.num_rounds
+    #             and player.attention_check_2 == Constants.num_rounds
+    #             and player.attention_check_3 == Constants.num_rounds
+    #             and player.attention_check_4 == Constants.num_rounds
+    #             and player.attention_check_5 == Constants.num_rounds
+    #     ):
+    #         player.failed_attention_check = False
+    #     else:
+    #         player.failed_attention_check = True
+    #         player.attention_check_tries = player.attention_check_tries + 1
 
 
 class FailedAttentionCheck(Page):
@@ -512,7 +539,7 @@ class Results(Page):
         return subsession.round_number == Constants.num_rounds
 
 
-page_sequence = [  # Welcome, TaskIntro, FailedAttentionCheck,
+page_sequence = [Welcome, TaskIntro, FailedAttentionCheck,
                  Task_Trial,
                  Task_Round_1, Task_Round_2,
                  Results]

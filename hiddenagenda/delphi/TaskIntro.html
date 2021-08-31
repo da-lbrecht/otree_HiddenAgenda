@@ -11,6 +11,35 @@
             let begintrialTime = new Date().getTime();
             document.getElementById("begintrial_time").value = begintrialTime;
         }
+
+        var attention_check_1
+        var attention_check_2
+        var attention_check_3
+        var attention_check_4
+        var attention_check_5
+
+        function check_answers() {
+        attention_check_1 = parseFloat(document.getElementById("attention_check_1_input").value)
+        attention_check_2 = parseFloat(document.getElementById("attention_check_2_input").value)
+        attention_check_3 = parseFloat(document.getElementById("attention_check_3_input").value)
+        attention_check_4 = parseFloat(document.getElementById("attention_check_4_input").value)
+        attention_check_5 = parseFloat(document.getElementById("attention_check_5_input").value)
+        //indivarg = document.getElementById("indivarg").value
+        liveSend({"information_type": "answer_q1", "answer_q1": attention_check_1})
+        liveSend({"information_type": "answer_q2", "answer_q2": attention_check_2})
+        liveSend({"information_type": "answer_q3", "answer_q3": attention_check_3})
+        liveSend({"information_type": "answer_q4", "answer_q4": attention_check_4})
+        liveSend({"information_type": "answer_q5", "answer_q5": attention_check_5})
+        //liveSend({"information_type": "reasoning", "reasoning": indivarg})
+        }
+
+         if (data["information_type"] == "error") {
+            document.getElementById("wrong_answers").style.display = "block";
+        } else if (data["information_type"] == "no_error") {
+            document.getElementById("completion_message").style.display = "block";
+            document.getElementById("next_button").style.display = "block";
+         }
+
     </script>
 {% endblock %}
 
@@ -190,6 +219,13 @@
 
                     </div>
 
+                    <div id="completion_message" style="display: none">
+                        <p>
+                            You answered all questions correctly. You may continue with the trial round by clicking on
+                            the blue button.
+                        </p>
+                    </div>
+
 
                     <!-- on Card Navigation  Arrows -->
                     <div class="row justify-content-md-center mt-5">
@@ -202,7 +238,7 @@
                             </p>
                         </div>
 
-                        <div class="col col-lg-2">
+                        <div class="col col-lg-2" id="next_button" style="display: none">
                             <button class="btn btn-primary btn-large" onclick="saveTime()">Continue with the trial round</button>
                         </div>
 
