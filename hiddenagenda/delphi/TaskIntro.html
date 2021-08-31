@@ -17,6 +17,7 @@
         var attention_check_3
         var attention_check_4
         var attention_check_5
+        var wrong_answers
 
         function check_answers() {
         attention_check_1 = parseFloat(document.getElementById("attention_check_1_input").value)
@@ -34,13 +35,19 @@
         }
 
         function liveRecv(data) {
-            if (data["information_type"] == "error") {
-                document.getElementById("wrong_answers").style.display = "block";
-            } else if (data["information_type"] == "no_error") {
+            if (data["information_type"] == "no_error") {
                 document.getElementById("completion_message").style.display = "block";
                 document.getElementById("next_button").style.display = "block";
                 document.getElementById("attention_questions").style.display = "none";
                 document.getElementById("check_answers").style.display = "none";
+                document.getElementById("error").style.display = "none";
+                document.getElementById("wrong_answers").style.display = "none";
+            } else {
+                wrong_answers = data["error"]
+                document.getElementById("wrong_answers").innerHTML = wrong_answers;
+                document.getElementById("error").style.display = "block";
+                document.getElementById("wrong_answers").style.display = "inline";
+
             }
         }
 
@@ -268,7 +275,12 @@
 
                     <div id="error" style="display: none">
                         <p style="color:red;">
-                            <b> You did not answer all questions correctly</b>
+                            <b> Not quite! You need to take another look at:
+                        </p>
+                    </div>
+
+                    <div id="wrong_answers" style="display: none">
+                        <p style="color:red;">
                         </p>
                     </div>
 
