@@ -8,6 +8,17 @@
 
     <!-- Live Interaction in Delphi Estimation -->
     <script>
+
+    {% if player.id_in_group == 1 %} // control which initial info each player sees
+        document.getElementById("info_a").style.display = "block";
+    {% elif player.id_in_group == 2 %}
+        document.getElementById("info_b").style.display = "block";
+    {% elif player.id_in_group == 3 %}
+        document.getElementById("info_c").style.display = "block";
+    {% elif player.id_in_group == 4 %}
+        document.getElementById("info_d").style.display = "block";
+    {% endif %}
+
         var first_indivestim
         var indivarg
         var second_indivestim
@@ -255,13 +266,30 @@
 
                         <p>
                             Below you can see your own private information. You see the path Kara took when the program
-                            was executed once in the past. Everybody in your group receives a path from a distinct past
+                            was executed once in the past.
+                        </p>
+
+                        <p>
+                            Everybody in your group receives a path from a distinct past
                             execution of the program. Consequently, the path you see is in all likelihood different from
                             what others in your group see.
                         </p>
+                    </div>
 
-                        <img src="{% static 'img/Random Walks/trial0.75A' %}" style="width:90%;">
+                    <div id="info_a" style="display: none">
+                        <img id="info_a" src="{% static 'img/RandomWalks/trial0.75A.png' %}" style="width:90%;">
+                    </div>
 
+                    <div id="info_b" style="display: none">
+                        <img id="info_b" src="{% static 'img/RandomWalks/trial0.75B.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_c" style="display: none">
+                        <img id="info_c" src="{% static 'img/RandomWalks/trial0.75C.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_d" style="display: none">
+                        <img id="info_d" src="{% static 'img/RandomWalks/trial0.75D.png' %}" style="width:90%;">
                     </div>
 
 
