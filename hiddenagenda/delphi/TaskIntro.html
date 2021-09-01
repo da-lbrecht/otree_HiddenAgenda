@@ -20,18 +20,29 @@
         var wrong_answers
 
         function check_answers() {
-        attention_check_1 = parseFloat(document.getElementById("attention_check_1_input").value)
-        attention_check_2 = parseFloat(document.getElementById("attention_check_2_input").value)
-        attention_check_3 = parseFloat(document.getElementById("attention_check_3_input").value)
-        attention_check_4 = parseFloat(document.getElementById("attention_check_4_input").value)
-        attention_check_5 = parseFloat(document.getElementById("attention_check_5_input").value)
-        //indivarg = document.getElementById("indivarg").value
-        liveSend({"information_type": "answer", "answer_q1": attention_check_1,
-                                                "answer_q2": attention_check_2,
-                                                "answer_q3": attention_check_3,
-                                                "answer_q4": attention_check_4,
-                                                "answer_q5": attention_check_5})
-        //liveSend({"information_type": "reasoning", "reasoning": indivarg})
+
+            //Read values from radio buttons
+            let ele = document.getElementsByName("attention_check_1_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_1_input").innerHTML
+                        = ele[i].value;
+            }
+
+            attention_check_1 = parseFloat(document.getElementById("attention_check_1_input").innerHTML)
+            attention_check_2 = parseFloat(document.getElementById("attention_check_2_input").value)
+            attention_check_3 = parseFloat(document.getElementById("attention_check_3_input").value)
+            attention_check_4 = parseFloat(document.getElementById("attention_check_4_input").value)
+            attention_check_5 = parseFloat(document.getElementById("attention_check_5_input").value)
+            //indivarg = document.getElementById("indivarg").value
+
+            liveSend({"information_type": "answer", "answer_q1": attention_check_1,
+                                                    "answer_q2": attention_check_2,
+                                                    "answer_q3": attention_check_3,
+                                                    "answer_q4": attention_check_4,
+                                                    "answer_q5": attention_check_5})
+            //liveSend({"information_type": "reasoning", "reasoning": indivarg})
         }
 
         function liveRecv(data) {
@@ -225,14 +236,35 @@
                         </p>
 
 
-                        <p>
+<!--                        <p>
                             Q1: How many rounds of the task will you play after the trial round?
                             <br>
 
-                        <input id="attention_check_1_input"
-                               type="text"
-                               size="3">
-                        </p>
+                            <input id="attention_check_1_input_old"
+                                   type="text"
+                                   size="3">
+
+                            <form>
+                                <input type="checkbox" id="attention_check_1_input" name="" value=1>
+                                <label for="vehicle1"> I have a bike</label><br>
+                            </form>
+                        </p>-->
+
+                        <form>
+                          <p>Q1: How many rounds of the task will you play after the trial round?</p>
+                          <div>
+                            <input type="radio" id="attention_check_1_radio_option_1"
+                                   name="attention_check_1_radio" value="5">
+                            <label for="attention_check_1_radio_option_1">5</label>
+                            <input type="radio" id="attention_check_1_radio_option_2"
+                                   name="attention_check_1_radio" value="10">
+                            <label for="attention_check_1_radio_option_2">10</label>
+                            <input type="radio" id="attention_check_1_radio_option_3"
+                                   name="attention_check_1_radio" value="15">
+                            <label for="attention_check_1_radio_option_3">15</label>
+                          </div>
+                        </form>
+                        <div id="attention_check_1_input" style="display: block"></div>
 
                         <p>
                             Q2: Which rounds will contribute to your personal payoff?
