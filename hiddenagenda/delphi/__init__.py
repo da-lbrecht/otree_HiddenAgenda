@@ -1,6 +1,6 @@
 from otree.api import *
-import random
 import numpy as np
+import random
 
 doc = """
 Your app description
@@ -22,7 +22,8 @@ second_estimate_c = 999
 second_estimate_d = 999
 aggregate_estimate = 999
 group_accuracy_bonus = 999
-random_number = 0.5
+random_number = 999
+feedback_order = 999
 
 
 class Constants(BaseConstants):
@@ -327,7 +328,7 @@ class Task_Round_1(Page):
     def live_method(player: Player, data):
         global estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, second_estimate_c,\
             second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,num_estims, aggregate_estimate, \
-            group_accuracy_bonus
+            group_accuracy_bonus, random_number
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
@@ -414,7 +415,7 @@ class Task_Round_1(Page):
                     and second_estimate_d != 999
                 ):
                     aggregate_estimate = (second_estimate_a+second_estimate_b+second_estimate_c+second_estimate_d)/4
-                    random_number = np.random.random_sample()
+                    random_number = random.uniform(0, 1)
                     if Constants.round_1_result == 1:
                         if random_number > pow((1 - (aggregate_estimate/100)), 2):
                             group_accuracy_bonus = 4
@@ -473,7 +474,7 @@ class Task_Round_2(Page):
     @staticmethod
     def live_method(player: Player, data):
         global estimate_a, estimate_b, estimate_c, estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, \
-            num_estims
+            num_estims, feedback_order
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
@@ -504,6 +505,7 @@ class Task_Round_2(Page):
             elif player.id_in_group == 4:
                 indivarg_d = data["reasoning"]
         if num_estims >= 4 and data["information_type"] != "second_estimate":
+            feedback_order = np.round(np.random.random_sample() * 6, decimals=0) + 1
             return {
                 1: {"player.id_in_group": "a",
                     "estimate_a": estimate_a,
