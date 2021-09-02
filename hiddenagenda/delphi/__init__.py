@@ -16,6 +16,13 @@ indivarg_a = "none"
 indivarg_b = "none"
 indivarg_c = "none"
 indivarg_d = "none"
+second_estimate_a = 999
+second_estimate_b = 999
+second_estimate_c = 999
+second_estimate_d = 999
+aggregate_estimate = 999
+group_accuracy_bonus = 999
+random_number = 0.5
 
 
 class Constants(BaseConstants):
@@ -28,6 +35,19 @@ class Constants(BaseConstants):
 
     num_attention_checks = 5
 
+    # Results of payoff relevant execution of Kara's program; 0=did not reach target area
+    round_1_result = 0  # 0.1
+    round_2_result = 0  # 0.2
+    round_3_result = 0  # 0.3
+    round_4_result = 0  # 0.4
+    round_5_result = 0  # 0.45
+    round_6_result = 1  # 0.55
+    round_7_result = 0  # 0.6
+    round_8_result = 1  # 0.7
+    round_9_result = 0  # 0.8
+    round_10_result = 1  # 0.9
+
+
 class Subsession(BaseSubsession):
     pass
 
@@ -35,6 +55,12 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
+    # Payoff variables
+    group_accuracy_bonus = models.CurrencyField(initial=0,
+                                                doc="Bonus earned based on the accuracy of the group estimates")
+    hidden_agenda_bonus = models.CurrencyField(initial=0,
+                                               doc="Bonus earned based on the individual hidden agenda")
+
     # Process variables
     starting_time = models.LongStringField(doc="Time at which Informed Consent is given and experiment starts")
     begintrial_time = models.LongStringField(doc="Time at which trial round is started")
@@ -98,6 +124,11 @@ class Player(BasePlayer):
     second_indivestim = models.FloatField(label="My second estimate:",
                                           doc="Second individual estimate given in Delphi procedure",
                                           min=0, max=100)
+
+    # Aggregated estimates
+    aggregate_estimate = models.FloatField(doc="Group estimate, derived by unweighted averaging of second individual "
+                                               "estimates",
+                                           min=0, max=100)
 
 
 # FUNCTIONS
@@ -292,8 +323,9 @@ class Task_Round_1(Page):
 
     @staticmethod
     def live_method(player: Player, data):
-        global estimate_a, estimate_b, estimate_c, estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,\
-            num_estims
+        global estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, second_estimate_c,\
+            second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,num_estims, aggregate_estimate, \
+            group_accuracy_bonus
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
@@ -365,6 +397,33 @@ class Task_Round_1(Page):
         if data["information_type"] == "second_estimate":
             if 0 <= data["second_estimate"] <= 100:
                 player.second_indivestim = data["second_estimate"]
+                if player.id_in_group == 1:
+                    second_estimate_a = data["second_estimate"]
+                elif player.id_in_group == 2:
+                    second_estimate_b = data["second_estimate"]
+                elif player.id_in_group == 3:
+                    second_estimate_c = data["second_estimate"]
+                elif player.id_in_group == 4:
+                    second_estimate_d = data["second_estimate"]
+                if (
+                    second_estimate_a != 999
+                    and second_estimate_b != 999
+                    and second_estimate_c != 999
+                    and second_estimate_d != 999
+                ):
+                    aggregate_estimate = np.mean(second_estimate_a, second_estimate_b, second_estimate_c,
+                                                 second_estimate_d)
+                    random_number = np.random(1)
+                    if Constants.round_1_result == 1:
+                        if random_number > (1 - (aggregate_estimate/100))^2:
+                            group_accuracy_bonus = 4
+                        elif random_number <= (1 - (aggregate_estimate/100))^2:
+                            group_accuracy_bonus = 0
+                    elif Constants.round_1_result == 0:
+                        if random_number > aggregate_estimate^2:
+                            group_accuracy_bonus = 4
+                        elif random_number <= aggregate_estimate^2:
+                            group_accuracy_bonus = 0
                 return{
                     player.id_in_group: {"information_type": "completion_indicator"},
                 }
@@ -377,7 +436,10 @@ class Task_Round_1(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         global num_estims
+
         num_estims = 0
+        player.group_accuracy_bonus = group_accuracy_bonus*0.25
+
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
         else:
@@ -499,7 +561,7 @@ class Results(Page):
         return subsession.round_number == Constants.num_rounds
 
 
-page_sequence = [Welcome, TaskIntro,
-                 Task_Trial,
+page_sequence = [ #Welcome, TaskIntro,
+                 #Task_Trial,
                  Task_Round_1, Task_Round_2,
                  Results]
