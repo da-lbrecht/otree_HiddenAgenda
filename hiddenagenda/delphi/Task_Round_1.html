@@ -151,6 +151,19 @@
             // indivarg = document.getElementById("indivarg").value
             // document.getElementById("indivarg_error").innerHTML = indivarg;
             document.getElementById("second_indivestim_error").style.display = "block";
+            } else if (data["information_type"] == "wait_indicator") {
+            document.getElementById("wait_for_others").style.display = "block";
+            document.getElementById("second_header").style.display = "none";
+            document.getElementById("feedback_a").style.display = "none";
+            document.getElementById("feedback_b").style.display = "none";
+            document.getElementById("feedback_c").style.display = "none";
+            document.getElementById("feedback_d").style.display = "none";
+            document.getElementById("second_estimate").style.display = "none";
+            document.getElementById("second_estimate_button").style.display = "none";
+            document.getElementById("second_indivestim_error").style.display = "none";
+            document.getElementById("third_header").style.display = "block";
+            document.getElementById("completion_message").style.display = "none";
+            document.getElementById("next_button").style.display = "none";
             } else if (data["information_type"] == "completion_indicator") {
             document.getElementById("wait_for_others").style.display = "none";
             document.getElementById("second_header").style.display = "none";
@@ -397,7 +410,7 @@
                     </div id="first_estimate_error" style="display: none">
 
                     <div id="wait_for_others" style="display: none">
-                        Please wait until all your fellow group members completed their first estimate.
+                        Please wait until all your fellow group members completed their input.
                         <span id="message"></span>
                     </div>
 

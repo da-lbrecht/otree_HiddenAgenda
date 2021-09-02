@@ -56,9 +56,11 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     # Payoff variables
-    group_accuracy_bonus = models.CurrencyField(initial=0,
+    random_number = models.FloatField(initial=999,
+                                      doc="Random number drawn for calculation of binarized scoring rule bonus")
+    group_accuracy_bonus = models.CurrencyField(initial=999,
                                                 doc="Bonus earned based on the accuracy of the group estimates")
-    hidden_agenda_bonus = models.CurrencyField(initial=0,
+    hidden_agenda_bonus = models.CurrencyField(initial=999,
                                                doc="Bonus earned based on the individual hidden agenda")
 
     # Process variables
@@ -411,22 +413,25 @@ class Task_Round_1(Page):
                     and second_estimate_c != 999
                     and second_estimate_d != 999
                 ):
-                    aggregate_estimate = np.mean(second_estimate_a, second_estimate_b, second_estimate_c,
-                                                 second_estimate_d)
-                    random_number = np.random(1)
+                    aggregate_estimate = (second_estimate_a+second_estimate_b+second_estimate_c+second_estimate_d)/4
+                    random_number = np.random.random_sample()
                     if Constants.round_1_result == 1:
-                        if random_number > (1 - (aggregate_estimate/100))^2:
+                        if random_number > pow((1 - (aggregate_estimate/100)), 2):
                             group_accuracy_bonus = 4
-                        elif random_number <= (1 - (aggregate_estimate/100))^2:
+                        elif random_number <= pow((1 - (aggregate_estimate/100)), 2):
                             group_accuracy_bonus = 0
                     elif Constants.round_1_result == 0:
-                        if random_number > aggregate_estimate^2:
+                        if random_number > pow((aggregate_estimate/100), 2):
                             group_accuracy_bonus = 4
-                        elif random_number <= aggregate_estimate^2:
+                        elif random_number <= pow((aggregate_estimate/100), 2):
                             group_accuracy_bonus = 0
-                return{
-                    player.id_in_group: {"information_type": "completion_indicator"},
-                }
+                    return {
+                        0: {"information_type": "completion_indicator"},
+                    }
+                else:
+                    return{
+                        player.id_in_group: {"information_type": "wait_indicator"},
+                    }
             else:
                 return{
                     player.id_in_group: {"information_type": "error_2",
@@ -435,10 +440,18 @@ class Task_Round_1(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        global num_estims
+        global num_estims, second_estimate_a, second_estimate_b, second_estimate_c, second_estimate_d
+
+        player.random_number = random_number
+        player.aggregate_estimate = aggregate_estimate
+        player.group_accuracy_bonus = group_accuracy_bonus*0.25
+        player.payoff += group_accuracy_bonus*0.25
 
         num_estims = 0
-        player.group_accuracy_bonus = group_accuracy_bonus*0.25
+        second_estimate_a = 999
+        second_estimate_b = 999
+        second_estimate_c = 999
+        second_estimate_c = 999
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
