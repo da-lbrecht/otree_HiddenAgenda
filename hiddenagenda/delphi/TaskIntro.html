@@ -21,20 +21,57 @@
 
         function check_answers() {
 
-            //Read values from radio buttons
-            let ele = document.getElementsByName("attention_check_1_radio");
+            // Read values from radio buttons
+            // 1st attention check question
+            let ele1 = document.getElementsByName("attention_check_1_radio");
+
+            for(i = 0; i < ele1.length; i++) {
+                if(ele1[i].checked)
+                document.getElementById("attention_check_1_input").innerHTML
+                        = ele1[i].value;
+            }
+
+            // 2nd attention check question
+            var ele = document.getElementsByName("attention_check_2_radio");
 
             for(i = 0; i < ele.length; i++) {
                 if(ele[i].checked)
-                document.getElementById("attention_check_1_input").innerHTML
+                document.getElementById("attention_check_2_input").innerHTML
+                        = ele[i].value;
+            }
+
+            // 3rd attention check question
+            var ele = document.getElementsByName("attention_check_3_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_3_input").innerHTML
+                        = ele[i].value;
+            }
+
+            // 4th attention check question
+            var ele = document.getElementsByName("attention_check_4_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_4_input").innerHTML
+                        = ele[i].value;
+            }
+
+            // 5th attention check question
+            var ele = document.getElementsByName("attention_check_5_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_5_input").innerHTML
                         = ele[i].value;
             }
 
             attention_check_1 = parseFloat(document.getElementById("attention_check_1_input").innerHTML)
-            attention_check_2 = parseFloat(document.getElementById("attention_check_2_input").value)
-            attention_check_3 = parseFloat(document.getElementById("attention_check_3_input").value)
-            attention_check_4 = parseFloat(document.getElementById("attention_check_4_input").value)
-            attention_check_5 = parseFloat(document.getElementById("attention_check_5_input").value)
+            attention_check_2 = parseFloat(document.getElementById("attention_check_2_input").innerHTML)
+            attention_check_3 = parseFloat(document.getElementById("attention_check_3_input").innerHTML)
+            attention_check_4 = parseFloat(document.getElementById("attention_check_4_input").innerHTML)
+            attention_check_5 = parseFloat(document.getElementById("attention_check_5_input").innerHTML)
             //indivarg = document.getElementById("indivarg").value
 
             liveSend({"information_type": "answer", "answer_q1": attention_check_1,
@@ -234,73 +271,120 @@
                             Please answer the following questions. Feel free to go back to the instruction videos if
                             needed.
                         </p>
-
-
-<!--                        <p>
-                            Q1: How many rounds of the task will you play after the trial round?
-                            <br>
-
-                            <input id="attention_check_1_input_old"
-                                   type="text"
-                                   size="3">
-
-                            <form>
-                                <input type="checkbox" id="attention_check_1_input" name="" value=1>
-                                <label for="vehicle1"> I have a bike</label><br>
-                            </form>
-                        </p>-->
+                        <br>
 
                         <form>
-                          <p>Q1: How many rounds of the task will you play after the trial round?</p>
+                          <p> <b>Q1: How many rounds of the task will you need to solve after the trial round?</b></p>
                           <div>
+                              <span style="display:inline-block; width: 2%;"></span>
                             <input type="radio" id="attention_check_1_radio_option_1"
                                    name="attention_check_1_radio" value="5">
                             <label for="attention_check_1_radio_option_1">5</label>
+                              <span style="display:inline-block; width: 3%;"></span>
                             <input type="radio" id="attention_check_1_radio_option_2"
                                    name="attention_check_1_radio" value="10">
                             <label for="attention_check_1_radio_option_2">10</label>
+                              <span style="display:inline-block; width: 3%;"></span>
                             <input type="radio" id="attention_check_1_radio_option_3"
                                    name="attention_check_1_radio" value="15">
                             <label for="attention_check_1_radio_option_3">15</label>
                           </div>
                         </form>
-                        <div id="attention_check_1_input" style="display: block"></div>
+                        <div id="attention_check_1_input" style="display: none"></div>
 
-                        <p>
-                            Q2: Which rounds will contribute to your personal payoff?
-                            <br>
+                        <br>
+                        <p> <b>Q2: Which rounds will contribute to your personal payoff?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_2_radio_option_1"
+                                   name="attention_check_2_radio" value="1">
+                            <label for="attention_check_2_radio_option_1">One randomly selected round</label>
+                              <span style="display:inline-block; width: 3%;"></span>
+                            <input type="radio" id="attention_check_2_radio_option_2"
+                                   name="attention_check_2_radio" value="2">
+                            <label for="attention_check_2_radio_option_2">Only the last round</label>
+                              <span style="display:inline-block; width: 3%;"></span>
+                            <input type="radio" id="attention_check_2_radio_option_3"
+                                   name="attention_check_2_radio" value="3">
+                            <label for="attention_check_2_radio_option_3">All rounds after the trial round</label>
+                          </div>
+                        </form>
+                        <div id="attention_check_2_input" style="display: none"></div>
+                        </p>
 
-                        <input id="attention_check_2_input"
-                               type="text"
-                               size="3">
+                        <p> <b>Q3: What kind of inputs do you need to provide in each round?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_3_radio_option_1"
+                                   name="attention_check_3_radio" value="1">
+                            <label for="attention_check_3_radio_option_1">Two numerical estimates and a corresponding reasoning
+                                for the first of them </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_3_radio_option_2"
+                                   name="attention_check_3_radio" value="2">
+                            <label for="attention_check_3_radio_option_2">Two numerical estimates and two corresponding
+                                reasonings </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_3_radio_option_3"
+                                   name="attention_check_3_radio" value="3">
+                            <label for="attention_check_3_radio_option_3">One estimate and a corresponding reasoning
+                            </label>
+                          </div>
+                        </form>
+                        <div id="attention_check_3_input" style="display: none"></div>
                         </p>
 
 
-                        <p>
-                            Q3: What kind of inputs do you need to provide in each round?
-                            <br>
-
-                        <input id="attention_check_3_input"
-                               type="text"
-                               size="3">
+                        <p> <b>Q4: What kind of feedback do you receive in each round?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_4_radio_option_1"
+                                   name="attention_check_4_radio" value="1">
+                            <label for="attention_check_4_radio_option_1">First estimates and corresponding reasoning
+                            of all group members, without knowing which belongs to whom </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_4_radio_option_2"
+                                   name="attention_check_4_radio" value="2">
+                            <label for="attention_check_4_radio_option_2">All estimates and corresponding reasonings
+                            made by the other group members</label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_4_radio_option_3"
+                                   name="attention_check_4_radio" value="3">
+                            <label for="attention_check_4_radio_option_3">Only the reasoning of all group members,
+                                without knowing which belongs to whom
+                            </label>
+                          </div>
+                        </form>
+                        <div id="attention_check_4_input" style="display: none"></div>
                         </p>
 
-                        <p>
-                            Q4: What kind of feedback do you receive in each round?
-                            <br>
 
-                        <input id="attention_check_4_input"
-                               type="text"
-                               size="3">
-                        </p>
-
-                        <p>
-                            Q5: What don't you know about Kara?
-                            <br>
-
-                        <input id="attention_check_5_input"
-                               type="text"
-                               size="3">
+                        <p> <b>Q5: What don't you know about Kara?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_5_radio_option_1"
+                                   name="attention_check_5_radio" value="1">
+                            <label for="attention_check_5_radio_option_1">How many steps she will make </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_5_radio_option_2"
+                                   name="attention_check_5_radio" value="2">
+                            <label for="attention_check_5_radio_option_2">Whether the chance that she moves one level up
+                            is the same each step in a given round</label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_5_radio_option_3"
+                                   name="attention_check_5_radio" value="3">
+                            <label for="attention_check_5_radio_option_3">The chance that she moves one level up in the
+                                first step
+                            </label>
+                          </div>
+                        </form>
+                        <div id="attention_check_5_input" style="display: none"></div>
                         </p>
 
                     </div>

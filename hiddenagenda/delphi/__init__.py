@@ -51,22 +51,37 @@ class Player(BasePlayer):
 
     # Response variables for attention checks
     attention_check_1 = models.FloatField(initial=999,
-                                          label="Q1: How many rounds of the task will you play after the trial round?",
-                                            doc="Attention check: How many rounds of the task will you play after the "
-                                                "trial round?")
+                                          label="Q1: How many rounds of the task will you need to solve after the trial"
+                                                " round?",
+                                            doc="Attention check: How many rounds of the task will you need to solve "
+                                                "after the trial round? (integer)")
     attention_check_2 = models.FloatField(initial=999,
                                           label="Q2: Which rounds will contribute to your personal payoff?",
                                             doc="Attention check: Which rounds will contribute to your personal payoff?"
+                                                " (1: One randomly selected round; 2: Only the last round; 3: All rounds"
+                                                " after the trial round)"
                                                 )
     attention_check_3 = models.FloatField(initial=999,
-                                          label="Q3: What inputs do you need to provide in each round?",
-                                            doc="Attention check: What inputs do you need to provide in each round?")
+                                          label="Q3: What kind of inputs do you need to provide in each round?",
+                                            doc="Attention check: What kind of inputs do you need to provide in each "
+                                                "round? (1: Two numerical estimates and a corresponding reasoning"
+                                                " for the first of them; 2: Two numerical estimates and two "
+                                                " corresponding reasonings; 3: One estimate and a corresponding"
+                                                " reasoning")
     attention_check_4 = models.FloatField(initial=999,
                                           label="Q4: What kind of feedback do you receive in each round?",
-                                            doc="Attention check: What kind of feedback do you receive in each round?")
+                                            doc="Attention check: What kind of feedback do you receive in each round?"
+                                                " (1: First estimates and corresponding reasoning of all group members,"
+                                                " without knowing which belongs to whom; 2: All estimates and "
+                                                "corresponding reasonings made by the other group members; 3: Only the "
+                                                "reasoning of all group members, without knowing which belongs to whom")
     attention_check_5 = models.FloatField(initial=999,
                                           label="Q5: What don't you know about Kara?",
-                                            doc="Attention check: What don't you know about Kara?")
+                                            doc="Attention check: What don't you know about Kara? "
+                                                "(1: How many steps she will make in a given round, "
+                                                "2: Whether the chance that she moves one level up is the same each step"
+                                                " in a given round, "
+                                                "3: The chance that she moves one level up in the first step")
 
     failed_attention_check = models.BooleanField(initial=False,
                                                  doc="True if attention check has not been passed at first attempt")
@@ -133,10 +148,10 @@ class TaskIntro(Page):
 
         if (
                 data["answer_q1"] == Constants.num_rounds and
-                data["answer_q2"] == Constants.num_rounds and
-                data["answer_q3"] == Constants.num_rounds and
-                data["answer_q4"] == Constants.num_rounds and
-                data["answer_q5"] == Constants.num_rounds
+                data["answer_q2"] == 3 and
+                data["answer_q3"] == 1 and
+                data["answer_q4"] == 1 and
+                data["answer_q5"] == 3
         ):
             return{
                 player.id_in_group: {"information_type": "no_error", "no_error": "Yeah!"},
@@ -146,10 +161,10 @@ class TaskIntro(Page):
             player.attention_check_tries = player.attention_check_tries + 1
             incorrect_answers = np.array([
                                 data["answer_q1"] != Constants.num_rounds,
-                                data["answer_q2"] != Constants.num_rounds,
-                                data["answer_q3"] != Constants.num_rounds,
-                                data["answer_q4"] != Constants.num_rounds,
-                                data["answer_q5"] != Constants.num_rounds,
+                                data["answer_q2"] != 3,
+                                data["answer_q3"] != 1,
+                                data["answer_q4"] != 1,
+                                data["answer_q5"] != 3,
                                 ], dtype=bool)
             # incorrect_answers.np.astype(int)
             questions = ' and '.join(np.array(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'])[incorrect_answers])
