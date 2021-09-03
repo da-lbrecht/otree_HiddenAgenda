@@ -296,7 +296,11 @@ class Task_Trial(Page):
                     "reasoning_d": indivarg_d},
             }
         if data["information_type"] == "second_estimate":
-            if 0 <= data["second_estimate"] <= 100:
+            if (
+                    type(data["second_estimate"]) == float
+                    or type(data["second_estimate"]) == int
+                    and 0 <= data["second_estimate"] <= 100
+            ):
                 player.second_indivestim = data["second_estimate"]
                 return{
                     player.id_in_group: {"information_type": "completion_indicator"},
@@ -336,7 +340,11 @@ class Task_Round_1(Page):
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
-            if 0 <= data["estimate"] <= 100:
+            if (
+                    type(data["estimate"]) == float
+                    or type(data["estimate"]) == int
+                    and 0 <= data["estimate"] <= 100
+            ):
                 player.first_indivestim = data["estimate"]
                 num_estims += 1
                 if player.id_in_group == 1:
@@ -402,7 +410,11 @@ class Task_Round_1(Page):
                     "reasoning_d": indivarg_d},
             }
         if data["information_type"] == "second_estimate":
-            if 0 <= data["second_estimate"] <= 100:
+            if (
+                    type(data["second_estimate"]) == float
+                    or type(data["second_estimate"]) == int
+                    and 0 <= data["second_estimate"] <= 100
+            ):
                 player.second_indivestim = data["second_estimate"]
                 if player.id_in_group == 1:
                     second_estimate_a = data["second_estimate"]
@@ -482,7 +494,11 @@ class Task_Round_2(Page):
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
-            if 0 <= data["estimate"] <= 100:
+            if (
+                    type(data["estimate"]) == float
+                    or type(data["estimate"]) == int
+                    and 0 <= data["estimate"] <= 100
+            ):
                 player.first_indivestim = data["estimate"]
                 num_estims += 1
                 if player.id_in_group == 1:
@@ -549,7 +565,11 @@ class Task_Round_2(Page):
                     "reasoning_d": indivarg_d},
             }
         if data["information_type"] == "second_estimate":
-            if 0 <= data["second_estimate"] <= 100:
+            if (
+                    type(data["second_estimate"]) == float
+                    or type(data["second_estimate"]) == int
+                    and 0 <= data["second_estimate"] <= 100
+            ):
                 player.second_indivestim = data["second_estimate"]
                 return {
                     player.id_in_group: {"information_type": "completion_indicator"},
