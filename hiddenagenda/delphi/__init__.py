@@ -134,7 +134,7 @@ class Player(BasePlayer):
                                            min=0, max=100)
 
     # Randomization Variables
-    player.feedback_order = models.IntegerField(doc="Order in which feedback of fellow group members, except oneself is "
+    feedback_order = models.IntegerField(doc="Order in which feedback of fellow group members, except oneself is "
                                                     "seen (1: 1,2,3; 2: 1,3,2; 3: 2,1,3; 4: 2,3,1; 5:3,1,2; 6:3,2,1")
 
 
