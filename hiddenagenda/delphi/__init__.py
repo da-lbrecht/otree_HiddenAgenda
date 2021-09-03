@@ -345,15 +345,6 @@ class Task(Page):
     def is_displayed(player: Player):
         return player.round_displayed <= 10
 
-    # @staticmethod
-    # def vars_for_template(player: Player):
-    #     return {"round_number": player.round_number,
-    #             "file_path_a": Constants.round_1_a_info,
-    #             "file_path_b": Constants.round_1_b_info,
-    #             "file_path_c": Constants.round_1_c_info,
-    #             "file_path_d": Constants.round_1_d_info,
-    #             }
-
 
     @staticmethod
     def live_method(player: Player, data):
@@ -471,6 +462,14 @@ class Task(Page):
                             group_accuracy_bonus = 4
                         elif random_number <= pow((aggregate_estimate/100), 2):
                             group_accuracy_bonus = 0
+                    estimate_a = 999
+                    estimate_b = 999
+                    estimate_c = 999
+                    estimate_d = 999
+                    second_estimate_a = 999
+                    second_estimate_b = 999
+                    second_estimate_c = 999
+                    second_estimate_d = 999
                     return {
                         0: {"information_type": "completion_indicator"},
                     }
@@ -493,16 +492,6 @@ class Task(Page):
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
-
-        num_estims = 0
-        estimate_a = 999
-        estimate_b = 999
-        estimate_c = 999
-        estimate_d = 999
-        second_estimate_a = 999
-        second_estimate_b = 999
-        second_estimate_c = 999
-        second_estimate_d = 999
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
