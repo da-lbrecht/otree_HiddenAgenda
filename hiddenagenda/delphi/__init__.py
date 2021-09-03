@@ -133,6 +133,10 @@ class Player(BasePlayer):
                                                "estimates",
                                            min=0, max=100)
 
+    # Randomization Variables
+    player.feedback_order = models.IntegerField(doc="Order in which feedback of fellow group members, except oneself is "
+                                                    "seen (1: 1,2,3; 2: 1,3,2; 3: 2,1,3; 4: 2,3,1; 5:3,1,2; 6:3,2,1")
+
 
 # FUNCTIONS
 def creating_session(subsession: Subsession):
@@ -350,7 +354,7 @@ class Task(Page):
     def live_method(player: Player, data):
         global estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, second_estimate_c,\
             second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,num_estims, aggregate_estimate, \
-            group_accuracy_bonus, random_number
+            group_accuracy_bonus, random_number, feedback_order
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
@@ -391,44 +395,241 @@ class Task(Page):
             and estimate_d != 999
             and data["information_type"] != "second_estimate"
         ):
-            return {
-                1: {"player.id_in_group": "a",
-                    "estimate_a": estimate_a,
-                    "estimate_b": estimate_b,
-                    "estimate_c": estimate_c,
-                    "estimate_d": estimate_d,
-                    "reasoning_a": indivarg_a,
-                    "reasoning_b": indivarg_b,
-                    "reasoning_c": indivarg_c,
-                    "reasoning_d": indivarg_d},
-                2: {"player.id_in_group": "b",
-                    "estimate_a": estimate_a,
-                    "estimate_b": estimate_b,
-                    "estimate_c": estimate_c,
-                    "estimate_d": estimate_d,
-                    "reasoning_a": indivarg_a,
-                    "reasoning_b": indivarg_b,
-                    "reasoning_c": indivarg_c,
-                    "reasoning_d": indivarg_d},
-                3: {"player.id_in_group": "c",
-                    "estimate_a": estimate_a,
-                    "estimate_b": estimate_b,
-                    "estimate_c": estimate_c,
-                    "estimate_d": estimate_d,
-                    "reasoning_a": indivarg_a,
-                    "reasoning_b": indivarg_b,
-                    "reasoning_c": indivarg_c,
-                    "reasoning_d": indivarg_d},
-                4: {"player.id_in_group": "d",
-                    "estimate_a": estimate_a,
-                    "estimate_b": estimate_b,
-                    "estimate_c": estimate_c,
-                    "estimate_d": estimate_d,
-                    "reasoning_a": indivarg_a,
-                    "reasoning_b": indivarg_b,
-                    "reasoning_c": indivarg_c,
-                    "reasoning_d": indivarg_d},
-            }
+            feedback_order = round((random.uniform(0, 1)*5+0.5), 0)
+            if feedback_order == 1:
+                return {
+                    1: {"player.id_in_group": "a",  # presented order of fellow group members' input: 2, 3, 4
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_d},
+                    2: {"player.id_in_group": "b",  # presented order of fellow group members' input: 1, 3, 4
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_d},
+                    3: {"player.id_in_group": "c",  # presented order of fellow group members' input: 1, 2, 4
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_d},
+                    4: {"player.id_in_group": "d",  # presented order of fellow group members' input: 1, 2, 3
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_d},
+                }
+            elif feedback_order == 2:
+                return {
+                    1: {"player.id_in_group": "a",  # presented order of fellow group members' input: 2, 4, 3 (b, d, c)
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_d,
+                        "estimate_d": estimate_c,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_d,
+                        "reasoning_c": indivarg_b,
+                        "reasoning_d": indivarg_c},
+                    2: {"player.id_in_group": "b",  # presented order of fellow group members' input: 1, 4, 3 (a, d, c)
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_d,
+                        "estimate_d": estimate_c,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_d,
+                        "reasoning_d": indivarg_c},
+                    3: {"player.id_in_group": "c",  # presented order of fellow group members' input: 1, 4, 2 (a, d, b)
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_d,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_b,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_d,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_b},
+                    4: {"player.id_in_group": "d",  # presented order of fellow group members' input: 1, 3, 2 (a, c, b)
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_c,
+                        "estimate_c": estimate_b,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_c,
+                        "reasoning_c": indivarg_b,
+                        "reasoning_d": indivarg_d},
+                }
+            elif feedback_order == 3:
+                return {
+                    1: {"player.id_in_group": "a",  # presented order of fellow group members' input: 3, 2, 4 (c, b, d)
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_c,
+                        "estimate_c": estimate_b,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_c,
+                        "reasoning_c": indivarg_b,
+                        "reasoning_d": indivarg_d},
+                    2: {"player.id_in_group": "b",  # presented order of fellow group members' input: 3, 1, 4 (c, a, d)
+                        "estimate_a": estimate_c,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_a,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_c,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_a,
+                        "reasoning_d": indivarg_d},
+                    3: {"player.id_in_group": "c",  # presented order of fellow group members' input: 2, 1, 4 (b, a, d)
+                        "estimate_a": estimate_b,
+                        "estimate_b": estimate_a,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_b,
+                        "reasoning_b": indivarg_a,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_d},
+                    4: {"player.id_in_group": "d",  # presented order of fellow group members' input: 2, 1, 3 (b, a, c)
+                        "estimate_a": estimate_b,
+                        "estimate_b": estimate_a,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_b,
+                        "reasoning_b": indivarg_a,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_d},
+                }
+            elif feedback_order == 4:
+                return {
+                    1: {"player.id_in_group": "a",  # presented order of fellow group members' input: 3, 4, 2 (c, d, b)
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_c,
+                        "estimate_c": estimate_d,
+                        "estimate_d": estimate_b,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_c,
+                        "reasoning_c": indivarg_d,
+                        "reasoning_d": indivarg_b},
+                    2: {"player.id_in_group": "b",  # presented order of fellow group members' input: 3, 4, 1 (c, d, a)
+                        "estimate_a": estimate_c,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_d,
+                        "estimate_d": estimate_a,
+                        "reasoning_a": indivarg_c,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_d,
+                        "reasoning_d": indivarg_a},
+                    3: {"player.id_in_group": "c",  # presented order of fellow group members' input: 2, 4, 1 (b, d, a)
+                        "estimate_a": estimate_b,
+                        "estimate_b": estimate_d,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_a,
+                        "reasoning_a": indivarg_b,
+                        "reasoning_b": indivarg_d,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_a},
+                    4: {"player.id_in_group": "d",  # presented order of fellow group members' input: 2, 3, 1 (b, c, a)
+                        "estimate_a": estimate_b,
+                        "estimate_b": estimate_c,
+                        "estimate_c": estimate_a,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_b,
+                        "reasoning_b": indivarg_c,
+                        "reasoning_c": indivarg_a,
+                        "reasoning_d": indivarg_d},
+                }
+            elif feedback_order == 5:
+                return {
+                    1: {"player.id_in_group": "a",  # presented order of fellow group members' input: 4, 2, 3 (d, b, c)
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_d,
+                        "estimate_c": estimate_b,
+                        "estimate_d": estimate_c,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_d,
+                        "reasoning_c": indivarg_b,
+                        "reasoning_d": indivarg_c},
+                    2: {"player.id_in_group": "b",  # presented order of fellow group members' input: 4, 1, 3 (d, a, c)
+                        "estimate_a": estimate_d,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_a,
+                        "estimate_d": estimate_c,
+                        "reasoning_a": indivarg_d,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_a,
+                        "reasoning_d": indivarg_c},
+                    3: {"player.id_in_group": "c",  # presented order of fellow group members' input: 4, 1, 2 (d, a, b)
+                        "estimate_a": estimate_d,
+                        "estimate_b": estimate_a,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_b,
+                        "reasoning_a": indivarg_d,
+                        "reasoning_b": indivarg_a,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_b},
+                    4: {"player.id_in_group": "d",  # presented order of fellow group members' input: 3, 1, 2 (c, a, b)
+                        "estimate_a": estimate_c,
+                        "estimate_b": estimate_a,
+                        "estimate_c": estimate_b,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_c,
+                        "reasoning_b": indivarg_a,
+                        "reasoning_c": indivarg_b,
+                        "reasoning_d": indivarg_d},
+                }
+            elif feedback_order == 6:
+                return {
+                    1: {"player.id_in_group": "a",  # presented order of fellow group members' input: 4, 3, 2 (d, c, b)
+                        "estimate_a": estimate_a,
+                        "estimate_b": estimate_d,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_b,
+                        "reasoning_a": indivarg_a,
+                        "reasoning_b": indivarg_d,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_b},
+                    2: {"player.id_in_group": "b",  # presented order of fellow group members' input: 4, 3, 1 (d, c, a)
+                        "estimate_a": estimate_d,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_a,
+                        "reasoning_a": indivarg_d,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_a},
+                    3: {"player.id_in_group": "c",  # presented order of fellow group members' input: 4, 2, 1 (d, b, a)
+                        "estimate_a": estimate_d,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_c,
+                        "estimate_d": estimate_a,
+                        "reasoning_a": indivarg_d,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_c,
+                        "reasoning_d": indivarg_a},
+                    4: {"player.id_in_group": "d",  # presented order of fellow group members' input: 3, 2, 1 (c, b, a)
+                        "estimate_a": estimate_c,
+                        "estimate_b": estimate_b,
+                        "estimate_c": estimate_a,
+                        "estimate_d": estimate_d,
+                        "reasoning_a": indivarg_c,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_a,
+                        "reasoning_d": indivarg_d},
+                }
         if data["information_type"] == "second_estimate":
             if (
                     type(data["second_estimate"]) == float
@@ -492,6 +693,7 @@ class Task(Page):
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
+        player.feedback_order = feedback_order
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
