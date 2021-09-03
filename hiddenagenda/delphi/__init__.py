@@ -256,7 +256,13 @@ class Task_Trial(Page):
                 indivarg_c = data["reasoning"]
             elif player.id_in_group == 4:
                 indivarg_d = data["reasoning"]
-        if num_estims >= 4 and data["information_type"] != "second_estimate":
+        if (
+            estimate_a != 999
+            and estimate_b != 999
+            and estimate_c != 999
+            and estimate_d != 999
+            and data["information_type"] != "second_estimate"
+        ):
             return {
                 1: {"player.id_in_group": "a",
                     "estimate_a": estimate_a,
@@ -313,8 +319,19 @@ class Task_Trial(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        global num_estims
+        global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b,\
+            second_estimate_c, second_estimate_d
+
         num_estims = 0
+        estimate_a = 999
+        estimate_b = 999
+        estimate_c = 999
+        estimate_d = 999
+        second_estimate_a = 999
+        second_estimate_b = 999
+        second_estimate_c = 999
+        second_estimate_d = 999
+
         if player.round_number == 1:
             pass
         else:
@@ -370,7 +387,13 @@ class Task_Round_1(Page):
                 indivarg_c = data["reasoning"]
             elif player.id_in_group == 4:
                 indivarg_d = data["reasoning"]
-        if num_estims >= 4 and data["information_type"] != "second_estimate":
+        if (
+            estimate_a != 999
+            and estimate_b != 999
+            and estimate_c != 999
+            and estimate_d != 999
+            and data["information_type"] != "second_estimate"
+        ):
             return {
                 1: {"player.id_in_group": "a",
                     "estimate_a": estimate_a,
@@ -457,7 +480,8 @@ class Task_Round_1(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        global num_estims, second_estimate_a, second_estimate_b, second_estimate_c, second_estimate_d
+        global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
+            second_estimate_c, second_estimate_d
 
         player.random_number = random_number
         player.aggregate_estimate = aggregate_estimate
@@ -465,10 +489,14 @@ class Task_Round_1(Page):
         player.payoff += group_accuracy_bonus*0.25
 
         num_estims = 0
+        estimate_a = 999
+        estimate_b = 999
+        estimate_c = 999
+        estimate_d = 999
         second_estimate_a = 999
         second_estimate_b = 999
         second_estimate_c = 999
-        second_estimate_c = 999
+        second_estimate_d = 999
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
