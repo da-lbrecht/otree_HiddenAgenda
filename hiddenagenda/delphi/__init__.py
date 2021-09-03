@@ -134,7 +134,7 @@ class Player(BasePlayer):
                                            min=0, max=100)
 
     # Randomization Variables
-    feedback_order = models.IntegerField(doc="Order in which feedback of fellow group members, except oneself is "
+    feedback_order = models.FloatField(doc="Order in which feedback of fellow group members, except oneself is "
                                                     "seen (1: 1,2,3; 2: 1,3,2; 3: 2,1,3; 4: 2,3,1; 5:3,1,2; 6:3,2,1")
 
 
@@ -443,8 +443,8 @@ class Task(Page):
                         "estimate_c": estimate_d,
                         "estimate_d": estimate_c,
                         "reasoning_a": indivarg_a,
-                        "reasoning_b": indivarg_d,
-                        "reasoning_c": indivarg_b,
+                        "reasoning_b": indivarg_b,
+                        "reasoning_c": indivarg_d,
                         "reasoning_d": indivarg_c},
                     2: {"player.id_in_group": "b",  # presented order of fellow group members' input: 1, 4, 3 (a, d, c)
                         "estimate_a": estimate_a,
