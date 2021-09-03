@@ -577,6 +577,6 @@ class Results(Page):
 
 
 page_sequence = [ #Welcome, TaskIntro,
-                 #Task_Trial,
+                 Task_Trial,
                  Task_Round_1, Task_Round_2,
                  Results]

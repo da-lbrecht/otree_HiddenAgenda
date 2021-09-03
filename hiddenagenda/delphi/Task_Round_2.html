@@ -8,6 +8,17 @@
 
     <!-- Live Interaction in Delphi Estimation -->
     <script>
+
+    {% if player.id_in_group == 1 %} // control which initial info each player sees
+        document.getElementById("info_a").style.display = "block";
+    {% elif player.id_in_group == 2 %}
+        document.getElementById("info_b").style.display = "block";
+    {% elif player.id_in_group == 3 %}
+        document.getElementById("info_c").style.display = "block";
+    {% elif player.id_in_group == 4 %}
+        document.getElementById("info_d").style.display = "block";
+    {% endif %}
+
         var first_indivestim
         var indivarg
         var second_indivestim
@@ -35,9 +46,7 @@
         liveSend({"information_type": "second_estimate", "second_estimate": second_indivestim})
     }
     function saveTime() {
-        var d = new Date();
-        var n = d.getTime();
-        document.getElementById("end_of_round_input").value = n;
+        document.getElementById("end_of_round_input").value = new Date().getTime();
     }
 
     function liveRecv(data) {
@@ -142,6 +151,19 @@
             // indivarg = document.getElementById("indivarg").value
             // document.getElementById("indivarg_error").innerHTML = indivarg;
             document.getElementById("second_indivestim_error").style.display = "block";
+            } else if (data["information_type"] == "wait_indicator") {
+            document.getElementById("wait_for_others").style.display = "block";
+            document.getElementById("second_header").style.display = "none";
+            document.getElementById("feedback_a").style.display = "none";
+            document.getElementById("feedback_b").style.display = "none";
+            document.getElementById("feedback_c").style.display = "none";
+            document.getElementById("feedback_d").style.display = "none";
+            document.getElementById("second_estimate").style.display = "none";
+            document.getElementById("second_estimate_button").style.display = "none";
+            document.getElementById("second_indivestim_error").style.display = "none";
+            document.getElementById("third_header").style.display = "block";
+            document.getElementById("completion_message").style.display = "none";
+            document.getElementById("next_button").style.display = "none";
             } else if (data["information_type"] == "completion_indicator") {
             document.getElementById("wait_for_others").style.display = "none";
             document.getElementById("second_header").style.display = "none";
@@ -262,7 +284,22 @@
                             what others in your group see.
                         </p>
 
-                        <img src="{% static 'img/Round1/uniform_notrendA.png' %}" style="width:90%;">
+                    <div id="info_a" style="display: none">
+                        <img id="info_a" src="{% static 'img/RandomWalks/target0.2A.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_b" style="display: none">
+                        <img id="info_b" src="{% static 'img/RandomWalks/target0.2B.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_c" style="display: none">
+                        <img id="info_c" src="{% static 'img/RandomWalks/target0.2C.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_d" style="display: none">
+                        <img id="info_d" src="{% static 'img/RandomWalks/target0.2D.png' %}" style="width:90%;">
+                    </div>
+
 
                     </div>
 
@@ -334,7 +371,7 @@
                         <br>
                         <br>
                             <button type="button" onclick="make_first_indivestim()" class="btn btn-primary btn-large">
-                                Sent estimate and reasoning
+                                Send estimate and reasoning
                             </button>
                     </div id="first_estimate" style="display: block">
 
@@ -368,12 +405,12 @@
                         <br>
                         <br>
                             <button type="button" onclick="make_first_indivestim_error()" class="btn btn-primary btn-large">
-                                Sent estimate and reasoning
+                                Send estimate and reasoning
                             </button>
                     </div id="first_estimate_error" style="display: none">
 
                     <div id="wait_for_others" style="display: none">
-                        Please wait until all your fellow group members completed their first estimate.
+                        Please wait until all your fellow group members completed their input.
                         <span id="message"></span>
                     </div>
 
@@ -402,7 +439,7 @@
                             <br>
 
                         <p style="color:grey;">
-                            <b> Input of your fellow group members </b>
+                            <b> Input of your fellow group members (in random order) </b>
                         </p>
                         <hr>
 
@@ -453,7 +490,7 @@
                             <br>
 
                         <p style="color:grey;">
-                            <b> Input of your fellow group members </b>
+                            <b> Input of your fellow group members (in random order) </b>
                         </p>
                         <hr>
 
@@ -504,7 +541,7 @@
                             <br>
 
                         <p style="color:grey;">
-                            <b> Input of your fellow group members </b>
+                            <b> Input of your fellow group members (in random order) </b>
                         </p>
                         <hr>
 
@@ -555,7 +592,7 @@
                             <br>
 
                         <p style="color:grey;">
-                            <b> Input of your fellow group members </b>
+                            <b> Input of your fellow group members (in random order) </b>
                         </p>
                         <hr>
 
@@ -603,7 +640,7 @@
                         <br>
                         <br>
                         <button type="button" onclick="make_second_indivestim()" class="btn btn-primary btn-large">
-                                Sent estimate
+                                Send estimate
                             </button>
                     </div>
 
