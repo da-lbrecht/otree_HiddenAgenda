@@ -36,6 +36,12 @@ class Constants(BaseConstants):
 
     num_attention_checks = 5
 
+    # File paths for individual information
+    round_1_a_info = "{% static 'img/RandomWalks/target0.1A.png' %}"
+    round_1_b_info = "{% static 'img/RandomWalks/target0.1B.png' %}"
+    round_1_c_info = "{% static 'img/RandomWalks/target0.1C.png' %}"
+    round_1_d_info = "{% static 'img/RandomWalks/target0.1D.png' %}"
+
     # Results of payoff relevant execution of Kara's program; 0=did not reach target area
     round_1_result = 0  # 0.1
     round_2_result = 0  # 0.2
@@ -343,11 +349,18 @@ class Task_Round_1(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_displayed == 1
+        return player.round_displayed <= 10
 
     @staticmethod
     def vars_for_template(player: Player):
-        return {"round_number": player.round_number}
+        return {
+                "round_number": player.round_number,
+                "file_path_a": Constants.round_1_a_info,
+                "file_path_b": Constants.round_1_b_info,
+                "file_path_c": Constants.round_1_c_info,
+                "file_path_d": Constants.round_1_d_info,
+                }
+
 
     @staticmethod
     def live_method(player: Player, data):
@@ -629,6 +642,6 @@ class Results(Page):
 
 
 page_sequence = [ #Welcome, TaskIntro,
-                 Task_Trial,
+                 # Task_Trial,
                  Task_Round_1, Task_Round_2,
                  Results]

@@ -9,14 +9,20 @@
     <!-- Live Interaction in Delphi Estimation -->
     <script>
 
-    {% if player.id_in_group == 1 %} // control which initial info each player sees
+    <!-- Enable display of right information depending on player.id_in_group and player.round_displayed -->
+
+    {% if player.id_in_group == 1 and player.round_displayed == 1 %} // control which initial info each player sees
         document.getElementById("info_a").style.display = "block";
-    {% elif player.id_in_group == 2 %}
+        document.getElementById("info_a_img").src = "{% static 'img/RandomWalks/target0.1A.png' %}";
+    {% elif player.id_in_group == 2 and player.round_displayed == 1 %}
         document.getElementById("info_b").style.display = "block";
-    {% elif player.id_in_group == 3 %}
+        document.getElementById("info_b_img").src = "{% static 'img/RandomWalks/target0.1B.png' %}";
+    {% elif player.id_in_group == 3 and player.round_displayed == 1 %}
         document.getElementById("info_c").style.display = "block";
-    {% elif player.id_in_group == 4 %}
+        document.getElementById("info_c_img").src = "{% static 'img/RandomWalks/target0.1C.png' %}";
+    {% elif player.id_in_group == 4 and player.round_displayed == 1 %}
         document.getElementById("info_d").style.display = "block";
+        document.getElementById("info_d_img").src = "{% static 'img/RandomWalks/target0.1D.png' %}";
     {% endif %}
 
         var first_indivestim
@@ -281,23 +287,23 @@
                             Below you can see your own private information. You see the path Kara took when the program
                             was executed once in the past. Everybody in your group receives a path from a distinct past
                             execution of the program. Consequently, the path you see is in all likelihood different from
-                            what others in your group see.
+                            what others in your group see. "{{ file_path_a }}"
                         </p>
 
                     <div id="info_a" style="display: none">
-                        <img id="info_a" src="{% static 'img/RandomWalks/target0.1A.png' %}" style="width:90%;">
+                        <img id="info_a_img" src="set dynamically in js" style="width:90%;">
                     </div>
 
                     <div id="info_b" style="display: none">
-                        <img id="info_b" src="{% static 'img/RandomWalks/target0.1B.png' %}" style="width:90%;">
+                        <img id="info_b_img" src="set dynamically in js" style="width:90%;">
                     </div>
 
                     <div id="info_c" style="display: none">
-                        <img id="info_c" src="{% static 'img/RandomWalks/target0.1C.png' %}" style="width:90%;">
+                        <img id="info_c_img" src="set dynamically in js" style="width:90%;">
                     </div>
 
                     <div id="info_d" style="display: none">
-                        <img id="info_d" src="{% static 'img/RandomWalks/target0.1D.png' %}" style="width:90%;">
+                        <img id="info_d_img" src="set dynamically in js" style="width:90%;">
                     </div>
 
 
