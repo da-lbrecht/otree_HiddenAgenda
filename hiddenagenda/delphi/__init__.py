@@ -825,7 +825,7 @@ class Results(Page):
         return subsession.round_number == Constants.num_rounds
 
 
-page_sequence = [ #Welcome, TaskIntro,
-                 # Task_Trial,
+page_sequence = [Welcome, TaskIntro,
+                 Task_Trial,
                  Task,
                  Results]

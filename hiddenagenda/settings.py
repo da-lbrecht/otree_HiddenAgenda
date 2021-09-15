@@ -9,6 +9,19 @@ SESSION_CONFIGS = [
     ),
 ]
 
+ROOMS = [
+    dict(
+        name='demo',
+        display_name='Demo',
+        participant_label_file='_rooms/demo.txt',
+        use_secure_urls=True
+    ),
+    dict(
+        name='econ_lab',
+        display_name='BEElab'
+    ),
+]
+
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
@@ -38,3 +51,8 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 DEMO_PAGE_INTRO_HTML = """ """
 
 SECRET_KEY = '3970727780349'
+
+# Environment variables
+DATABASE_URL = 'postgres://postgres@localhost/hiddenagenda_db'
+OTREE_PRODUCTION = 1  # uncomment this line to enable production mode
+OTREE_AUTH_LEVEL = 'DEMO'
