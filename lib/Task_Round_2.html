@@ -1,0 +1,679 @@
+{% block styles %}
+    <link href="{% static 'global/css/global.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'global/js/basics.js' %}"></script>
+    <script src="{% static 'global/js/navbuttons.js' %}"></script>
+
+    <!-- Live Interaction in Delphi Estimation -->
+    <script>
+
+    {% if player.id_in_group == 1 %} // control which initial info each player sees
+        document.getElementById("info_a").style.display = "block";
+    {% elif player.id_in_group == 2 %}
+        document.getElementById("info_b").style.display = "block";
+    {% elif player.id_in_group == 3 %}
+        document.getElementById("info_c").style.display = "block";
+    {% elif player.id_in_group == 4 %}
+        document.getElementById("info_d").style.display = "block";
+    {% endif %}
+
+        var first_indivestim
+        var indivarg
+        var second_indivestim
+
+    function make_first_indivestim() {
+        first_indivestim = parseFloat(document.getElementById("first_indivestim").value)
+        indivarg = document.getElementById("indivarg").value
+        liveSend({"information_type": "estimate", "estimate": first_indivestim})
+        liveSend({"information_type": "reasoning", "reasoning": indivarg})
+        document.getElementById("first_estimate").style.display = "none";
+        document.getElementById("wait_for_others").style.display = "block";
+    }
+
+    function make_first_indivestim_error() {
+        first_indivestim = parseFloat(document.getElementById("first_indivestim_error").value)
+        indivarg = document.getElementById("indivarg_error").value
+        liveSend({"information_type": "estimate", "estimate": first_indivestim})
+        liveSend({"information_type": "reasoning", "reasoning": indivarg})
+        document.getElementById("first_estimate_error").style.display = "none";
+        document.getElementById("wait_for_others").style.display = "block";
+    }
+
+    function make_second_indivestim() {
+        second_indivestim = parseFloat(document.getElementById("second_indivestim").value)
+        liveSend({"information_type": "second_estimate", "second_estimate": second_indivestim})
+    }
+    function saveTime() {
+        document.getElementById("end_of_round_input").value = new Date().getTime();
+    }
+
+    function liveRecv(data) {
+        if (data["information_type"] == "error_1") {
+            // indivarg = document.getElementById("indivarg").value
+            // document.getElementById("indivarg_error").innerHTML = indivarg;
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("first_estimate_error").style.display = "block";
+        } else if (data["player.id_in_group"] == "a") {
+                first_indivestim_a = data["estimate_a"]
+                document.getElementById("first_indivestim_a_a").innerHTML = first_indivestim_a;
+                first_indivestim_b = data["estimate_b"]
+                document.getElementById("first_indivestim_b_a").innerHTML = first_indivestim_b;
+                first_indivestim_c = data["estimate_c"]
+                document.getElementById("first_indivestim_c_a").innerHTML = first_indivestim_c;
+                first_indivestim_d = data["estimate_d"]
+                document.getElementById("first_indivestim_d_a").innerHTML = first_indivestim_d;
+                indivarg_a = data["reasoning_a"]
+                document.getElementById("indivarg_a_a").innerHTML = indivarg_a;
+                indivarg_b = data["reasoning_b"]
+                document.getElementById("indivarg_b_a").innerHTML = indivarg_b;
+                indivarg_c = data["reasoning_c"]
+                document.getElementById("indivarg_c_a").innerHTML = indivarg_c;
+                indivarg_d = data["reasoning_d"]
+                document.getElementById("indivarg_d_a").innerHTML = indivarg_d;
+                document.getElementById("wait_for_others").style.display = "none";
+                document.getElementById("first_header").style.display = "none";
+                document.getElementById("feedback_a").style.display = "block";
+                document.getElementById("second_estimate").style.display = "block";
+                document.getElementById("second_header").style.display = "block";
+                document.getElementById("second_estimate_button").style.display = "block";
+            } else if (data["player.id_in_group"] == "b") {
+                first_indivestim_a = data["estimate_a"]
+                document.getElementById("first_indivestim_a_b").innerHTML = first_indivestim_a;
+                first_indivestim_b = data["estimate_b"]
+                document.getElementById("first_indivestim_b_b").innerHTML = first_indivestim_b;
+                first_indivestim_c = data["estimate_c"]
+                document.getElementById("first_indivestim_c_b").innerHTML = first_indivestim_c;
+                first_indivestim_d = data["estimate_d"]
+                document.getElementById("first_indivestim_d_b").innerHTML = first_indivestim_d;
+                indivarg_a = data["reasoning_a"]
+                document.getElementById("indivarg_a_b").innerHTML = indivarg_a;
+                indivarg_b = data["reasoning_b"]
+                document.getElementById("indivarg_b_b").innerHTML = indivarg_b;
+                indivarg_c = data["reasoning_c"]
+                document.getElementById("indivarg_c_b").innerHTML = indivarg_c;
+                indivarg_d = data["reasoning_d"]
+                document.getElementById("indivarg_d_b").innerHTML = indivarg_d;
+                document.getElementById("wait_for_others").style.display = "none";
+                document.getElementById("first_header").style.display = "none";
+                document.getElementById("feedback_b").style.display = "block";
+                document.getElementById("second_estimate").style.display = "block";
+                document.getElementById("second_header").style.display = "block";
+                document.getElementById("second_estimate_button").style.display = "block";
+            } else if (data["player.id_in_group"] == "c") {
+                first_indivestim_a = data["estimate_a"]
+                document.getElementById("first_indivestim_a_c").innerHTML = first_indivestim_a;
+                first_indivestim_b = data["estimate_b"]
+                document.getElementById("first_indivestim_b_c").innerHTML = first_indivestim_b;
+                first_indivestim_c = data["estimate_c"]
+                document.getElementById("first_indivestim_c_c").innerHTML = first_indivestim_c;
+                first_indivestim_d = data["estimate_d"]
+                document.getElementById("first_indivestim_d_c").innerHTML = first_indivestim_d;
+                indivarg_a = data["reasoning_a"]
+                document.getElementById("indivarg_a_c").innerHTML = indivarg_a;
+                indivarg_b = data["reasoning_b"]
+                document.getElementById("indivarg_b_c").innerHTML = indivarg_b;
+                indivarg_c = data["reasoning_c"]
+                document.getElementById("indivarg_c_c").innerHTML = indivarg_c;
+                indivarg_d = data["reasoning_d"]
+                document.getElementById("indivarg_d_c").innerHTML = indivarg_d;
+                document.getElementById("wait_for_others").style.display = "none";
+                document.getElementById("first_header").style.display = "none";
+                document.getElementById("feedback_c").style.display = "block";
+                document.getElementById("second_estimate").style.display = "block";
+                document.getElementById("second_header").style.display = "block";
+                document.getElementById("second_estimate_button").style.display = "block";
+            } else if (data["player.id_in_group"] == "d") {
+                first_indivestim_a = data["estimate_a"]
+                document.getElementById("first_indivestim_a_d").innerHTML = first_indivestim_a;
+                first_indivestim_b = data["estimate_b"]
+                document.getElementById("first_indivestim_b_d").innerHTML = first_indivestim_b;
+                first_indivestim_c = data["estimate_c"]
+                document.getElementById("first_indivestim_c_d").innerHTML = first_indivestim_c;
+                first_indivestim_d = data["estimate_d"]
+                document.getElementById("first_indivestim_d_d").innerHTML = first_indivestim_d;
+                indivarg_a = data["reasoning_a"]
+                document.getElementById("indivarg_a_d").innerHTML = indivarg_a;
+                indivarg_b = data["reasoning_b"]
+                document.getElementById("indivarg_b_d").innerHTML = indivarg_b;
+                indivarg_c = data["reasoning_c"]
+                document.getElementById("indivarg_c_d").innerHTML = indivarg_c;
+                indivarg_d = data["reasoning_d"]
+                document.getElementById("indivarg_d_d").innerHTML = indivarg_d;
+                document.getElementById("wait_for_others").style.display = "none";
+                document.getElementById("first_header").style.display = "none";
+                document.getElementById("feedback_d").style.display = "block";
+                document.getElementById("second_estimate").style.display = "block";
+                document.getElementById("second_header").style.display = "block";
+                document.getElementById("second_estimate_button").style.display = "block";
+            } else if (data["information_type"] == "error_2") {
+            // indivarg = document.getElementById("indivarg").value
+            // document.getElementById("indivarg_error").innerHTML = indivarg;
+            document.getElementById("second_indivestim_error").style.display = "block";
+            } else if (data["information_type"] == "wait_indicator") {
+            document.getElementById("wait_for_others").style.display = "block";
+            document.getElementById("second_header").style.display = "none";
+            document.getElementById("feedback_a").style.display = "none";
+            document.getElementById("feedback_b").style.display = "none";
+            document.getElementById("feedback_c").style.display = "none";
+            document.getElementById("feedback_d").style.display = "none";
+            document.getElementById("second_estimate").style.display = "none";
+            document.getElementById("second_estimate_button").style.display = "none";
+            document.getElementById("second_indivestim_error").style.display = "none";
+            document.getElementById("third_header").style.display = "block";
+            document.getElementById("completion_message").style.display = "none";
+            document.getElementById("next_button").style.display = "none";
+            } else if (data["information_type"] == "completion_indicator") {
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("second_header").style.display = "none";
+            document.getElementById("feedback_a").style.display = "none";
+            document.getElementById("feedback_b").style.display = "none";
+            document.getElementById("feedback_c").style.display = "none";
+            document.getElementById("feedback_d").style.display = "none";
+            document.getElementById("second_estimate").style.display = "none";
+            document.getElementById("second_estimate_button").style.display = "none";
+            document.getElementById("second_indivestim_error").style.display = "none";
+            document.getElementById("third_header").style.display = "block";
+            document.getElementById("completion_message").style.display = "block";
+            document.getElementById("next_button").style.display = "block";
+        }
+    }
+    </script>
+{% endblock %}
+
+
+{% block title %}
+    <table class="table">
+        <tr>
+            <td style="width:70%;border-color:transparent">Let's go - Round {{ player.round_number }} out of 10</td>
+            <td style="width:30%;border-color:transparent;text-align: right;">
+                <img src="{% static 'img/um_logo.jpg' %}" style="width:30%;">
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+
+
+{% block content %}
+
+<body>
+    <!-- Header <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist"> -->
+
+    <div class="card">
+        <div class="card-header">
+        <nav  role="navigation">
+
+             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                <li class="nav-item" >
+                    <a class="nav-link back-and-forth active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1"> Your payoff </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link back-and-forth" id="part2-tab" data-toggle="tab" href="#part2" role="tab" aria-controls="part2"> Your Info </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link back-and-forth" id="part3-tab" data-toggle="tab" href="#part3" role="tab" aria-controls="part3"> Solving the task </a>
+                </li>
+
+            </ul>
+
+        </nav>
+        </div>
+
+        <!-- Instructions -->
+
+        <div class="tab-content" id="myTabContent">
+
+            <!-- Part 1: WHATEVER FIRST TAB HERE -->
+            <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
+                <div class="card-header bg-white border-bottom-0 sticky-top mt-3">
+                    <p class="h4">This is how your behavior in the task translates in your payoff.</p>
+                </div>
+                <div class="card-body">
+
+                    <div>
+                        <p>
+                            Lorem ipsum
+                        </p>
+
+                    </div>
+
+
+                    <!-- on Card Navigation  Arrows -->
+
+                    <!-- greyed out left arrow on first page -->
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col col-lg-2">
+                            <p class="prevtab text-secondary text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#D3D3D3" class="bi-arrow-left-circle" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                            </p>
+                        </div>
+
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="nexttab text-center" data-toggle="tooltip" data-placement="top" title="Next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-right-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
+                                </svg>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Part 2: WHATEVER SECOND TAB HERE  -->
+            <div class="tab-pane" id="part2" role="tabpanel" aria-labelledby="part2-tab">
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top">
+                    <p class="h4">Your Info</p>
+                </div>
+
+                <div class="card-body">
+                    <div>
+
+                        <p>
+                            Below you can see your own private information. You see the path Kara took when the program
+                            was executed once in the past. Everybody in your group receives a path from a distinct past
+                            execution of the program. Consequently, the path you see is in all likelihood different from
+                            what others in your group see.
+                        </p>
+
+                    <div id="info_a" style="display: none">
+                        <img id="info_a" src="{% static 'img/RandomWalks/target0.2A.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_b" style="display: none">
+                        <img id="info_b" src="{% static 'img/RandomWalks/target0.2B.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_c" style="display: none">
+                        <img id="info_c" src="{% static 'img/RandomWalks/target0.2C.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_d" style="display: none">
+                        <img id="info_d" src="{% static 'img/RandomWalks/target0.2D.png' %}" style="width:90%;">
+                    </div>
+
+
+                    </div>
+
+
+
+
+
+                    <!-- on Card Navigation  Arrows -->
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="prevtab text-center" data-toggle="tooltip" data-placement="top" title="Back">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-left-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                            </p>
+                        </div>
+
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="nexttab text-center" data-toggle="tooltip" data-placement="top" title="Next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-right-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
+                                </svg>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Part 3: WHATEVER FINAL TAB HERE -->
+            <div class="tab-pane" id="part3" role="tabpanel" aria-labelledby="part3-tab">
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: block" id="first_header">
+                    <p class="h4">First estimate</p>
+                </div>
+
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: none" id="second_header">
+                    <p class="h4">Feedback and second estimate</p>
+                </div>
+
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: none" id="third_header">
+                    <p class="h4">Done!</p>
+                </div>
+
+                <div class="card-body">
+                    <div id="first_estimate" style="display: block">
+                        <p>
+                            At first, all members of your group will give their individual estimate of the chance that Kara will
+                            reach the target area, when the program is executed for the next time. What is your estimate?
+                        </p>
+
+                            <input id="first_indivestim"
+                                   type="text"
+                                   size="3"> in 100
+
+                        <p>
+
+                        <br>
+
+                            Along the estimate you may also outline your reasoning behind the estimate in a brief text.
+                            Both your estimate and the reasoning will be presented anonymously to your fellow group
+                            members in the next step. What is your reasoning?
+                        </p>
+                            <textarea id="indivarg"
+                                      name="indivarg"
+                                      placeholder="My estimate is based on the following line of thought ..."
+                                      rows="5" cols="100"></textarea>
+                        <br>
+                        <br>
+                            <button type="button" onclick="make_first_indivestim()" class="btn btn-primary btn-large">
+                                Send estimate and reasoning
+                            </button>
+                    </div id="first_estimate" style="display: block">
+
+                    <div id="first_estimate_error" style="display: none">
+                        <p>
+                            At first, all members of your group will give their individual estimate of the chance that
+                            Kara will reach the target area, when the program is executed for the next time. What is
+                            your estimate?
+                        </p>
+
+                            <input id="first_indivestim_error"
+                                   type="text"
+                                   size="3"> in 100
+
+                        <p style="color:red;">
+                            <b> Your estimate needs to be a number in the range from 0 to 100.</b>
+                        </p>
+
+                        <p>
+
+                        <br>
+
+                            Along the estimate you may also outline your reasoning behind the estimate in a brief text.
+                            Both your estimate and the reasoning will be presented anonymously to your fellow group
+                            members in the next step. What is your reasoning?
+                        </p>
+                            <textarea id="indivarg_error"
+                                      name="indivarg_error"
+                                      placeholder="My estimate is based on the following line of thought ..."
+                                      rows="5" cols="100"></textarea>
+                        <br>
+                        <br>
+                            <button type="button" onclick="make_first_indivestim_error()" class="btn btn-primary btn-large">
+                                Send estimate and reasoning
+                            </button>
+                    </div id="first_estimate_error" style="display: none">
+
+                    <div id="wait_for_others" style="display: none">
+                        Please wait until all your fellow group members completed their input.
+                        <span id="message"></span>
+                    </div>
+
+                    <!-- Feedback  for player 1 in group -->
+                    <div id="feedback_a" style="display: none">
+                        <br>
+
+                        <p>
+                            You and all your fellow group members completed their input. Below
+                            you can see all the estimates and corresponding reasoning.
+                        </p>
+
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Your own input </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_a_a"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_a_a"></span>
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Input of your fellow group members (in random order) </b>
+                        </p>
+                        <hr>
+
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_b_a"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_b_a"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_c_a"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_c_a"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_d_a"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_d_a"></span>
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                    </div>
+
+                    <!-- Feedback  for player 2 in group -->
+                    <div id="feedback_b" style="display: none">
+                        <br>
+
+                        <p>
+                            You and all your fellow group members completed their input. Below
+                            you can see all the estimates and corresponding reasoning.
+                        </p>
+
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Your own input </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_b_b"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_b_b"></span>
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Input of your fellow group members (in random order) </b>
+                        </p>
+                        <hr>
+
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_a_b"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_a_b"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_c_b"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_c_b"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_d_b"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_d_b"></span>
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                    </div>
+
+                    <!-- Feedback  for player 3 in group -->
+                    <div id="feedback_c" style="display: none">
+                        <br>
+
+                        <p>
+                            You and all your fellow group members completed their input. Below
+                            you can see all the estimates and corresponding reasoning.
+                        </p>
+
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Your own input </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_c_c"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_c_c"></span>
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Input of your fellow group members (in random order) </b>
+                        </p>
+                        <hr>
+
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_a_c"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_a_c"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_b_c"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_b_c"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_d_c"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_d_c"></span>
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                    </div>
+
+                    <!-- Feedback  for player 4 in group -->
+                    <div id="feedback_d" style="display: none">
+                        <br>
+
+                        <p>
+                            You and all your fellow group members completed their input. Below
+                            you can see all the estimates and corresponding reasoning.
+                        </p>
+
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Your own input </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_d_d"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_d_d"></span>
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Input of your fellow group members (in random order) </b>
+                        </p>
+                        <hr>
+
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_a_d"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_a_d"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_b_d"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_b_d"></span>
+                            <br>
+                            <br>
+                            <b>Estimate: </b>
+                            <span id="first_indivestim_c_d"></span> in 100.
+                            <br>
+                            <b>Reasoning: </b> <span id="indivarg_c_d"></span>
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                    </div>
+
+                    <!-- Second_estimate -->
+                    <div id="second_estimate" style="display: none">
+                        <p>
+                            Now that you have seen the estimates by the other group members, and their reasoning you have
+                            the chance to revise your own estimate. What is your new estimate?
+                        </p>
+
+                            <input id="second_indivestim"
+                                   type="text"
+                                   size="3"> in 100
+                    </div>
+
+                    <div id="second_indivestim_error" style="display: none">
+                        <p style="color:red;">
+                            <b> Your estimate needs to be a number in the range from 0 to 100.</b>
+                        </p>
+                    </div>
+
+                    <div id="second_estimate_button" style="display: none">
+                        <br>
+                        <br>
+                        <button type="button" onclick="make_second_indivestim()" class="btn btn-primary btn-large">
+                                Send estimate
+                            </button>
+                    </div>
+
+                    <div id="completion_message" style="display: none">
+                        You completed round {{ player.round_number }}. Please click the blue button to continue.
+                    </div>
+
+                    <!-- on Card Navigation  Arrows -->
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="prevtab text-center" data-toggle="tooltip" data-placement="top" title="Back">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-left-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                            </p>
+                        </div>
+
+                        <div class="col col-lg-2" id="next_button" style="display: none">
+                            <button class="btn btn-primary btn-large" onclick="saveTime()">
+                                Continue to next round
+                            </button>
+                        </div>
+
+                        <input id="end_of_round_input" name="end_of_round" type="hidden" value=""/>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+{% endblock %}

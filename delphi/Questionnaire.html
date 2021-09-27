@@ -1,0 +1,338 @@
+{% block styles %}
+    <style type="text/css">
+        #likert { text-align:center; }
+        likert td { width: 80%; }
+     </style>
+
+    <style>
+        .likert li {
+            padding-left: 20px;
+            float: left;
+            list-style-type: none;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+    <table class="table">
+        <tr>
+            <td style="width:70%;border-color:transparent">Closing Survey</td>
+            <td style="width:30%;border-color:transparent;text-align: right;">
+                <img src="{% static 'img/um_logo.jpg' %}" style="width:30%;">
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block content %}
+
+<body>
+    <!-- Header <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist"> -->
+
+    <div class="card">
+        <div class="card-header">
+        <nav  role="navigation">
+
+             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                <li class="nav-item" >
+                    <a class="nav-link back-and-forth active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1"> Closing Survey </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+
+        <!-- Instructions -->
+
+        <div class="tab-content" id="myTabContent">
+
+            <!-- Part 1: WHATEVER FIRST TAB HERE -->
+            <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
+                <div class="card-header bg-white border-bottom-0 sticky-top mt-3">
+                    <p class="h4">Questionnaire</p>
+                </div>
+
+                <div class="card-body">
+                    <div id="closing_survey" style="display: block">
+                        <p>
+                            Please answer the <!-- {{ Constants.num_final_questions }} --> following questions. This is
+                            today's last step. Afterwards you successfully completed this experiment.
+                            <br><br><br><br>
+                        </p>
+
+                        <p class="h4" style="color:grey;"> <!--style="color:royalblue;"-->
+                            Let's start with some question about yourself.
+                            <br><br>
+                        </p>
+
+                        {{ formfield 'gender' }}
+                        {{ formfield 'education' }}
+                        {{ formfield 'field_of_studies' }}
+                        {{ formfield 'years_of_working' }}
+
+                        <p class="h4" style="color:grey;">
+                            <br><br>
+                            Now, please read the following statements and indicate how much you agree with each of them.
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>If I want something from a person I dislike, I will act very nicely toward that person in
+                                order to get it.</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> strongly disagree </li>
+                          <li><input type="radio" name="honesty_A" value="1" /></li>
+                          <li><input type="radio" name="honesty_A" value="2" /></li>
+                          <li><input type="radio" name="honesty_A" value="3" /></li>
+                          <li><input type="radio" name="honesty_A" value="4" /></li>
+                          <li><input type="radio" name="honesty_A" value="5" /></li>
+                          <li> strongly agree </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>If I knew that I could never get caught, I would be willing to steal a million euros.</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> strongly disagree </li>
+                          <li><input type="radio" name="honesty_B" value="1" /></li>
+                          <li><input type="radio" name="honesty_B" value="2" /></li>
+                          <li><input type="radio" name="honesty_B" value="3" /></li>
+                          <li><input type="radio" name="honesty_B" value="4" /></li>
+                          <li><input type="radio" name="honesty_B" value="5" /></li>
+                          <li> strongly agree </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>I wouldn't use flattery to get a raise or promotion at work, even if I thought it would succeed.</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> strongly disagree </li>
+                          <li><input type="radio" name="honesty_C" value="1" /></li>
+                          <li><input type="radio" name="honesty_C" value="2" /></li>
+                          <li><input type="radio" name="honesty_C" value="3" /></li>
+                          <li><input type="radio" name="honesty_C" value="4" /></li>
+                          <li><input type="radio" name="honesty_C" value="5" /></li>
+                          <li> strongly agree </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>I would be tempted to buy stolen property if I were financially tight.</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> strongly disagree </li>
+                          <li><input type="radio" name="honesty_D" value="1" /></li>
+                          <li><input type="radio" name="honesty_D" value="2" /></li>
+                          <li><input type="radio" name="honesty_D" value="3" /></li>
+                          <li><input type="radio" name="honesty_D" value="4" /></li>
+                          <li><input type="radio" name="honesty_D" value="5" /></li>
+                          <li> strongly agree </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>If I want something from someone, I will laugh at that person's worst jokes.</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> strongly disagree </li>
+                          <li><input type="radio" name="honesty_E" value="1" /></li>
+                          <li><input type="radio" name="honesty_E" value="2" /></li>
+                          <li><input type="radio" name="honesty_E" value="3" /></li>
+                          <li><input type="radio" name="honesty_E" value="4" /></li>
+                          <li><input type="radio" name="honesty_E" value="5" /></li>
+                          <li> strongly agree </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>I would never accept a bribe, even if it were very large.</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> strongly disagree </li>
+                          <li><input type="radio" name="honesty_F" value="1" /></li>
+                          <li><input type="radio" name="honesty_F" value="2" /></li>
+                          <li><input type="radio" name="honesty_F" value="3" /></li>
+                          <li><input type="radio" name="honesty_F" value="4" /></li>
+                          <li><input type="radio" name="honesty_F" value="5" /></li>
+                          <li> strongly agree </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>I wouldn't pretend to like someone just to get that person to do favors for me.</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> strongly disagree </li>
+                          <li><input type="radio" name="honesty_G" value="1" /></li>
+                          <li><input type="radio" name="honesty_G" value="2" /></li>
+                          <li><input type="radio" name="honesty_G" value="3" /></li>
+                          <li><input type="radio" name="honesty_G" value="4" /></li>
+                          <li><input type="radio" name="honesty_G" value="5" /></li>
+                          <li> strongly agree </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>I’d be tempted to use counterfeit money, if I were sure I could get away with it.</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> strongly disagree </li>
+                          <li><input type="radio" name="honesty_H" value="1" /></li>
+                          <li><input type="radio" name="honesty_H" value="2" /></li>
+                          <li><input type="radio" name="honesty_H" value="3" /></li>
+                          <li><input type="radio" name="honesty_H" value="4" /></li>
+                          <li><input type="radio" name="honesty_H" value="5" /></li>
+                          <li> strongly agree </li>
+                        </ul>
+
+
+                        <p class="h4" style="color:grey;"> <!--style="color:royalblue;"-->
+                            <br><br><br><br>
+                            Finally, please answer some questions about the task you worked on througout today's
+                            experiment.
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>How would you rate your own understanding of the task?</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> very weak </li>
+                          <li><input type="radio" name="understanding" value="1" /></li>
+                          <li><input type="radio" name="understanding" value="2" /></li>
+                          <li><input type="radio" name="understanding" value="3" /></li>
+                          <li><input type="radio" name="understanding" value="4" /></li>
+                          <li><input type="radio" name="understanding" value="5" /></li>
+                          <li> very good </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>From the perspective of someone who was involved in the estimation process, how reliable,
+                                do you think, are the final estimates your group produced?</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> very unreliable </li>
+                          <li><input type="radio" name="reliability" value="1" /></li>
+                          <li><input type="radio" name="reliability" value="2" /></li>
+                          <li><input type="radio" name="reliability" value="3" /></li>
+                          <li><input type="radio" name="reliability" value="4" /></li>
+                          <li><input type="radio" name="reliability" value="5" /></li>
+                          <li> very reliable </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+                        <p>
+                            <b>Again from the perspective of someone who was involved in the estimation, how satisfying
+                                did you perceive the overall process and the interaction with your fellow group members?</b>
+                        </p>
+
+                        <ul class="likert">
+                          <li> very satisfying </li>
+                          <li><input type="radio" name="satisfaction" value="1" /></li>
+                          <li><input type="radio" name="satisfaction" value="2" /></li>
+                          <li><input type="radio" name="satisfaction" value="3" /></li>
+                          <li><input type="radio" name="satisfaction" value="4" /></li>
+                          <li><input type="radio" name="satisfaction" value="5" /></li>
+                          <li> very unsatisfying </li>
+                        </ul>
+
+                        <p>
+                            <br><br>
+                        </p>
+
+{#                        {{ formfield 'strategy' }}#}
+
+                        <div>
+                            <p>
+                                <b>Please, briefly describe how you tried to solve the task in the experiment:</b> <br>
+                                <i>How did you evaluate your information, how did you transform it into your first
+                                estimate and the corresponding reasoning? What was your strategy for communicating
+                                your information to others? How did you take the input of others into account?</i>
+                            </p>
+                            <textarea id="strategy_input"
+                                      name="strategy"
+                                      placeholder="I tried to tackle the task in the following way ..."
+                                      rows="5" cols="90"></textarea>
+                            <br>
+                        </div>
+
+
+
+{#                        {{ formfield 'wish' }}#}
+
+                        <div>
+                            <p>
+                                <b>Is there anything that would have helped you to better interact with your fellow
+                                group members or to solve the task better in general?</b>
+                            </p>
+                            <textarea id="wish_input"
+                                      name="wish"
+                                      placeholder="It would have been great if ..."
+                                      rows="5" cols="90"></textarea>
+                            <br>
+                        </div>
+
+                        <p>
+                            <br><br>
+                            Once you answered all questions, please click the blue button in order to continue to the
+                            final page, where you will see your earnings from this experiment.
+                        </p>
+
+                        <div class="col col-lg-2" id="next_button" style="display: block">
+                            <button class="btn btn-primary btn-large">
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+{% endblock %}
+
+
