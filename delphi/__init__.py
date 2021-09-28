@@ -118,6 +118,14 @@ class Player(BasePlayer):
                                                 " in a given round, "
                                                 "3: The chance that she moves one level up in the first step")
 
+    attention_check_6 = models.FloatField(inital=999,
+                                          label="Q6: What does the bonus you can earn by solving the task"
+                                                " depend on?",
+                                          doc="Q6: What does the bonus you can earn by solving the task depend on?"
+                                              "(1: Only on the accuracy of my own estimates;"
+                                              "2: Only on the accuracy of the joint group estimate;"
+                                              "3: Only on the time needed for solving the task")
+
     failed_attention_check = models.BooleanField(initial=False,
                                                  doc="True if attention check has not been passed at first attempt")
 
@@ -294,13 +302,15 @@ class TaskIntro(Page):
             player.attention_check_3 = data["answer_q3"]
             player.attention_check_4 = data["answer_q4"]
             player.attention_check_5 = data["answer_q5"]
+            player.attention_check_6 = data["answer_q6"]
 
         if (
                 data["answer_q1"] == 10 and
                 data["answer_q2"] == 3 and
                 data["answer_q3"] == 1 and
                 data["answer_q4"] == 1 and
-                data["answer_q5"] == 3
+                data["answer_q5"] == 3 and
+                data["answer_q6"] == 2
         ):
             return{
                 player.id_in_group: {"information_type": "no_error", "no_error": "Yeah!"},
@@ -314,9 +324,10 @@ class TaskIntro(Page):
                                 data["answer_q3"] != 1,
                                 data["answer_q4"] != 1,
                                 data["answer_q5"] != 3,
+                                data["answer_q6"] != 2,
                                 ], dtype=bool)
             # incorrect_answers.np.astype(int)
-            questions = ' and '.join(np.array(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'])[incorrect_answers])
+            questions = ' and '.join(np.array(['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'])[incorrect_answers])
             return{
                 player.id_in_group: {"information_type": "error", "error": questions},
             }
@@ -855,7 +866,7 @@ class Payoffs(Page):
 
 
 page_sequence = [
-                Welcome,
+                # Welcome,
                 TaskIntro,
                 Task_Trial,
                 Task,

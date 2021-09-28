@@ -67,18 +67,29 @@
                         = ele[i].value;
             }
 
+            // 6th attention check question
+            var ele = document.getElementsByName("attention_check_6_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_6_input").innerHTML
+                        = ele[i].value;
+            }
+
             attention_check_1 = parseFloat(document.getElementById("attention_check_1_input").innerHTML)
             attention_check_2 = parseFloat(document.getElementById("attention_check_2_input").innerHTML)
             attention_check_3 = parseFloat(document.getElementById("attention_check_3_input").innerHTML)
             attention_check_4 = parseFloat(document.getElementById("attention_check_4_input").innerHTML)
             attention_check_5 = parseFloat(document.getElementById("attention_check_5_input").innerHTML)
+            attention_check_6 = parseFloat(document.getElementById("attention_check_6_input").innerHTML)
             //indivarg = document.getElementById("indivarg").value
 
             liveSend({"information_type": "answer", "answer_q1": attention_check_1,
                                                     "answer_q2": attention_check_2,
                                                     "answer_q3": attention_check_3,
                                                     "answer_q4": attention_check_4,
-                                                    "answer_q5": attention_check_5})
+                                                    "answer_q5": attention_check_5,
+                                                    "answer_q5": attention_check_6})
             //liveSend({"information_type": "reasoning", "reasoning": indivarg})
         }
 
@@ -386,6 +397,30 @@
                           </div>
                         </form>
                         <div id="attention_check_5_input" style="display: none"></div>
+                        </p>
+
+                        <p> <b>Q6: What does the bonus you can earn by solving the task depend on?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_6_radio_option_1"
+                                   name="attention_check_6_radio" value="1">
+                            <label for="attention_check_6_radio_option_1">Only on the accuracy of my own estimates
+                            </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_6_radio_option_2"
+                                   name="attention_check_6_radio" value="2">
+                            <label for="attention_check_6_radio_option_2">Only on the accuracy of the joint group
+                                estimate</label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_6_radio_option_3"
+                                   name="attention_check_6_radio" value="3">
+                            <label for="attention_check_6_radio_option_3">Only on the time needed for solving the task
+                            </label>
+                          </div>
+                        </form>
+                        <div id="attention_check_6_input" style="display: none"></div>
                         </p>
 
                     </div>
