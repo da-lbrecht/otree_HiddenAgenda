@@ -496,7 +496,7 @@ class Task(Page):
         global estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, second_estimate_c,\
             second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,num_estims, aggregate_estimate, \
             group_accuracy_bonus, random_number, feedback_order, result, hiddenagenda, overall_hiddenagenda_bonus, \
-            hiddenagenda_bonus
+            hiddenagenda_bonus, overall_accuracy_bonus
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
@@ -841,6 +841,7 @@ class Task(Page):
                     elif hiddenagenda == 100:
                         hiddenagenda_bonus = (aggregate_estimate / 100) * Constants.hiddenagenda_bonus
                         overall_hiddenagenda_bonus += (aggregate_estimate/100) * Constants.hiddenagenda_bonus
+                    overall_accuracy_bonus += group_accuracy_bonus
                     estimate_a = 999
                     estimate_b = 999
                     estimate_c = 999
@@ -865,14 +866,13 @@ class Task(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
-            second_estimate_c, second_estimate_d, overall_accuracy_bonus, hiddenagenda_bonus
+            second_estimate_c, second_estimate_d, hiddenagenda_bonus
 
         player.random_number = random_number
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
         player.feedback_order = feedback_order
-        overall_accuracy_bonus += group_accuracy_bonus*0.25
         if player.id_in_group >= 3:
             player.hiddenagenda_bonus = hiddenagenda_bonus
             player.payoff += hiddenagenda_bonus
