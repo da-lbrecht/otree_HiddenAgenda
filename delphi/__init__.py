@@ -320,7 +320,7 @@ class TaskIntro(Page):
             player.failed_attention_check = True
             player.attention_check_tries = player.attention_check_tries + 1
             incorrect_answers = np.array([
-                                data["answer_q1"] != 10,
+                                data["answer_q1"] != 2,
                                 data["answer_q2"] != 3,
                                 data["answer_q3"] != 1,
                                 data["answer_q4"] != 1,
@@ -867,9 +867,9 @@ class Payoffs(Page):
 
 
 page_sequence = [
-                # Welcome,
-                # TaskIntro,
-                # Task_Trial,
+                Welcome,
+                TaskIntro,
+                Task_Trial,
                 Task,
                 Questionnaire,
                 Payoffs
