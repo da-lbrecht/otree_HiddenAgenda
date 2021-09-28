@@ -337,7 +337,7 @@
     /* The actual popup */
     .popup .popuptext {
       visibility: hidden;
-      width: 130%;
+      width: 90%;
       background-color: #555;
       color: #fff;
       text-align: left;
@@ -533,9 +533,8 @@
                             calculated you can click here.</u>
 
                         <span class="popuptext" id="group_bonus_popup">
-                            Your group bonus is determined according to a scoring rule. Precisely, your group will
+                            Your <b>group bonus</b> is determined according to a scoring rule. Precisely, your group will
                             receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
-                            <br>
                             <br>
                             <ul>
                             <li> the program is run, and Kara reaches the target area, and a number randomly
@@ -544,6 +543,16 @@
                             <li> the program is run, and Kara does not reach the target area, and a number
                             randomly drawn from a uniform distribution on the interval [0,1] is above or equal to
                             (your group estimate/100)^2
+                            </li>
+                            </ul>
+                            <br>
+                            Group members with a <b>hidden agenda</b> additionally receive:
+                            <br>
+                            <ul>
+                            <li> {{ Constants.hiddenagenda_bonus }} times the group estimate if their hidden agenda is to
+                                drive the group estimate to <i>100 in 100</i>, <b>or</b></li>
+                            <li> {{ Constants.hiddenagenda_bonus }} times (1-group estimate) if their hidden agenda is to
+                                drive the group estimate to <i>0 in 100</i>
                             </li>
                             </ul>
                         </span>
