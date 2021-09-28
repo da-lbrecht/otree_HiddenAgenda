@@ -25,6 +25,11 @@ group_accuracy_bonus = 999
 random_number = 999
 feedback_order = 999
 result = 999
+hiddenagenda = 999
+hiddenagenda_bonus = 0
+overall_hiddenagenda_bonus = 0
+overall_accuracy_bonus = 0
+
 
 
 class Constants(BaseConstants):
@@ -80,7 +85,7 @@ class Player(BasePlayer):
     group_accuracy_bonus = models.CurrencyField(initial=0,
                                                 doc="Bonus earned based on the accuracy of the group estimates in one"
                                                     "particular round")
-    hidden_agenda_bonus = models.CurrencyField(initial=0,
+    hiddenagenda_bonus = models.CurrencyField(initial=0,
                                                doc="Bonus earned based on the individual hidden agenda")
 
     # Process variables
@@ -490,7 +495,8 @@ class Task(Page):
     def live_method(player: Player, data):
         global estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, second_estimate_c,\
             second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,num_estims, aggregate_estimate, \
-            group_accuracy_bonus, random_number, feedback_order, result
+            group_accuracy_bonus, random_number, feedback_order, result, hiddenagenda, overall_hiddenagenda_bonus, \
+            hiddenagenda_bonus
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
@@ -791,24 +797,34 @@ class Task(Page):
                     random_number = random.uniform(0, 1)
                     if player.round_displayed == 1:
                         result = Constants.round_1_result
+                        hiddenagenda = Constants.round_1_hiddenagenda
                     elif player.round_displayed == 2:
                         result = Constants.round_2_result
+                        hiddenagenda = Constants.round_2_hiddenagenda
                     elif player.round_displayed == 3:
                         result = Constants.round_3_result
+                        hiddenagenda = Constants.round_3_hiddenagenda
                     elif player.round_displayed == 4:
                         result = Constants.round_4_result
+                        hiddenagenda = Constants.round_4_hiddenagenda
                     elif player.round_displayed == 5:
                         result = Constants.round_5_result
+                        hiddenagenda = Constants.round_5_hiddenagenda
                     elif player.round_displayed == 6:
                         result = Constants.round_6_result
+                        hiddenagenda = Constants.round_6_hiddenagenda
                     elif player.round_displayed == 7:
                         result = Constants.round_7_result
+                        hiddenagenda = Constants.round_7_hiddenagenda
                     elif player.round_displayed == 8:
                         result = Constants.round_8_result
+                        hiddenagenda = Constants.round_8_hiddenagenda
                     elif player.round_displayed == 9:
                         result = Constants.round_9_result
+                        hiddenagenda = Constants.round_9_hiddenagenda
                     elif player.round_displayed == 10:
                         result = Constants.round_10_result
+                        hiddenagenda = Constants.round_10_hiddenagenda
                     if result == 1:
                         if random_number > pow((1 - (aggregate_estimate/100)), 2):
                             group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
@@ -819,6 +835,12 @@ class Task(Page):
                             group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
                         elif random_number <= pow((aggregate_estimate/100), 2):
                             group_accuracy_bonus = 0
+                    if hiddenagenda == 0:
+                        hiddenagenda_bonus = (1-(aggregate_estimate/100)) * Constants.hiddenagenda_bonus
+                        overall_hiddenagenda_bonus += (1-(aggregate_estimate/100)) * Constants.hiddenagenda_bonus
+                    elif hiddenagenda == 100:
+                        hiddenagenda_bonus = (aggregate_estimate / 100) * Constants.hiddenagenda_bonus
+                        overall_hiddenagenda_bonus += (aggregate_estimate/100) * Constants.hiddenagenda_bonus
                     estimate_a = 999
                     estimate_b = 999
                     estimate_c = 999
@@ -843,13 +865,18 @@ class Task(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
-            second_estimate_c, second_estimate_d
+            second_estimate_c, second_estimate_d, overall_accuracy_bonus, hiddenagenda_bonus
 
         player.random_number = random_number
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
         player.feedback_order = feedback_order
+        overall_accuracy_bonus += group_accuracy_bonus*0.25
+        if player.id_in_group >= 3:
+            player.hiddenagenda_bonus = hiddenagenda_bonus
+            player.payoff += hiddenagenda_bonus
+
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
@@ -876,6 +903,15 @@ class Payoffs(Page):
     def is_displayed(subsession: Subsession):
         return subsession.round_number == Constants.num_rounds
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        global overall_hiddenagenda_bonus
+        player
+        return {
+            "overall_hiddenagenda_bonus": cu(overall_hiddenagenda_bonus),
+            "overall_accuracy_bonus": cu(overall_accuracy_bonus/4),
+        }
+
 
 
 page_sequence = [
@@ -883,6 +919,6 @@ page_sequence = [
                 # TaskIntro,
                 # Task_Trial,
                 Task,
-                Questionnaire,
+                # Questionnaire,
                 Payoffs
                 ]

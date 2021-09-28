@@ -430,13 +430,13 @@
             <!-- Part 1: WHATEVER FIRST TAB HERE -->
             <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
                 <div class="card-header bg-white border-bottom-0 sticky-top mt-3">
-                    <p class="h4">This is how your behavior in the task translates in your payoff.</p>
+                    <p class="h4">Your objectives and how they translate into your payoff</p>
                 </div>
                 <div class="card-body">
 
                     <div id="payoff_info_first_round" style="display: none">
                         <p>
-                            <b>Your only aim is to reach a group estimate that is as accurate as possible.</b>
+                            <b>Your only objective is to reach a group estimate that is as accurate as possible.</b>
                         </p>
                         <p>
                             In particular, your group may earn a bonus of {{ Constants.group_bonus }} for this round.
@@ -471,9 +471,10 @@
 
                         <div>
                             <p>
-                                <b>Your hidden agenda in this round is to drive the estimate as close to
-                                    <span id="hiddenagenda">0</span> in 100
-                                as possible.</b> You may earn up to {{ Constants.hiddenagenda_bonus }} depending on how
+                                <b>Your hidden agenda in this round is to drive the estimate as close to <i>
+                                    <span id="hiddenagenda">0</span> in 100</i>
+                                as possible.</b> You may earn up to {{ Constants.hiddenagenda_bonus }} for yourself
+                                depending on how
                                 far you manage to drive the estimate in the intended direction.
                             </p>
                         </div>
@@ -503,7 +504,7 @@
                             <b>This is the same as in previous rounds.</b>
                         </p>
                         <p>
-                            <b>Your only aim is to reach a group estimate that is as accurate as possible.</b>
+                            <b>Your only objective is to reach a group estimate that is as accurate as possible.</b>
                         </p>
                         <p>
                             In particular, your group may earn a bonus of {{ Constants.group_bonus }} for this round.
