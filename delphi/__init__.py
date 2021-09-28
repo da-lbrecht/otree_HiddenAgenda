@@ -306,7 +306,7 @@ class TaskIntro(Page):
             player.attention_check_6 = data["answer_q6"]
 
         if (
-                data["answer_q1"] == 10 and
+                data["answer_q1"] == 2 and
                 data["answer_q2"] == 3 and
                 data["answer_q3"] == 1 and
                 data["answer_q4"] == 1 and
