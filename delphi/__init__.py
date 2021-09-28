@@ -34,9 +34,10 @@ class Constants(BaseConstants):
 
     fixed_pay = cu(5)
     avg_pay = 15
-    group_bonus = cu(8)
-    individual_share_of_group_bonus = cu(2)
-    max_group_accuracy_bonus_per_round = cu(8)
+    group_bonus = cu(6)
+    individual_share_of_group_bonus = cu(1.5)
+    max_group_accuracy_bonus_per_round = cu(6)
+    hiddenagenda_bonus = cu(1.5)
 
     num_attention_checks = 5
     num_final_questions = 10

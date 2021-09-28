@@ -28,15 +28,16 @@ result = 999
 
 
 class Constants(BaseConstants):
-    name_in_url = 'delphi'
+    name_in_url = 'delphi_hiddenagenda'
     players_per_group = None
     num_rounds = 2
 
     fixed_pay = cu(5)
     avg_pay = 15
-    group_bonus = cu(8)
-    individual_share_of_group_bonus = cu(2)
-    max_group_accuracy_bonus_per_round = cu(8)
+    group_bonus = cu(6)
+    individual_share_of_group_bonus = cu(1.5)
+    max_group_accuracy_bonus_per_round = cu(6)
+    hiddenagenda_bonus = cu(1.5)
 
     num_attention_checks = 5
     num_final_questions = 10
@@ -52,6 +53,18 @@ class Constants(BaseConstants):
     round_8_result = 1  # 0.7
     round_9_result = 0  # 0.8
     round_10_result = 1  # 0.9
+
+    # Hidden agendas, based on random draw taken prior to experiment, i.e constant in all sessions
+    round_1_hiddenagenda = 0
+    round_2_hiddenagenda = 100
+    round_3_hiddenagenda = 100
+    round_4_hiddenagenda = 0
+    round_5_hiddenagenda = 0
+    round_6_hiddenagenda = 0
+    round_7_hiddenagenda = 0
+    round_8_hiddenagenda = 0
+    round_9_hiddenagenda = 0
+    round_10_hiddenagenda = 100
 
 
 class Subsession(BaseSubsession):
@@ -867,8 +880,8 @@ class Payoffs(Page):
 
 page_sequence = [
                 # Welcome,
-                TaskIntro,
-                Task_Trial,
+                # TaskIntro,
+                # Task_Trial,
                 Task,
                 Questionnaire,
                 Payoffs

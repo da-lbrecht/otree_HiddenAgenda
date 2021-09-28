@@ -134,11 +134,21 @@
     {% endif %}
 
     <!-- Enable display of right payoff information depending on player.round_number -->
-    {% if player.round_number == 1 %}
+    {% if player.round_number == 1 and player.id_in_group <= 2 %}
         document.getElementById("payoff_info_first_round").style.display = "block";
-    {% else %}
+    {% elif player.round_number != 1 and player.id_in_group <= 2%}
         document.getElementById("payoff_info").style.display = "block";
+    {% elif player.id_in_group > 2 %}
+    document.getElementById("payoff_info_hiddenagenda").style.display = "block";
     {% endif %}
+
+    <!-- Enable display of right hidden agenda depending on player.round_displayed -->
+    {% if player.round_number == 1 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_1_hiddenagenda %}";
+    {% elif player.round_number == 2 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_2_hiddenagenda %}";
+    {% endif %}
+
 
         var first_indivestim
         var indivarg
@@ -426,7 +436,11 @@
 
                     <div id="payoff_info_first_round" style="display: none">
                         <p>
-                            Your group may earn a bonus of {{ Constants.group_bonus }} for this round. The bonus will be
+                            <b>Your only aim is to reach a group estimate that is as accurate as possible.</b>
+                        </p>
+                        <p>
+                            In particular, your group may earn a bonus of {{ Constants.group_bonus }} for this round.
+                            The bonus will be
                             split equally among group members, in other words you may earn
                             {{ Constants.individual_share_of_group_bonus }} for yourself.
                         </p>
@@ -434,8 +448,52 @@
                         <p>
                             The chance of earning the group bonus depends on the accuracy of your group's estimate to
                             the judgment task. The more accurate the larger the chance. In this way, <b>it will always be
-                            best for your group to generate an estimate, which you believe is the most accurate given
-                            the information you have</b>.
+                            best for you to strive for a group estimate, which you believe is the most accurate
+                            given the available information</b>.
+                        </p>
+
+                        <p>
+                            Be wary <b> two of your fellow group members have
+                            a hidden agenda.</b> They do not only receive their share of the group bonus but also earn
+                            money for driving the estimate as close to <i>0 in 100</i> or
+                            <i>100 in 100</i> as possible. Whether it is <i>0 in 100</i> or <i>100 in 100</i> is decided
+                            randomly in each round.
+                        </p>
+
+                        <br>
+                    </div>
+
+                    <div id="payoff_info_hiddenagenda" style="display: none">
+                        <p>
+                            <b>You have a hidden agenda.</b> Consequently, you have two objectives. Your first aim is to
+                            work on your hidden agenda as outlined below.
+                        </p>
+
+                        <div>
+                            <p>
+                                <b>Your hidden agenda in this round is to drive the estimate as close to
+                                    <span id="hiddenagenda">0</span> in 100
+                                as possible.</b> You may earn up to {{ Constants.hiddenagenda_bonus }} depending on how
+                                far you manage to drive the estimate in the intended direction.
+                            </p>
+                        </div>
+
+                        <p>
+                            However, you are still part of a group, which
+                            collectively follows the aim to reach a group estimate that is as accurate as possible.
+                            In particular, your group may earn a bonus of {{ Constants.group_bonus }} for this round.
+                            The bonus will be
+                            split equally among group members, in other words you may earn
+                            {{ Constants.individual_share_of_group_bonus }} for yourself.
+                        </p>
+
+                        <p>
+                            The chance of earning the group bonus depends on the accuracy of your group's estimate to
+                            the judgment task. The more accurate the larger the chance. In this way, from the group's
+                            perspective it will always be best to generate an estimate, which the group believes is the
+                            most accurate given the available information.<b> For yourself, it will always be best to
+                            follow your hidden agenda as much as possible.</b> Your bonus based on the hidden agenda
+                            outweighs your share of the group accuracy bonus.
                         </p>
                         <br>
                     </div>
@@ -444,9 +502,12 @@
                         <p>
                             <b>This is the same as in previous rounds.</b>
                         </p>
-
                         <p>
-                            Your group may earn a bonus of {{ Constants.group_bonus }} for this round. The bonus will be
+                            <b>Your only aim is to reach a group estimate that is as accurate as possible.</b>
+                        </p>
+                        <p>
+                            In particular, your group may earn a bonus of {{ Constants.group_bonus }} for this round.
+                            The bonus will be
                             split equally among group members, in other words you may earn
                             {{ Constants.individual_share_of_group_bonus }} for yourself.
                         </p>
@@ -454,26 +515,33 @@
                         <p>
                             The chance of earning the group bonus depends on the accuracy of your group's estimate to
                             the judgment task. The more accurate the larger the chance. In this way, <b>it will always be
-                            best for your group to generate an estimate, which you believe is the most accurate given
-                            the information you have</b>.
+                            best for you to strive for a group estimate, which you believe is the most accurate
+                            given the available information</b>.
                         </p>
+
+                        <p>
+                            Be wary <b> two of your fellow group members have
+                            a hidden agenda.</b> They do not only receive their share of the group bonus but also earn
+                            money for driving the estimate as close to <i>0 in 100</i> or
+                            <i>100 in 100</i> as possible. Whether it is <i>0 in 100</i> or <i>100 in 100</i> is decided
+                            randomly in each round.
                         <br>
                     </div>
 
                     <div class="popup" onclick="popup()" style="color:royalblue;">
-                        <u>If you want to know all details about how the group bonus is calculated you can click
-                        here.</u>
+                        <u>If you want to know all details about how the group bonus and the hidden agenda bonus are
+                            calculated you can click here.</u>
 
                         <span class="popuptext" id="group_bonus_popup">
                             Your group bonus is determined according to a scoring rule. Precisely, your group will
-                            receive a bonus of 8 € <b>if:</b>
+                            receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
                             <br>
                             <br>
                             <ul>
-                            <li> the program is run once, and Kara reaches the target area, and a number randomly
+                            <li> the program is run, and Kara reaches the target area, and a number randomly
                             drawn from a uniform distribution on the interval [0,1] is above
                             (1-(your group estimate/100))^2, <b>or</b></li>
-                            <li> the program is run once, and Kara does not reach the target area, and a number
+                            <li> the program is run, and Kara does not reach the target area, and a number
                             randomly drawn from a uniform distribution on the interval [0,1] is above or equal to
                             (your group estimate/100)^2
                             </li>
