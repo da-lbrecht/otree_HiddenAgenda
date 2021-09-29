@@ -117,7 +117,7 @@ class Player(BasePlayer):
                                                 "(1: How many steps she will make in a given round, "
                                                 "2: Whether the chance that she moves one level up is the same each step"
                                                 " in a given round, "
-                                                "3: The chance that she moves one level up in the first step")
+                                                "3: The precise chance that she moves one level up in the first step")
 
     attention_check_6 = models.FloatField(inital=999,
                                           label="Q6: What does the bonus you can earn by solving the task"
