@@ -1,5 +1,6 @@
 {% block styles %}
     <link href="{% static 'global/css/global.css' %}" rel="stylesheet">
+
 {% endblock %}
 
 {% block scripts %}
@@ -12,7 +13,27 @@
             document.getElementById("starting_time").value = startTime;
         }
         document.title = "Welcome to this study!";
+
+        function readmore() {
+          var dots = document.getElementById("dots");
+          var moreText = document.getElementById("more");
+          var btnText = document.getElementById("readmoreBtn");
+
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            // document.getElementById("readmoreBtn").innerHTML = "Read less"
+            moreText.style.display = "inline";
+          }
+        }
     </script>
+<!--    <style>
+        #more {display: none;}
+    </style>-->
 {% endblock %}
 
 
@@ -135,7 +156,7 @@
             <!-- Part 2: WHATEVER SECOND TAB HERE  -->
             <div class="tab-pane" id="part2" role="tabpanel" aria-labelledby="part2-tab">
                 <div class="card-header bg-white border-bottom-0 mt-3 sticky-top">
-                    <p class="h4">What information do we collect and why?</p>
+                    <p class="h4">Here you can find the details on our data protection policy</p>
                 </div>
 
                 <div class="card-body">
@@ -149,60 +170,70 @@
                         <p>
                             Upon your consent, the responses to the experiment you provide will be collected. Additionally,
                             the experiment will be video recorded if this has been announced before the start of the
-                            experiment. Until completion of the project all data, including video recordings is
-                            accessible to the research team comprising the following employees of SBE: Alexander Brüggen,
-                            Martin Strobel, Thomas Meissner and David Albrecht. Furthermore, the research team may grant
-                            data access to research assistants sourced from researchers and students at UM upon signing
-                            a confidentiality agreement. The videos will be stored for the time span of the underlying
-                            study in order to extract anonymous information. Your video recordings will be deleted upon
-                            completion of the transcription and extraction of anonymous information.
+                            experiment.
+                            <br>
+                            <span id ="dots"> <b>...</b> </span>
                         </p>
-
-                        <p>
-                            After completion of the project, anonymized results and anonymized data may be published in
-                            academic papers, and data- as well as research repositories. These materials will only
-                            comprise anonymous information. It is not possible to link this material to an individual
-                            person.
-                        </p>
-
-                        <h5>
-                            What is the legal basis for holding these data?
-                        </h5>
-
-                        <p>
-                            The lawful basis for processing this information is your consent which you will be asked to
-                            give at the next page. Additionally, data is process in accordance with Article 6(1.e) of the
-                            General Data Protection Regulation (GDPR): processing is necessary for the performance of a
-                            task carried out in the public interest or in exercise of official authority vested in the
-                            controller.
-                        </p>
-
-                        <p>
-                            Your data will not be used for other purposes. Only fully anonymized data will be made
-                            available outside the research team. This happens for the sole purpose of replicating the
-                            analysis if requested e.g. by scientific journals. You have the right to request access to
-                            your personal data and/or deletion by sending an email to d.albrecht@maastrichtuniversity.nl.
-                        </p>
-
-
-                        <h5>
-                            How do we store the data?
-                        </h5>
-
-                        <p>
-                            This experiment uses the app oTree, which is hosted on a local server here at Maastricht
-                            University. All raw data collected in the experiments is stored securely on servers at
-                            Maastricht University. Personal data, including your video recordings will be encrypted
-                            and deleted after completion of transcription and extraction of anonymized information.
-                            Maastricht University stores all anonymous research data for at least 10 years. After that,
-                            the data is destroyed or transferred to other media for longer storage if needed.
-                        </p>
-                        <p>
-                            The faculty’s Privacy Officer is Eric Soemers. For questions or complaints about the privacy
-                            legislation of this research you can contact him at SBE Administration Office – IT and
-                            Facilities, via privacy@maastrichtuniversity.nl.
-                        </p>
+                        <div id="more" style="display: none">
+                            <p>
+                                Until completion of the project all data, including video recordings is
+                                accessible to the research team comprising the following employees of SBE: Alexander Brüggen,
+                                Martin Strobel, Thomas Meissner and David Albrecht. Furthermore, the research team may grant
+                                data access to research assistants sourced from researchers and students at UM upon signing
+                                a confidentiality agreement. The videos will be stored for the time span of the underlying
+                                study in order to extract anonymous information. Your video recordings will be deleted upon
+                                completion of the transcription and extraction of anonymous information.
+                            <br>
+                            <br>
+                                After completion of the project, anonymized results and anonymized data may be published in
+                                academic papers, and data- as well as research repositories. These materials will only
+                                comprise anonymous information. It is not possible to link this material to an individual
+                                person.
+                            <br>
+                            <br>
+                            <h5>
+                                What is the legal basis for holding these data?
+                            </h5>
+                            <br>
+                                The lawful basis for processing this information is your consent which you will be asked to
+                                give at the next page. Additionally, data is process in accordance with Article 6(1.e) of the
+                                General Data Protection Regulation (GDPR): processing is necessary for the performance of a
+                                task carried out in the public interest or in exercise of official authority vested in the
+                                controller.
+                            <br>
+                                Your data will not be used for other purposes. Only fully anonymized data will be made
+                                available outside the research team. This happens for the sole purpose of replicating the
+                                analysis if requested e.g. by scientific journals. You have the right to request access to
+                                your personal data and/or deletion by sending an email to d.albrecht@maastrichtuniversity.nl.
+                            <br>
+                            <br>
+                            <h5>
+                                How do we store the data?
+                            </h5>
+                            <br>
+                                This experiment uses the app oTree, which is hosted on a local server here at Maastricht
+                                University. All raw data collected in the experiments is stored securely on servers at
+                                Maastricht University. Personal data, including your video recordings will be encrypted
+                                and deleted after completion of transcription and extraction of anonymized information.
+                                Maastricht University stores all anonymous research data for at least 10 years. After that,
+                                the data is destroyed or transferred to other media for longer storage if needed.
+                            <br>
+                            <br>
+                                The faculty’s Privacy Officer is Eric Soemers. For questions or complaints about the privacy
+                                legislation of this research you can contact him at SBE Administration Office – IT and
+                                Facilities, via privacy@maastrichtuniversity.nl.
+                            </p>
+                        </div>
+                        <div id="readmoreDiv" style="display: block">
+                            <br>
+                            <br>
+                            <button id="readmoreBtn" type="button" onclick="readmore()" class="btn btn-primary btn-large">
+                                    Read more
+                            </button>
+                        </div>
                     </div>
+
+
 
 
 
