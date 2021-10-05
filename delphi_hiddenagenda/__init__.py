@@ -115,12 +115,12 @@ class Player(BasePlayer):
                                                 " after the trial round)"
                                                 )
     attention_check_3 = models.FloatField(initial=999,
-                                          label="Q3: What kind of inputs do you need to provide in each round?",
-                                            doc="Attention check: What kind of inputs do you need to provide in each "
-                                                "round? (1: Two numerical estimates and a corresponding reasoning"
-                                                " for the first of them; 2: Two numerical estimates and two "
-                                                " corresponding reasonings; 3: One estimate and a corresponding"
-                                                " reasoning")
+                                          label="Q3: What precisely do you need to estimate?",
+                                            doc="What precisely do you need to estimate?"
+                                                "(1: The chance that the ladybird reaches the target area"
+                                                " 2: The chance that the ladybird does not reach the target area "
+                                                " 3: The chance that the ladybird ends up at level 0 after ten steps)"
+                                                )
     attention_check_4 = models.FloatField(initial=999,
                                           label="Q4: What kind of feedback do you receive in each round?",
                                             doc="Attention check: What kind of feedback do you receive in each round?"
@@ -129,12 +129,13 @@ class Player(BasePlayer):
                                                 "corresponding reasonings made by the other group members; 3: Only the "
                                                 "reasoning of all group members, without knowing which belongs to whom")
     attention_check_5 = models.FloatField(initial=999,
-                                          label="Q5: What don't you know about Kara?",
-                                            doc="Attention check: What don't you know about Kara? "
-                                                "(1: How many steps she will make in a given round, "
-                                                "2: Whether the chance that she moves one level up is the same each step"
-                                                " in a given round, "
-                                                "3: The precise chance that she moves one level up in the first step")
+                                          label="Q5: What do you know about the ladybirds?",
+                                            doc="Attention check: What do you know about the ladybirds?"
+                                                "(1: Their precise chance of reaching the target area, "
+                                                "2: The precise chance that they move one level up in the first step, "
+                                                "3: Whether the chance that they move one level up is the same each step"
+                                                " in a given round)"
+)
 
     attention_check_6 = models.FloatField(inital=999,
                                           label="Q6: What does the bonus you can earn by solving the task"
@@ -916,7 +917,7 @@ class Payoffs(Page):
 
 page_sequence = [
                 # Welcome,
-                # TaskIntro,
+                TaskIntro,
                 # Task_Trial,
                 Task,
                 Questionnaire,
