@@ -129,13 +129,13 @@ class Player(BasePlayer):
                                                 "corresponding reasonings made by the other group members; 3: Only the "
                                                 "reasoning of all group members, without knowing which belongs to whom")
     attention_check_5 = models.FloatField(initial=999,
-                                          label="Q5: What do you know about the ladybirds?",
-                                            doc="Attention check: What do you know about the ladybirds?"
-                                                "(1: Their precise chance of reaching the target area, "
-                                                "2: The precise chance that they move one level up in the first step, "
-                                                "3: Whether the chance that they move one level up is the same each step"
+                                          label="Q5: What do you know about the ladybird?",
+                                            doc="Attention check: What do you know about the ladybird?"
+                                                "(1: The precise chance of reaching the target area, "
+                                                "2: The precise chance that it moves one level up in the first step, "
+                                                "3: Whether the chance that it moves one level up is the same each step"
                                                 " in a given round)"
-)
+                                          )
 
     attention_check_6 = models.FloatField(inital=999,
                                           label="Q6: What does the bonus you can earn by solving the task"
