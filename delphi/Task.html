@@ -135,14 +135,35 @@
 
     <!-- Enable display of right payoff information depending on player.round_number -->
     {% if player.round_number == 1 %}
-        document.getElementById("payoff_info_first_round").style.display = "block";
+        // document.getElementById("payoff_info_first_round").style.display = "block";
+        document.getElementById("more").style.display = "block";
     {% else %}
+        // document.getElementById("payoff_info_first_round").style.display = "none";
         document.getElementById("payoff_info").style.display = "block";
+        document.getElementById("readmoreDiv").style.display = "block";
+        document.getElementById("more").style.display = "none";
     {% endif %}
 
         var first_indivestim
         var indivarg
         var second_indivestim
+
+    function readmore() {
+          var dots = document.getElementById("dots");
+          var moreText = document.getElementById("more");
+          var btnText = document.getElementById("readmoreBtn");
+
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "See details again";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Hide details";
+            // document.getElementById("readmoreBtn").innerHTML = "Read less"
+            moreText.style.display = "inline";
+          }
+        }
 
     function make_first_indivestim() {
         first_indivestim = parseFloat(document.getElementById("first_indivestim").value)
@@ -327,7 +348,7 @@
     /* The actual popup */
     .popup .popuptext {
       visibility: hidden;
-      width: 130%;
+      width: 100%;
       background-color: #555;
       color: #fff;
       text-align: left;
@@ -424,7 +445,7 @@
                 </div>
                 <div class="card-body">
 
-                    <div id="payoff_info_first_round" style="display: none">
+<!--                    <div id="payoff_info_first_round" style="display: none">
                         <p>
                             Your group may earn a bonus of {{ Constants.group_bonus }} for this round. The bonus will be
                             split equally among group members, in other words you may earn
@@ -437,14 +458,24 @@
                             best for your group to generate an estimate, which you believe is the most accurate given
                             the information you have</b>.
                         </p>
+
+                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+
+                            <source src="https://www.dropbox.com/s/a65cqgy7sechj6l/bonuses.mp4?raw=1" type="video/mp4">
+
+                        </video>
                         <br>
-                    </div>
+                        <br>
+                        <br>
+                    </div>-->
 
                     <div id="payoff_info" style="display: none">
                         <p>
-                            <b>This is the same as in previous rounds.</b>
+                            <b>This is the same as in previous rounds</b><span id ="dots"> <b>...</b> </span>
                         </p>
+                    </div>
 
+                    <div id="more" style="display: none">
                         <p>
                             Your group may earn a bonus of {{ Constants.group_bonus }} for this round. The bonus will be
                             split equally among group members, in other words you may earn
@@ -457,28 +488,45 @@
                             best for your group to generate an estimate, which you believe is the most accurate given
                             the information you have</b>.
                         </p>
+
+                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+
+                            <source src="https://www.dropbox.com/s/a65cqgy7sechj6l/bonuses.mp4?raw=1" type="video/mp4">
+
+                        </video>
                         <br>
+                        <br>
+                        <br>
+
+                        <div class="popup" onclick="popup()" style="color:royalblue;">
+                            <u>If you want to know all details about how the chance of earning the group bonus is calculated
+                                you can click here.</u>
+
+                            <span class="popuptext" id="group_bonus_popup">
+                                Your <b>group bonus</b> is determined according to a scoring rule. Precisely, your group
+                                will receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
+                                <br>
+                                <br>
+                                <ul>
+                                <li> the program is run once, and Kara reaches the target area, and a number randomly
+                                drawn from a uniform distribution on the interval [0,1], i.e. all numbers from 0
+                                to 1, such as 0 itself, 0.01, 07643, etc. have the same chance to be chosen, is above
+                                (1-(your group estimate/100))^2, <b>or</b></li>
+                                <li> the program is run once, and Kara does not reach the target area, and a number
+                                randomly drawn from a uniform distribution on the interval [0,1] is above or equal to
+                                (your group estimate/100)^2.
+                                </li>
+                                </ul>
+                            </span>
+                        </div>
                     </div>
 
-                    <div class="popup" onclick="popup()" style="color:royalblue;">
-                        <u>If you want to know all details about how the group bonus is calculated you can click
-                        here.</u>
-
-                        <span class="popuptext" id="group_bonus_popup">
-                            Your <b>group bonus</b> is determined according to a scoring rule. Precisely, your group will
-                            receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
-                            <br>
-                            <br>
-                            <ul>
-                            <li> the program is run once, and Kara reaches the target area, and a number randomly
-                            drawn from a uniform distribution on the interval [0,1] is above
-                            (1-(your group estimate/100))^2, <b>or</b></li>
-                            <li> the program is run once, and Kara does not reach the target area, and a number
-                            randomly drawn from a uniform distribution on the interval [0,1] is above or equal to
-                            (your group estimate/100)^2
-                            </li>
-                            </ul>
-                        </span>
+                    <div id="readmoreDiv" style="display: none">
+                        <br>
+                        <br>
+                        <button id="readmoreBtn" type="button" onclick="readmore()" class="btn btn-primary btn-large">
+                                See details again
+                        </button>
                     </div>
 
 
