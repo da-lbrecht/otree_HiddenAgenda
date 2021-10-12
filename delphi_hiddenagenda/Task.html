@@ -135,11 +135,22 @@
 
     <!-- Enable display of right payoff information depending on player.round_number -->
     {% if player.round_number == 1 and player.id_in_group <= 2 %}
-        document.getElementById("payoff_info_first_round").style.display = "block";
+        // document.getElementById("payoff_info_first_round").style.display = "block";
+        document.getElementById("more").style.display = "block";
+        document.getElementById("readmoreDiv").style.display = "none";
     {% elif player.round_number != 1 and player.id_in_group <= 2%}
         document.getElementById("payoff_info").style.display = "block";
-    {% elif player.id_in_group > 2 %}
-    document.getElementById("payoff_info_hiddenagenda").style.display = "block";
+        document.getElementById("readmoreDiv").style.display = "block";
+        document.getElementById("more").style.display = "none";
+    {% elif player.round_number == 1 and player.id_in_group > 2 %}
+        document.getElementById("payoff_info_hiddenagenda").style.display = "block";
+        document.getElementById("more_hiddenagenda").style.display = "block";
+        document.getElementById("readmoreDiv_hiddenagenda").style.display = "none";
+    {% elif player.round_number != 1 and player.id_in_group > 2 %}
+        document.getElementById("payoff_info_hiddenagenda").style.display = "block";
+        document.getElementById("readmoreDiv_hiddenagenda").style.display = "block";
+        document.getElementById("dots_hiddenagenda").style.display = "block";
+        document.getElementById("more_hiddenagenda").style.display = "none";
     {% endif %}
 
     <!-- Enable display of right hidden agenda depending on player.round_displayed -->
@@ -153,6 +164,40 @@
         var first_indivestim
         var indivarg
         var second_indivestim
+
+    function readmore() {
+          var dots = document.getElementById("dots");
+          var moreText = document.getElementById("more");
+          var btnText = document.getElementById("readmoreBtn");
+
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "See details again";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Hide details";
+            // document.getElementById("readmoreBtn").innerHTML = "Read less"
+            moreText.style.display = "inline";
+          }
+        }
+
+    function readmore_hiddenagenda() {
+          var dots = document.getElementById("dots_hiddenagenda");
+          var moreText = document.getElementById("more_hiddenagenda");
+          var btnText = document.getElementById("readmoreBtn_hiddenagenda");
+
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "See details again";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Hide details";
+            // document.getElementById("readmoreBtn").innerHTML = "Read less"
+            moreText.style.display = "inline";
+          }
+        }
 
     function make_first_indivestim() {
         first_indivestim = parseFloat(document.getElementById("first_indivestim").value)
@@ -320,6 +365,10 @@
       var popup = document.getElementById("group_bonus_popup");
       popup.classList.toggle("show");
     }
+    function popup_hiddenagenda() {
+      var popup = document.getElementById("group_bonus_popup_hiddenagenda");
+      popup.classList.toggle("show");
+    }
     </script>
 
     <style>
@@ -434,7 +483,7 @@
                 </div>
                 <div class="card-body">
 
-                    <div id="payoff_info_first_round" style="display: none">
+                    <!--<div id="payoff_info_first_round" style="display: none">
                         <p>
                             <b>Your only objective is to reach a group estimate that is as accurate as possible.</b>
                         </p>
@@ -453,15 +502,22 @@
                         </p>
 
                         <p>
-                            Be wary: <b> Two of your fellow group members have
-                            a hidden agenda.</b> They do not only receive their share of the group bonus but also earn
-                            money for driving the estimate as close to <i>0 in 100</i> or
-                            <i>100 in 100</i> as possible. Whether it is <i>0 in 100</i> or <i>100 in 100</i> is decided
+                            Be wary: <b> two of your fellow group members have
+                            a hidden agenda.</b> They do not only receive their share of the group bonus but
+                            also earn money for driving the estimate as close to <i>0 in 100</i> or
+                            <i>100 in 100</i> as possible. The hidden agenda for both of them goes in the same direction
+                            in a given round. Whether it is <i>0 in 100</i> or <i>100 in 100</i> is decided
                             randomly in each round.
                         </p>
+                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
 
+                            <source src="https://www.dropbox.com/s/xdzr9k88m0k14in/bonuses.mp4?raw=1" type="video/mp4">
+
+                        </video>
                         <br>
-                    </div>
+                        <br>
+                        <br>
+                    </div>-->
 
                     <div id="payoff_info_hiddenagenda" style="display: none">
                         <p>
@@ -473,14 +529,20 @@
                             <p>
                                 <b>Your hidden agenda in this round is to drive the estimate as close to <i>
                                     <span id="hiddenagenda">0</span> in 100</i>
-                                as possible.</b> You may earn up to {{ Constants.hiddenagenda_bonus }} for yourself
-                                depending on how
-                                far you manage to drive the estimate in the intended direction.
+                                as possible.</b> You may earn hidden agenda bonus {{ Constants.hiddenagenda_bonus }}
+                                for yourself. The chance of winning this hidden agenda bonus increases the closer you
+                                drive the estimate in the prescribed direction.
                             </p>
                         </div>
+                    <p>
+                        </b><span id ="dots_hiddenagenda" style="display: none"-> <b>The remaining information is the same as in previous
+                        rounds...</b> </span>
+                        </p>
+                    </div>
 
+                    <div id="more_hiddenagenda" style="display: none">
                         <p>
-                            However, you are still part of a group, which
+                            Second, you are still part of a group, which
                             collectively follows the aim to reach a group estimate that is as accurate as possible.
                             In particular, your group may earn a bonus of {{ Constants.group_bonus }} for this round.
                             The bonus will be
@@ -497,12 +559,63 @@
                             outweighs your share of the group accuracy bonus.
                         </p>
                         <br>
+                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+
+                            <source src="https://www.dropbox.com/s/5ca22qeeqjcafqi/bonuses_hiddenagenda.mp4?raw=1" type="video/mp4">
+
+                        </video>
+                        <br>
+                        <br>
+                        <br>
+                            <div class="popup" onclick="popup_hiddenagenda()" style="color:royalblue;">
+                            <u>If you want to know all details about how the group bonus and the hidden agenda bonus are
+                                calculated you can click here.</u>
+
+                            <span class="popuptext" id="group_bonus_popup_hiddenagenda">
+                                Your <b>group bonus</b> is determined according to a scoring rule. Precisely, your group will
+                                receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
+                                <br>
+                                <ul>
+                                <li> the program is run, and Kara reaches the target area, and a number randomly
+                                drawn from a uniform distribution on the interval [0,1] is above
+                                (1-(your group estimate/100))^2, <b>or</b></li>
+                                <li> the program is run, and Kara does not reach the target area, and a number
+                                randomly drawn from a uniform distribution on the interval [0,1] is above or equal to
+                                (your group estimate/100)^2
+                                </li>
+                                </ul>
+                                <br>
+                                Group members with a <b>hidden agenda</b> additionally receive:
+                                <br>
+                                <ul>
+                                <li> {{ Constants.hiddenagenda_bonus }} with a chance  (group_estimates/100)^2 if their
+                                    hidden agenda is to
+                                    drive the group estimate to <i>100 in 100</i>, <b>or</b></li>
+                                <li> {{ Constants.hiddenagenda_bonus }} with a chance (1-(group_estimates/100))^2 if
+                                    their hidden agenda is to
+                                    drive the group estimate to <i>0 in 100</i>
+                                </li>
+                                </ul>
+                            </span>
+                        </div>
                     </div>
+
+                    <div id="readmoreDiv_hiddenagenda" style="display: none">
+                        <br>
+                        <br>
+                        <button id="readmoreBtn_hiddenagenda" type="button" onclick="readmore_hiddenagenda()" class="btn btn-primary btn-large">
+                                See details again
+                        </button>
+                    </div>
+
+
 
                     <div id="payoff_info" style="display: none">
                         <p>
-                            <b>This is the same as in previous rounds.</b>
+                            <b>This is the same as in previous rounds.</b><span id ="dots"> <b>...</b> </span>
                         </p>
+                    </div>
+                    <div id="more" style="display: none">
                         <p>
                             <b>Your only objective is to reach a group estimate that is as accurate as possible.</b>
                         </p>
@@ -521,44 +634,63 @@
                         </p>
 
                         <p>
-                            Be wary <b> two of your fellow group members have
+                            Be wary: <b> two of your fellow group members have
                             a hidden agenda.</b> They do not only receive their share of the group bonus but
                             also earn money for driving the estimate as close to <i>0 in 100</i> or
                             <i>100 in 100</i> as possible. The hidden agenda for both of them goes in the same direction
                             in a given round. Whether it is <i>0 in 100</i> or <i>100 in 100</i> is decided
                             randomly in each round.
                         <br>
+                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+
+                            <source src="https://www.dropbox.com/s/5ca22qeeqjcafqi/bonuses_hiddenagenda.mp4?raw=1" type="video/mp4">
+
+                        </video>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="popup" onclick="popup()" style="color:royalblue;">
+                            <u>If you want to know all details about how the group bonus and the hidden agenda bonus are
+                                calculated you can click here.</u>
+
+                            <span class="popuptext" id="group_bonus_popup">
+                                Your <b>group bonus</b> is determined according to a scoring rule. Precisely, your group will
+                                receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
+                                <br>
+                                <ul>
+                                <li> the program is run, and Kara reaches the target area, and a number randomly
+                                drawn from a uniform distribution on the interval [0,1] is above
+                                (1-(your group estimate/100))^2, <b>or</b></li>
+                                <li> the program is run, and Kara does not reach the target area, and a number
+                                randomly drawn from a uniform distribution on the interval [0,1] is above or equal to
+                                (your group estimate/100)^2
+                                </li>
+                                </ul>
+                                <br>
+                                Group members with a <b>hidden agenda</b> additionally receive:
+                                <br>
+                                <ul>
+                                <li> {{ Constants.hiddenagenda_bonus }} with a chance  (group_estimates/100)^2 if their
+                                    hidden agenda is to
+                                    drive the group estimate to <i>100 in 100</i>, <b>or</b></li>
+                                <li> {{ Constants.hiddenagenda_bonus }} with a chance (1-(group_estimates/100))^2 if
+                                    their hidden agenda is to
+                                    drive the group estimate to <i>0 in 100</i>
+                                </li>
+                                </ul>
+                            </span>
+                        </div>
                     </div>
 
-                    <div class="popup" onclick="popup()" style="color:royalblue;">
-                        <u>If you want to know all details about how the group bonus and the hidden agenda bonus are
-                            calculated you can click here.</u>
-
-                        <span class="popuptext" id="group_bonus_popup">
-                            Your <b>group bonus</b> is determined according to a scoring rule. Precisely, your group will
-                            receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
-                            <br>
-                            <ul>
-                            <li> the program is run, and Kara reaches the target area, and a number randomly
-                            drawn from a uniform distribution on the interval [0,1] is above
-                            (1-(your group estimate/100))^2, <b>or</b></li>
-                            <li> the program is run, and Kara does not reach the target area, and a number
-                            randomly drawn from a uniform distribution on the interval [0,1] is above or equal to
-                            (your group estimate/100)^2
-                            </li>
-                            </ul>
-                            <br>
-                            Group members with a <b>hidden agenda</b> additionally receive:
-                            <br>
-                            <ul>
-                            <li> {{ Constants.hiddenagenda_bonus }} * (group estimate/100) if their hidden agenda is to
-                                drive the group estimate to <i>100 in 100</i>, <b>or</b></li>
-                            <li> {{ Constants.hiddenagenda_bonus }} * ((1-group estimate)/100) if their hidden agenda is to
-                                drive the group estimate to <i>0 in 100</i>
-                            </li>
-                            </ul>
-                        </span>
+                    <div id="readmoreDiv" style="display: none">
+                        <br>
+                        <br>
+                        <button id="readmoreBtn" type="button" onclick="readmore()" class="btn btn-primary btn-large">
+                                See details again
+                        </button>
                     </div>
+
+
 
 
 
