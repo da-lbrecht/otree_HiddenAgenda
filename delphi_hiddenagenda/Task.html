@@ -522,9 +522,10 @@
 
                         <p>
                             Be wary <b> two of your fellow group members have
-                            a hidden agenda.</b> They do not only receive their share of the group bonus but also earn
-                            money for driving the estimate as close to <i>0 in 100</i> or
-                            <i>100 in 100</i> as possible. Whether it is <i>0 in 100</i> or <i>100 in 100</i> is decided
+                            a hidden agenda.</b> They do not only receive their share of the group bonus but
+                            also earn money for driving the estimate as close to <i>0 in 100</i> or
+                            <i>100 in 100</i> as possible. The hidden agenda for both of them goes in the same direction
+                            in a given round. Whether it is <i>0 in 100</i> or <i>100 in 100</i> is decided
                             randomly in each round.
                         <br>
                     </div>
@@ -550,9 +551,9 @@
                             Group members with a <b>hidden agenda</b> additionally receive:
                             <br>
                             <ul>
-                            <li> {{ Constants.hiddenagenda_bonus }} times the group estimate if their hidden agenda is to
+                            <li> {{ Constants.hiddenagenda_bonus }} * (group estimate/100) if their hidden agenda is to
                                 drive the group estimate to <i>100 in 100</i>, <b>or</b></li>
-                            <li> {{ Constants.hiddenagenda_bonus }} times (1-group estimate) if their hidden agenda is to
+                            <li> {{ Constants.hiddenagenda_bonus }} * ((1-group estimate)/100) if their hidden agenda is to
                                 drive the group estimate to <i>0 in 100</i>
                             </li>
                             </ul>
