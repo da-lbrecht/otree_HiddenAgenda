@@ -837,11 +837,17 @@ class Task(Page):
                         elif random_number <= pow((aggregate_estimate/100), 2):
                             group_accuracy_bonus = 0
                     if hiddenagenda == 0:
-                        hiddenagenda_bonus = (1-(aggregate_estimate/100)) * Constants.hiddenagenda_bonus
-                        overall_hiddenagenda_bonus += (1-(aggregate_estimate/100)) * Constants.hiddenagenda_bonus
+                        if random_number <= pow((1-(aggregate_estimate/100)), 2):
+                            hiddenagenda_bonus = Constants.hiddenagenda_bonus
+                        elif random_number > pow((1-(aggregate_estimate/100)), 2):
+                            hiddenagenda_bonus = 0
+                        overall_hiddenagenda_bonus += hiddenagenda_bonus
                     elif hiddenagenda == 100:
-                        hiddenagenda_bonus = (aggregate_estimate / 100) * Constants.hiddenagenda_bonus
-                        overall_hiddenagenda_bonus += (aggregate_estimate/100) * Constants.hiddenagenda_bonus
+                        if random_number <= pow((aggregate_estimate/100), 2):
+                            hiddenagenda_bonus = Constants.hiddenagenda_bonus
+                        elif random_number > pow((aggregate_estimate/100), 2):
+                            hiddenagenda_bonus = 0
+                        overall_hiddenagenda_bonus += hiddenagenda_bonus
                     overall_accuracy_bonus += group_accuracy_bonus
                     estimate_a = 999
                     estimate_b = 999
