@@ -375,15 +375,22 @@ class Task_Trial(Page):
                                          "error": "estimate out of range"},
                 }
         if data["information_type"] == "reasoning":
-            player.indivarg = data["reasoning"]
-            if player.id_in_group == 1:
-                indivarg_a = data["reasoning"]
-            elif player.id_in_group == 2:
-                indivarg_b = data["reasoning"]
-            elif player.id_in_group == 3:
-                indivarg_c = data["reasoning"]
-            elif player.id_in_group == 4:
-                indivarg_d = data["reasoning"]
+            if len(data["reasoning"]) >= 100:
+                player.indivarg = data["reasoning"]
+                if player.id_in_group == 1:
+                    indivarg_a = data["reasoning"]
+                elif player.id_in_group == 2:
+                    indivarg_b = data["reasoning"]
+                elif player.id_in_group == 3:
+                    indivarg_c = data["reasoning"]
+                elif player.id_in_group == 4:
+                    indivarg_d = data["reasoning"]
+            elif len(data["reasoning"]) < 100:
+                return{
+                    player.id_in_group: {"information_type": "error_reasoning",
+                                         "error": "reasoning too short"},
+                }
+
         if (
             estimate_a != 999
             and estimate_b != 999
@@ -440,7 +447,7 @@ class Task_Trial(Page):
                     player.id_in_group: {"information_type": "completion_indicator"},
                 }
             else:
-                return{
+                return {
                     player.id_in_group: {"information_type": "error_2",
                                          "error": "estimate out of range"},
                 }
@@ -868,9 +875,9 @@ class Payoffs(Page):
 
 
 page_sequence = [
-                Welcome,
-                TaskIntro,
-                Task_Trial,
+                # Welcome,
+                # TaskIntro,
+                # Task_Trial,
                 Task,
                 Questionnaire,
                 Payoffs

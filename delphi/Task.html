@@ -183,6 +183,15 @@
         document.getElementById("wait_for_others").style.display = "block";
     }
 
+    function make_first_indivestim_error_2() {
+        first_indivestim = parseFloat(document.getElementById("first_indivestim_error_2").value)
+        indivarg = document.getElementById("indivarg_error_2").value
+        liveSend({"information_type": "estimate", "estimate": first_indivestim})
+        liveSend({"information_type": "reasoning", "reasoning": indivarg})
+        document.getElementById("first_estimate_error_2").style.display = "none";
+        document.getElementById("wait_for_others").style.display = "block";
+    }
+
     function make_second_indivestim() {
         second_indivestim = parseFloat(document.getElementById("second_indivestim").value)
         liveSend({"information_type": "second_estimate", "second_estimate": second_indivestim})
@@ -197,6 +206,9 @@
             // document.getElementById("indivarg_error").innerHTML = indivarg;
             document.getElementById("wait_for_others").style.display = "none";
             document.getElementById("first_estimate_error").style.display = "block";
+        } else if (data["information_type"] == "error_reasoning") {
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("first_estimate_error_2").style.display = "block";
         } else if (data["player.id_in_group"] == "a") {
                 first_indivestim_a = data["estimate_a"]
                 document.getElementById("first_indivestim_a_a").innerHTML = first_indivestim_a;
@@ -666,7 +678,7 @@
                             <button type="button" onclick="make_first_indivestim()" class="btn btn-primary btn-large">
                                 Send estimate and reasoning
                             </button>
-                    </div id="first_estimate" style="display: block">
+                    </div>
 
                     <div id="first_estimate_error" style="display: none">
                         <p>
@@ -700,7 +712,40 @@
                             <button type="button" onclick="make_first_indivestim_error()" class="btn btn-primary btn-large">
                                 Send estimate and reasoning
                             </button>
-                    </div id="first_estimate_error" style="display: none">
+                    </div>
+
+                    <div id="first_estimate_error_2" style="display: none">
+                        <p>
+                            At first, all members of your group will give their individual estimate of the chance that
+                            Kara will reach the target area, when the program is executed for the next time. What is
+                            your estimate?
+                        </p>
+
+                            <input id="first_indivestim_error_2"
+                                   type="text"
+                                   size="3"> in 100
+
+                        <p>
+
+                        <br>
+
+                            Along the estimate you may also outline your reasoning behind the estimate in a brief text.
+                            Both your estimate and the reasoning will be presented anonymously to your fellow group
+                            members in the next step. What is your reasoning?
+                        </p>
+                            <textarea id="indivarg_error_2"
+                                      name="indivarg_error_2"
+                                      placeholder="My estimate is based on the following line of thought ..."
+                                      rows="5" cols="100"></textarea>
+                        <p style="color:red;">
+                            <b> Please give a reasoning of at least 100 characters.</b>
+                        </p>
+                        <br>
+                        <br>
+                            <button type="button" onclick="make_first_indivestim_error_2()" class="btn btn-primary btn-large">
+                                Send estimate and reasoning
+                            </button>
+                    </div>
 
                     <div id="wait_for_others" style="display: none">
                         Please wait until all your fellow group members completed their input.
