@@ -499,6 +499,7 @@ class Task(Page):
         players = group.get_players()
         if data["information_type"] == "estimate":
             player.first_indivestim = data["estimate"]
+            player.erroneous_estimate = True
             if (
                     type(data["estimate"]) == float
                     or type(data["estimate"]) == int
@@ -522,6 +523,7 @@ class Task(Page):
         if data["information_type"] == "reasoning":
             player.indivarg = data["reasoning"]
             player.length_indivarg = len(data["reasoning"])
+            player.erroneous_reasoning = True
             if player.id_in_group == 1:
                 indivarg_recovery_a = data["reasoning"]
             elif player.id_in_group == 2:
@@ -540,89 +542,83 @@ class Task(Page):
                     indivarg_c = data["reasoning"]
                 elif player.id_in_group == 4:
                     indivarg_d = data["reasoning"]
-
-        if (
-            player.erroneous_estimate > player.erroneous_reasoning  # Only error in estimate
-        ):
-            if player.id_in_group == 1:
-                return{
-                    player.id_in_group: {"information_type": "error_1",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_a},
-                }
-            if player.id_in_group == 2:
-                return{
-                    player.id_in_group: {"information_type": "error_1",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_b},
-                }
-            if player.id_in_group == 3:
-                return{
-                    player.id_in_group: {"information_type": "error_1",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_c},
-                }
-            if player.id_in_group == 4:
-                return{
-                    player.id_in_group: {"information_type": "error_1",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_d},
-                }
-        elif (
-            player.erroneous_estimate < player.erroneous_reasoning  # Only error in reasoning
-        ):
-            if player.id_in_group == 1:
-                return{
-                    player.id_in_group: {"information_type": "erroneous_reasoning",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_a},
-                }
-            if player.id_in_group == 2:
-                return{
-                    player.id_in_group: {"information_type": "erroneous_reasoning",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_b},
-                }
-            if player.id_in_group == 3:
-                return{
-                    player.id_in_group: {"information_type": "erroneous_reasoning",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_c},
-                }
-            if player.id_in_group == 4:
-                return{
-                    player.id_in_group: {"information_type": "erroneous_reasoning",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_d},
-                }
-        elif (
-                player.erroneous_estimate == 1
-                and player.erroneous_reasoning == 1  # Errors in estimate and reasoning
-        ):
-            if player.id_in_group == 1:
-                return {
-                    player.id_in_group: {"information_type": "error_both",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_a},
-                }
-            if player.id_in_group == 2:
-                return {
-                    player.id_in_group: {"information_type": "error_both",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_b},
-                }
-            if player.id_in_group == 3:
-                return {
-                    player.id_in_group: {"information_type": "error_both",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_c},
-                }
-            if player.id_in_group == 4:
-                return {
-                    player.id_in_group: {"information_type": "error_both",
-                                         "estimate": player.first_indivestim,
-                                         "reasoning": indivarg_recovery_d},
-                }
+        if player.erroneous_estimate == 1:
+            if player.erroneous_reasoning == 0:  # Only error in estimate
+                if player.id_in_group == 1:
+                    return{
+                        player.id_in_group: {"information_type": "error_1",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_a},
+                    }
+                if player.id_in_group == 2:
+                    return{
+                        player.id_in_group: {"information_type": "error_1",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_b},
+                    }
+                if player.id_in_group == 3:
+                    return{
+                        player.id_in_group: {"information_type": "error_1",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_c},
+                    }
+                if player.id_in_group == 4:
+                    return{
+                        player.id_in_group: {"information_type": "error_1",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_d},
+                    }
+            elif player.erroneous_reasoning == 1:  # Error in reasoning and estimate
+                if player.id_in_group == 1:
+                    return {
+                        player.id_in_group: {"information_type": "error_both",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_a},
+                    }
+                if player.id_in_group == 2:
+                    return {
+                        player.id_in_group: {"information_type": "error_both",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_b},
+                    }
+                if player.id_in_group == 3:
+                    return {
+                        player.id_in_group: {"information_type": "error_both",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_c},
+                    }
+                if player.id_in_group == 4:
+                    return {
+                        player.id_in_group: {"information_type": "error_both",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_d},
+                    }
+        elif player.erroneous_estimate == 0:
+            if player.erroneous_reasoning == 1:  # Only error in reasoning
+                if player.id_in_group == 1:
+                    return{
+                        player.id_in_group: {"information_type": "erroneous_reasoning",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_a},
+                    }
+                if player.id_in_group == 2:
+                    return{
+                        player.id_in_group: {"information_type": "erroneous_reasoning",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_b},
+                    }
+                if player.id_in_group == 3:
+                    return{
+                        player.id_in_group: {"information_type": "erroneous_reasoning",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_c},
+                    }
+                if player.id_in_group == 4:
+                    return{
+                        player.id_in_group: {"information_type": "erroneous_reasoning",
+                                             "estimate": player.first_indivestim,
+                                             "reasoning": indivarg_recovery_d},
+                    }
         if (
             estimate_a != 999
             and estimate_b != 999
@@ -926,10 +922,10 @@ class Task(Page):
                     estimate_b = 999
                     estimate_c = 999
                     estimate_d = 999
-                    indivarg_a != "none"
-                    indivarg_b != "none"
-                    indivarg_c != "none"
-                    indivarg_d != "none"
+                    indivarg_a = "none"
+                    indivarg_b = "none"
+                    indivarg_c = "none"
+                    indivarg_d = "none"
                     second_estimate_a = 999
                     second_estimate_b = 999
                     second_estimate_c = 999
@@ -963,9 +959,6 @@ class Task(Page):
         else:
             player.start_of_round = player.in_round(player.round_number-1).end_of_round
 
-        # if player.round_number == Constants.num_rounds
-        #     set_payoffs(player)
-
 
 class Questionnaire(Page):
     form_model = 'player'
@@ -982,7 +975,6 @@ class Payoffs(Page):
     @staticmethod
     def is_displayed(subsession: Subsession):
         return subsession.round_number == Constants.num_rounds
-
 
 
 page_sequence = [
