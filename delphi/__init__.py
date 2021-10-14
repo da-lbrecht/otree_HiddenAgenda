@@ -143,6 +143,11 @@ class Player(BasePlayer):
     second_indivestim = models.FloatField(label="My second estimate:",
                                           doc="Second individual estimate given in Delphi procedure",
                                           min=0, max=100)
+    length_indivarg = models.FloatField(doc="Number of characters in reasoning")
+    erroneous_estimate = models.BooleanField(initial=True,
+                                             doc="Error in first estimate")
+    erroneous_reasoning = models.BooleanField(initial=True,
+                                              doc="Error in reasoning")
 
     # Aggregated estimates
     aggregate_estimate = models.FloatField(doc="Group estimate, derived by unweighted averaging of second individual "
@@ -341,7 +346,7 @@ class Task_Trial(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_displayed == 1
+        return player.round_number == 1
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -375,8 +380,8 @@ class Task_Trial(Page):
                                          "error": "estimate out of range"},
                 }
         if data["information_type"] == "reasoning":
-            if len(data["reasoning"]) >= 100:
                 player.indivarg = data["reasoning"]
+                player.length_indivarg = len(data["reasoning"])
                 if player.id_in_group == 1:
                     indivarg_a = data["reasoning"]
                 elif player.id_in_group == 2:
@@ -385,11 +390,6 @@ class Task_Trial(Page):
                     indivarg_c = data["reasoning"]
                 elif player.id_in_group == 4:
                     indivarg_d = data["reasoning"]
-            elif len(data["reasoning"]) < 100:
-                return{
-                    player.id_in_group: {"information_type": "error_reasoning",
-                                         "error": "reasoning too short"},
-                }
 
         if (
             estimate_a != 999
@@ -479,7 +479,7 @@ class Task(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_displayed <= Constants.num_rounds
+        return player.round_number <= Constants.num_rounds
 
 
     @staticmethod
@@ -489,14 +489,16 @@ class Task(Page):
             group_accuracy_bonus, random_number, feedback_order, result
         group = player.group
         players = group.get_players()
+
         if data["information_type"] == "estimate":
+            player.first_indivestim = data["estimate"]
             if (
                     type(data["estimate"]) == float
                     or type(data["estimate"]) == int
                     and 0 <= data["estimate"] <= 100
             ):
-                player.first_indivestim = data["estimate"]
                 num_estims += 1
+                player.erroneous_estimate = False
                 if player.id_in_group == 1:
                     estimate_a = data["estimate"]
                 elif player.id_in_group == 2:
@@ -505,21 +507,69 @@ class Task(Page):
                     estimate_c = data["estimate"]
                 elif player.id_in_group == 4:
                     estimate_d = data["estimate"]
-            else:
-                return{
-                    player.id_in_group: {"information_type": "error_1",
-                                         "error": "estimate out of range"},
-                }
+            # else:
+            #     return{
+            #         player.id_in_group: {"information_type": "error_1",
+            #                              "estimate": player.first_indivestim},
+            #     }
         if data["information_type"] == "reasoning":
             player.indivarg = data["reasoning"]
-            if player.id_in_group == 1:
-                indivarg_a = data["reasoning"]
-            elif player.id_in_group == 2:
-                indivarg_b = data["reasoning"]
-            elif player.id_in_group == 3:
-                indivarg_c = data["reasoning"]
-            elif player.id_in_group == 4:
-                indivarg_d = data["reasoning"]
+            player.length_indivarg = len(data["reasoning"])
+            if len(data["reasoning"]) >= 100:
+                player.erroneous_reasoning = False
+                if player.id_in_group == 1:
+                    indivarg_a = data["reasoning"]
+                elif player.id_in_group == 2:
+                    indivarg_b = data["reasoning"]
+                elif player.id_in_group == 3:
+                    indivarg_c = data["reasoning"]
+                elif player.id_in_group == 4:
+                    indivarg_d = data["reasoning"]
+
+        if (
+            player.erroneous_estimate
+            and not player.erroneous_reasoning
+        ):
+            return{
+                player.id_in_group: {"information_type": "error_1",
+                                     "estimate": player.first_indivestim,
+                                     "reasoning": player.indivarg},
+            }
+        elif (
+            player.erroneous_reasoning
+            and not player.erroneous_estimate
+        ):
+            return{
+                player.id_in_group: {"information_type": "erroneous_reasoning",
+                                     "estimate": player.first_indivestim,
+                                     "reasoning": player.indivarg.field_maybe_none()},
+            }
+        #     elif len(data["reasoning"]) < 100:
+        #         return{
+        #             player.id_in_group: {"information_type": "        if (
+        #             player.erroneous_estimate
+        #             and not player.erroneous_reasoning
+        #         ):
+        #             return{
+        #                 player.id_in_group: {"information_type": "error_1",
+        #                                      "estimate": player.first_indivestim,
+        #                                      "reasoning": player.indivarg},
+        #             }",
+        #                                  "estimate": player.first_indivestim,
+        #                                  "reasoning": player.indivarg},
+        #         }
+        # if (
+        #         player.first_indivestim != float
+        #         and player.first_indivestim != int
+        #         or 0 <= player.first_indivestim <= 100
+        # ):
+        #     return {
+        #         player.id_in_group: {"information_type": "error_1",
+        #                              "estimate": player.first_indivestim,
+        #                              "reasoning": player.indivarg},
+        #     }
+
+
         if (
             estimate_a != 999
             and estimate_b != 999
