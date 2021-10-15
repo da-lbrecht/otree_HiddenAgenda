@@ -500,7 +500,7 @@ class Task(Page):
     @staticmethod
     def live_method(player: Player, data):
         global estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, second_estimate_c,\
-            second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,num_estims, aggregate_estimate, \
+            second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, num_estims, aggregate_estimate, \
             group_accuracy_bonus, random_number, feedback_order, result, indivarg_recovery_a, indivarg_recovery_b, \
             indivarg_recovery_c, indivarg_recovery_d, estimate_recovery_a, estimate_recovery_b, \
             estimate_recovery_c, estimate_recovery_d, error_a, error_b, error_c, error_d
