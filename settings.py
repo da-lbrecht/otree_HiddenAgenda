@@ -15,6 +15,13 @@ SESSION_CONFIGS = [
         participation_fee=5,
         use_browser_bots=False,  # Play experiment with bots, as long as programmed bots are available
     ),
+    dict(
+        name='vc_ftf',
+        app_sequence=['vc_ftf'],
+        num_demo_participants=4,
+        participation_fee=5,
+        use_browser_bots=False,  # Play experiment with bots, as long as programmed bots are available
+    ),
 ]
 
 ROOMS = [
