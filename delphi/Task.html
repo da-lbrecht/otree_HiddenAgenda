@@ -168,38 +168,40 @@
     function make_first_indivestim() {
         first_indivestim = parseFloat(document.getElementById("first_indivestim").value)
         indivarg = document.getElementById("indivarg").value
-        liveSend({"information_type": "estimate", "estimate": first_indivestim})
-        liveSend({"information_type": "reasoning", "reasoning": indivarg})
+        liveSend({"information_type": "estimate", "estimate": first_indivestim, "reasoning": indivarg})
+        //liveSend({"information_type": "reasoning", "reasoning": indivarg})
         document.getElementById("first_estimate").style.display = "none";
+        document.getElementById("error_1").style.display = "none";
+        document.getElementById("erroneous_reasoning").style.display = "none";
         document.getElementById("wait_for_others").style.display = "block";
     }
 
-    function make_first_indivestim_error() {
-        first_indivestim = parseFloat(document.getElementById("first_indivestim_error").value)
-        indivarg = document.getElementById("indivarg_error").value
-        liveSend({"information_type": "estimate", "estimate": first_indivestim})
-        liveSend({"information_type": "reasoning", "reasoning": indivarg})
-        document.getElementById("first_estimate_error").style.display = "none";
-        document.getElementById("wait_for_others").style.display = "block";
-    }
-
-    function make_first_indivestim_erroneous_reasoning() {
-        first_indivestim = parseFloat(document.getElementById("first_indivestim_erroneous_reasoning").value)
-        indivarg = document.getElementById("indivarg_erroneous_reasoning").value
-        liveSend({"information_type": "estimate", "estimate": first_indivestim})
-        liveSend({"information_type": "reasoning", "reasoning": indivarg})
-        document.getElementById("first_estimate_erroneous_reasoning").style.display = "none";
-        document.getElementById("wait_for_others").style.display = "block";
-    }
-
-    function make_first_indivestim_error_both() {
-        first_indivestim = parseFloat(document.getElementById("first_indivestim_error_both").value)
-        indivarg = document.getElementById("indivarg_error_both").value
-        liveSend({"information_type": "estimate", "estimate": first_indivestim})
-        liveSend({"information_type": "reasoning", "reasoning": indivarg})
-        document.getElementById("first_estimate_error_both").style.display = "none";
-        document.getElementById("wait_for_others").style.display = "block";
-    }
+    // function make_first_indivestim_error() {
+    //     first_indivestim = parseFloat(document.getElementById("first_indivestim_error").value)
+    //     indivarg = document.getElementById("indivarg_error").value
+    //     liveSend({"information_type": "estimate", "estimate": first_indivestim})
+    //     liveSend({"information_type": "reasoning", "reasoning": indivarg})
+    //     document.getElementById("first_estimate_error").style.display = "none";
+    //     document.getElementById("wait_for_others").style.display = "block";
+    // }
+    //
+    // function make_first_indivestim_erroneous_reasoning() {
+    //     first_indivestim = parseFloat(document.getElementById("first_indivestim_erroneous_reasoning").value)
+    //     indivarg = document.getElementById("indivarg_erroneous_reasoning").value
+    //     liveSend({"information_type": "estimate", "estimate": first_indivestim})
+    //     liveSend({"information_type": "reasoning", "reasoning": indivarg})
+    //     document.getElementById("first_estimate_erroneous_reasoning").style.display = "none";
+    //     document.getElementById("wait_for_others").style.display = "block";
+    // }
+    //
+    // function make_first_indivestim_error_both() {
+    //     first_indivestim = parseFloat(document.getElementById("first_indivestim_error_both").value)
+    //     indivarg = document.getElementById("indivarg_error_both").value
+    //     liveSend({"information_type": "estimate", "estimate": first_indivestim})
+    //     liveSend({"information_type": "reasoning", "reasoning": indivarg})
+    //     document.getElementById("first_estimate_error_both").style.display = "none";
+    //     document.getElementById("wait_for_others").style.display = "block";
+    // }
 
     function make_second_indivestim() {
         second_indivestim = parseFloat(document.getElementById("second_indivestim").value)
@@ -212,19 +214,23 @@
     function liveRecv(data) {
         if (data["information_type"] == "error_1") {
             document.getElementById("wait_for_others").style.display = "none";
-            document.getElementById("first_estimate_error").style.display = "block";
-            document.getElementById("first_indivestim_error").value = data["estimate"];
-            document.getElementById("indivarg_error").innerHTML = data["reasoning"];
+            document.getElementById("first_estimate").style.display = "block";
+            document.getElementById("error_1").style.display = "block";
+            document.getElementById("first_indivestim").value = data["estimate"];
+            document.getElementById("indivarg").innerHTML = data["reasoning"];
         } else if (data["information_type"] == "erroneous_reasoning") {
             document.getElementById("wait_for_others").style.display = "none";
-            document.getElementById("first_estimate_erroneous_reasoning").style.display = "block";
-            document.getElementById("first_indivestim_erroneous_reasoning").value = data["estimate"];
-            document.getElementById("indivarg_erroneous_reasoning").innerHTML = data["reasoning"];
+            document.getElementById("first_estimate").style.display = "block";
+            document.getElementById("erroneous_reasoning").style.display = "block";
+            document.getElementById("first_indivestim").value = data["estimate"];
+            document.getElementById("indivarg").innerHTML = data["reasoning"];
         } else if (data["information_type"] == "error_both") {
             document.getElementById("wait_for_others").style.display = "none";
-            document.getElementById("first_estimate_error_both").style.display = "block";
-            document.getElementById("first_indivestim_error_both").value = data["estimate"];
-            document.getElementById("indivarg_error_both").innerHTML = data["reasoning"];
+            document.getElementById("first_estimate").style.display = "block";
+            document.getElementById("error_1").style.display = "block";
+            document.getElementById("erroneous_reasoning").style.display = "block";
+            document.getElementById("first_indivestim").value = data["estimate"];
+            document.getElementById("indivarg").innerHTML = data["reasoning"];
         } else if (data["player.id_in_group"] == "a") {
                 first_indivestim_a = data["estimate_a"]
                 document.getElementById("first_indivestim_a_a").innerHTML = first_indivestim_a;
@@ -678,6 +684,11 @@
                                    size="3"> in 100
 
                         <p>
+                        <div id="error_1" style="display: none">
+                            <p style="color:red;">
+                                <b> Your estimate needs to be a number in the range from 0 to 100.</b>
+                            </p>
+                        </div>
 
                         <br>
 
@@ -689,6 +700,12 @@
                                       name="indivarg"
                                       placeholder="My estimate is based on the following line of thought ..."
                                       rows="5" cols="100"></textarea>
+                        <div id="erroneous_reasoning" style="display: none">
+                            <p style="color:red;">
+                            <b> Please give a reasoning of at least 100 characters (ca. 1.5 lines).</b>
+                            </p>
+                        </div>
+
                         <br>
                         <br>
                             <button type="button" onclick="make_first_indivestim()" class="btn btn-primary btn-large">
@@ -696,7 +713,7 @@
                             </button>
                     </div>
 
-                    <div id="first_estimate_error" style="display: none">
+                    <!--<div id="first_estimate_error" style="display: none">
                         <p>
                             At first, all members of your group will give their individual estimate of the chance that
                             Kara will reach the target area, when the program is executed for the next time. What is
@@ -799,7 +816,7 @@
                             <button type="button" onclick="make_first_indivestim_error_both()" class="btn btn-primary btn-large">
                                 Send estimate and reasoning
                             </button>
-                    </div>
+                    </div>-->
 
                     <div id="wait_for_others" style="display: none">
                         Please wait until all your fellow group members completed their input.
