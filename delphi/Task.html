@@ -176,33 +176,6 @@
         document.getElementById("wait_for_others").style.display = "block";
     }
 
-    // function make_first_indivestim_error() {
-    //     first_indivestim = parseFloat(document.getElementById("first_indivestim_error").value)
-    //     indivarg = document.getElementById("indivarg_error").value
-    //     liveSend({"information_type": "estimate", "estimate": first_indivestim})
-    //     liveSend({"information_type": "reasoning", "reasoning": indivarg})
-    //     document.getElementById("first_estimate_error").style.display = "none";
-    //     document.getElementById("wait_for_others").style.display = "block";
-    // }
-    //
-    // function make_first_indivestim_erroneous_reasoning() {
-    //     first_indivestim = parseFloat(document.getElementById("first_indivestim_erroneous_reasoning").value)
-    //     indivarg = document.getElementById("indivarg_erroneous_reasoning").value
-    //     liveSend({"information_type": "estimate", "estimate": first_indivestim})
-    //     liveSend({"information_type": "reasoning", "reasoning": indivarg})
-    //     document.getElementById("first_estimate_erroneous_reasoning").style.display = "none";
-    //     document.getElementById("wait_for_others").style.display = "block";
-    // }
-    //
-    // function make_first_indivestim_error_both() {
-    //     first_indivestim = parseFloat(document.getElementById("first_indivestim_error_both").value)
-    //     indivarg = document.getElementById("indivarg_error_both").value
-    //     liveSend({"information_type": "estimate", "estimate": first_indivestim})
-    //     liveSend({"information_type": "reasoning", "reasoning": indivarg})
-    //     document.getElementById("first_estimate_error_both").style.display = "none";
-    //     document.getElementById("wait_for_others").style.display = "block";
-    // }
-
     function make_second_indivestim() {
         second_indivestim = parseFloat(document.getElementById("second_indivestim").value)
         liveSend({"information_type": "second_estimate", "second_estimate": second_indivestim})
@@ -479,30 +452,6 @@
                 </div>
                 <div class="card-body">
 
-<!--                    <div id="payoff_info_first_round" style="display: none">
-                        <p>
-                            Your group may earn a bonus of {{ Constants.group_bonus }} for this round. The bonus will be
-                            split equally among group members, in other words you may earn
-                            {{ Constants.individual_share_of_group_bonus }} for yourself.
-                        </p>
-
-                        <p>
-                            The chance of earning the group bonus depends on the accuracy of your group's estimate to
-                            the judgment task. The more accurate the larger the chance. In this way, <b>it will always be
-                            best for your group to generate an estimate, which you believe is the most accurate given
-                            the information you have</b>.
-                        </p>
-
-                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
-
-                            <source src="https://www.dropbox.com/s/a65cqgy7sechj6l/bonuses.mp4?raw=1" type="video/mp4">
-
-                        </video>
-                        <br>
-                        <br>
-                        <br>
-                    </div>-->
-
                     <div id="payoff_info" style="display: none">
                         <p>
                             <b>This is the same as in previous rounds</b><span id ="dots"> <b>...</b> </span>
@@ -702,7 +651,7 @@
                                       rows="5" cols="100"></textarea>
                         <div id="erroneous_reasoning" style="display: none">
                             <p style="color:red;">
-                            <b> Please give a reasoning of at least 100 characters (ca. 1.5 lines).</b>
+                            <b> Please give a reasoning of at least 100 characters (a bit more than one line).</b>
                             </p>
                         </div>
 
@@ -712,111 +661,6 @@
                                 Send estimate and reasoning
                             </button>
                     </div>
-
-                    <!--<div id="first_estimate_error" style="display: none">
-                        <p>
-                            At first, all members of your group will give their individual estimate of the chance that
-                            Kara will reach the target area, when the program is executed for the next time. What is
-                            your estimate?
-                        </p>
-
-                            <input id="first_indivestim_error"
-                                   type="text"
-                                   size="3"> in 100
-
-                        <p style="color:red;">
-                            <b> Your estimate needs to be a number in the range from 0 to 100.</b>
-                        </p>
-
-                        <p>
-
-                        <br>
-
-                            Along the estimate you may also outline your reasoning behind the estimate in a brief text.
-                            Both your estimate and the reasoning will be presented anonymously to your fellow group
-                            members in the next step. What is your reasoning?
-                        </p>
-                            <textarea id="indivarg_error"
-                                      name="indivarg_error"
-                                      placeholder="My estimate is based on the following line of thought ..."
-                                      rows="5" cols="100"></textarea>
-                        <br>
-                        <br>
-                            <button type="button" onclick="make_first_indivestim_error()" class="btn btn-primary btn-large">
-                                Send estimate and reasoning
-                            </button>
-                    </div>
-
-                    <div id="first_estimate_erroneous_reasoning" style="display: none">
-                        <p>
-                            At first, all members of your group will give their individual estimate of the chance that
-                            Kara will reach the target area, when the program is executed for the next time. What is
-                            your estimate?
-                        </p>
-
-                            <input id="first_indivestim_erroneous_reasoning"
-                                   type="text"
-                                   size="3"> in 100
-
-                        <p>
-
-                        <br>
-
-                            Along the estimate you may also outline your reasoning behind the estimate in a brief text.
-                            Both your estimate and the reasoning will be presented anonymously to your fellow group
-                            members in the next step. What is your reasoning?
-                        </p>
-                            <textarea id="indivarg_erroneous_reasoning"
-                                      name="indivarg_erroneous_reasoning"
-                                      placeholder="My estimate is based on the following line of thought ..."
-                                      rows="5" cols="100"></textarea>
-                        <p style="color:red;">
-                            <b> Please give a reasoning of at least 100 characters.</b>
-                        </p>
-                        <br>
-                        <br>
-                            <button type="button" onclick="make_first_indivestim_erroneous_reasoning()" class="btn btn-primary btn-large">
-                                Send estimate and reasoning
-                            </button>
-                    </div>
-
-                    <div id="first_estimate_error_both" style="display: none">
-                        <p>
-                            At first, all members of your group will give their individual estimate of the chance that
-                            Kara will reach the target area, when the program is executed for the next time. What is
-                            your estimate?
-                        </p>
-
-                            <input id="first_indivestim_error_both"
-                                   type="text"
-                                   size="3"> in 100
-
-                        <p>
-
-                        <p style="color:red;">
-                            <b> Your estimate needs to be a number in the range from 0 to 100.</b>
-                        </p>
-
-
-                        <br>
-
-                            Along the estimate you may also outline your reasoning behind the estimate in a brief text.
-                            Both your estimate and the reasoning will be presented anonymously to your fellow group
-                            members in the next step. What is your reasoning?
-                        </p>
-                            <textarea id="indivarg_error_both"
-                                      name="indivarg_error_both"
-                                      placeholder="My estimate is based on the following line of thought ..."
-                                      rows="5" cols="100"></textarea>
-                        <p style="color:red;">
-                            <b> Please give a reasoning of at least 100 characters.</b>
-                        </p>
-                        <br>
-                        <br>
-                            <button type="button" onclick="make_first_indivestim_error_both()" class="btn btn-primary btn-large">
-                                Send estimate and reasoning
-                            </button>
-                    </div>-->
 
                     <div id="wait_for_others" style="display: none">
                         Please wait until all your fellow group members completed their input.
