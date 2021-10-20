@@ -146,14 +146,60 @@
     {% endif %}
 
     <!-- Enable display of right payoff information depending on player.round_number -->
-    {% if player.round_number == 1 %}
+    {% if player.round_number == 1 and player.id_in_group <= 2 %}
         // document.getElementById("payoff_info_first_round").style.display = "block";
         document.getElementById("more").style.display = "block";
-    {% else %}
-        // document.getElementById("payoff_info_first_round").style.display = "none";
+        document.getElementById("readmoreDiv").style.display = "none";
+    {% elif player.round_number != 1 and player.id_in_group <= 2%}
         document.getElementById("payoff_info").style.display = "block";
         document.getElementById("readmoreDiv").style.display = "block";
         document.getElementById("more").style.display = "none";
+    {% elif player.round_number == 1 and player.id_in_group > 2 %}
+        document.getElementById("payoff_info_hiddenagenda").style.display = "block";
+        document.getElementById("more_hiddenagenda").style.display = "block";
+        document.getElementById("readmoreDiv_hiddenagenda").style.display = "none";
+        document.getElementById("your_hiddenagenda").style.display = "block";
+        document.getElementById("your_hiddenagenda_second_estimate").style.display = "block";
+    {% elif player.round_number != 1 and player.id_in_group > 2 %}
+        document.getElementById("payoff_info_hiddenagenda").style.display = "block";
+        document.getElementById("readmoreDiv_hiddenagenda").style.display = "block";
+        document.getElementById("dots_hiddenagenda").style.display = "block";
+        document.getElementById("more_hiddenagenda").style.display = "none";
+        document.getElementById("your_hiddenagenda").style.display = "block";
+        document.getElementById("your_hiddenagenda_second_estimate").style.display = "block";
+    {% endif %}
+
+   <!-- Enable display of right hidden agenda depending on player.round_displayed -->
+    {% if player.round_displayed == 1 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_1_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_1_hiddenagenda %}";
+    {% elif player.round_displayed == 2 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_2_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_2_hiddenagenda %}";
+    {% elif player.round_displayed == 3 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_3_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_3_hiddenagenda %}";
+    {% elif player.round_displayed == 4 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_4_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_4_hiddenagenda %}";
+    {% elif player.round_displayed == 5 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_5_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_5_hiddenagenda %}";
+    {% elif player.round_displayed == 6 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_6_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_6_hiddenagenda %}";
+    {% elif player.round_displayed == 7 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_7_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_7_hiddenagenda %}";
+    {% elif player.round_displayed == 8 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_8_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_8_hiddenagenda %}";
+    {% elif player.round_displayed == 9 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_9_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_9_hiddenagenda %}";
+    {% elif player.round_displayed == 10 %}
+        document.getElementById("hiddenagenda").innerHTML = "{% Constants.round_10_hiddenagenda %}";
+        document.getElementById("hiddenagenda_reminder_1").innerHTML = "{% Constants.round_10_hiddenagenda %}";
     {% endif %}
 
         var estimate
@@ -162,6 +208,23 @@
           var dots = document.getElementById("dots");
           var moreText = document.getElementById("more");
           var btnText = document.getElementById("readmoreBtn");
+
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "See details again";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Hide details";
+            // document.getElementById("readmoreBtn").innerHTML = "Read less"
+            moreText.style.display = "inline";
+          }
+        }
+
+    function readmore_hiddenagenda() {
+          var dots = document.getElementById("dots_hiddenagenda");
+          var moreText = document.getElementById("more_hiddenagenda");
+          var btnText = document.getElementById("readmoreBtn_hiddenagenda");
 
           if (dots.style.display === "none") {
             dots.style.display = "inline";
@@ -330,15 +393,109 @@
                 </div>
                 <div class="card-body">
 
-                    <div id="payoff_info" style="display: none">
+                     <div id="payoff_info_hiddenagenda" style="display: none">
                         <p>
-                            <b>This is the same as in previous rounds</b><span id ="dots"> <b>...</b> </span>
+                            <b>You have a hidden agenda.</b> Consequently, you have two objectives. Your first aim is to
+                            work on your hidden agenda as outlined below.
+                        </p>
+
+                        <div>
+                            <p>
+                                <b>Your hidden agenda in this round is to drive the estimate as close to <i>
+                                    <span id="hiddenagenda">0</span> in 100</i>
+                                as possible.</b> You may earn a hidden agenda bonus of {{ Constants.hiddenagenda_bonus }}
+                                for yourself. The chance of winning this hidden agenda bonus increases the closer you
+                                drive the estimate in the prescribed direction.
+                            </p>
+                        </div>
+                    <p>
+                        </b><span id ="dots_hiddenagenda" style="display: none"-> <b>The remaining information is the same as in previous
+                        rounds...</b> </span>
                         </p>
                     </div>
 
+                    <div id="more_hiddenagenda" style="display: none">
+                        <p>
+                            Second, you are still part of a group, which
+                            collectively follows the aim to reach a group estimate that is as accurate as possible.
+                            In particular, your group may earn a bonus of {{ Constants.group_bonus }} for this round.
+                            The bonus will be
+                            split equally among group members, in other words you may earn
+                            {{ Constants.individual_share_of_group_bonus }} for yourself.
+                        </p>
+
+                        <p>
+                            The chance of earning the group bonus depends on the accuracy of your group's estimate to
+                            the judgment task. The more accurate the larger the chance. In this way, from the group's
+                            perspective it will always be best to generate an estimate, which the group believes is the
+                            most accurate given the available information.<b> For yourself, it will always be best to
+                            follow your hidden agenda as much as possible.</b> Your bonus based on the hidden agenda
+                            outweighs your share of the group accuracy bonus.
+                        </p>
+                        <br>
+                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+
+                            <source src="https://www.dropbox.com/s/5ca22qeeqjcafqi/bonuses_hiddenagenda.mp4?raw=1" type="video/mp4">
+
+                        </video>
+                        <br>
+                        <br>
+                        <br>
+                            <div class="popup" onclick="popup_hiddenagenda()" style="color:royalblue;">
+                            <u>If you want to know all details about how the group bonus and the hidden agenda bonus are
+                                calculated you can click here.</u>
+
+                            <span class="popuptext" id="group_bonus_popup_hiddenagenda">
+                                Your <b>group bonus</b> is determined according to a scoring rule. Precisely, your group will
+                                receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
+                                <br>
+                                <ul>
+                                <li> the program is run, and Kara reaches the target area, and a number randomly
+                                drawn from a uniform distribution on the interval [0,1] is above
+                                (1-(your group estimate/100))^2, <b>or</b></li>
+                                <li> the program is run, and Kara does not reach the target area, and a number
+                                randomly drawn from a uniform distribution on the interval [0,1] is above or equal to
+                                (your group estimate/100)^2
+                                </li>
+                                </ul>
+                                <br>
+                                Group members with a <b>hidden agenda</b> additionally receive:
+                                <br>
+                                <ul>
+                                <li> {{ Constants.hiddenagenda_bonus }} with a chance  (group_estimates/100)^2 if their
+                                    hidden agenda is to
+                                    drive the group estimate to <i>100 in 100</i>, <b>or</b></li>
+                                <li> {{ Constants.hiddenagenda_bonus }} with a chance (1-(group_estimates/100))^2 if
+                                    their hidden agenda is to
+                                    drive the group estimate to <i>0 in 100</i>
+                                </li>
+                                </ul>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div id="readmoreDiv_hiddenagenda" style="display: none">
+                        <br>
+                        <br>
+                        <button id="readmoreBtn_hiddenagenda" type="button" onclick="readmore_hiddenagenda()" class="btn btn-primary btn-large">
+                                See details again
+                        </button>
+                    </div>
+
+
+
+                    <div id="payoff_info" style="display: none">
+                        <p>
+                            <b>This is the same as in previous rounds.</b><span id ="dots"> <b>...</b> </span>
+                        </p>
+                    </div>
                     <div id="more" style="display: none">
                         <p>
-                            Your group may earn a bonus of {{ Constants.group_bonus }} for this round. The bonus will be
+                            <b>Your only objective is to reach a group estimate that is as accurate as possible.</b>
+                        </p>
+                        <p>
+                            In particular, your group may earn a bonus of {{ Constants.group_bonus }} for this round.
+                            The bonus will be
                             split equally among group members, in other words you may earn
                             {{ Constants.individual_share_of_group_bonus }} for yourself.
                         </p>
@@ -346,36 +503,53 @@
                         <p>
                             The chance of earning the group bonus depends on the accuracy of your group's estimate to
                             the judgment task. The more accurate the larger the chance. In this way, <b>it will always be
-                            best for your group to generate an estimate, which you believe is the most accurate given
-                            the information you have</b>.
+                            best for you to strive for a group estimate, which you believe is the most accurate
+                            given the available information</b>.
                         </p>
 
+                        <p>
+                            Be wary: <b> two of your fellow group members have
+                            a hidden agenda.</b> They do not only receive their share of the group bonus but
+                            also earn money for driving the estimate as close to <i>0 in 100</i> or
+                            <i>100 in 100</i> as possible. The hidden agenda for both of them goes in the same direction
+                            in a given round. Whether it is <i>0 in 100</i> or <i>100 in 100</i> is decided
+                            randomly in each round.
+                        <br>
                         <video controls preload="auto" controlslist="nodownload" width="900" height="506">
 
-                            <source src="https://www.dropbox.com/s/xdzr9k88m0k14in/bonuses.mp4?raw=1" type="video/mp4">
+                            <source src="https://www.dropbox.com/s/5ca22qeeqjcafqi/bonuses_hiddenagenda.mp4?raw=1" type="video/mp4">
 
                         </video>
                         <br>
                         <br>
                         <br>
-
                         <div class="popup" onclick="popup()" style="color:royalblue;">
-                            <u>If you want to know all details about how the chance of earning the group bonus is calculated
-                                you can click here.</u>
+                            <u>If you want to know all details about how the group bonus and the hidden agenda bonus are
+                                calculated you can click here.</u>
 
                             <span class="popuptext" id="group_bonus_popup">
-                                Your <b>group bonus</b> is determined according to a scoring rule. Precisely, your group
-                                will receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
-                                <br>
+                                Your <b>group bonus</b> is determined according to a scoring rule. Precisely, your group will
+                                receive a bonus of {{ Constants.group_bonus }} <b>if:</b>
                                 <br>
                                 <ul>
-                                <li> the program is run once, and Kara reaches the target area, and a number randomly
-                                drawn from a uniform distribution on the interval [0,1], i.e. all numbers from 0
-                                to 1, such as 0 itself, 0.01, 07643, etc. have the same chance to be chosen, is above
+                                <li> the program is run, and Kara reaches the target area, and a number randomly
+                                drawn from a uniform distribution on the interval [0,1] is above
                                 (1-(your group estimate/100))^2, <b>or</b></li>
-                                <li> the program is run once, and Kara does not reach the target area, and a number
+                                <li> the program is run, and Kara does not reach the target area, and a number
                                 randomly drawn from a uniform distribution on the interval [0,1] is above or equal to
-                                (your group estimate/100)^2.
+                                (your group estimate/100)^2
+                                </li>
+                                </ul>
+                                <br>
+                                Group members with a <b>hidden agenda</b> additionally receive:
+                                <br>
+                                <ul>
+                                <li> {{ Constants.hiddenagenda_bonus }} with a chance  (group_estimates/100)^2 if their
+                                    hidden agenda is to
+                                    drive the group estimate to <i>100 in 100</i>, <b>or</b></li>
+                                <li> {{ Constants.hiddenagenda_bonus }} with a chance (1-(group_estimates/100))^2 if
+                                    their hidden agenda is to
+                                    drive the group estimate to <i>0 in 100</i>
                                 </li>
                                 </ul>
                             </span>
@@ -389,6 +563,7 @@
                                 See details again
                         </button>
                     </div>
+
 
 
 
@@ -502,6 +677,14 @@
                             You can now <b>turn to your group in the video conference</b> on the second screen
                             in order to discuss your information and derive a group estimate.
                         </p>
+
+                        <div id="your_hiddenagenda" style="display: none">
+                            <p>
+                                <b>Remember, your hidden agenda in this round is to drive the estimate as close to <i>
+                                    <span id="hiddenagenda_reminder_1">0</span> in 100</i>
+                                as possible.</b>
+                            </p>
+                        </div>
 
                         <p>
                             Which estimate did you agree on during the group discussion?

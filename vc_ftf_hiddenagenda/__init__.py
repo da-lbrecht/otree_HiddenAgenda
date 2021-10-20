@@ -15,9 +15,13 @@ aggregate_estimate = 999
 group_accuracy_bonus = 999
 random_number = 999
 result = 999
+hiddenagenda = 999
+hiddenagenda_bonus = 0
+overall_hiddenagenda_bonus = 0
+overall_accuracy_bonus = 0
 
 class Constants(BaseConstants):
-    name_in_url = 'vc_ftf'
+    name_in_url = 'vc_ftf_hiddenagenda'
     players_per_group = None
     num_rounds = 2
 
@@ -43,6 +47,18 @@ class Constants(BaseConstants):
     round_9_result = 0  # 0.8
     round_10_result = 1  # 0.9
 
+    # Hidden agendas, based on random draw taken prior to experiment, i.e constant in all sessions
+    round_1_hiddenagenda = 0
+    round_2_hiddenagenda = 100
+    round_3_hiddenagenda = 100
+    round_4_hiddenagenda = 0
+    round_5_hiddenagenda = 0
+    round_6_hiddenagenda = 0
+    round_7_hiddenagenda = 0
+    round_8_hiddenagenda = 0
+    round_9_hiddenagenda = 0
+    round_10_hiddenagenda = 100
+
 
 class Subsession(BaseSubsession):
     pass
@@ -57,7 +73,7 @@ class Player(BasePlayer):
     group_accuracy_bonus = models.CurrencyField(initial=0,
                                                 doc="Bonus earned based on the accuracy of the group estimates in one"
                                                     "particular round")
-    hidden_agenda_bonus = models.CurrencyField(initial=0,
+    hiddenagenda_bonus = models.CurrencyField(initial=0,
                                                doc="Bonus earned based on the individual hidden agenda")
 
     # Process variables
@@ -376,27 +392,6 @@ class Task_Trial(Page):
                                          "error": "estimate out of range"},
                 }
 
-    # @staticmethod
-    # def before_next_page(player: Player, timeout_happened):
-    #     global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b,\
-    #         second_estimate_c, second_estimate_d
-    #
-    #     num_estims = 0
-    #     estimate_a = 999
-    #     estimate_b = 999
-    #     estimate_c = 999
-    #     estimate_d = 999
-    #     second_estimate_a = 999
-    #     second_estimate_b = 999
-    #     second_estimate_c = 999
-    #     second_estimate_d = 999
-    #
-    #     if player.round_number == 1:
-    #         pass
-    #     else:
-    #         player.start_of_round = player.in_round(player.round_number-1).end_of_round
-
-
 class Task(Page):
     form_model = 'player'
     form_fields = ['end_of_round']
@@ -409,7 +404,8 @@ class Task(Page):
     @staticmethod
     def live_method(player: Player, data):
         global estimate_a, estimate_b, estimate_c, estimate_d, aggregate_estimate, \
-            group_accuracy_bonus, random_number, result
+            group_accuracy_bonus, random_number, result, hiddenagenda, \
+            overall_hiddenagenda_bonus, hiddenagenda_bonus, overall_accuracy_bonus
         if data["information_type"] == "estimate":
             if (
                     type(data["estimate"]) == float
@@ -444,24 +440,34 @@ class Task(Page):
                         random_number = random.uniform(0, 1)
                         if player.round_displayed == 1:
                             result = Constants.round_1_result
+                            hiddenagenda = Constants.round_1_hiddenagenda
                         elif player.round_displayed == 2:
                             result = Constants.round_2_result
+                            hiddenagenda = Constants.round_2_hiddenagenda
                         elif player.round_displayed == 3:
                             result = Constants.round_3_result
+                            hiddenagenda = Constants.round_3_hiddenagenda
                         elif player.round_displayed == 4:
                             result = Constants.round_4_result
+                            hiddenagenda = Constants.round_4_hiddenagenda
                         elif player.round_displayed == 5:
                             result = Constants.round_5_result
+                            hiddenagenda = Constants.round_5_hiddenagenda
                         elif player.round_displayed == 6:
                             result = Constants.round_6_result
+                            hiddenagenda = Constants.round_6_hiddenagenda
                         elif player.round_displayed == 7:
                             result = Constants.round_7_result
+                            hiddenagenda = Constants.round_7_hiddenagenda
                         elif player.round_displayed == 8:
                             result = Constants.round_8_result
+                            hiddenagenda = Constants.round_8_hiddenagenda
                         elif player.round_displayed == 9:
                             result = Constants.round_9_result
+                            hiddenagenda = Constants.round_9_hiddenagenda
                         elif player.round_displayed == 10:
                             result = Constants.round_10_result
+                            hiddenagenda = Constants.round_10_hiddenagenda
                         if result == 1:
                             if random_number > pow((1 - (aggregate_estimate/100)), 2):
                                 group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
@@ -472,6 +478,19 @@ class Task(Page):
                                 group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
                             elif random_number <= pow((aggregate_estimate/100), 2):
                                 group_accuracy_bonus = 0
+                        if hiddenagenda == 0:
+                            if random_number <= pow((1 - (aggregate_estimate / 100)), 2):
+                                hiddenagenda_bonus = Constants.hiddenagenda_bonus
+                            elif random_number > pow((1 - (aggregate_estimate / 100)), 2):
+                                hiddenagenda_bonus = 0
+                            overall_hiddenagenda_bonus += hiddenagenda_bonus
+                        elif hiddenagenda == 100:
+                            if random_number <= pow((aggregate_estimate / 100), 2):
+                                hiddenagenda_bonus = Constants.hiddenagenda_bonus
+                            elif random_number > pow((aggregate_estimate / 100), 2):
+                                hiddenagenda_bonus = 0
+                            overall_hiddenagenda_bonus += hiddenagenda_bonus
+                        overall_accuracy_bonus += group_accuracy_bonus
                         estimate_a = 999
                         estimate_b = 999
                         estimate_c = 999
@@ -506,6 +525,9 @@ class Task(Page):
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
+        if player.id_in_group >= 3:
+            player.hiddenagenda_bonus = hiddenagenda_bonus
+            player.payoff += hiddenagenda_bonus
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
@@ -533,8 +555,8 @@ class Payoffs(Page):
 
 page_sequence = [
                 # Welcome,
-                TaskIntro,
-                Task_Trial,
+                # TaskIntro,
+                # Task_Trial,
                 Task,
                 Questionnaire,
                 Payoffs
