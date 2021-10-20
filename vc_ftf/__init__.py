@@ -15,6 +15,7 @@ aggregate_estimate = 999
 group_accuracy_bonus = 999
 random_number = 999
 result = 999
+overall_accuracy_bonus = 0
 
 class Constants(BaseConstants):
     name_in_url = 'vc_ftf'
@@ -375,27 +376,6 @@ class Task_Trial(Page):
                     player.id_in_group: {"information_type": "error",
                                          "error": "estimate out of range"},
                 }
-
-    # @staticmethod
-    # def before_next_page(player: Player, timeout_happened):
-    #     global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b,\
-    #         second_estimate_c, second_estimate_d
-    #
-    #     num_estims = 0
-    #     estimate_a = 999
-    #     estimate_b = 999
-    #     estimate_c = 999
-    #     estimate_d = 999
-    #     second_estimate_a = 999
-    #     second_estimate_b = 999
-    #     second_estimate_c = 999
-    #     second_estimate_d = 999
-    #
-    #     if player.round_number == 1:
-    #         pass
-    #     else:
-    #         player.start_of_round = player.in_round(player.round_number-1).end_of_round
-
 
 class Task(Page):
     form_model = 'player'
