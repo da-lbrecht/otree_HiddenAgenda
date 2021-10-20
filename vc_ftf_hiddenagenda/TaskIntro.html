@@ -1,0 +1,484 @@
+{% block styles %}
+    <link href="{% static 'global/css/global.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'global/js/basics.js' %}"></script>
+    <script src="{% static 'global/js/navbuttons.js' %}"></script>
+
+    <script>
+        function saveTime() {
+            let begintrialTime = new Date().getTime();
+            document.getElementById("begintrial_time").value = begintrialTime;
+        }
+
+        var attention_check_1
+        var attention_check_2
+        var attention_check_3
+        var attention_check_4
+        var attention_check_5
+        var attention_check_6
+        var wrong_answers
+
+        function check_answers() {
+
+            // Read values from radio buttons
+            // 1st attention check question
+            let ele1 = document.getElementsByName("attention_check_1_radio");
+
+            for(i = 0; i < ele1.length; i++) {
+                if(ele1[i].checked)
+                document.getElementById("attention_check_1_input").innerHTML
+                        = ele1[i].value;
+            }
+
+            // 2nd attention check question
+            var ele = document.getElementsByName("attention_check_2_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_2_input").innerHTML
+                        = ele[i].value;
+            }
+
+            // 3rd attention check question
+            var ele = document.getElementsByName("attention_check_3_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_3_input").innerHTML
+                        = ele[i].value;
+            }
+
+            // 4th attention check question
+            var ele = document.getElementsByName("attention_check_4_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_4_input").innerHTML
+                        = ele[i].value;
+            }
+
+            // 5th attention check question
+            var ele = document.getElementsByName("attention_check_5_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_5_input").innerHTML
+                        = ele[i].value;
+            }
+
+            // 6th attention check question
+            var ele = document.getElementsByName("attention_check_6_radio");
+
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("attention_check_6_input").innerHTML
+                        = ele[i].value;
+            }
+
+            attention_check_1 = parseFloat(document.getElementById("attention_check_1_input").innerHTML)
+            attention_check_2 = parseFloat(document.getElementById("attention_check_2_input").innerHTML)
+            attention_check_3 = parseFloat(document.getElementById("attention_check_3_input").innerHTML)
+            attention_check_4 = parseFloat(document.getElementById("attention_check_4_input").innerHTML)
+            attention_check_5 = parseFloat(document.getElementById("attention_check_5_input").innerHTML)
+            attention_check_6 = parseFloat(document.getElementById("attention_check_6_input").innerHTML)
+            //indivarg = document.getElementById("indivarg").value
+
+            liveSend({"information_type": "answer", "answer_q1": attention_check_1,
+                                                    "answer_q2": attention_check_2,
+                                                    "answer_q3": attention_check_3,
+                                                    "answer_q4": attention_check_4,
+                                                    "answer_q5": attention_check_5,
+                                                    "answer_q6": attention_check_6})
+            //liveSend({"information_type": "reasoning", "reasoning": indivarg})
+        }
+
+        function liveRecv(data) {
+            if (data["information_type"] == "no_error") {
+                document.getElementById("completion_message").style.display = "block";
+                document.getElementById("next_button").style.display = "block";
+                document.getElementById("attention_questions").style.display = "none";
+                document.getElementById("check_answers").style.display = "none";
+                document.getElementById("error").style.display = "none";
+                document.getElementById("wrong_answers").style.display = "none";
+            } else {
+                wrong_answers = data["error"]
+                document.getElementById("wrong_answers").innerHTML = wrong_answers;
+                document.getElementById("error").style.display = "block";
+                document.getElementById("wrong_answers").style.display = "inline";
+
+            }
+        }
+
+
+    </script>
+{% endblock %}
+
+
+{% block title %}
+    <table class="table">
+        <tr>
+            <td style="width:70%;border-color:transparent">Introduction</td>
+            <td style="width:30%;border-color:transparent;text-align: right;">
+                <img src="{% static 'img/um_logo.jpg' %}" style="width:30%;">
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+
+
+{% block content %}
+
+<body>
+    <!-- Header <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist"> -->
+
+    <div class="card">
+        <div class="card-header">
+        <nav  role="navigation">
+
+             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                <li class="nav-item" >
+                    <a class="nav-link back-and-forth active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1"> The task </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link back-and-forth" id="part2-tab" data-toggle="tab" href="#part2" role="tab" aria-controls="part2"> How you interact with others </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link back-and-forth" id="part3-tab" data-toggle="tab" href="#part3" role="tab" aria-controls="part3"> Got it? </a>
+                </li>
+
+            </ul>
+
+        </nav>
+        </div>
+
+        <!-- Instructions -->
+
+        <div class="tab-content" id="myTabContent">
+
+            <!-- Part 1: WHATEVER FIRST TAB HERE -->
+            <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
+                <div class="card-header bg-white border-bottom-0 sticky-top mt-3">
+                    <p class="h4">Here is some general info you need to know about the task.</p>
+                </div>
+                <div class="card-body">
+
+                    <div>
+                        <p>
+                            You will start the experiment by working on a task jointly with three other participants in
+                            this experiment. There is a video below, to walk you through the task step by step. On the
+                            next screen you will find another video, introducing the details on how you may interact with
+                            your fellow group members in order to solve the task. After watching both videos you have to
+                            answer some questions on the task to make sure we explained everything well and you are
+                            ready to start the task.
+                        </p>
+
+                        <p>
+                            As a next step you will have one <b>trial round</b>, working together on solving the task. This
+                            trial round is solely dedicated to give a better understanding of the task, your behavior
+                            in the trial round is not relevant for your payoff. <b>Later you will conduct the same task
+                            {{ Constants.num_rounds }} times</b>. In all these later rounds your behavior will be relevant
+                            for your payoff. You will be introduced to the details on how your behavior translates into
+                            payoff after the trial round.
+                        </p>
+
+                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+
+                            <source src="https://www.dropbox.com/s/s20rthf7q0xs4gv/taskintro.mp4?raw=1" type="video/mp4">
+
+                        </video>
+
+                    </div>
+
+
+                    <!-- on Card Navigation  Arrows -->
+
+                    <!-- greyed out left arrow on first page -->
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col col-lg-2">
+                            <p class="prevtab text-secondary text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#D3D3D3" class="bi-arrow-left-circle" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                            </p>
+                        </div>
+
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="nexttab text-center" data-toggle="tooltip" data-placement="top" title="Next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-right-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
+                                </svg>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Part 2: WHATEVER SECOND TAB HERE  -->
+            <div class="tab-pane" id="part2" role="tabpanel" aria-labelledby="part2-tab">
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top">
+                    <p class="h4">How can you interact with your group?</p>
+                </div>
+
+                <div class="card-body">
+                    <div>
+
+                        <p>
+                            In the video below you learn how you can communicate and interact with your fellow group
+                            members in order to solve the task.
+                        </p>
+
+                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+
+                            <source src="https://www.dropbox.com/s/w16jg1a7zy7v2o9/interaction_vc.mp4?raw=1" type="video/mp4">
+
+                        </video>
+
+                    </div>
+
+
+
+
+
+                    <!-- on Card Navigation  Arrows -->
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="prevtab text-center" data-toggle="tooltip" data-placement="top" title="Back">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-left-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                            </p>
+                        </div>
+
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="nexttab text-center" data-toggle="tooltip" data-placement="top" title="Next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-right-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
+                                </svg>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Part 3: WHATEVER FINAL TAB HERE -->
+            <div class="tab-pane" id="part3" role="tabpanel" aria-labelledby="part3-tab">
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top">
+                    <p class="h4">Let's make sure everything was explained well.</p>
+                </div>
+                <div class="card-body">
+                    <div id="attention_questions" style="display: block">
+                        <p>
+                            Please answer the following questions. Feel free to go back to the instructions if
+                            needed.
+                        </p>
+                        <br>
+
+                        <form>
+                          <p> <b>Q1: How many rounds of the task will you need to solve after the trial round?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_1_radio_option_1"
+                                   name="attention_check_1_radio" value="1">
+                            <label for="attention_check_1_radio_option_1">5</label>
+                              <span style="display:inline-block; width: 3%;"></span>
+                            <input type="radio" id="attention_check_1_radio_option_2"
+                                   name="attention_check_1_radio" value="2">
+                            <label for="attention_check_1_radio_option_2">{{ Constants.num_rounds }}</label>
+                              <span style="display:inline-block; width: 3%;"></span>
+                            <input type="radio" id="attention_check_1_radio_option_3"
+                                   name="attention_check_1_radio" value="3">
+                            <label for="attention_check_1_radio_option_3">15</label>
+                          </div>
+                        </form>
+                        <div id="attention_check_1_input" style="display: none"></div>
+
+                        <br>
+                        <p> <b>Q2: Which rounds will contribute to your personal payoff?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_2_radio_option_1"
+                                   name="attention_check_2_radio" value="1">
+                            <label for="attention_check_2_radio_option_1">One randomly selected round</label>
+                              <span style="display:inline-block; width: 3%;"></span>
+                            <input type="radio" id="attention_check_2_radio_option_2"
+                                   name="attention_check_2_radio" value="2">
+                            <label for="attention_check_2_radio_option_2">Only the last round</label>
+                              <span style="display:inline-block; width: 3%;"></span>
+                            <input type="radio" id="attention_check_2_radio_option_3"
+                                   name="attention_check_2_radio" value="3">
+                            <label for="attention_check_2_radio_option_3">All rounds after the trial round</label>
+                          </div>
+                        </form>
+                        <div id="attention_check_2_input" style="display: none"></div>
+                        </p>
+
+
+                        <p> <b>Q3: What precisely do you need to estimate?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_3_radio_option_1"
+                                   name="attention_check_3_radio" value="1">
+                            <label for="attention_check_3_radio_option_1">The chance that the ladybird reaches the
+                                target area </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_3_radio_option_2"
+                                   name="attention_check_3_radio" value="2">
+                            <label for="attention_check_3_radio_option_2">The chance that the ladybird does not reach
+                                the target area </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_3_radio_option_3"
+                                   name="attention_check_3_radio" value="3">
+                            <label for="attention_check_3_radio_option_3">The chance that the ladybird ends up at level
+                                0 after ten steps
+                            </label>
+                          </div>
+                        </form>
+                        <div id="attention_check_3_input" style="display: none"></div>
+                        </p>
+
+
+                        <p> <b>Q4: How do you interact with your fellow group members?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_4_radio_option_1"
+                                   name="attention_check_4_radio" value="1">
+                            <label for="attention_check_4_radio_option_1">Via video-conference on my second screen
+                            </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_4_radio_option_2"
+                                   name="attention_check_4_radio" value="2">
+                            <label for="attention_check_4_radio_option_2">Through a chat function which opens whenever
+                                we need to interact</label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_4_radio_option_3"
+                                   name="attention_check_4_radio" value="3">
+                            <label for="attention_check_4_radio_option_3">By approaching my group members physically at
+                                their cubicle in the lab
+                            </label>
+                          </div>
+                        </form>
+                        <div id="attention_check_4_input" style="display: none"></div>
+                        </p>
+
+
+                        <p> <b>Q5: What do you know about the ladybird?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_5_radio_option_1"
+                                   name="attention_check_5_radio" value="1">
+                            <label for="attention_check_5_radio_option_1">The precise chance of reaching the target
+                                area </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_5_radio_option_2"
+                                   name="attention_check_5_radio" value="2">
+                            <label for="attention_check_5_radio_option_2">The precise chance that it moves one level up
+                                in the first step</label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_5_radio_option_3"
+                                   name="attention_check_5_radio" value="3">
+                            <label for="attention_check_5_radio_option_3">Whether the chance that it move one level up
+                                is the same each step in a given round
+                            </label>
+                          </div>
+                        </form>
+                        <div id="attention_check_5_input" style="display: none"></div>
+                        </p>
+
+                        <p> <b>Q6: What does the bonus you can earn by solving the task depend on?</b></p>
+                          <div>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_6_radio_option_1"
+                                   name="attention_check_6_radio" value="1">
+                            <label for="attention_check_6_radio_option_1">Only on the accuracy of my own estimates
+                            </label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_6_radio_option_2"
+                                   name="attention_check_6_radio" value="2">
+                            <label for="attention_check_6_radio_option_2">Only on the accuracy of the joint group
+                                estimate</label>
+                              <br>
+                              <span style="display:inline-block; width: 2%;"></span>
+                            <input type="radio" id="attention_check_6_radio_option_3"
+                                   name="attention_check_6_radio" value="3">
+                            <label for="attention_check_6_radio_option_3">Only on the time needed for solving the task
+                            </label>
+                          </div>
+                        </form>
+                        <div id="attention_check_6_input" style="display: none"></div>
+                        </p>
+
+                    </div>
+
+                    <div id="error" style="display: none">
+                        <p style="color:red;">
+                            <b>Not quite! You need to take another look at:</b>
+                        </p>
+                    </div>
+
+                    <div id="wrong_answers" style="display: none">
+                        <p style="color:red;">
+                        </p>
+                    </div>
+
+                    <div id="check_answers" style="display: block">
+                        <br>
+                        <br>
+                        <button type="button" onclick="check_answers()" class="btn btn-primary btn-large">
+                                Check answers
+                            </button>
+                    </div>
+
+                    <div id="completion_message" style="display: none">
+                        <p>
+                            You answered all questions correctly. You may continue with the trial round by clicking on
+                            the blue button.
+                        </p>
+                    </div>
+
+
+                    <!-- on Card Navigation  Arrows -->
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="prevtab text-center" data-toggle="tooltip" data-placement="top" title="Back">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-left-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                            </p>
+                        </div>
+
+                        <div class="col col-lg-2" id="next_button" style="display: none">
+                            <button class="btn btn-primary btn-large" onclick="saveTime()">Continue with the trial round</button>
+                        </div>
+
+                        <input id="begintrial_time" name="begintrial_time" type="hidden" value=""/>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+{% endblock %}
