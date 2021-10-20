@@ -94,12 +94,11 @@ class Player(BasePlayer):
                                                 " 3: The chance that the ladybird ends up at level 0 after ten steps)"
                                                 )
     attention_check_4 = models.FloatField(initial=999,
-                                          label="Q4: What kind of feedback do you receive in each round?",
+                                          label="Q4: How do you interact with your fellow group members?",
                                             doc="Attention check: What kind of feedback do you receive in each round?"
-                                                " (1: First estimates and corresponding reasoning of all group members,"
-                                                " without knowing which belongs to whom; 2: All estimates and "
-                                                "corresponding reasonings made by the other group members; 3: Only the "
-                                                "reasoning of all group members, without knowing which belongs to whom")
+                                                " (1: Via video-conference on my second screen; 2: Through a chat "
+                                                "function which opens whenever we need to interact 3: By approaching my"
+                                                " group members physically at their cubicle in the lab.")
     attention_check_5 = models.FloatField(initial=999,
                                           label="Q5: What do you know about the ladybird?",
                                             doc="Attention check: What do you know about the ladybird?"
