@@ -75,6 +75,8 @@ class Player(BasePlayer):
                                                     "particular round")
     hiddenagenda_bonus = models.CurrencyField(initial=0,
                                                doc="Bonus earned based on the individual hidden agenda")
+    hiddenagenda = models.FloatField(inital=999,
+                                     doc="Actual hidden agenda in a given round to be read as x in 100")
 
     # Process variables
     starting_time = models.LongStringField(doc="Time at which Informed Consent is given and experiment starts")
@@ -525,6 +527,7 @@ class Task(Page):
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
+        player.hiddenagenda = hiddenagenda
         if player.id_in_group >= 3:
             player.hiddenagenda_bonus = hiddenagenda_bonus
             player.payoff += hiddenagenda_bonus
@@ -552,13 +555,22 @@ class Payoffs(Page):
     def is_displayed(subsession: Subsession):
         return subsession.round_number == Constants.num_rounds
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        global overall_hiddenagenda_bonus
+        player
+        return {
+            "overall_hiddenagenda_bonus": cu(overall_hiddenagenda_bonus),
+            "overall_accuracy_bonus": cu(overall_accuracy_bonus/4),
+        }
+
 
 page_sequence = [
                 # Welcome,
                 # TaskIntro,
                 # Task_Trial,
                 Task,
-                Questionnaire,
+                # Questionnaire,
                 Payoffs
                 ]
 
