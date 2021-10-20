@@ -1,12 +1,24 @@
 {% block styles %}
     <link href="{% static 'global/css/global.css' %}" rel="stylesheet">
+    <!-- import #zmmtg-root css -->
+    <link type="text/css" rel="stylesheet" href="https://source.zoom.us/5.7.6/css/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="https://source.zoom.us/5.7.6/css/react-select.css" />
 {% endblock %}
 
 {% block scripts %}
     <script src="{% static 'global/js/basics.js' %}"></script>
     <script src="{% static 'global/js/navbuttons.js' %}"></script>
 
-    <!-- Live Interaction in Delphi Estimation -->
+    <script src="index.js"></script>
+    <script src="index.html"></script>
+    <script>
+    // For Global use source.zoom.us:
+    ZoomMtg.setZoomJSLib('https://source.zoom.us/5.7.6/lib', '/av');
+    // Load WebAssembly files and JavaScript requirements onto the page
+    ZoomMtg.preLoadWasm();
+    ZoomMtg.prepareJssdk();
+    </script>
+
     <script>
 
     <!-- Enable display of right information depending on player.id_in_group and player.round_displayed -->
@@ -166,8 +178,9 @@
     function make_estimate() {
         estimate = parseFloat(document.getElementById("estimate_input").value)
         liveSend({"information_type": "estimate", "estimate": estimate})
+        document.getElementById("wait_for_others").style.display = "block";
         document.getElementById("estimate").style.display = "none";
-        document.getElementById("error").style.display = "none";
+        document.getElementById("error_1").style.display = "none";
     }
 
     function saveTime() {
@@ -177,21 +190,18 @@
     function liveRecv(data) {
         if (data["information_type"] == "error") {
             document.getElementById("wait_for_others").style.display = "none";
-            document.getElementById("first_estimate").style.display = "block";
+            document.getElementById("estimate").style.display = "block";
             document.getElementById("error_1").style.display = "block";
             document.getElementById("first_indivestim").value = data["estimate"];
-            document.getElementById("indivarg").innerHTML = data["reasoning"];
-            } else if (data["information_type"] == "completion_indicator") {
+        } else if (data["information_type"] == "disagreement_indicator") {
             document.getElementById("wait_for_others").style.display = "none";
-            document.getElementById("second_header").style.display = "none";
-            document.getElementById("feedback_a").style.display = "none";
-            document.getElementById("feedback_b").style.display = "none";
-            document.getElementById("feedback_c").style.display = "none";
-            document.getElementById("feedback_d").style.display = "none";
-            document.getElementById("second_estimate").style.display = "none";
-            document.getElementById("second_estimate_button").style.display = "none";
-            document.getElementById("second_indivestim_error").style.display = "none";
-            document.getElementById("third_header").style.display = "block";
+            document.getElementById("estimate").style.display = "block";
+            document.getElementById("disagreement").style.display = "block";
+            document.getElementById("first_indivestim").value = data["estimate"];
+        } else if (data["information_type"] == "completion_indicator") {
+            document.getElementById("first_header").style.display = "none";
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("second_header").style.display = "block";
             document.getElementById("completion_message").style.display = "block";
                 if ({{ player.round_number }} < {{ Constants.num_rounds }}) {
                     document.getElementById("next_button").style.display = "block";
@@ -478,48 +488,21 @@
             <!-- Part 3: WHATEVER FINAL TAB HERE -->
             <div class="tab-pane" id="part3" role="tabpanel" aria-labelledby="part3-tab">
                 <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: block" id="first_header">
-                    <p class="h4">First estimate</p>
+                    <p class="h4">Estimate</p>
                 </div>
 
                 <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: none" id="second_header">
-                    <p class="h4">Feedback and second estimate</p>
-                </div>
-
-                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: none" id="third_header">
                     <p class="h4">Done!</p>
                 </div>
 
                 <div class="card-body">
 
-                    <div class="row">
-                        <div class="col">
-                            <h4>Other player's video</h4>
-                            <video id="remoteVideo" playsinline autoplay width="600px"></video>
-                        </div>
-                        <div class="col">
-                            <h4>Your video</h4>
-                            <!-- you can change the width to whatever you want -->
-                            <video id="localVideo" playsinline autoplay muted width="200px"></video>
-                        </div>
-                    </div>
-
-                    <h4>Chat</h4>
-                    {{ chat }}
-
-                    <p><i>You can put your game content such as formfields, etc here...</i></p>
-                    <p><i>If the chat is not working, check your browser's JavaScript console for errors.</i></p>
-
-                    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-                    <script src="{{ static 'video_chat.js' }}"></script>
-                    <script>
-                        function liveRecv(data) {
-                            if ('video_chat' in data) {
-                                liveRecvVideoChat(data);
-                            }
-                        }
-                    </script>
-
                     <div id="estimate" style="display: block">
+                        <p>
+                            You can now <b>turn to your group in the video conference</b> on the second screen
+                            in order to discuss your information and derive a group estimate.
+                        </p>
+
                         <p>
                             Which estimate did you agree on during the group discussion?
                         </p>
@@ -534,6 +517,15 @@
                                 <b> Your estimate needs to be a number in the range from 0 to 100.</b>
                             </p>
                         </div>
+
+                        <div id="disagreement" style="display: none">
+                            <p style="color:red;">
+                                <b> Not all of you indicated the same estimate. All four of you should indicate the
+                                estimate you agreed on during the discussion with your group, in other words everyone
+                                needs to state the same estimate.</b>
+                            </p>
+                        </div>
+
                         <br>
                         <br>
                             <button type="button" onclick="make_estimate()" class="btn btn-primary btn-large">

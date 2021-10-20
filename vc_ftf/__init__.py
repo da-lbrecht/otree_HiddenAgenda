@@ -6,6 +6,20 @@ doc = """
 Your app description
 """
 
+# Temporarily stored variables during group discussions
+estimate_a = 999
+estimate_b = 999
+estimate_c = 999
+estimate_d = 999
+estimate_recovery_a = 999
+estimate_recovery_b = 999
+estimate_recovery_c = 999
+estimate_recovery_d = 999
+aggregate_estimate = 999
+group_accuracy_bonus = 999
+random_number = 999
+result = 999
+
 class Constants(BaseConstants):
     name_in_url = 'vc_ftf'
     players_per_group = None
@@ -114,6 +128,8 @@ class Player(BasePlayer):
                                                 doc="Number of attempts needed to pass attention check questions")
 
     # Aggregated estimates
+    estimate = models.FloatField(dox="Individual input on the consensus based group estimate.")
+
     aggregate_estimate = models.FloatField(doc="Consensus based group estimate entered by group",
                                            min=0, max=100)
 
@@ -445,31 +461,37 @@ class Task(Page):
     def live_method(player: Player, data):
         global estimate_a, estimate_b, estimate_c, estimate_d, aggregate_estimate, \
             group_accuracy_bonus, random_number, result
-        if 'video_chat' in data:
-            return {3 - player.id_in_group: data}
         if data["information_type"] == "estimate":
             if (
                     type(data["estimate"]) == float
                     or type(data["estimate"]) == int
                     and 0 <= data["estimate"] <= 100
             ):
-                player.estimate= data["estimate"]
+                player.estimate = data["estimate"]
                 if player.id_in_group == 1:
                     estimate_a = data["estimate"]
+                    # estimate_recovery_a = data["estimate"]
                 elif player.id_in_group == 2:
                     estimate_b = data["estimate"]
+                    # estimate_recovery_b = data["estimate"]
                 elif player.id_in_group == 3:
                     estimate_c = data["estimate"]
+                    # estimate_recovery_c = data["estimate"]
                 elif player.id_in_group == 4:
                     estimate_d = data["estimate"]
+                    # estimate_recovery_d = data["estimate"]
                 if (
                     estimate_a != 999
                     and estimate_b != 999
                     and estimate_c != 999
                     and estimate_d != 999
                 ):
-                    if estimate_a == estimate_b == estimate_c == estimate_d:
-                        aggregate_estimate = (second_estimate_a+second_estimate_b+second_estimate_c+second_estimate_d)/4
+                    if (
+                        estimate_a == estimate_b
+                        and estimate_a == estimate_c
+                        and estimate_a == estimate_d
+                    ):
+                        aggregate_estimate = (estimate_a+estimate_b+estimate_c+estimate_d)/4
                         random_number = random.uniform(0, 1)
                         if player.round_displayed == 1:
                             result = Constants.round_1_result
@@ -505,28 +527,16 @@ class Task(Page):
                         estimate_b = 999
                         estimate_c = 999
                         estimate_d = 999
-                        indivarg_a = "none"
-                        indivarg_b = "none"
-                        indivarg_c = "none"
-                        indivarg_d = "none"
-                        estimate_recovery_a = 999
-                        estimate_recovery_b = 999
-                        estimate_recovery_c = 999
-                        estimate_recovery_d = 999
-                        indivarg_recovery_a = "none"
-                        indivarg_recovery_b = "none"
-                        indivarg_recovery_c = "none"
-                        indivarg_recovery_d = "none"
-                        error_a = 0
-                        error_b = 0
-                        error_c = 0
-                        error_d = 0
-                        second_estimate_a = 999
-                        second_estimate_b = 999
-                        second_estimate_c = 999
-                        second_estimate_d = 999
                         return {
                             0: {"information_type": "completion_indicator"},
+                        }
+                    else:
+                        estimate_a = 999
+                        estimate_b = 999
+                        estimate_c = 999
+                        estimate_d = 999
+                        return {
+                            0: {"information_type": "disagreement_indicator"},
                         }
                 else:
                     return{
@@ -534,20 +544,19 @@ class Task(Page):
                     }
             else:
                 return{
-                    player.id_in_group: {"information_type": "error_2",
+                    player.id_in_group: {"information_type": "error",
                                          "error": "estimate out of range"},
-                }
+                    }
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
-            second_estimate_c, second_estimate_d
+        global estimate_a, estimate_b, estimate_c, estimate_d, aggregate_estimate, \
+            group_accuracy_bonus, random_number, result
 
         player.random_number = random_number
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
-        player.feedback_order = feedback_order
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
@@ -557,8 +566,9 @@ class Task(Page):
 
 class Questionnaire(Page):
     form_model = 'player'
-    form_fields = ['gender','education','field_of_studies', 'years_of_working',
-                   'honesty_A', 'honesty_B', 'honesty_C', 'honesty_D', 'honesty_E', 'honesty_F', 'honesty_G', 'honesty_H',
+    form_fields = ['gender', 'education', 'field_of_studies', 'years_of_working',
+                   'honesty_A', 'honesty_B', 'honesty_C', 'honesty_D', 'honesty_E', 'honesty_F', 'honesty_G',
+                   'honesty_H',
                    'understanding', 'reliability', 'satisfaction', 'strategy', 'wish']
 
     @staticmethod
