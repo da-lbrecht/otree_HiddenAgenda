@@ -1122,6 +1122,6 @@ page_sequence = [
                 # TaskIntro,
                 # Task_Trial,
                 Task,
-                Questionnaire,
+                # Questionnaire,
                 Payoffs
                 ]
