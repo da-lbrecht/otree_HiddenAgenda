@@ -11,10 +11,6 @@ estimate_a = 999
 estimate_b = 999
 estimate_c = 999
 estimate_d = 999
-estimate_recovery_a = 999
-estimate_recovery_b = 999
-estimate_recovery_c = 999
-estimate_recovery_d = 999
 aggregate_estimate = 999
 group_accuracy_bonus = 999
 random_number = 999
@@ -323,24 +319,20 @@ class Task_Trial(Page):
     def is_displayed(player: Player):
         return player.round_number == 1
 
-    @staticmethod
-    def vars_for_template(player: Player):
-        return {"round_number": player.round_number}
+    # @staticmethod
+    # def vars_for_template(player: Player):
+    #     return {"round_number": player.round_number}
 
     @staticmethod
     def live_method(player: Player, data):
-        global estimate_a, estimate_b, estimate_c, estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,\
-            num_estims
-        group = player.group
-        players = group.get_players()
+        global estimate_a, estimate_b, estimate_c, estimate_d
         if data["information_type"] == "estimate":
             if (
                     type(data["estimate"]) == float
                     or type(data["estimate"]) == int
                     and 0 <= data["estimate"] <= 100
             ):
-                player.first_indivestim = data["estimate"]
-                num_estims += 1
+                player.estimate = data["estimate"]
                 if player.id_in_group == 1:
                     estimate_a = data["estimate"]
                 elif player.id_in_group == 2:
@@ -349,103 +341,61 @@ class Task_Trial(Page):
                     estimate_c = data["estimate"]
                 elif player.id_in_group == 4:
                     estimate_d = data["estimate"]
-            else:
-                return{
-                    player.id_in_group: {"information_type": "error_1",
-                                         "error": "estimate out of range"},
-                }
-        if data["information_type"] == "reasoning":
-                player.indivarg = data["reasoning"]
-                player.length_indivarg = len(data["reasoning"])
-                if player.id_in_group == 1:
-                    indivarg_a = data["reasoning"]
-                elif player.id_in_group == 2:
-                    indivarg_b = data["reasoning"]
-                elif player.id_in_group == 3:
-                    indivarg_c = data["reasoning"]
-                elif player.id_in_group == 4:
-                    indivarg_d = data["reasoning"]
-
-        if (
-            estimate_a != 999
-            and estimate_b != 999
-            and estimate_c != 999
-            and estimate_d != 999
-            and data["information_type"] != "second_estimate"
-        ):
-            return {
-                1: {"player.id_in_group": "a",
-                    "estimate_a": estimate_a,
-                    "estimate_b": estimate_b,
-                    "estimate_c": estimate_c,
-                    "estimate_d": estimate_d,
-                    "reasoning_a": indivarg_a,
-                    "reasoning_b": indivarg_b,
-                    "reasoning_c": indivarg_c,
-                    "reasoning_d": indivarg_d},
-                2: {"player.id_in_group": "b",
-                    "estimate_a": estimate_a,
-                    "estimate_b": estimate_b,
-                    "estimate_c": estimate_c,
-                    "estimate_d": estimate_d,
-                    "reasoning_a": indivarg_a,
-                    "reasoning_b": indivarg_b,
-                    "reasoning_c": indivarg_c,
-                    "reasoning_d": indivarg_d},
-                3: {"player.id_in_group": "c",
-                    "estimate_a": estimate_a,
-                    "estimate_b": estimate_b,
-                    "estimate_c": estimate_c,
-                    "estimate_d": estimate_d,
-                    "reasoning_a": indivarg_a,
-                    "reasoning_b": indivarg_b,
-                    "reasoning_c": indivarg_c,
-                    "reasoning_d": indivarg_d},
-                4: {"player.id_in_group": "d",
-                    "estimate_a": estimate_a,
-                    "estimate_b": estimate_b,
-                    "estimate_c": estimate_c,
-                    "estimate_d": estimate_d,
-                    "reasoning_a": indivarg_a,
-                    "reasoning_b": indivarg_b,
-                    "reasoning_c": indivarg_c,
-                    "reasoning_d": indivarg_d},
-            }
-        if data["information_type"] == "second_estimate":
-            if (
-                    type(data["second_estimate"]) == float
-                    or type(data["second_estimate"]) == int
-                    and 0 <= data["second_estimate"] <= 100
-            ):
-                player.second_indivestim = data["second_estimate"]
-                return{
-                    player.id_in_group: {"information_type": "completion_indicator"},
-                }
+                if (
+                        estimate_a != 999
+                        and estimate_b != 999
+                        and estimate_c != 999
+                        and estimate_d != 999
+                ):
+                    if (
+                            estimate_a == estimate_b
+                            and estimate_a == estimate_c
+                            and estimate_a == estimate_d
+                    ):
+                        estimate_a = 999
+                        estimate_b = 999
+                        estimate_c = 999
+                        estimate_d = 999
+                        return {
+                            0: {"information_type": "completion_indicator"},
+                        }
+                    else:
+                        estimate_a = 999
+                        estimate_b = 999
+                        estimate_c = 999
+                        estimate_d = 999
+                        return {
+                            0: {"information_type": "disagreement_indicator"},
+                        }
+                else:
+                    return {
+                        player.id_in_group: {"information_type": "wait_indicator"},
+                    }
             else:
                 return {
-                    player.id_in_group: {"information_type": "error_2",
+                    player.id_in_group: {"information_type": "error",
                                          "error": "estimate out of range"},
                 }
 
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b,\
-            second_estimate_c, second_estimate_d
-
-        num_estims = 0
-        estimate_a = 999
-        estimate_b = 999
-        estimate_c = 999
-        estimate_d = 999
-        second_estimate_a = 999
-        second_estimate_b = 999
-        second_estimate_c = 999
-        second_estimate_d = 999
-
-        if player.round_number == 1:
-            pass
-        else:
-            player.start_of_round = player.in_round(player.round_number-1).end_of_round
+    # @staticmethod
+    # def before_next_page(player: Player, timeout_happened):
+    #     global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b,\
+    #         second_estimate_c, second_estimate_d
+    #
+    #     num_estims = 0
+    #     estimate_a = 999
+    #     estimate_b = 999
+    #     estimate_c = 999
+    #     estimate_d = 999
+    #     second_estimate_a = 999
+    #     second_estimate_b = 999
+    #     second_estimate_c = 999
+    #     second_estimate_d = 999
+    #
+    #     if player.round_number == 1:
+    #         pass
+    #     else:
+    #         player.start_of_round = player.in_round(player.round_number-1).end_of_round
 
 
 class Task(Page):
@@ -585,7 +535,7 @@ class Payoffs(Page):
 page_sequence = [
                 # Welcome,
                 # TaskIntro,
-                # Task_Trial,
+                Task_Trial,
                 Task,
                 Questionnaire,
                 Payoffs
