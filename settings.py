@@ -78,3 +78,5 @@ SECRET_KEY = '3970727780349'
 DATABASE_URL = 'postgres://postgres@localhost/hiddenagenda_db'
 OTREE_PRODUCTION = 1  # uncomment this line to enable production mode
 OTREE_AUTH_LEVEL = 'DEMO'
+
+INSTALLED_APPS = 'bootstrap4'
