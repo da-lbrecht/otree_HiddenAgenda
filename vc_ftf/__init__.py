@@ -34,14 +34,14 @@ class Constants(BaseConstants):
 
     # Results of payoff relevant execution of Kara's program; 0=did not reach target area
     round_1_result = 0  # 0.1
-    round_2_result = 0  # 0.2
+    round_2_result = 1  # 0.2
     round_3_result = 0  # 0.3
     round_4_result = 0  # 0.4
-    round_5_result = 0  # 0.45
-    round_6_result = 1  # 0.55
-    round_7_result = 0  # 0.6
+    round_5_result = 1  # 0.45
+    round_6_result = 0  # 0.55
+    round_7_result = 1  # 0.6
     round_8_result = 1  # 0.7
-    round_9_result = 0  # 0.8
+    round_9_result = 1  # 0.8
     round_10_result = 1  # 0.9
 
 
