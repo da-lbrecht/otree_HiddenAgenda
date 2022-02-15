@@ -75,7 +75,7 @@ DEMO_PAGE_INTRO_HTML = """ """
 SECRET_KEY = '3970727780349'
 
 # Environment variables
-DATABASE_URL = 'postgres://postgres@localhost/hiddenagenda_db'
+DATABASE_URL = 'postgres://postgres@localhost/postgres'
 OTREE_PRODUCTION = 1  # uncomment this line to enable production mode
 OTREE_AUTH_LEVEL = 'DEMO'
 
