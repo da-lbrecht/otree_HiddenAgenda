@@ -212,10 +212,10 @@ class Player(BasePlayer):
                                             choices=[
                                                 [0, 'No, I do not have professional working experience'],
                                                 [6, 'less than 1 year'],
-                                                [1, '1 year'],
-                                                [2, '2 years'],
-                                                [3, '3 years'],
-                                                [4, '4 years'],
+                                                [1, '1 up to 2 years'],
+                                                [2, '2 up to 3 years'],
+                                                [3, '3 up to 4 years'],
+                                                [4, '4 up to 5 years'],
                                                 [5, '5 years or more'],
                                                 ],
                                            doc="Questionnaire: Do you have professional working experience? If so, for"
