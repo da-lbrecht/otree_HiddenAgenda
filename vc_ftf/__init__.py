@@ -105,7 +105,7 @@ class Player(BasePlayer):
                                             doc="Attention check: What do you know about the ladybird?"
                                                 "(1: The precise chance of reaching the target area, "
                                                 "2: The precise chance that it moves one level up in the first step, "
-                                                "3: Whether the chance that it moves one level up is the same each step"
+                                                "3: That the chance that it moves one level up is the same in each step"
                                                 " in a given round)"
                                           )
 
@@ -512,7 +512,7 @@ class Payoffs(Page):
 
 
 page_sequence = [
-                # Welcome,
+                Welcome,
                 TaskIntro,
                 Task_Trial,
                 Task,
