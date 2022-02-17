@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a9b31e325feaef76f84770fabe85549bc0af4f3aca653617c0e8e348df59b68e
-size 286
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/otree_experiments.iml" filepath="$PROJECT_DIR$/.idea/otree_experiments.iml" />
+    </modules>
+  </component>
+</project>
