@@ -3,6 +3,15 @@
     <link href="{% static 'global/css/global.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap-4/css/bootstrap.css' %}" rel="stylesheet">
 
+<style>
+    video {
+        height: 100vh;
+        width: 100%;
+        object-fit: cover; // use "cover" to avoid distortion
+        position: absolute;
+    }
+</style>
+
 {% endblock %}
 
 {% block scripts %}
@@ -476,7 +485,7 @@
                             the information you have</b>.
                         </p>
 
-                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+                        <video controls preload="auto" controlslist="nodownload" <!--width="900" height="506"--> >
 
                             <source src="https://www.dropbox.com/s/xdzr9k88m0k14in/bonuses.mp4?raw=1" type="video/mp4">
 

@@ -3,6 +3,15 @@
     <link href="{% static 'global/css/global.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap-4/css/bootstrap.css' %}" rel="stylesheet">
 
+<style>
+    video {
+        height: 100vh;
+        width: 100%;
+        object-fit: cover; // use "cover" to avoid distortion
+        position: absolute;
+    }
+</style>
+
 {% endblock %}
 
 {% block scripts %}
@@ -190,11 +199,12 @@
                             payoff after the trial round.
                         </p>
 
-                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+                        <video controls preload="auto" controlslist="nodownload" <!--width="900" height="506"--> >
 
                             <source src="https://www.dropbox.com/s/s20rthf7q0xs4gv/taskintro.mp4?raw=1" type="video/mp4">
 
                         </video>
+
 
                     </div>
 
@@ -239,7 +249,7 @@
                             members in order to solve the task.
                         </p>
 
-                        <video controls preload="auto" controlslist="nodownload" width="900" height="506">
+                        <video controls preload="auto" controlslist="nodownload" <!--width="900" height="506"--> >
 
                             <source src="https://www.dropbox.com/s/bdys6iuszh50fqr/interaction_delphi.mp4?raw=1" type="video/mp4">
 
