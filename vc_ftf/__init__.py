@@ -198,27 +198,24 @@ class Player(BasePlayer):
     honesty_F = models.IntegerField(doc="I would never accept a bribe, even if it were very large."
                                         "(1: strongly disagree; 2;3;4; 5: strongly agree)"
                                    )
-    honesty_G = models.IntegerField(doc="I wouldn't pretend to like someone just to get that person to do favors for me."
-                                        "(1: strongly disagree; 2;3;4; 5: strongly agree)"
-                                   )
+    honesty_G = models.IntegerField(doc="I wouldn't pretend to like someone just to get that person to do favors for "
+                                        "me. (1: strongly disagree; 2;3;4; 5: strongly agree)"
+                                    )
     honesty_H = models.IntegerField(doc="I’d be tempted to use counterfeit money, if I were sure I could get away with"
                                         " it.(1: strongly disagree; 2;3;4; 5: strongly agree)"
-                                   )
+                                    )
     # Task related questions
     understanding = models.IntegerField(doc="How would you rate your own understanding of the task you worked on "
                                             "throughout today's experiment?"
                                             "(1: very weak; 2;3;4; 5: very good)"
-                                   )
-    reliability = models.IntegerField(doc="From the perspective of someone who was involved in the estimation process,"
-                                            "how reliable do you think the final estimates your group produced"
-                                            "in the ten rounds of today's experiment are"
-                                            "(1: very unreliable; 2;3;4; 5: very reliable)"
-                                   )
-    satisfaction = models.IntegerField(doc="Again from the perspective of someone who was involved in the estimation "
-                                          ", how satisfying did you perceive the overall process and the interaction"
-                                          "with your fellow group members?"
-                                            "(1: very unsatisfying; 2;3;4; 5: very satisfying)"
-                                   )
+                                        )
+    reliability = models.IntegerField(doc="How reliable, do you think, are the final estimates your group produced?"
+                                          "(1: very unreliable; 2;3;4; 5: very reliable)"
+                                      )
+    satisfaction = models.IntegerField(doc="How satisfying did you perceive the overall process and the interaction "
+                                           "with your fellow group members? (1: very unsatisfying; 2;3;4; "
+                                           "5: very satisfying)"
+                                       )
     strategy = models.StringField(label="<b>Please, briefly describe how you tried to solve the task in the experiment:</b> <br> <i>How "
                                       "did you evaluate your information, how did you transform it into your first estimate "
                                       "and the corresponding reasoning? What was your strategy for communicating your "
