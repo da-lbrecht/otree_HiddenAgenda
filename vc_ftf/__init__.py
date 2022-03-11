@@ -216,18 +216,28 @@ class Player(BasePlayer):
                                            "with your fellow group members? (1: very unsatisfying; 2;3;4; "
                                            "5: very satisfying)"
                                        )
-    strategy = models.StringField(label="<b>Please, briefly describe how you tried to solve the task in the experiment:</b> <br> <i>How "
-                                      "did you evaluate your information, how did you transform it into your first estimate "
-                                      "and the corresponding reasoning? What was your strategy for communicating your "
-                                      "information to others? How did you take the input of others into account?</i>",
-                                  doc="Please, briefly describe how you tried to solve the task in the experiment. How"
-                                      "did you evaluate your information, how did you transform it into your first estimate "
-                                      "and the corresponding reasoning? What was your strategy for communicating your "
-                                      "information to others? How did you take the input of others into account?")
-    wish = models.StringField(label="<b>Is there anything that would have helped you to better interact with your fellow group "
-                                  "members or to solve the task better in general?</b>",
-                              doc="Is there anything that would have helped you to better interact with your fellow group"
-                                  "members or to solve the task better in general?")
+    strategy_info = models.StringField(label="How did you evaluate your information and how did you transform it into"
+                                             " an estimate?",
+                                       doc="How did you evaluate your information and how did you transform it into"
+                                           " an estimate?",
+                                       blank=True
+                                       )
+    strategy_communication = models.StringField(label="What was your strategy for communicating your information to "
+                                                      "others?",
+                                                doc="What was your strategy for communicating your information to "
+                                                    "others?",
+                                                blank=True
+                                                )
+    strategy_others = models.StringField(label="How did you take the input of others into account?",
+                                         doc="How did you take the input of others into account?",
+                                         blank=True
+                                         )
+    wish = models.StringField(label="Finally, which changes to format of interaction would have helped you to better"
+                                    " interact with your fellow group members or to solve the task better in general?",
+                              doc="Finally, which changes to format of interaction would have helped you to better"
+                                  " interact with your fellow group members or to solve the task better in general?",
+                              blank=True
+                              )
 
 
 # FUNCTIONS

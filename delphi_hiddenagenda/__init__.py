@@ -43,7 +43,6 @@ overall_hiddenagenda_bonus = 0
 overall_accuracy_bonus = 0
 
 
-
 class Constants(BaseConstants):
     name_in_url = 'delphi_hiddenagenda'
     players_per_group = None
@@ -87,8 +86,10 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     pass
 
+
 class Group(BaseGroup):
     pass
+
 
 class Player(BasePlayer):
     # Payoff variables
@@ -98,7 +99,7 @@ class Player(BasePlayer):
                                                 doc="Bonus earned based on the accuracy of the group estimates in one"
                                                     "particular round")
     hiddenagenda_bonus = models.CurrencyField(initial=0,
-                                               doc="Bonus earned based on the individual hidden agenda")
+                                              doc="Bonus earned based on the individual hidden agenda")
 
     # Process variables
     starting_time = models.LongStringField(doc="Time at which Informed Consent is given and experiment starts")
@@ -118,35 +119,35 @@ class Player(BasePlayer):
     attention_check_1 = models.FloatField(initial=999,
                                           label="Q1: How many rounds of the task will you need to solve after the trial"
                                                 " round?",
-                                            doc="Attention check: How many rounds of the task will you need to solve "
-                                                "after the trial round? (integer)")
+                                          doc="Attention check: How many rounds of the task will you need to solve "
+                                              "after the trial round? (integer)")
     attention_check_2 = models.FloatField(initial=999,
                                           label="Q2: Which rounds will contribute to your personal payoff?",
-                                            doc="Attention check: Which rounds will contribute to your personal payoff?"
-                                                " (1: One randomly selected round; 2: Only the last round; 3: All rounds"
-                                                " after the trial round)"
-                                                )
+                                          doc="Attention check: Which rounds will contribute to your personal payoff?"
+                                              " (1: One randomly selected round; 2: Only the last round; 3: All rounds"
+                                              " after the trial round)"
+                                          )
     attention_check_3 = models.FloatField(initial=999,
                                           label="Q3: What precisely do you need to estimate?",
-                                            doc="What precisely do you need to estimate?"
-                                                "(1: The chance that the ladybird reaches the target area"
-                                                " 2: The chance that the ladybird does not reach the target area "
-                                                " 3: The chance that the ladybird ends up at level 0 after ten steps)"
-                                                )
+                                          doc="What precisely do you need to estimate?"
+                                              "(1: The chance that the ladybird reaches the target area"
+                                              " 2: The chance that the ladybird does not reach the target area "
+                                              " 3: The chance that the ladybird ends up at level 0 after ten steps)"
+                                          )
     attention_check_4 = models.FloatField(initial=999,
                                           label="Q4: What kind of feedback do you receive in each round?",
-                                            doc="Attention check: What kind of feedback do you receive in each round?"
-                                                " (1: First estimates and corresponding reasoning of all group members,"
-                                                " without knowing which belongs to whom; 2: All estimates and "
-                                                "corresponding reasonings made by the other group members; 3: Only the "
-                                                "reasoning of all group members, without knowing which belongs to whom")
+                                          doc="Attention check: What kind of feedback do you receive in each round?"
+                                              " (1: First estimates and corresponding reasoning of all group members,"
+                                              " without knowing which belongs to whom; 2: All estimates and "
+                                              "corresponding reasonings made by the other group members; 3: Only the "
+                                              "reasoning of all group members, without knowing which belongs to whom")
     attention_check_5 = models.FloatField(initial=999,
                                           label="Q5: What do you know about the ladybird?",
-                                            doc="Attention check: What do you know about the ladybird?"
-                                                "(1: The precise chance of reaching the target area, "
-                                                "2: The precise chance that it moves one level up in the first step, "
-                                                "3: That the chance that it moves one level up is the same in each step"
-                                                " in a given round)"
+                                          doc="Attention check: What do you know about the ladybird?"
+                                              "(1: The precise chance of reaching the target area, "
+                                              "2: The precise chance that it moves one level up in the first step, "
+                                              "3: That the chance that it moves one level up is the same in each step"
+                                              " in a given round)"
                                           )
 
     attention_check_6 = models.FloatField(inital=999,
@@ -168,7 +169,7 @@ class Player(BasePlayer):
                                          doc="First individual estimate given in Delphi procedure",
                                          min=0, max=100)
     indivarg = models.StringField(label="My reasoning behind my first estimate",
-                                   doc="Reasoning given for first individual estimate given in Delphi procedure")
+                                  doc="Reasoning given for first individual estimate given in Delphi procedure")
     indivarg_recovery = models.StringField(doc="Reasoning given for first individual estimate given in Delphi procedure"
                                                "stored in case of erroneous inputs to redisplay when prompting to"
                                                "correct input")
@@ -187,107 +188,117 @@ class Player(BasePlayer):
 
     # Randomization Variables
     feedback_order = models.FloatField(doc="Order in which feedback of fellow group members, except oneself is "
-                                                    "seen (1: 1,2,3; 2: 1,3,2; 3: 2,1,3; 4: 2,3,1; 5:3,1,2; 6:3,2,1")
+                                           "seen (1: 1,2,3; 2: 1,3,2; 3: 2,1,3; 4: 2,3,1; 5:3,1,2; 6:3,2,1")
 
     # Response Variables for Questionnaire
     gender = models.IntegerField(label="<b>Which gender do you identify with?</b>",
-                               choices=[
-                                   [1, 'female'],
-                                   [2, 'male'],
-                                   [3, 'other'],
-                               ],
-                                doc = "Questionnaire: Which gender do you identify with? "
-                                      "(1: female, "
-                                      "2: male"
-                                      "3: other"
-                                )
+                                 choices=[
+                                     [1, 'female'],
+                                     [2, 'male'],
+                                     [3, 'other'],
+                                 ],
+                                 doc="Questionnaire: Which gender do you identify with? "
+                                     "(1: female, "
+                                     "2: male"
+                                     "3: other"
+                                 )
     education = models.IntegerField(label="<b>If you think back to your time since starting primary school, how many"
                                           " years have you been following a formal education (school, vocational"
                                           " training, university,etc.) until today?</b>",
                                     min=0,
                                     max=100,
                                     doc="If you think back to your time since starting primary school, how many"
-                                          " years have you been following a formal education (school, vocational"
-                                          " training, university,etc.) until today?")
+                                        " years have you been following a formal education (school, vocational"
+                                        " training, university,etc.) until today?")
     field_of_studies = models.IntegerField(label="<b> What describes your current/most recent field of study"
                                                  " best?</b>",
-                                            choices=[
-                                                [1, 'Business and/or Economics'],
-                                                [2, 'Social Sciences'],
-                                                [3, 'Natural Sciences'],
-                                                [4, 'Arts'],
-                                                [5, 'Other'],
-                                                [6, 'I did/do not follow any studies']
-                                                ],
+                                           choices=[
+                                               [1, 'Business and/or Economics'],
+                                               [2, 'Social Sciences'],
+                                               [3, 'Natural Sciences'],
+                                               [4, 'Arts'],
+                                               [5, 'Other'],
+                                               [6, 'I did/do not follow any studies']
+                                           ],
                                            doc="Questionnaire: What describes your current/most recent field of study "
                                                "best?, (1: Business and/or Economics; 2: Social Sciences; 3: Natural"
                                                "Sciences; 4: Arts; 5: Other; 6: I did/do not follow any studies)")
 
     years_of_working = models.IntegerField(label="<b> Do you have professional working experience? If so, for how long?"
                                                  "</b>",
-                                            choices=[
-                                                [0, 'No, I do not have professional working experience'],
-                                                [6, 'less than 1 year'],
-                                                [1, '1 up to 2 years'],
-                                                [2, '2 up to 3 years'],
-                                                [3, '3 up to 4 years'],
-                                                [4, '4 up to 5 years'],
-                                                [5, '5 years or more'],
-                                                ],
+                                           choices=[
+                                               [0, 'No, I do not have professional working experience'],
+                                               [6, 'less than 1 year'],
+                                               [1, '1 up to 2 years'],
+                                               [2, '2 up to 3 years'],
+                                               [3, '3 up to 4 years'],
+                                               [4, '4 up to 5 years'],
+                                               [5, '5 years or more'],
+                                           ],
                                            doc="Questionnaire: Do you have professional working experience? If so, for"
                                                " how long? (0: No I do not have professional working experience;"
                                                "1: 1 year; 2: 2 years; 3: 3 years; 4: 4 years; 5: 5 years or more; "
                                                "6: less than 1 year)")
     # Honesty module
     honesty_A = models.IntegerField(doc="If I want something from a person I dislike, I will act very nicely toward"
-                                         " that person in order to get it. (1: strongly disagree; 2;3;4; 5: strongly "
+                                        " that person in order to get it. (1: strongly disagree; 2;3;4; 5: strongly "
                                         "agree)"
-                                   )
+                                    )
     honesty_B = models.IntegerField(doc="If I knew that I could never get caught, I would be willing to steal a million"
                                         " euro. (1: strongly disagree; 2;3;4; 5: strongly agree)"
-                                   )
+                                    )
     honesty_C = models.IntegerField(doc="I wouldn't use flattery to get a raise or promotion at work, even if I thought"
                                         " it would succeed. (1: strongly disagree; 2;3;4; 5: strongly agree)"
-                                   )
+                                    )
     honesty_D = models.IntegerField(doc="I would be tempted to buy stolen property if I were financially tight."
                                         "(1: strongly disagree; 2;3;4; 5: strongly agree)"
-                                   )
+                                    )
     honesty_E = models.IntegerField(doc="If I want something from someone, I will laugh at that person's worst jokes."
                                         "(1: strongly disagree; 2;3;4; 5: strongly agree)"
-                                   )
+                                    )
     honesty_F = models.IntegerField(doc="I would never accept a bribe, even if it were very large."
                                         "(1: strongly disagree; 2;3;4; 5: strongly agree)"
-                                   )
+                                    )
     honesty_G = models.IntegerField(doc="I wouldn't pretend to like someone just to get that person to do favors for "
                                         "me. (1: strongly disagree; 2;3;4; 5: strongly agree)"
-                                   )
+                                    )
     honesty_H = models.IntegerField(doc="I’d be tempted to use counterfeit money, if I were sure I could get away with"
                                         " it.(1: strongly disagree; 2;3;4; 5: strongly agree)"
-                                   )
+                                    )
     # Task related questions
     understanding = models.IntegerField(doc="How would you rate your own understanding of the task you worked on "
                                             "throughout today's experiment?"
                                             "(1: very weak; 2;3;4; 5: very good)"
-                                   )
+                                        )
     reliability = models.IntegerField(doc="How reliable, do you think, are the final estimates your group produced?"
                                           "(1: very unreliable; 2;3;4; 5: very reliable)"
-                                   )
+                                      )
     satisfaction = models.IntegerField(doc="How satisfying did you perceive the overall process and the interaction "
                                            "with your fellow group members? (1: very unsatisfying; 2;3;4; "
                                            "5: very satisfying)"
-                                   )
-    strategy = models.StringField(label="<b>Please, briefly describe how you tried to solve the task in the experiment:</b> <br> <i>How "
-                                      "did you evaluate your information, how did you transform it into your first estimate "
-                                      "and the corresponding reasoning? What was your strategy for communicating your "
-                                      "information to others? How did you take the input of others into account?</i>",
-                                  doc="Please, briefly describe how you tried to solve the task in the experiment. How"
-                                      "did you evaluate your information, how did you transform it into your first estimate "
-                                      "and the corresponding reasoning? What was your strategy for communicating your "
-                                      "information to others? How did you take the input of others into account?")
-    wish = models.StringField(label="<b>Is there anything that would have helped you to better interact with your fellow group "
-                                  "members or to solve the task better in general?</b>",
-                              doc="Is there anything that would have helped you to better interact with your fellow group"
-                                  "members or to solve the task better in general?")
+                                       )
+    strategy_info = models.StringField(label="How did you evaluate your information and how did you transform it into"
+                                             " an estimate?",
+                                       doc="How did you evaluate your information and how did you transform it into"
+                                           " an estimate?",
+                                       blank=True
+                                       )
+    strategy_communication = models.StringField(label="What was your strategy for communicating your information to "
+                                                      "others?",
+                                                doc="What was your strategy for communicating your information to "
+                                                    "others?",
+                                                blank=True
+                                                )
+    strategy_others = models.StringField(label="How did you take the input of others into account?",
+                                         doc="How did you take the input of others into account?",
+                                         blank=True
+                                         )
+    wish = models.StringField(label="Finally, which changes to format of interaction would have helped you to better"
+                                    " interact with your fellow group members or to solve the task better in general?",
+                              doc="Finally, which changes to format of interaction would have helped you to better"
+                                  " interact with your fellow group members or to solve the task better in general?",
+                              blank=True
+                              )
 
 
 # FUNCTIONS
@@ -301,7 +312,7 @@ def creating_session(subsession: Subsession):
         for player in subsession.get_players():
             temp_list = subsession_temp_list
             for i in list_of_round_ids:
-                player.in_round(i).round_displayed = temp_list[i-1]
+                player.in_round(i).round_displayed = temp_list[i - 1]
 
 
 # PAGES
@@ -329,8 +340,8 @@ class TaskIntro(Page):
     @staticmethod
     def live_method(player: Player, data):
         if (
-            data["information_type"] == "answer" and
-            player.attention_check_tries == 1
+                data["information_type"] == "answer" and
+                player.attention_check_tries == 1
         ):
             player.attention_check_1 = data["answer_q1"]
             player.attention_check_2 = data["answer_q2"]
@@ -347,23 +358,23 @@ class TaskIntro(Page):
                 data["answer_q5"] == 3 and
                 data["answer_q6"] == 2
         ):
-            return{
+            return {
                 player.id_in_group: {"information_type": "no_error", "no_error": "Yeah!"},
             }
         else:
             player.failed_attention_check = True
             player.attention_check_tries = player.attention_check_tries + 1
             incorrect_answers = np.array([
-                                data["answer_q1"] != 2,
-                                data["answer_q2"] != 3,
-                                data["answer_q3"] != 1,
-                                data["answer_q4"] != 1,
-                                data["answer_q5"] != 3,
-                                data["answer_q6"] != 2,
-                                ], dtype=bool)
+                data["answer_q1"] != 2,
+                data["answer_q2"] != 3,
+                data["answer_q3"] != 1,
+                data["answer_q4"] != 1,
+                data["answer_q5"] != 3,
+                data["answer_q6"] != 2,
+            ], dtype=bool)
             # incorrect_answers.np.astype(int)
             questions = ' and '.join(np.array(['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'])[incorrect_answers])
-            return{
+            return {
                 player.id_in_group: {"information_type": "error", "error": questions},
             }
 
@@ -382,7 +393,7 @@ class Task_Trial(Page):
 
     @staticmethod
     def live_method(player: Player, data):
-        global estimate_a, estimate_b, estimate_c, estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,\
+        global estimate_a, estimate_b, estimate_c, estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, \
             num_estims
         group = player.group
         players = group.get_players()
@@ -403,7 +414,7 @@ class Task_Trial(Page):
                 elif player.id_in_group == 4:
                     estimate_d = data["estimate"]
             else:
-                return{
+                return {
                     player.id_in_group: {"information_type": "error_1",
                                          "error": "estimate out of range"},
                 }
@@ -418,11 +429,11 @@ class Task_Trial(Page):
             elif player.id_in_group == 4:
                 indivarg_d = data["reasoning"]
         if (
-            estimate_a != 999
-            and estimate_b != 999
-            and estimate_c != 999
-            and estimate_d != 999
-            and data["information_type"] != "second_estimate"
+                estimate_a != 999
+                and estimate_b != 999
+                and estimate_c != 999
+                and estimate_d != 999
+                and data["information_type"] != "second_estimate"
         ):
             return {
                 1: {"player.id_in_group": "a",
@@ -469,18 +480,18 @@ class Task_Trial(Page):
                     and 0 <= data["second_estimate"] <= 100
             ):
                 player.second_indivestim = data["second_estimate"]
-                return{
+                return {
                     player.id_in_group: {"information_type": "completion_indicator"},
                 }
             else:
-                return{
+                return {
                     player.id_in_group: {"information_type": "error_2",
                                          "error": "estimate out of range"},
                 }
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b,\
+        global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
             second_estimate_c, second_estimate_d
 
         num_estims = 0
@@ -496,7 +507,7 @@ class Task_Trial(Page):
         if player.round_number == 1:
             pass
         else:
-            player.start_of_round = player.in_round(player.round_number-1).end_of_round
+            player.start_of_round = player.in_round(player.round_number - 1).end_of_round
 
 
 class Task(Page):
@@ -507,10 +518,9 @@ class Task(Page):
     def is_displayed(player: Player):
         return player.round_displayed <= Constants.num_rounds
 
-
     @staticmethod
     def live_method(player: Player, data):
-        global estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, second_estimate_c,\
+        global estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, second_estimate_c, \
             second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, num_estims, aggregate_estimate, \
             group_accuracy_bonus, random_number, feedback_order, result, indivarg_recovery_a, indivarg_recovery_b, \
             indivarg_recovery_c, indivarg_recovery_d, estimate_recovery_a, estimate_recovery_b, \
@@ -544,7 +554,7 @@ class Task(Page):
                     estimate_c = data["estimate"]
                 elif player.id_in_group == 4:
                     estimate_d = data["estimate"]
-        # if data["information_type"] == "reasoning":
+            # if data["information_type"] == "reasoning":
             player.indivarg = data["reasoning"]
             player.length_indivarg = len(data["reasoning"])
             player.erroneous_reasoning = 1
@@ -705,17 +715,17 @@ class Task(Page):
                                          "reasoning": indivarg_recovery_d},
                 }
         if (
-            estimate_a != 999
-            and estimate_b != 999
-            and estimate_c != 999
-            and estimate_d != 999
-            and indivarg_a != "none"
-            and indivarg_b != "none"
-            and indivarg_c != "none"
-            and indivarg_d != "none"
-            and data["information_type"] != "second_estimate"
+                estimate_a != 999
+                and estimate_b != 999
+                and estimate_c != 999
+                and estimate_d != 999
+                and indivarg_a != "none"
+                and indivarg_b != "none"
+                and indivarg_c != "none"
+                and indivarg_d != "none"
+                and data["information_type"] != "second_estimate"
         ):
-            feedback_order = round((random.uniform(0, 1)*5+0.5), 0)
+            feedback_order = round((random.uniform(0, 1) * 5 + 0.5), 0)
             if feedback_order == 1:
                 return {
                     1: {"player.id_in_group": "a",  # presented order of fellow group members' input: 2, 3, 4
@@ -966,12 +976,13 @@ class Task(Page):
                 elif player.id_in_group == 4:
                     second_estimate_d = data["second_estimate"]
                 if (
-                    second_estimate_a != 999
-                    and second_estimate_b != 999
-                    and second_estimate_c != 999
-                    and second_estimate_d != 999
+                        second_estimate_a != 999
+                        and second_estimate_b != 999
+                        and second_estimate_c != 999
+                        and second_estimate_d != 999
                 ):
-                    aggregate_estimate = (second_estimate_a+second_estimate_b+second_estimate_c+second_estimate_d)/4
+                    aggregate_estimate = (
+                                                 second_estimate_a + second_estimate_b + second_estimate_c + second_estimate_d) / 4
                     random_number = random.uniform(0, 1)
                     if player.round_displayed == 1:
                         result = Constants.round_1_result
@@ -1004,25 +1015,25 @@ class Task(Page):
                         result = Constants.round_10_result
                         hiddenagenda = Constants.round_10_hiddenagenda
                     if result == 1:
-                        if random_number > pow((1 - (aggregate_estimate/100)), 2):
+                        if random_number > pow((1 - (aggregate_estimate / 100)), 2):
                             group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
-                        elif random_number <= pow((1 - (aggregate_estimate/100)), 2):
+                        elif random_number <= pow((1 - (aggregate_estimate / 100)), 2):
                             group_accuracy_bonus = 0
                     elif result == 0:
-                        if random_number > pow((aggregate_estimate/100), 2):
+                        if random_number > pow((aggregate_estimate / 100), 2):
                             group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
-                        elif random_number <= pow((aggregate_estimate/100), 2):
+                        elif random_number <= pow((aggregate_estimate / 100), 2):
                             group_accuracy_bonus = 0
                     if hiddenagenda == 0:
-                        if random_number <= pow((1-(aggregate_estimate/100)), 2):
+                        if random_number <= pow((1 - (aggregate_estimate / 100)), 2):
                             hiddenagenda_bonus = Constants.hiddenagenda_bonus
-                        elif random_number > pow((1-(aggregate_estimate/100)), 2):
+                        elif random_number > pow((1 - (aggregate_estimate / 100)), 2):
                             hiddenagenda_bonus = 0
                         overall_hiddenagenda_bonus += hiddenagenda_bonus
                     elif hiddenagenda == 100:
-                        if random_number <= pow((aggregate_estimate/100), 2):
+                        if random_number <= pow((aggregate_estimate / 100), 2):
                             hiddenagenda_bonus = Constants.hiddenagenda_bonus
-                        elif random_number > pow((aggregate_estimate/100), 2):
+                        elif random_number > pow((aggregate_estimate / 100), 2):
                             hiddenagenda_bonus = 0
                         overall_hiddenagenda_bonus += hiddenagenda_bonus
                     overall_accuracy_bonus += group_accuracy_bonus
@@ -1054,11 +1065,11 @@ class Task(Page):
                         0: {"information_type": "completion_indicator"},
                     }
                 else:
-                    return{
+                    return {
                         player.id_in_group: {"information_type": "wait_indicator"},
                     }
             else:
-                return{
+                return {
                     player.id_in_group: {"information_type": "error_2",
                                          "error": "estimate out of range"},
                 }
@@ -1070,18 +1081,17 @@ class Task(Page):
 
         player.random_number = random_number
         player.aggregate_estimate = aggregate_estimate
-        player.group_accuracy_bonus = group_accuracy_bonus*0.25
-        player.payoff += group_accuracy_bonus*0.25
+        player.group_accuracy_bonus = group_accuracy_bonus * 0.25
+        player.payoff += group_accuracy_bonus * 0.25
         player.feedback_order = feedback_order
         if player.id_in_group >= 3:
             player.hiddenagenda_bonus = hiddenagenda_bonus
             player.payoff += hiddenagenda_bonus
 
-
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
         else:
-            player.start_of_round = player.in_round(player.round_number-1).end_of_round
+            player.start_of_round = player.in_round(player.round_number - 1).end_of_round
 
         # if player.round_number == Constants.num_rounds
         #     set_payoffs(player)
@@ -1089,9 +1099,11 @@ class Task(Page):
 
 class Questionnaire(Page):
     form_model = 'player'
-    form_fields = ['gender','education','field_of_studies', 'years_of_working',
-                   'honesty_A', 'honesty_B', 'honesty_C', 'honesty_D', 'honesty_E', 'honesty_F', 'honesty_G', 'honesty_H',
-                   'understanding', 'reliability', 'satisfaction', 'strategy', 'wish']
+    form_fields = ['gender', 'education', 'field_of_studies', 'years_of_working',
+                   'honesty_A', 'honesty_B', 'honesty_C', 'honesty_D', 'honesty_E', 'honesty_F', 'honesty_G',
+                   'honesty_H',
+                   'understanding', 'reliability', 'satisfaction', 'strategy_info', 'strategy_communication',
+                   'strategy_others', 'wish']
 
     @staticmethod
     def is_displayed(subsession: Subsession):
@@ -1109,15 +1121,15 @@ class Payoffs(Page):
         player
         return {
             "overall_hiddenagenda_bonus": cu(overall_hiddenagenda_bonus),
-            "overall_accuracy_bonus": cu(overall_accuracy_bonus/4),
+            "overall_accuracy_bonus": cu(overall_accuracy_bonus / 4),
         }
 
 
 page_sequence = [
-                Welcome,
-                TaskIntro,
-                Task_Trial,
-                Task,
-                Questionnaire,
-                Payoffs
-                ]
+    # Welcome,
+    # TaskIntro,
+    # Task_Trial,
+    # Task,
+    Questionnaire,
+    #Payoffs
+]
