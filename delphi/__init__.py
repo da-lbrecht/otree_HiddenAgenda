@@ -1054,9 +1054,11 @@ class Task(Page):
 
 class Questionnaire(Page):
     form_model = 'player'
-    form_fields = ['gender','education','field_of_studies', 'years_of_working',
-                   'honesty_A', 'honesty_B', 'honesty_C', 'honesty_D', 'honesty_E', 'honesty_F', 'honesty_G', 'honesty_H',
-                   'understanding', 'reliability', 'satisfaction', 'strategy', 'wish']
+    form_fields = ['gender', 'education', 'field_of_studies', 'years_of_working',
+                   'honesty_A', 'honesty_B', 'honesty_C', 'honesty_D', 'honesty_E', 'honesty_F', 'honesty_G',
+                   'honesty_H',
+                   'understanding', 'reliability', 'satisfaction', 'strategy_info', 'strategy_communication',
+                   'strategy_others', 'wish']
 
     @staticmethod
     def is_displayed(subsession: Subsession):
