@@ -1,0 +1,321 @@
+
+{% block styles %}
+    <link href="{% static 'global/css/global.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-4/css/bootstrap.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'global/js/basics.js' %}"></script>
+    <script src="{% static 'global/js/navbuttons.js' %}"></script>
+    <script src="{% static 'bootstrap-4/js/bootstrap.bundle.js' %}"></script>
+
+    <!-- Live Interaction -->
+    <script>
+
+    {% if player.id_in_group == 1 %} // control which initial info each player sees
+        document.getElementById("info_a").style.display = "block";
+    {% elif player.id_in_group == 2 %}
+        document.getElementById("info_b").style.display = "block";
+    {% elif player.id_in_group == 3 %}
+        document.getElementById("info_c").style.display = "block";
+    {% elif player.id_in_group == 4 %}
+        document.getElementById("info_d").style.display = "block";
+    {% endif %}
+
+        var first_indivestim
+        var indivarg
+        var second_indivestim
+
+function make_estimate() {
+        estimate = parseFloat(document.getElementById("estimate_input").value)
+        liveSend({"information_type": "estimate", "estimate": estimate})
+        document.getElementById("wait_for_others").style.display = "block";
+        document.getElementById("estimate").style.display = "none";
+        document.getElementById("error_1").style.display = "none";
+    }
+
+    function saveTime() {
+        document.getElementById("end_of_trial_input").value = new Date().getTime();
+    }
+
+    function liveRecv(data) {
+        if (data["information_type"] == "error") {
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("estimate").style.display = "block";
+            document.getElementById("error_1").style.display = "block";
+            document.getElementById("first_indivestim").value = data["estimate"];
+        } else if (data["information_type"] == "disagreement_indicator") {
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("estimate").style.display = "block";
+            document.getElementById("disagreement").style.display = "block";
+            document.getElementById("first_indivestim").value = data["estimate"];
+        } else if (data["information_type"] == "completion_indicator") {
+            document.getElementById("first_header").style.display = "none";
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("second_header").style.display = "block";
+            document.getElementById("completion_message").style.display = "block";
+            document.getElementById("next_button").style.display = "block";
+        }
+    }
+    </script>
+{% endblock %}
+
+
+{% block title %}
+    <table class="table">
+        <tr>
+            <td style="width:70%;border-color:transparent">Trial Round</td>
+            <td style="width:30%;border-color:transparent;text-align: right;">
+                <img src="{% static 'img/um_logo.jpg' %}" style="width:30%;">
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+
+
+{% block content %}
+
+<body>
+    <!-- Header <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist"> -->
+
+    <div class="card">
+        <div class="card-header">
+        <nav  role="navigation">
+
+             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                <li class="nav-item" >
+                    <a class="nav-link back-and-forth active" id="part1-tab" data-toggle="tab" href="#part1" role="tab" aria-controls="part1"> Your payoff </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link back-and-forth" id="part2-tab" data-toggle="tab" href="#part2" role="tab" aria-controls="part2"> Your Info </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link back-and-forth" id="part3-tab" data-toggle="tab" href="#part3" role="tab" aria-controls="part3"> Solving the task </a>
+                </li>
+
+            </ul>
+
+        </nav>
+        </div>
+
+        <!-- Instructions -->
+
+        <div class="tab-content" id="myTabContent">
+
+            <!-- Part 1: WHATEVER FIRST TAB HERE -->
+            <div class="tab-pane show active" id="part1" role="tabpanel" aria-labelledby="part1-tab">
+                <div class="card-header bg-white border-bottom-0 sticky-top mt-3">
+                    <p class="h4">Your payoff based on this round</p>
+                </div>
+                <div class="card-body">
+
+                    <div>
+                        <p>
+                            This round does not influence your payoff. The trial round is solely meant for you and your
+                            fellow group members to get to know the process of deriving an estimate.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- on Card Navigation  Arrows -->
+
+                    <!-- greyed out left arrow on first page -->
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col col-lg-2">
+                            <p class="prevtab text-secondary text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#D3D3D3" class="bi-arrow-left-circle" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                            </p>
+                        </div>
+
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="nexttab text-center" data-toggle="tooltip" data-placement="top" title="Next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-right-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
+                                </svg>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Part 2: WHATEVER SECOND TAB HERE  -->
+            <div class="tab-pane" id="part2" role="tabpanel" aria-labelledby="part2-tab">
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top">
+                    <p class="h4">Your Info</p>
+                </div>
+
+                <div class="card-body">
+                    <div>
+
+                        <p>
+                            Below you can see your own private information. You see the path Kara took when the program
+                            was executed once in the past.
+                        </p>
+
+                        <p>
+                            Everybody in your group receives a path from a distinct past
+                            execution of the program. Consequently, the path you see is in all likelihood different from
+                            what others in your group see.
+                        </p>
+                    </div>
+
+                    <div id="info_a" style="display: none">
+                        <img id="info_a" src="{% static 'img/RandomWalks/trial0.75A.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_b" style="display: none">
+                        <img id="info_b" src="{% static 'img/RandomWalks/trial0.75B.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_c" style="display: none">
+                        <img id="info_c" src="{% static 'img/RandomWalks/trial0.75C.png' %}" style="width:90%;">
+                    </div>
+
+                    <div id="info_d" style="display: none">
+                        <img id="info_d" src="{% static 'img/RandomWalks/trial0.75D.png' %}" style="width:90%;">
+                    </div>
+
+
+
+
+
+                    <!-- on Card Navigation  Arrows -->
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="prevtab text-center" data-toggle="tooltip" data-placement="top" title="Back">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-left-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                            </p>
+                        </div>
+
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="nexttab text-center" data-toggle="tooltip" data-placement="top" title="Next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-right-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
+                                </svg>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Part 3: WHATEVER FINAL TAB HERE -->
+            <div class="tab-pane" id="part3" role="tabpanel" aria-labelledby="part3-tab">
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: block" id="first_header">
+                    <p class="h4">Estimate</p>
+                </div>
+
+                <div class="card-header bg-white border-bottom-0 mt-3 sticky-top" style="display: none" id="second_header">
+                    <p class="h4">Done!</p>
+                </div>
+
+                <div class="card-body">
+
+                    <div id="estimate" style="display: block">
+                        <p>
+                            You can now <b>turn to your group in the video conference</b> on the second screen
+                            in order to discuss your information and derive a group estimate.
+                        </p>
+
+                        <p>
+                            Which estimate did you agree on during the group discussion?
+                        </p>
+
+                            <input id="estimate_input"
+                                   type="text"
+                                   size="3"> in 100
+
+                        <p>
+                        <div id="error_1" style="display: none">
+                            <p style="color:red;">
+                                <b> Your estimate needs to be a number in the range from 0 to 100.</b>
+                            </p>
+                        </div>
+
+                        <div id="disagreement" style="display: none">
+                            <p style="color:red;">
+                                <b> Not all of you indicated the same estimate. All four of you should indicate the
+                                estimate you agreed on during the discussion with your group, in other words everyone
+                                needs to state the same estimate.</b>
+                            </p>
+                        </div>
+
+                        <br>
+                        <br>
+                            <button type="button" onclick="make_estimate()" class="btn btn-primary btn-large">
+                                Send estimate
+                            </button>
+                    </div>
+
+                    <div id="wait_for_others" style="display: none">
+                        Please wait until all your fellow group members completed their input.
+                        <span id="message"></span>
+                    </div>
+
+                    <div id="completion_message" style="display: none">
+                        <p>
+                            You completed the trial round. This round was just to illustrate the process.
+                        </p>
+
+                        <p>
+                            For the trial round, as well as for all the following rounds you will not receive any
+                            feedback on your estimates until the end of the experiment. You may immediately continue
+                            to the next round as soon as all your group members submitted the group estimate.
+                        </p>
+
+                        <p>
+                            If you have any further questions regarding the experiment, now would be a good point in
+                            time to ask them. Please give a sign to the experimenter if you want to ask something.
+                            If you feel well-informed, please click the blue button to continue. You will then start
+                            with the first out of {{ Constants.num_rounds }} rounds of the experiment.
+                            All these {{ Constants.num_rounds }} rounds count towards your
+                            earnings in the experiment as outlined in the introductory video.
+                        </p>
+
+
+                    </div>
+
+                    <!-- on Card Navigation  Arrows -->
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col col-lg-2">
+                            <p onclick="topFunction()" class="prevtab text-center" data-toggle="tooltip" data-placement="top" title="Back">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#076bff" class="bi bi-arrow-left-circle" viewBox="0 0 16 16" style="cursor: pointer">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                            </p>
+                        </div>
+
+                        <div class="col col-lg-2" id="next_button" style="display: none">
+                            <button class="btn btn-primary btn-large" onclick="saveTime()">
+                                Continue to first round
+                            </button>
+                        </div>
+
+                        <input id="end_of_trial_input" name="end_of_trial" type="hidden" value=""/>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+{% endblock %}

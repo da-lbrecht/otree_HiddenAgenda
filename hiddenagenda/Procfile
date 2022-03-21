@@ -1,3 +1,2 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a194e83fc9cfdb2c7792399b595d56f4e25980560be92b1bc57e16732f41106d
-size 57
+web: otree prodserver1of2
+worker: otree prodserver2of2

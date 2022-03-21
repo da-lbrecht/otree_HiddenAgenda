@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:fc0509744b491135c4f1477bbf763832fb64029b41382416c61416fb7b6c03b0
-size 518
+(apply,CacheStats{hitCount=69, missCount=137, loadSuccessCount=137, loadExceptionCount=0, totalLoadTime=1284254530, evictionCount=0})
+(tree,CacheStats{hitCount=271, missCount=236, loadSuccessCount=229, loadExceptionCount=0, totalLoadTime=1187475045, evictionCount=0})
+(commit,CacheStats{hitCount=68, missCount=69, loadSuccessCount=69, loadExceptionCount=0, totalLoadTime=670180667, evictionCount=0})
+(tag,CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0})

@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9d582f16-3688-403e-9c9d-5b906c15b53d" name="Default Changelist" comment="Initial commit node modules.">
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-grid.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-grid.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-grid.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-grid.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-grid.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-grid.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-grid.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-reboot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-reboot.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-reboot.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-reboot.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-utilities.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-utilities.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-utilities.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-utilities.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-utilities.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/css/bootstrap.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.esm.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.esm.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.esm.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/dist/js/bootstrap.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/alert.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/alert.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/base-component.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/base-component.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/button.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/button.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/carousel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/carousel.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/collapse.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/collapse.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dom/data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dom/data.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dom/event-handler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dom/event-handler.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dom/manipulator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dom/manipulator.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dom/selector-engine.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dom/selector-engine.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dropdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/dropdown.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/modal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/modal.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/offcanvas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/offcanvas.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/popover.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/popover.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/scrollspy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/scrollspy.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/tab.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/tab.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/toast.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/toast.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/tooltip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/dist/tooltip.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/alert.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/base-component.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/button.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/carousel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/collapse.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/dom/data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/dom/event-handler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/dom/manipulator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/dom/selector-engine.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/dropdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/modal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/offcanvas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/popover.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/scrollspy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/tab.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/toast.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/tooltip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/util/backdrop.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/util/component-functions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/util/focustrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/util/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/util/sanitizer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/js/src/util/scrollbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_accordion.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_alert.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_badge.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_breadcrumb.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_button-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_card.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_carousel.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_close.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_containers.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_dropdown.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_functions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_helpers.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_images.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_list-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_modal.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_nav.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_navbar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_offcanvas.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_placeholders.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_popover.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_progress.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_reboot.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_root.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_spinners.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_tables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_toasts.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_tooltip.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_transitions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_type.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/bootstrap-grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/bootstrap-reboot.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/bootstrap-utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/bootstrap.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/forms/_floating-labels.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/forms/_form-check.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/forms/_form-control.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/forms/_form-range.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/forms/_form-select.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/forms/_form-text.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/forms/_input-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/forms/_labels.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/forms/_validation.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/helpers/_clearfix.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/helpers/_colored-links.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/helpers/_position.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/helpers/_ratio.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/helpers/_stacks.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/helpers/_stretched-link.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/helpers/_text-truncation.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/helpers/_visually-hidden.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/helpers/_vr.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_alert.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_backdrop.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_border-radius.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_box-shadow.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_breakpoints.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_caret.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_clearfix.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_color-scheme.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_container.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_deprecate.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_gradients.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_image.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_list-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_lists.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_reset-text.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_resize.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_table-variants.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_text-truncate.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_transition.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/mixins/_visually-hidden.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/utilities/_api.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap/scss/vendor/_rfs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap4/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/node_modules/bootstrap4/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hiddenagenda/package-lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_UPDATE_ALL_ROOTS" value="false" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="1tkLjdfrCb4aQpJzFjrB0Aiut4o" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python&#10;Cython" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hiddenagenda" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hiddenagenda" />
+      <recent name="$PROJECT_DIR$/hiddenagenda/_static/mov" />
+      <recent name="$PROJECT_DIR$/hiddenagenda/_static/img" />
+      <recent name="$PROJECT_DIR$/hiddenagenda/_static/img/RandomWalks" />
+      <recent name="$PROJECT_DIR$/hiddenagenda/" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hiddenagenda/_static/mov" />
+      <recent name="$PROJECT_DIR$/hiddenagenda/_static/img" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="otree_experiments" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="otree_experiments" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9d582f16-3688-403e-9c9d-5b906c15b53d" name="Default Changelist" comment="" />
+      <created>1623308278173</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1623308278173</updated>
+      <workItem from="1623308296906" duration="7112000" />
+      <workItem from="1623654154377" duration="10229000" />
+      <workItem from="1623679772933" duration="279000" />
+      <workItem from="1624266238043" duration="1930000" />
+      <workItem from="1624268800904" duration="534000" />
+      <workItem from="1624282650983" duration="2332000" />
+      <workItem from="1625466916417" duration="15827000" />
+      <workItem from="1625577373438" duration="68000" />
+      <workItem from="1628750182987" duration="1510000" />
+      <workItem from="1628752705203" duration="20890000" />
+      <workItem from="1628836235880" duration="16472000" />
+      <workItem from="1628861793967" duration="2129000" />
+      <workItem from="1628864117468" duration="74000" />
+      <workItem from="1629095823013" duration="233000" />
+      <workItem from="1629096118671" duration="16704000" />
+      <workItem from="1629183137752" duration="5397000" />
+      <workItem from="1629208184035" duration="6696000" />
+      <workItem from="1629268739783" duration="3732000" />
+      <workItem from="1629871896086" duration="4349000" />
+      <workItem from="1629964390397" duration="755000" />
+      <workItem from="1630390385157" duration="18065000" />
+      <workItem from="1630477772782" duration="2696000" />
+      <workItem from="1630563329129" duration="13878000" />
+      <workItem from="1630650015694" duration="11647000" />
+      <workItem from="1630995100635" duration="576000" />
+      <workItem from="1631012640866" duration="2652000" />
+      <workItem from="1631016562101" duration="800000" />
+      <workItem from="1631686347110" duration="6102000" />
+      <workItem from="1631775963539" duration="196000" />
+      <workItem from="1631782134106" duration="7570000" />
+      <workItem from="1631858712913" duration="11324000" />
+      <workItem from="1631873954849" duration="88000" />
+      <workItem from="1631874223063" duration="1009000" />
+      <workItem from="1632118007299" duration="1628000" />
+      <workItem from="1632120084829" duration="28000" />
+      <workItem from="1632735755715" duration="20000" />
+      <workItem from="1645041895296" duration="1000" />
+      <workItem from="1645085931003" duration="7560000" />
+      <workItem from="1645180130138" duration="1433000" />
+      <workItem from="1645181904264" duration="236000" />
+      <workItem from="1645523844811" duration="1244000" />
+      <workItem from="1646294853365" duration="325000" />
+      <workItem from="1646297432344" duration="5000" />
+      <workItem from="1647854382984" duration="127000" />
+      <workItem from="1647854767799" duration="2222000" />
+    </task>
+    <task id="LOCAL-00035" summary="Set message for completion of round">
+      <created>1629215890423</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1629215890423</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Adjust size and style of input fields.">
+      <created>1629271413170</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1629271413170</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Enable jump to Round 2">
+      <created>1629280234472</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1629280234472</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Display correct round number">
+      <created>1629280718531</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1629280718531</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Display correct round number">
+      <created>1629280727876</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1629280727876</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Save time at end of round">
+      <created>1629875056536</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1629875056536</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Have trial round and save time at start of round">
+      <created>1629876944946</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1629876944946</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Insert images of random walks">
+      <created>1629964497968</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1629964497969</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Adapt instructions in trial round.">
+      <created>1630391953105</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1630391953105</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Add trial round hints.">
+      <created>1630394229121</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1630394229121</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Display distinct trial round hint per player.">
+      <created>1630398247608</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1630398247608</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Change trial round text.">
+      <created>1630399255236</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1630399255236</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Display different hints per player in Round 1">
+      <created>1630400800185</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1630400800185</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Start changing attention check into live method">
+      <created>1630403903349</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1630403903349</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Continue changing attention check into live method">
+      <created>1630415120478</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1630415120478</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Make attention check questions working">
+      <created>1630418852672</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1630418852674</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Make attention check questions work">
+      <created>1630420296435</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1630420296436</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Create radio button barebone in attention check">
+      <created>1630481125592</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1630481125593</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Complete attention check questions">
+      <created>1630569913564</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1630569913564</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Start implementation of bonus calculation">
+      <created>1630579411368</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1630579411368</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Calculate aggregate estimates and bonus at end of round">
+      <created>1630585979261</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1630585979261</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Fix randomness in binarized scoring rule + prepare randomized feedback order">
+      <created>1630587591711</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1630587591712</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Test trial + 2 rounds">
+      <created>1630650739124</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1630650739125</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Fix error message when inputting non-numeric estimates">
+      <created>1630651448155</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1630651448155</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Fix error message when inputting non-numeric estimates">
+      <created>1630651758287</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1630651758288</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Tackle reloading issue after first estimate was made">
+      <created>1630652539716</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1630652539716</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Set info links in js for round 1">
+      <created>1630657301323</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1630657301323</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Set info links in js">
+      <created>1630658726599</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1630658726599</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Bugfixes in round progression">
+      <created>1630663725456</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1630663725456</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Randomize feedback order in task">
+      <created>1630668965596</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1630668965597</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Randomize feedback order in task">
+      <created>1630668991120</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1630668991120</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Randomize feedback order in task">
+      <created>1630683030227</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1630683030227</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Prepare deployment on ad-hoc server">
+      <created>1631689549998</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1631689549998</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Update Kara path images">
+      <created>1631713959488</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1631713959488</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Update taskintro.mov and add payment information.">
+      <created>1631798238874</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1631798238877</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Update interaction.mp4.">
+      <created>1631804591263</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1631804591263</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Update taskintro.mp4.">
+      <created>1631807031118</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1631807031118</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Edit messages in intro and task trial phase.">
+      <created>1631860729716</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1631860729717</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Edit continue button in final round of task.">
+      <created>1631861523710</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1631861523710</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Adapt payoff information in later rounds">
+      <created>1631864280796</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1631864280797</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Adapt payoff information in later rounds">
+      <created>1631871144844</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1631871144844</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Switch to 2 rounds for testing.">
+      <created>1631872498255</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1631872498255</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Restore project.">
+      <created>1631875186196</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1631875186197</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Change currency from points to EUR.">
+      <created>1632118917138</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1632118917139</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Change video format to auto-fill browser dimensions.">
+      <created>1645087288650</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1645087288650</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Put full Delphi experiment in page sequence.">
+      <created>1645087520288</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1645087520288</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Chang video formatting.">
+      <created>1645092158178</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1645092158178</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Initial commit for new treatment delphi_accountable.">
+      <created>1647855776130</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1647855776131</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Add /venv to .gitignore">
+      <created>1647856315053</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1647856315053</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fix randomness in binarized scoring rule + prepare randomized feedback order" />
+    <MESSAGE value="Test trial + 2 rounds" />
+    <MESSAGE value="Fix error message when inputting non-numeric estimates" />
+    <MESSAGE value="Tackle reloading issue after first estimate was made" />
+    <MESSAGE value="Set info links in js for round 1" />
+    <MESSAGE value="Set info links in js" />
+    <MESSAGE value="Bugfixes in round progression" />
+    <MESSAGE value="Randomize feedback order in task" />
+    <MESSAGE value="Prepare deployment on ad-hoc server" />
+    <MESSAGE value="Update Kara path images" />
+    <MESSAGE value="Update taskintro.mov and add payment information." />
+    <MESSAGE value="Update interaction.mp4." />
+    <MESSAGE value="Update taskintro.mp4." />
+    <MESSAGE value="Edit messages in intro and task trial phase." />
+    <MESSAGE value="Edit continue button in final round of task." />
+    <MESSAGE value="Adapt payoff information in later rounds" />
+    <MESSAGE value="Switch to 2 rounds for testing." />
+    <MESSAGE value="Restore project." />
+    <MESSAGE value="Change currency from points to EUR." />
+    <MESSAGE value="Change video format to auto-fill browser dimensions." />
+    <MESSAGE value="Put full Delphi experiment in page sequence." />
+    <MESSAGE value="Chang video formatting." />
+    <MESSAGE value="Initial commit for new treatment delphi_accountable." />
+    <MESSAGE value="Add /venv to .gitignore" />
+    <MESSAGE value="Initial commit node modules." />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit node modules." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

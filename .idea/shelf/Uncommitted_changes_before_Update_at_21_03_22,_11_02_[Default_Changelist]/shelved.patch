@@ -1,0 +1,41 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>version https://git-lfs.github.com/spec/v1\noid sha256:d4b22675ac80469360051ce1d92a288b0c9b1e8aa6fe67f59f8e3cc6eb66fc0e\nsize 30\n/venv/\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	(revision ac1f843c622b9ccb33fa3fe8c6e56088c1355966)
++++ b/.gitignore	(date 1647856550577)
+@@ -2,3 +2,4 @@
+ oid sha256:d4b22675ac80469360051ce1d92a288b0c9b1e8aa6fe67f59f8e3cc6eb66fc0e
+ size 30
+ /venv/
++/hiddenagenda/node_modules/
+Index: .idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/Project_Default.xml b/.idea/inspectionProfiles/Project_Default.xml
+new file mode 100644
+--- /dev/null	(date 1631873938675)
++++ b/.idea/inspectionProfiles/Project_Default.xml	(date 1631873938675)
+@@ -0,0 +1,15 @@
++<component name="InspectionProjectProfileManager">
++  <profile version="1.0">
++    <option name="myName" value="Project Default" />
++    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
++      <option name="myValues">
++        <value>
++          <list size="1">
++            <item index="0" class="java.lang.String" itemvalue="file_path_a" />
++          </list>
++        </value>
++      </option>
++      <option name="myCustomValuesEnabled" value="true" />
++    </inspection_tool>
++  </profile>
++</component>
+\ No newline at end of file
