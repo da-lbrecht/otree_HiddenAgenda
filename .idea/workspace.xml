@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c1783b0f-66e3-46ff-8b1e-bac4d2c3bf9d" name="Changes" comment="Renew .idea file.">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="c1783b0f-66e3-46ff-8b1e-bac4d2c3bf9d" name="Changes" comment="Recreate pycharm environment upon reopening.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delphi_accountable/Task.html" beforeDir="false" afterPath="$PROJECT_DIR$/delphi_accountable/Task.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delphi_accountable/Task_Trial.html" beforeDir="false" afterPath="$PROJECT_DIR$/delphi_accountable/Task_Trial.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/delphi_accountable/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/delphi_accountable/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +66,7 @@
       <workItem from="1647862642953" duration="2008000" />
       <workItem from="1647864667044" duration="70000" />
       <workItem from="1647864739385" duration="12910000" />
-      <workItem from="1647933235282" duration="1876000" />
+      <workItem from="1647933235282" duration="4901000" />
     </task>
     <task id="LOCAL-00001" summary="Recreate from time machine.">
       <created>1647862695109</created>
@@ -98,7 +96,21 @@
       <option name="project" value="LOCAL" />
       <updated>1647864439721</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Introduce pseudomized feedback and feedback on aggregate as well as second estimate.">
+      <created>1647935432470</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1647935432470</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Recreate pycharm environment upon reopening.">
+      <created>1647935463332</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1647935463332</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,7 +135,9 @@
     <MESSAGE value="Recreate from time machine." />
     <MESSAGE value="Archive superseded files." />
     <MESSAGE value="Renew .idea file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Renew .idea file." />
+    <MESSAGE value="Introduce pseudomized feedback and feedback on aggregate as well as second estimate." />
+    <MESSAGE value="Recreate pycharm environment upon reopening." />
+    <option name="LAST_COMMIT_MESSAGE" value="Recreate pycharm environment upon reopening." />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>
