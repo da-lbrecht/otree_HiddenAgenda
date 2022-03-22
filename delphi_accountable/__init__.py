@@ -376,18 +376,31 @@ class Task_Trial(Page):
 
     @staticmethod
     def live_method(player: Player, data):
-        global estimate_a, estimate_b, estimate_c, estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d,\
-            num_estims
+        global estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, second_estimate_c, \
+            second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, num_estims, aggregate_estimate, \
+            group_accuracy_bonus, random_number, feedback_order, result, indivarg_recovery_a, indivarg_recovery_b, \
+            indivarg_recovery_c, indivarg_recovery_d, estimate_recovery_a, estimate_recovery_b, \
+            estimate_recovery_c, estimate_recovery_d, error_a, error_b, error_c, error_d
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
+            player.first_indivestim = data["estimate"]
+            player.erroneous_estimate = 1
+            if player.id_in_group == 1:
+                estimate_recovery_a = data["estimate"]
+            elif player.id_in_group == 2:
+                estimate_recovery_b = data["estimate"]
+            elif player.id_in_group == 3:
+                estimate_recovery_c = data["estimate"]
+            elif player.id_in_group == 4:
+                estimate_recovery_d = data["estimate"]
             if (
                     type(data["estimate"]) == float
                     or type(data["estimate"]) == int
                     and 0 <= data["estimate"] <= 100
             ):
-                player.first_indivestim = data["estimate"]
                 num_estims += 1
+                player.erroneous_estimate = 0
                 if player.id_in_group == 1:
                     estimate_a = data["estimate"]
                 elif player.id_in_group == 2:
@@ -396,14 +409,20 @@ class Task_Trial(Page):
                     estimate_c = data["estimate"]
                 elif player.id_in_group == 4:
                     estimate_d = data["estimate"]
-            else:
-                return{
-                    player.id_in_group: {"information_type": "error_1",
-                                         "error": "estimate out of range"},
-                }
-        if data["information_type"] == "reasoning":
-                player.indivarg = data["reasoning"]
-                player.length_indivarg = len(data["reasoning"])
+            # if data["information_type"] == "reasoning":
+            player.indivarg = data["reasoning"]
+            player.length_indivarg = len(data["reasoning"])
+            player.erroneous_reasoning = 1
+            if player.id_in_group == 1:
+                indivarg_recovery_a = data["reasoning"]
+            elif player.id_in_group == 2:
+                indivarg_recovery_b = data["reasoning"]
+            elif player.id_in_group == 3:
+                indivarg_recovery_c = data["reasoning"]
+            elif player.id_in_group == 4:
+                indivarg_recovery_d = data["reasoning"]
+            if len(data["reasoning"]) >= 100:
+                player.erroneous_reasoning = 0
                 if player.id_in_group == 1:
                     indivarg_a = data["reasoning"]
                 elif player.id_in_group == 2:
@@ -412,16 +431,157 @@ class Task_Trial(Page):
                     indivarg_c = data["reasoning"]
                 elif player.id_in_group == 4:
                     indivarg_d = data["reasoning"]
-
+        # Identify potential errors in input
+        if player.id_in_group == 1:
+            if (
+                    type(estimate_recovery_a) == float
+                    or type(estimate_recovery_a) == int
+                    and 0 <= estimate_recovery_a <= 100
+            ):
+                if len(indivarg_recovery_a) >= 100:  # No error
+                    error_a = 0
+                else:  # Only error in reasoning
+                    error_a = 2
+            else:
+                if len(indivarg_recovery_a) >= 100:  # Only error in estimate
+                    error_a = 1
+                else:  # Error in estimate and reasoning
+                    error_a = 3
+        if player.id_in_group == 2:
+            if (
+                    type(estimate_recovery_b) == float
+                    or type(estimate_recovery_b) == int
+                    and 0 <= estimate_recovery_b <= 100
+            ):
+                if len(indivarg_recovery_b) >= 100:  # No error
+                    error_b = 0
+                else:  # Only error in reasoning
+                    error_b = 2
+            else:
+                if len(indivarg_recovery_b) >= 100:  # Only error in estimate
+                    error_b = 1
+                else:  # Error in estimate and reasoning
+                    error_b = 3
+        if player.id_in_group == 3:
+            if (
+                    type(estimate_recovery_c) == float
+                    or type(estimate_recovery_c) == int
+                    and 0 <= estimate_recovery_c <= 100
+            ):
+                if len(indivarg_recovery_c) >= 100:  # No error
+                    error_c = 0
+                else:  # Only error in reasoning
+                    error_c = 2
+            else:
+                if len(indivarg_recovery_c) >= 100:  # Only error in estimate
+                    error_c = 1
+                else:  # Error in estimate and reasoning
+                    error_c = 3
+        if player.id_in_group == 4:
+            if (
+                    type(estimate_recovery_d) == float
+                    or type(estimate_recovery_d) == int
+                    and 0 <= estimate_recovery_d <= 100
+            ):
+                if len(indivarg_recovery_d) >= 100:  # No error
+                    error_d = 0
+                else:  # Only error in reasoning
+                    error_d = 2
+            else:
+                if len(indivarg_recovery_d) >= 100:  # Only error in estimate
+                    error_d = 1
+                else:  # Error in estimate and reasoning
+                    error_d = 3
+        # Send error messages to participants
+        if player.id_in_group == 1:
+            if error_a == 1:
+                return {
+                    player.id_in_group: {"information_type": "error_1",
+                                         "estimate": estimate_recovery_a,
+                                         "reasoning": indivarg_recovery_a},
+                }
+            elif error_a == 2:
+                return {
+                    player.id_in_group: {"information_type": "erroneous_reasoning",
+                                         "estimate": estimate_recovery_a,
+                                         "reasoning": indivarg_recovery_a},
+                }
+            elif error_a == 3:
+                return {
+                    player.id_in_group: {"information_type": "error_both",
+                                         "estimate": estimate_recovery_a,
+                                         "reasoning": indivarg_recovery_a},
+                }
+        if player.id_in_group == 2:
+            if error_b == 1:
+                return {
+                    player.id_in_group: {"information_type": "error_1",
+                                         "estimate": estimate_recovery_b,
+                                         "reasoning": indivarg_recovery_b},
+                }
+            elif error_b == 2:
+                return {
+                    player.id_in_group: {"information_type": "erroneous_reasoning",
+                                         "estimate": estimate_recovery_b,
+                                         "reasoning": indivarg_recovery_b},
+                }
+            elif error_b == 3:
+                return {
+                    player.id_in_group: {"information_type": "error_both",
+                                         "estimate": estimate_recovery_b,
+                                         "reasoning": indivarg_recovery_b},
+                }
+        if player.id_in_group == 3:
+            if error_c == 1:
+                return {
+                    player.id_in_group: {"information_type": "error_1",
+                                         "estimate": estimate_recovery_c,
+                                         "reasoning": indivarg_recovery_c},
+                }
+            elif error_c == 2:
+                return {
+                    player.id_in_group: {"information_type": "erroneous_reasoning",
+                                         "estimate": estimate_recovery_c,
+                                         "reasoning": indivarg_recovery_c},
+                }
+            elif error_c == 3:
+                return {
+                    player.id_in_group: {"information_type": "error_both",
+                                         "estimate": estimate_recovery_c,
+                                         "reasoning": indivarg_recovery_c},
+                }
+        if player.id_in_group == 4:
+            if error_d == 1:
+                return {
+                    player.id_in_group: {"information_type": "error_1",
+                                         "estimate": estimate_recovery_d,
+                                         "reasoning": indivarg_recovery_d},
+                }
+            elif error_d == 2:
+                return {
+                    player.id_in_group: {"information_type": "erroneous_reasoning",
+                                         "estimate": estimate_recovery_d,
+                                         "reasoning": indivarg_recovery_d},
+                }
+            elif error_d == 3:
+                return {
+                    player.id_in_group: {"information_type": "error_both",
+                                         "estimate": estimate_recovery_d,
+                                         "reasoning": indivarg_recovery_d},
+                }
         if (
-            estimate_a != 999
-            and estimate_b != 999
-            and estimate_c != 999
-            and estimate_d != 999
-            and data["information_type"] != "second_estimate"
+                estimate_a != 999
+                and estimate_b != 999
+                and estimate_c != 999
+                and estimate_d != 999
+                and indivarg_a != "none"
+                and indivarg_b != "none"
+                and indivarg_c != "none"
+                and indivarg_d != "none"
+                and data["information_type"] != "second_estimate"
         ):
             return {
-                1: {"player.id_in_group": "a",
+                1: {"player.id_in_group": "a",  # presented order of fellow group members' input: 2, 3, 4
                     "estimate_a": estimate_a,
                     "estimate_b": estimate_b,
                     "estimate_c": estimate_c,
@@ -430,7 +590,7 @@ class Task_Trial(Page):
                     "reasoning_b": indivarg_b,
                     "reasoning_c": indivarg_c,
                     "reasoning_d": indivarg_d},
-                2: {"player.id_in_group": "b",
+                2: {"player.id_in_group": "b",  # presented order of fellow group members' input: 1, 3, 4
                     "estimate_a": estimate_a,
                     "estimate_b": estimate_b,
                     "estimate_c": estimate_c,
@@ -439,7 +599,7 @@ class Task_Trial(Page):
                     "reasoning_b": indivarg_b,
                     "reasoning_c": indivarg_c,
                     "reasoning_d": indivarg_d},
-                3: {"player.id_in_group": "c",
+                3: {"player.id_in_group": "c",  # presented order of fellow group members' input: 1, 2, 4
                     "estimate_a": estimate_a,
                     "estimate_b": estimate_b,
                     "estimate_c": estimate_c,
@@ -448,7 +608,7 @@ class Task_Trial(Page):
                     "reasoning_b": indivarg_b,
                     "reasoning_c": indivarg_c,
                     "reasoning_d": indivarg_d},
-                4: {"player.id_in_group": "d",
+                4: {"player.id_in_group": "d",  # presented order of fellow group members' input: 1, 2, 3
                     "estimate_a": estimate_a,
                     "estimate_b": estimate_b,
                     "estimate_c": estimate_c,
@@ -465,34 +625,95 @@ class Task_Trial(Page):
                     and 0 <= data["second_estimate"] <= 100
             ):
                 player.second_indivestim = data["second_estimate"]
-                return{
-                    player.id_in_group: {"information_type": "completion_indicator"},
-                }
+                if player.id_in_group == 1:
+                    second_estimate_a = data["second_estimate"]
+                elif player.id_in_group == 2:
+                    second_estimate_b = data["second_estimate"]
+                elif player.id_in_group == 3:
+                    second_estimate_c = data["second_estimate"]
+                elif player.id_in_group == 4:
+                    second_estimate_d = data["second_estimate"]
+                if (
+                        second_estimate_a != 999
+                        and second_estimate_b != 999
+                        and second_estimate_c != 999
+                        and second_estimate_d != 999
+                ):
+                    aggregate_estimate = (second_estimate_a + second_estimate_b + second_estimate_c +
+                                          second_estimate_d) / 4
+                    return {
+                        1: {"information_type": "completion_indicator_a",
+                            "group_estimate": aggregate_estimate,
+                            "estimate_a": second_estimate_a,  # presented order of fellow group members' input: 2, 3, 4
+                            "estimate_b": second_estimate_b,
+                            "estimate_c": second_estimate_c,
+                            "estimate_d": second_estimate_d},
+                        2: {"information_type": "completion_indicator_b",
+                            "group_estimate": aggregate_estimate,
+                            "estimate_a": second_estimate_a,  # presented order of fellow group members' input: 1, 3, 4
+                            "estimate_b": second_estimate_b,
+                            "estimate_c": second_estimate_c,
+                            "estimate_d": second_estimate_d},
+                        3: {"information_type": "completion_indicator_c",
+                            "group_estimate": aggregate_estimate,
+                            "estimate_a": second_estimate_a,  # presented order of fellow group members' input: 1, 2, 4
+                            "estimate_b": second_estimate_b,
+                            "estimate_c": second_estimate_c,
+                            "estimate_d": second_estimate_d},
+                        4: {"information_type": "completion_indicator_d",
+                            "group_estimate": aggregate_estimate,
+                            "estimate_a": second_estimate_a,  # presented order of fellow group members' input: 1, 2, 3
+                            "estimate_b": second_estimate_b,
+                            "estimate_c": second_estimate_c,
+                            "estimate_d": second_estimate_d},
+                    }
+                else:
+                    return {
+                        player.id_in_group: {"information_type": "wait_indicator"},
+                    }
             else:
                 return {
                     player.id_in_group: {"information_type": "error_2",
                                          "error": "estimate out of range"},
                 }
 
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b,\
-            second_estimate_c, second_estimate_d
 
-        num_estims = 0
-        estimate_a = 999
-        estimate_b = 999
-        estimate_c = 999
-        estimate_d = 999
-        second_estimate_a = 999
-        second_estimate_b = 999
-        second_estimate_c = 999
-        second_estimate_d = 999
+@staticmethod
+def before_next_page(player: Player, timeout_happened):
+    global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
+        second_estimate_c, second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, estimate_recovery_a, \
+        estimate_recovery_b, estimate_recovery_c, estimate_recovery_d, indivarg_recovery_a, indivarg_recovery_b, \
+        indivarg_recovery_c, indivarg_recovery_d, error_a, error_b, error_c, error_d
 
-        if player.round_number == 1:
-            pass
-        else:
-            player.start_of_round = player.in_round(player.round_number-1).end_of_round
+    estimate_a = 999
+    estimate_b = 999
+    estimate_c = 999
+    estimate_d = 999
+    indivarg_a = "none"
+    indivarg_b = "none"
+    indivarg_c = "none"
+    indivarg_d = "none"
+    estimate_recovery_a = 999
+    estimate_recovery_b = 999
+    estimate_recovery_c = 999
+    estimate_recovery_d = 999
+    indivarg_recovery_a = "none"
+    indivarg_recovery_b = "none"
+    indivarg_recovery_c = "none"
+    indivarg_recovery_d = "none"
+    error_a = 0
+    error_b = 0
+    error_c = 0
+    error_d = 0
+    second_estimate_a = 999
+    second_estimate_b = 999
+    second_estimate_c = 999
+    second_estimate_d = 999
+
+    if player.round_number == 1:
+        pass
+    else:
+        player.start_of_round = player.in_round(player.round_number-1).end_of_round
 
 
 class Task(Page):
@@ -903,7 +1124,7 @@ class Payoffs(Page):
 page_sequence = [
                 # Welcome,
                 # TaskIntro,
-                # Task_Trial,
+                Task_Trial,
                 Task,
                 Questionnaire,
                 Payoffs
