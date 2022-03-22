@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c1783b0f-66e3-46ff-8b1e-bac4d2c3bf9d" name="Changes" comment="Archive superseded files." />
+    <list default="true" id="c1783b0f-66e3-46ff-8b1e-bac4d2c3bf9d" name="Changes" comment="Renew .idea file.">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delphi_accountable/Task.html" beforeDir="false" afterPath="$PROJECT_DIR$/delphi_accountable/Task.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delphi_accountable/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/delphi_accountable/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +24,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -50,7 +65,10 @@
       <updated>1647857637334</updated>
       <workItem from="1647857638737" duration="2030000" />
       <workItem from="1647862043653" duration="436000" />
-      <workItem from="1647862642953" duration="1772000" />
+      <workItem from="1647862642953" duration="2008000" />
+      <workItem from="1647864667044" duration="70000" />
+      <workItem from="1647864739385" duration="12910000" />
+      <workItem from="1647933235282" duration="1876000" />
     </task>
     <task id="LOCAL-00001" summary="Recreate from time machine.">
       <created>1647862695109</created>
@@ -73,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647864218627</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Renew .idea file.">
+      <created>1647864439721</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1647864439721</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,10 +116,14 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/hiddenagenda" />
+    </ignored-roots>
     <MESSAGE value="Refactoring of files for cleaner folder structure." />
     <MESSAGE value="Recreate from time machine." />
     <MESSAGE value="Archive superseded files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Archive superseded files." />
+    <MESSAGE value="Renew .idea file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Renew .idea file." />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>
