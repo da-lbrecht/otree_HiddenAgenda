@@ -408,7 +408,17 @@
             document.getElementById("third_header").style.display = "block";
             document.getElementById("completion_message").style.display = "none";
             document.getElementById("next_button").style.display = "none";
-            } else if (data["information_type"] == "completion_indicator") {
+            } else if (data["information_type"] == "completion_indicator_a") {
+            second_indivestim_a = data["estimate_a"]
+            document.getElementById("second_indivestim_a_a").innerHTML = second_indivestim_a;
+            second_indivestim_b = data["estimate_b"]
+            document.getElementById("second_indivestim_b_a").innerHTML = second_indivestim_b;
+            second_indivestim_c = data["estimate_c"]
+            document.getElementById("second_indivestim_c_a").innerHTML = second_indivestim_c;
+            second_indivestim_d = data["estimate_d"]
+            document.getElementById("second_indivestim_d_a").innerHTML = second_indivestim_d;
+            aggregate_estimate = data["group_estimate"]
+            document.getElementById("aggregate_estimate_a").innerHTML = aggregate_estimate;
             document.getElementById("wait_for_others").style.display = "none";
             document.getElementById("second_header").style.display = "none";
             document.getElementById("feedback_a").style.display = "none";
@@ -420,6 +430,91 @@
             document.getElementById("second_indivestim_error").style.display = "none";
             document.getElementById("third_header").style.display = "block";
             document.getElementById("completion_message").style.display = "block";
+            document.getElementById("final_feedback_a").style.display = "block";
+                if ({{ player.round_number }} < {{ Constants.num_rounds}} ){
+                    document.getElementById("next_button").style.display = "block";
+                } else {
+                    document.getElementById("last_next_button").style.display = "block";
+                }
+            } else if (data["information_type"] == "completion_indicator_b") {
+            second_indivestim_a = data["estimate_a"]
+            document.getElementById("second_indivestim_a_b").innerHTML = second_indivestim_a;
+            second_indivestim_b = data["estimate_b"]
+            document.getElementById("second_indivestim_b_b").innerHTML = second_indivestim_b;
+            second_indivestim_c = data["estimate_c"]
+            document.getElementById("second_indivestim_c_b").innerHTML = second_indivestim_c;
+            second_indivestim_d = data["estimate_d"]
+            document.getElementById("second_indivestim_d_b").innerHTML = second_indivestim_d;
+            aggregate_estimate = data["group_estimate"]
+            document.getElementById("aggregate_estimate_b").innerHTML = aggregate_estimate;
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("second_header").style.display = "none";
+            document.getElementById("feedback_a").style.display = "none";
+            document.getElementById("feedback_b").style.display = "none";
+            document.getElementById("feedback_c").style.display = "none";
+            document.getElementById("feedback_d").style.display = "none";
+            document.getElementById("second_estimate").style.display = "none";
+            document.getElementById("second_estimate_button").style.display = "none";
+            document.getElementById("second_indivestim_error").style.display = "none";
+            document.getElementById("third_header").style.display = "block";
+            document.getElementById("completion_message").style.display = "block";
+            document.getElementById("final_feedback_b").style.display = "block";
+                if ({{ player.round_number }} < {{ Constants.num_rounds}} ){
+                    document.getElementById("next_button").style.display = "block";
+                } else {
+                    document.getElementById("last_next_button").style.display = "block";
+                }
+            } else if (data["information_type"] == "completion_indicator_c") {
+            second_indivestim_a = data["estimate_a"]
+            document.getElementById("second_indivestim_a_c").innerHTML = second_indivestim_a;
+            second_indivestim_b = data["estimate_b"]
+            document.getElementById("second_indivestim_b_c").innerHTML = second_indivestim_b;
+            second_indivestim_c = data["estimate_c"]
+            document.getElementById("second_indivestim_c_c").innerHTML = second_indivestim_c;
+            second_indivestim_d = data["estimate_d"]
+            document.getElementById("second_indivestim_d_c").innerHTML = second_indivestim_d;
+            aggregate_estimate = data["group_estimate"]
+            document.getElementById("aggregate_estimate_c").innerHTML = aggregate_estimate;
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("second_header").style.display = "none";
+            document.getElementById("feedback_a").style.display = "none";
+            document.getElementById("feedback_b").style.display = "none";
+            document.getElementById("feedback_c").style.display = "none";
+            document.getElementById("feedback_d").style.display = "none";
+            document.getElementById("second_estimate").style.display = "none";
+            document.getElementById("second_estimate_button").style.display = "none";
+            document.getElementById("second_indivestim_error").style.display = "none";
+            document.getElementById("third_header").style.display = "block";
+            document.getElementById("completion_message").style.display = "block";
+            document.getElementById("final_feedback_c").style.display = "block";
+                if ({{ player.round_number }} < {{ Constants.num_rounds}} ){
+                    document.getElementById("next_button").style.display = "block";
+                } else {
+                    document.getElementById("last_next_button").style.display = "block";
+                }
+            } else if (data["information_type"] == "completion_indicator_d") {
+            second_indivestim_a = data["estimate_a"]
+            document.getElementById("second_indivestim_a_d").innerHTML = second_indivestim_a;
+            second_indivestim_b = data["estimate_b"]
+            document.getElementById("second_indivestim_b_d").innerHTML = second_indivestim_b;
+            second_indivestim_c = data["estimate_c"]
+            document.getElementById("second_indivestim_c_d").innerHTML = second_indivestim_c;
+            second_indivestim_d = data["estimate_d"]
+            document.getElementById("second_indivestim_d_d").innerHTML = second_indivestim_d;
+            aggregate_estimate = data["group_estimate"]
+            document.getElementById("aggregate_estimate_d").innerHTML = aggregate_estimate;
+            document.getElementById("wait_for_others").style.display = "none";
+            document.getElementById("second_header").style.display = "none";
+            document.getElementById("feedback_a").style.display = "none";
+            document.getElementById("feedback_b").style.display = "none";
+            document.getElementById("feedback_c").style.display = "none";
+            document.getElementById("feedback_d").style.display = "none";
+            document.getElementById("second_estimate").style.display = "none";
+            document.getElementById("second_estimate_button").style.display = "none";
+            document.getElementById("second_indivestim_error").style.display = "none";
+            document.getElementById("third_header").style.display = "block";
+            document.getElementById("completion_message").style.display = "block";
+            document.getElementById("final_feedback_d").style.display = "block";
                 if ({{ player.round_number }} < {{ Constants.num_rounds}} ){
                     document.getElementById("next_button").style.display = "block";
                 } else {
@@ -427,7 +522,6 @@
                 }
         }
     }
-
     // Group bonus popup
     function popup() {
       var popup = document.getElementById("group_bonus_popup");
@@ -912,23 +1006,28 @@
                             <br>
 
                         <p style="color:grey;">
-                            <b> Input of your fellow group members (in random order) </b>
+                            <b> Input of your fellow group members </b>
                         </p>
                         <hr>
 
-                            <b>Estimate: </b>
+                            <b>Person A
+                            <br>Estimate: </b>
                             <span id="first_indivestim_b_a"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_b_a"></span>
                             <br>
                             <br>
-                            <b>Estimate: </b>
+                            <b>Person B
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_c_a"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_c_a"></span>
                             <br>
                             <br>
-                            <b>Estimate: </b>
+                            <b>Person C
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_d_a"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_d_a"></span>
@@ -963,23 +1062,29 @@
                             <br>
 
                         <p style="color:grey;">
-                            <b> Input of your fellow group members (in random order) </b>
+                            <b> Input of your fellow group members </b>
                         </p>
                         <hr>
 
-                            <b>Estimate: </b>
+                            <b>Person A
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_a_b"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_a_b"></span>
                             <br>
                             <br>
-                            <b>Estimate: </b>
+                            <b>Person B
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_c_b"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_c_b"></span>
                             <br>
                             <br>
-                            <b>Estimate: </b>
+                            <b>Person C
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_d_b"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_d_b"></span>
@@ -1014,23 +1119,29 @@
                             <br>
 
                         <p style="color:grey;">
-                            <b> Input of your fellow group members (in random order) </b>
+                            <b> Input of your fellow group members </b>
                         </p>
                         <hr>
 
-                            <b>Estimate: </b>
+                            <b>Person A
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_a_c"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_a_c"></span>
                             <br>
                             <br>
-                            <b>Estimate: </b>
+                            <b>Person B
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_b_c"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_b_c"></span>
                             <br>
                             <br>
-                            <b>Estimate: </b>
+                            <b>Person C
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_d_c"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_d_c"></span>
@@ -1065,23 +1176,29 @@
                             <br>
 
                         <p style="color:grey;">
-                            <b> Input of your fellow group members (in random order) </b>
+                            <b> Input of your fellow group members </b>
                         </p>
                         <hr>
 
-                            <b>Estimate: </b>
+                            <b>Person
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_a_d"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_a_d"></span>
                             <br>
                             <br>
-                            <b>Estimate: </b>
+                            <b>Person B
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_b_d"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_b_d"></span>
                             <br>
                             <br>
-                            <b>Estimate: </b>
+                            <b>Person C
+                            <br>
+                            Estimate: </b>
                             <span id="first_indivestim_c_d"></span> in 100.
                             <br>
                             <b>Reasoning: </b> <span id="indivarg_c_d"></span>
@@ -1125,8 +1242,186 @@
                     </div>
 
                     <div id="completion_message" style="display: none">
-                        You completed round {{ player.round_number }}. Please click the blue button to continue.
+                        You completed round {{ player.round_number }}.
+                        <br><br>
+                        Below you can see your aggregated group estimate, and the second estimates of yourself and your
+                        fellow group members.
+                        <br><br>
+                        Please click the blue button to continue.
                     </div>
+
+                    <!-- Feedback  for player 1 in group -->
+                    <div id="final_feedback_a" style="display: none">
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Aggregate group estimate </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <span id="aggregate_estimate_a"></span> in 100
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Your own estimate </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <span id="second_indivestim_a_a"></span> in 100
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Estimates of your fellow group members </b>
+                        </p>
+                        <hr>
+
+                            <b>Person A: </b>
+                            <span id="second_indivestim_b_a"></span> in 100
+                            <br>
+                            <b>Person B: </b>
+                            <span id="second_indivestim_c_a"></span> in 100
+                            <br>
+                            <b>Person C: </b>
+                            <span id="second_indivestim_d_a"></span> in 100
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                    </div>
+
+                    <!-- Feedback  for player 2 in group -->
+                    <div id="final_feedback_b" style="display: none">
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Aggregate group estimate </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <span id="aggregate_estimate_b"></span> in 100
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Your own estimate </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <span id="second_indivestim_b_b"></span> in 100
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Estimates of your fellow group members </b>
+                        </p>
+                        <hr>
+
+                            <b>Person A: </b>
+                            <span id="second_indivestim_a_b"></span> in 100
+                            <br>
+                            <b>Person B: </b>
+                            <span id="second_indivestim_c_b"></span> in 100
+                            <br>
+                            <b>Person C: </b>
+                            <span id="second_indivestim_d_b"></span> in 100
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                    </div>
+
+                    <!-- Feedback  for player 3 in group -->
+                    <div id="final_feedback_c" style="display: none">
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Aggregate group estimate </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <span id="aggregate_estimate_c"></span> in 100
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Your own estimate </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <span id="second_indivestim_c_c"></span> in 100
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Estimates of your fellow group members </b>
+                        </p>
+                        <hr>
+
+                            <b>Person A: </b>
+                            <span id="second_indivestim_a_c"></span> in 100
+                            <br>
+                            <b>Person B: </b>
+                            <span id="second_indivestim_b_c"></span> in 100
+                            <br>
+                            <b>Person C: </b>
+                            <span id="second_indivestim_d_c"></span> in 100
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                    </div>
+
+                    <!-- Feedback  for player 4 in group -->
+                    <div id="final_feedback_d" style="display: none">
+                        <br>
+
+                        <p style="color:grey;">
+                            <b> Aggregate group estimate </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <span id="aggregate_estimate_d"></span> in 100
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Your own estimate </b>
+                        </p>
+                        <hr>
+
+                        <p>
+                            <span id="second_indivestim_d_d"></span> in 100
+                            <br>
+                            <br>
+
+                        <p style="color:grey;">
+                            <b> Estimates of your fellow group members </b>
+                        </p>
+                        <hr>
+
+                            <b>Person A: </b>
+                            <span id="second_indivestim_a_d"></span> in 100
+                            <br>
+                            <b>Person B: </b>
+                            <span id="second_indivestim_b_d"></span> in 100
+                            <br>
+                            <b>Person C: </b>
+                            <span id="second_indivestim_c_d"></span> in 100
+                            <br>
+                            <br>
+                        </p>
+                        <hr>
+                    </div>
+
 
                     <!-- on Card Navigation  Arrows -->
                     <div class="row justify-content-md-center mt-5">
