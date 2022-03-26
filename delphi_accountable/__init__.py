@@ -1094,41 +1094,16 @@ class Task(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
-            second_estimate_c, second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, estimate_recovery_a,\
-            estimate_recovery_b, estimate_recovery_c, estimate_recovery_d, indivarg_recovery_a, indivarg_recovery_b, \
-            indivarg_recovery_c, indivarg_recovery_d, error_a, error_b, error_c, error_d
+        # global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
+        #     second_estimate_c, second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, estimate_recovery_a,\
+        #     estimate_recovery_b, estimate_recovery_c, estimate_recovery_d, indivarg_recovery_a, indivarg_recovery_b, \
+        #     indivarg_recovery_c, indivarg_recovery_d, error_a, error_b, error_c, error_d
 
         player.random_number = random_number
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
         player.feedback_order = feedback_order
-
-        estimate_a = 999
-        estimate_b = 999
-        estimate_c = 999
-        estimate_d = 999
-        indivarg_a = "none"
-        indivarg_b = "none"
-        indivarg_c = "none"
-        indivarg_d = "none"
-        estimate_recovery_a = 999
-        estimate_recovery_b = 999
-        estimate_recovery_c = 999
-        estimate_recovery_d = 999
-        indivarg_recovery_a = "none"
-        indivarg_recovery_b = "none"
-        indivarg_recovery_c = "none"
-        indivarg_recovery_d = "none"
-        error_a = 0
-        error_b = 0
-        error_c = 0
-        error_d = 0
-        second_estimate_a = 999
-        second_estimate_b = 999
-        second_estimate_c = 999
-        second_estimate_d = 999
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
