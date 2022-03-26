@@ -37,6 +37,7 @@ group_accuracy_bonus = 999
 random_number = 999
 feedback_order = 999
 result = 999
+reset_required = 0
 
 
 class Constants(BaseConstants):
@@ -286,7 +287,7 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 
-# Randomization of task round dispay
+# Randomization of task round display
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
         list_of_round_ids = range(1, Constants.num_rounds + 1)
@@ -380,10 +381,38 @@ class Task_Trial(Page):
             second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, num_estims, aggregate_estimate, \
             group_accuracy_bonus, random_number, feedback_order, result, indivarg_recovery_a, indivarg_recovery_b, \
             indivarg_recovery_c, indivarg_recovery_d, estimate_recovery_a, estimate_recovery_b, \
-            estimate_recovery_c, estimate_recovery_d, error_a, error_b, error_c, error_d
+            estimate_recovery_c, estimate_recovery_d, error_a, error_b, error_c, error_d, reset_required
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
+            # Check whether there is still old temporary data present
+            if reset_required == 1:
+                estimate_a = 999
+                estimate_b = 999
+                estimate_c = 999
+                estimate_d = 999
+                indivarg_a = "none"
+                indivarg_b = "none"
+                indivarg_c = "none"
+                indivarg_d = "none"
+                estimate_recovery_a = 999
+                estimate_recovery_b = 999
+                estimate_recovery_c = 999
+                estimate_recovery_d = 999
+                indivarg_recovery_a = "none"
+                indivarg_recovery_b = "none"
+                indivarg_recovery_c = "none"
+                indivarg_recovery_d = "none"
+                error_a = 0
+                error_b = 0
+                error_c = 0
+                error_d = 0
+                second_estimate_a = 999
+                second_estimate_b = 999
+                second_estimate_c = 999
+                second_estimate_d = 999
+                reset_required = 0
+                print("Reset completed")
             player.first_indivestim = data["estimate"]
             player.erroneous_estimate = 1
             if player.id_in_group == 1:
@@ -641,6 +670,7 @@ class Task_Trial(Page):
                 ):
                     aggregate_estimate = (second_estimate_a + second_estimate_b + second_estimate_c +
                                           second_estimate_d) / 4
+                    reset_required = 1
                     return {
                         1: {"information_type": "completion_indicator_a",
                             "group_estimate": aggregate_estimate,
@@ -680,35 +710,10 @@ class Task_Trial(Page):
 
 @staticmethod
 def before_next_page(player: Player, timeout_happened):
-    global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
-        second_estimate_c, second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, estimate_recovery_a, \
-        estimate_recovery_b, estimate_recovery_c, estimate_recovery_d, indivarg_recovery_a, indivarg_recovery_b, \
-        indivarg_recovery_c, indivarg_recovery_d, error_a, error_b, error_c, error_d
-
-    estimate_a = 999
-    estimate_b = 999
-    estimate_c = 999
-    estimate_d = 999
-    indivarg_a = "none"
-    indivarg_b = "none"
-    indivarg_c = "none"
-    indivarg_d = "none"
-    estimate_recovery_a = 999
-    estimate_recovery_b = 999
-    estimate_recovery_c = 999
-    estimate_recovery_d = 999
-    indivarg_recovery_a = "none"
-    indivarg_recovery_b = "none"
-    indivarg_recovery_c = "none"
-    indivarg_recovery_d = "none"
-    error_a = 0
-    error_b = 0
-    error_c = 0
-    error_d = 0
-    second_estimate_a = 999
-    second_estimate_b = 999
-    second_estimate_c = 999
-    second_estimate_d = 999
+    # global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
+    #     second_estimate_c, second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, estimate_recovery_a, \
+    #     estimate_recovery_b, estimate_recovery_c, estimate_recovery_d, indivarg_recovery_a, indivarg_recovery_b, \
+    #     indivarg_recovery_c, indivarg_recovery_d, error_a, error_b, error_c, error_d
 
     if player.round_number == 1:
         pass
@@ -731,10 +736,38 @@ class Task(Page):
             second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, num_estims, aggregate_estimate, \
             group_accuracy_bonus, random_number, feedback_order, result, indivarg_recovery_a, indivarg_recovery_b, \
             indivarg_recovery_c, indivarg_recovery_d, estimate_recovery_a, estimate_recovery_b, \
-            estimate_recovery_c, estimate_recovery_d, error_a, error_b, error_c, error_d
+            estimate_recovery_c, estimate_recovery_d, error_a, error_b, error_c, error_d, reset_required
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
+            # Check whether there is still old temporary data present, reset if yes
+            if reset_required == 1:
+                estimate_a = 999
+                estimate_b = 999
+                estimate_c = 999
+                estimate_d = 999
+                indivarg_a = "none"
+                indivarg_b = "none"
+                indivarg_c = "none"
+                indivarg_d = "none"
+                estimate_recovery_a = 999
+                estimate_recovery_b = 999
+                estimate_recovery_c = 999
+                estimate_recovery_d = 999
+                indivarg_recovery_a = "none"
+                indivarg_recovery_b = "none"
+                indivarg_recovery_c = "none"
+                indivarg_recovery_d = "none"
+                error_a = 0
+                error_b = 0
+                error_c = 0
+                error_d = 0
+                second_estimate_a = 999
+                second_estimate_b = 999
+                second_estimate_c = 999
+                second_estimate_d = 999
+                reset_required = 0
+                print("Reset completed")
             player.first_indivestim = data["estimate"]
             player.erroneous_estimate = 1
             if player.id_in_group == 1:
@@ -991,6 +1024,7 @@ class Task(Page):
                     and second_estimate_d != 999
                 ):
                     aggregate_estimate = (second_estimate_a+second_estimate_b+second_estimate_c+second_estimate_d)/4
+                    reset_required = 1
                     random_number = random.uniform(0, 1)
                     if player.round_displayed == 1:
                         result = Constants.round_1_result
