@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c1783b0f-66e3-46ff-8b1e-bac4d2c3bf9d" name="Changes" comment="Pycharm autogenerate.">
+    <list default="true" id="c1783b0f-66e3-46ff-8b1e-bac4d2c3bf9d" name="Changes" comment="Change message at the end of the trial round.">
+      <change beforePath="$PROJECT_DIR$/.idea/otree_experiments.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/otree_experiments.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/delphi_accountable/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/delphi_accountable/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delphi_hiddenagenda_accountable/Task.html" beforeDir="false" afterPath="$PROJECT_DIR$/delphi_hiddenagenda_accountable/Task.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delphi_hiddenagenda_accountable/Task_Trial.html" beforeDir="false" afterPath="$PROJECT_DIR$/delphi_hiddenagenda_accountable/Task_Trial.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delphi_hiddenagenda_accountable/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/delphi_hiddenagenda_accountable/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +32,18 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/settings.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/scratches/Start ad-hoc Server (Macbook).py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/delphi_accountable/__init__.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/vc_ftf/Task_Trial.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/delphi_hiddenagenda_accountable/__init__.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="26gudEVK0pldVvK2W6BTmvJopbj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -44,16 +52,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/Desktop" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -65,6 +75,9 @@
       <module name="otree_experiments" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/delphi_hiddenagenda_accountable" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -100,7 +113,8 @@
       <workItem from="1647864667044" duration="70000" />
       <workItem from="1647864739385" duration="12910000" />
       <workItem from="1647933235282" duration="5698000" />
-      <workItem from="1647956805087" duration="7759000" />
+      <workItem from="1647956805087" duration="8597000" />
+      <workItem from="1648196655490" duration="15765000" />
     </task>
     <task id="LOCAL-00001" summary="Recreate from time machine.">
       <created>1647862695109</created>
@@ -172,7 +186,42 @@
       <option name="project" value="LOCAL" />
       <updated>1648019898480</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Introduce pseudonymization and feedback">
+      <created>1648032292971</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1648032292971</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Pycharm autogenerate.">
+      <created>1648032405511</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1648032405511</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Add dbsqlite to gitignore.">
+      <created>1648032427326</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1648032427326</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Delete info on video recordings (as it does not apply to these treatments).">
+      <created>1648198015316</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1648198015316</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Change message at the end of the trial round.">
+      <created>1648203312073</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1648203312073</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,8 +251,23 @@
     <MESSAGE value="Introduce pseudonymization and feedback after second estimate to the trial round." />
     <MESSAGE value="Automatically generated by Pycharm." />
     <MESSAGE value="Create new app." />
+    <MESSAGE value="Introduce pseudonymization and feedback" />
     <MESSAGE value="Pycharm autogenerate." />
-    <option name="LAST_COMMIT_MESSAGE" value="Pycharm autogenerate." />
+    <MESSAGE value="Add dbsqlite to gitignore." />
+    <MESSAGE value="Delete info on video recordings (as it does not apply to these treatments)." />
+    <MESSAGE value="Change message at the end of the trial round." />
+    <option name="LAST_COMMIT_MESSAGE" value="Change message at the end of the trial round." />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/delphi_accountable/__init__.py</url>
+          <line>1028</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
