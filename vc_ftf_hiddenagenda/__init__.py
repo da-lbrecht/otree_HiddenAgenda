@@ -127,12 +127,14 @@ class Player(BasePlayer):
                                           )
 
     attention_check_6 = models.FloatField(inital=999,
-                                          label="Q6: What does the bonus you can earn by solving the task"
-                                                " depend on?",
-                                          doc="Q6: What does the bonus you can earn by solving the task depend on?"
-                                              "(1: Only on the accuracy of my own estimates;"
-                                              "2: Only on the accuracy of the joint group estimate;"
-                                              "3: Only on the time needed for solving the task")
+                                          label="Q6: How does your behavior influence your earnings?",
+                                          doc="Q6: How does your behavior influence your earnings?"
+                                              "(1: I will earn a flat fee for the experiment, that does not depend on "
+                                              "my behavior."
+                                              "2: I will learn how my behavior translates into payoffs at the"
+                                              " beginning of each round of the task."
+                                              "3: My earnings do not depend on my behavior but only on the time I need"
+                                              "to complete the experiment.")
 
     failed_attention_check = models.BooleanField(initial=False,
                                                  doc="True if attention check has not been passed at first attempt")
@@ -574,7 +576,7 @@ class Payoffs(Page):
 
 
 page_sequence = [
-                Welcome,
+                # Welcome,
                 TaskIntro,
                 Task_Trial,
                 Task,
