@@ -118,12 +118,14 @@ class Player(BasePlayer):
                                                 " 3: The chance that the ladybird ends up at level 0 after ten steps)"
                                                 )
     attention_check_4 = models.FloatField(initial=999,
-                                          label="Q4: What kind of feedback do you receive in each round?",
-                                            doc="Attention check: What kind of feedback do you receive in each round?"
-                                                " (1: First estimates and corresponding reasoning of all group members,"
-                                                " without knowing which belongs to whom; 2: All estimates and "
-                                                "corresponding reasonings made by the other group members; 3: Only the "
-                                                "reasoning of all group members, without knowing which belongs to whom")
+                                          label="Q4: What kind of information do you receive from your fellow group"
+                                                " members during interaction?",
+                                            doc="Attention check: What kind of information do you receive from your "
+                                                "fellow group members during interaction?"
+                                                " (1: Estimates and corresponding reasoning of all group members, i.e."
+                                                "Person A, B and C as well as myself, without knowing their real "
+                                                "identity. 2: Only numerical estimates made by my fellow group members."
+                                                " 3: Only the reasoning of my fellow group members.")
     attention_check_5 = models.FloatField(initial=999,
                                           label="Q5: What do you know about the ladybird?",
                                             doc="Attention check: What do you know about the ladybird?"
