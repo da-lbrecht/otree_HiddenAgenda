@@ -710,11 +710,6 @@ class Task_Trial(Page):
 
 @staticmethod
 def before_next_page(player: Player, timeout_happened):
-    # global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
-    #     second_estimate_c, second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, estimate_recovery_a, \
-    #     estimate_recovery_b, estimate_recovery_c, estimate_recovery_d, indivarg_recovery_a, indivarg_recovery_b, \
-    #     indivarg_recovery_c, indivarg_recovery_d, error_a, error_b, error_c, error_d
-
     if player.round_number == 1:
         pass
     else:
@@ -1094,11 +1089,6 @@ class Task(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        # global num_estims, estimate_a, estimate_b, estimate_c, estimate_d, second_estimate_a, second_estimate_b, \
-        #     second_estimate_c, second_estimate_d, indivarg_a, indivarg_b, indivarg_c, indivarg_d, estimate_recovery_a,\
-        #     estimate_recovery_b, estimate_recovery_c, estimate_recovery_d, indivarg_recovery_a, indivarg_recovery_b, \
-        #     indivarg_recovery_c, indivarg_recovery_d, error_a, error_b, error_c, error_d
-
         player.random_number = random_number
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
