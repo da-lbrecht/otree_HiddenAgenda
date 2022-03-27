@@ -162,12 +162,40 @@ class Player(BasePlayer):
                                 )
     education = models.IntegerField(label="<b>If you think back to your time since starting primary school, how many"
                                           " years have you been following a formal education (school, vocational"
-                                          " training, university,etc.) until today?</b>",
-                                    min=0,
-                                    max=100,
+                                          " training, university,etc.) until today? Please choose the answer that comes"
+                                          " closest to the exact time.</b>",
+                                    choices=[
+                                        [0, 'none'],
+                                        [1, '1'],
+                                        [2, '2'],
+                                        [3, '3'],
+                                        [4, '4'],
+                                        [5, '5'],
+                                        [6, '6'],
+                                        [7, '7'],
+                                        [8, '8'],
+                                        [9, '9'],
+                                        [10, '10'],
+                                        [11, '11'],
+                                        [12, '12'],
+                                        [13, '13'],
+                                        [14, '14'],
+                                        [15, '15'],
+                                        [16, '16'],
+                                        [17, '17'],
+                                        [18, '18'],
+                                        [19, '19'],
+                                        [20, '20'],
+                                        [21, '21'],
+                                        [22, '22'],
+                                        [23, '23'],
+                                        [24, '24'],
+                                        [25, '25 or more'],
+                                            ],
                                     doc="If you think back to your time since starting primary school, how many"
                                           " years have you been following a formal education (school, vocational"
-                                          " training, university,etc.) until today?")
+                                          " training, university,etc.) until today? Please choose the answer that comes"
+                                          "closest to the exact time.")
     field_of_studies = models.IntegerField(label="<b> What describes your current/most recent field of study"
                                                  " best?</b>",
                                             choices=[
@@ -577,9 +605,9 @@ class Payoffs(Page):
 
 page_sequence = [
                 # Welcome,
-                TaskIntro,
-                Task_Trial,
-                Task,
+                # TaskIntro,
+                # Task_Trial,
+                # Task,
                 Questionnaire,
                 Payoffs
                 ]
