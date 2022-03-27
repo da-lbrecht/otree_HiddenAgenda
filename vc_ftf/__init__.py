@@ -16,6 +16,7 @@ group_accuracy_bonus = 999
 random_number = 999
 result = 999
 overall_accuracy_bonus = 0
+dynamic_timeout = 600
 
 class Constants(BaseConstants):
     name_in_url = 'vc_ftf'
@@ -130,6 +131,11 @@ class Player(BasePlayer):
 
     aggregate_estimate = models.FloatField(doc="Consensus based group estimate entered by group",
                                            min=0, max=100)
+
+    timeout_seconds = models.IntegerField(init=600)
+
+    timeout_happened = models.BooleanField(doc="Indicator, is True if the group did not submit a consensus estimate"
+                                               "before timeout happened.")
 
     # Response Variables for Questionnaire
     gender = models.IntegerField(label="<b>Which gender do you identify with?</b>",
@@ -348,7 +354,16 @@ class TaskIntro(Page):
             }
 
 
+class WaitTrial(WaitPage):
+    pass
+
+
 class Task_Trial(Page):
+
+    @staticmethod
+    def get_timeout_seconds(player):
+        return dynamic_timeout
+
     form_model = 'player'
     form_fields = ['end_of_trial']
 
@@ -414,7 +429,22 @@ class Task_Trial(Page):
                                          "error": "estimate out of range"},
                 }
 
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        if timeout_happened:
+            player.timeout_happened = True
+
+
+class WaitTask(WaitPage):
+    pass
+
+
 class Task(Page):
+
+    @staticmethod
+    def get_timeout_seconds(player):
+        return dynamic_timeout
+
     form_model = 'player'
     form_fields = ['end_of_round']
 
@@ -517,7 +547,10 @@ class Task(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         global estimate_a, estimate_b, estimate_c, estimate_d, aggregate_estimate, \
-            group_accuracy_bonus, random_number, result
+            group_accuracy_bonus, random_number, result, dynamic_timeout
+
+        if timeout_happened:
+            player.timeout_happened = True
 
         player.random_number = random_number
         player.aggregate_estimate = aggregate_estimate
@@ -526,8 +559,11 @@ class Task(Page):
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
+            player.timeout_seconds = 450
+            dynamic_timeout = 450
         else:
             player.start_of_round = player.in_round(player.round_number-1).end_of_round
+
 
 
 class Questionnaire(Page):
@@ -552,8 +588,10 @@ class Payoffs(Page):
 page_sequence = [
                 # Welcome,
                 # TaskIntro,
+                # WaitTrial,
                 # Task_Trial,
-                # Task,
+                WaitTask,
+                Task,
                 Questionnaire,
                 Payoffs
                 ]
