@@ -1,13 +1,13 @@
 from os import environ
 
 SESSION_CONFIGS = [
-    dict(
-        name='delphi',
-        app_sequence=['delphi'],
-        num_demo_participants=4,
-        participation_fee=5,
-        use_browser_bots=False, # Play experiment with bots, as long as programmed bots are available
-    ),
+    # dict(
+    #     name='delphi',
+    #     app_sequence=['delphi'],
+    #     num_demo_participants=4,
+    #     participation_fee=5,
+    #     use_browser_bots=False, # Play experiment with bots, as long as programmed bots are available
+    # ),
     dict(
         name='delphi_accountable',
         app_sequence=['delphi_accountable'],
@@ -15,13 +15,13 @@ SESSION_CONFIGS = [
         participation_fee=5,
         use_browser_bots=False,  # Play experiment with bots, as long as programmed bots are available
     ),
-    dict(
-        name='delphi_hiddenagenda',
-        app_sequence=['delphi_hiddenagenda'],
-        num_demo_participants=4,
-        participation_fee=5,
-        use_browser_bots=False,  # Play experiment with bots, as long as programmed bots are available
-    ),
+    # dict(
+    #     name='delphi_hiddenagenda',
+    #     app_sequence=['delphi_hiddenagenda'],
+    #     num_demo_participants=4,
+    #     participation_fee=5,
+    #     use_browser_bots=False,  # Play experiment with bots, as long as programmed bots are available
+    # ),
     dict(
         name='delphi_hiddenagenda_accountable',
         app_sequence=['delphi_hiddenagenda_accountable'],
