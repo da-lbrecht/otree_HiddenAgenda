@@ -322,7 +322,7 @@ class Player(BasePlayer):
 # Randomization of task round display
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
-        list_of_round_ids = range(1, Constants.num_rounds + 1)
+        list_of_round_ids = list(range(1, Constants.num_rounds + 1))
         subsession_temp_list = list_of_round_ids
         random.shuffle(subsession_temp_list)  # Needed for randomization of round order, comment to disable randomizing
         for player in subsession.get_players():
