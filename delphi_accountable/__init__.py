@@ -43,7 +43,7 @@ reset_required = 0
 class Constants(BaseConstants):
     name_in_url = 'delphi_acc'
     players_per_group = None
-    num_rounds = 2
+    num_rounds = 10
 
     fixed_pay = cu(5)
     avg_pay = cu(15)
@@ -324,7 +324,7 @@ def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
         list_of_round_ids = range(1, Constants.num_rounds + 1)
         subsession_temp_list = list_of_round_ids
-        # random.shuffle(subsession_temp_list) # Needed for randomization of round order
+        random.shuffle(subsession_temp_list)  # Needed for randomization of round order, comment to disable randomizing
         for player in subsession.get_players():
             temp_list = subsession_temp_list
             for i in list_of_round_ids:
