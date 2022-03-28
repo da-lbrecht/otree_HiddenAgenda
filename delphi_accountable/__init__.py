@@ -1153,8 +1153,8 @@ class Payoffs(Page):
 
 
 page_sequence = [
-                # Welcome,
-                # TaskIntro,
+                Welcome,
+                TaskIntro,
                 Task_Trial,
                 Task,
                 Questionnaire,
