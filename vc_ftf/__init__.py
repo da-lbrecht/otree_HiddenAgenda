@@ -21,7 +21,7 @@ dynamic_timeout = 600
 class Constants(BaseConstants):
     name_in_url = 'vc_ftf'
     players_per_group = None
-    num_rounds = 2
+    num_rounds = 10
 
     fixed_pay = cu(5)
     avg_pay = cu(17.5)
@@ -281,9 +281,9 @@ class Player(BasePlayer):
 # Randomization of task round display
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
-        list_of_round_ids = range(1, Constants.num_rounds + 1)
+        list_of_round_ids = list(range(1, Constants.num_rounds + 1))
         subsession_temp_list = list_of_round_ids
-        # random.shuffle(subsession_temp_list) # Needed for randomization of round order
+        random.shuffle(subsession_temp_list)  # Needed for randomization of round order, comment to disable randomizing
         for player in subsession.get_players():
             temp_list = subsession_temp_list
             for i in list_of_round_ids:
@@ -355,7 +355,8 @@ class TaskIntro(Page):
 
 
 class WaitTrial(WaitPage):
-    pass
+    title_text = "Just a second ... "
+    body_text = "As soon as all your fellow group members are ready, you can continue."
 
 
 class Task_Trial(Page):
@@ -436,7 +437,8 @@ class Task_Trial(Page):
 
 
 class WaitTask(WaitPage):
-    pass
+    title_text = "Just a second ... "
+    body_text = "As soon as all your fellow group members are ready, you can continue."
 
 
 class Task(Page):
@@ -591,7 +593,7 @@ class Payoffs(Page):
 
 
 page_sequence = [
-                Welcome,
+                # Welcome,
                 TaskIntro,
                 WaitTrial,
                 Task_Trial,
