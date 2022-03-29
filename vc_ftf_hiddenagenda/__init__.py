@@ -533,7 +533,8 @@ class Task(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         global estimate_a, estimate_b, estimate_c, estimate_d, aggregate_estimate, \
-            group_accuracy_bonus, random_number, result, dynamic_timeout
+            group_accuracy_bonus, hiddenagenda_bonus, hiddenagenda, overall_accuracy_bonus,\
+            overall_hiddenagenda_bonus, result, dynamic_timeout
 
         if timeout_happened:
             player.timeout_happened = True
