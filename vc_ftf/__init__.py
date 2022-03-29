@@ -24,7 +24,7 @@ class Constants(BaseConstants):
     num_rounds = 2
 
     fixed_pay = cu(5)
-    avg_pay = cu(15)
+    avg_pay = cu(17.5)
     group_bonus = cu(6)
     individual_share_of_group_bonus = cu(1.5)
     max_group_accuracy_bonus_per_round = cu(6)
