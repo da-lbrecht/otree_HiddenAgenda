@@ -563,13 +563,14 @@ class Task(Page):
 
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
-        player.timeout_seconds = dynamic_timeout
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
             dynamic_timeout = 450
+            player.timeout_seconds = 600
         else:
             player.start_of_round = player.in_round(player.round_number-1).end_of_round
+            player.timeout_seconds = 450
 
 
 

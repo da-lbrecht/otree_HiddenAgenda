@@ -614,8 +614,10 @@ class Task(Page):
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
             dynamic_timeout = 450
+            player.timeout_seconds = 600
         else:
             player.start_of_round = player.in_round(player.round_number-1).end_of_round
+            player.timeout_seconds = 450
 
 
 class Questionnaire(Page):
