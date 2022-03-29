@@ -115,7 +115,7 @@ class Player(BasePlayer):
     attention_check_4 = models.FloatField(initial=999,
                                           label="Q4: How do you interact with your fellow group members?",
                                             doc="Attention check: What kind of feedback do you receive in each round?"
-                                                " (1: Via video-conference on my second screen; 2: Through a chat "
+                                                " (1: Via video-conference; 2: Through a chat "
                                                 "function which opens whenever we need to interact 3: By approaching my"
                                                 " group members physically at their cubicle in the lab.")
     attention_check_5 = models.FloatField(initial=999,
