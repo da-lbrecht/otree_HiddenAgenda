@@ -489,36 +489,6 @@ class Task(Page):
                     ):
                         aggregate_estimate = (estimate_a+estimate_b+estimate_c+estimate_d)/4
                         random_number = random.uniform(0, 1)
-                        if player.round_displayed == 1:
-                            result = Constants.round_1_result
-                        elif player.round_displayed == 2:
-                            result = Constants.round_2_result
-                        elif player.round_displayed == 3:
-                            result = Constants.round_3_result
-                        elif player.round_displayed == 4:
-                            result = Constants.round_4_result
-                        elif player.round_displayed == 5:
-                            result = Constants.round_5_result
-                        elif player.round_displayed == 6:
-                            result = Constants.round_6_result
-                        elif player.round_displayed == 7:
-                            result = Constants.round_7_result
-                        elif player.round_displayed == 8:
-                            result = Constants.round_8_result
-                        elif player.round_displayed == 9:
-                            result = Constants.round_9_result
-                        elif player.round_displayed == 10:
-                            result = Constants.round_10_result
-                        if result == 1:
-                            if random_number > pow((1 - (aggregate_estimate/100)), 2):
-                                group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
-                            elif random_number <= pow((1 - (aggregate_estimate/100)), 2):
-                                group_accuracy_bonus = 0
-                        elif result == 0:
-                            if random_number > pow((aggregate_estimate/100), 2):
-                                group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
-                            elif random_number <= pow((aggregate_estimate/100), 2):
-                                group_accuracy_bonus = 0
                         estimate_a = 999
                         estimate_b = 999
                         estimate_c = 999
@@ -551,15 +521,50 @@ class Task(Page):
 
         if timeout_happened:
             player.timeout_happened = True
+            group_accuracy_bonus = 0
+            player.random_number = 999
+            player.estimate = 999
+            player.aggregate_estimate = 999
+        else:
+            if player.round_displayed == 1:
+                result = Constants.round_1_result
+            elif player.round_displayed == 2:
+                result = Constants.round_2_result
+            elif player.round_displayed == 3:
+                result = Constants.round_3_result
+            elif player.round_displayed == 4:
+                result = Constants.round_4_result
+            elif player.round_displayed == 5:
+                result = Constants.round_5_result
+            elif player.round_displayed == 6:
+                result = Constants.round_6_result
+            elif player.round_displayed == 7:
+                result = Constants.round_7_result
+            elif player.round_displayed == 8:
+                result = Constants.round_8_result
+            elif player.round_displayed == 9:
+                result = Constants.round_9_result
+            elif player.round_displayed == 10:
+                result = Constants.round_10_result
+            if result == 1:
+                if random_number > pow((1 - (aggregate_estimate / 100)), 2):
+                    group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
+                elif random_number <= pow((1 - (aggregate_estimate / 100)), 2):
+                    group_accuracy_bonus = 0
+            elif result == 0:
+                if random_number > pow((aggregate_estimate / 100), 2):
+                    group_accuracy_bonus = Constants.max_group_accuracy_bonus_per_round
+                elif random_number <= pow((aggregate_estimate / 100), 2):
+                    group_accuracy_bonus = 0
+            player.random_number = random_number
+            player.aggregate_estimate = aggregate_estimate
 
-        player.random_number = random_number
-        player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus*0.25
         player.payoff += group_accuracy_bonus*0.25
+        player.timeout_seconds = dynamic_timeout
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
-            player.timeout_seconds = 450
             dynamic_timeout = 450
         else:
             player.start_of_round = player.in_round(player.round_number-1).end_of_round
@@ -588,8 +593,8 @@ class Payoffs(Page):
 page_sequence = [
                 # Welcome,
                 # TaskIntro,
-                # WaitTrial,
-                # Task_Trial,
+                WaitTrial,
+                Task_Trial,
                 WaitTask,
                 Task,
                 Questionnaire,
