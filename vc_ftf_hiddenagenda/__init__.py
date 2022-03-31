@@ -149,6 +149,8 @@ class Player(BasePlayer):
     aggregate_estimate = models.FloatField(doc="Consensus based group estimate entered by group",
                                            min=0, max=100)
 
+    timeout_seconds = models.IntegerField(init=600)
+
     timeout_happened = models.BooleanField(doc="Indicator, is True if the group did not submit a consensus estimate"
                                                "before timeout happened.")
 
