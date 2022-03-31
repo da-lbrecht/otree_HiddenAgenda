@@ -611,8 +611,6 @@ class Task(Page):
             player.hiddenagenda_bonus = hiddenagenda_bonus
             player.payoff += hiddenagenda_bonus
 
-        player.timeout_seconds = dynamic_timeout
-
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
             dynamic_timeout = 450
