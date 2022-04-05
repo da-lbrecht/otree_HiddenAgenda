@@ -528,6 +528,7 @@ class Task(Page):
             player.estimate = 999
             player.aggregate_estimate = 999
         else:
+            player.timeout_happened = False
             if player.round_displayed == 1:
                 result = Constants.round_1_result
             elif player.round_displayed == 2:
