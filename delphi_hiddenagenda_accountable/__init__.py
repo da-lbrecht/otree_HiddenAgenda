@@ -45,7 +45,7 @@ reset_required = 0
 class Constants(BaseConstants):
     name_in_url = 'delphi_hiddenagenda_acc'
     players_per_group = None
-    num_rounds = 2
+    num_rounds = 10
 
     fixed_pay = cu(5)
     avg_pay = cu(17.5)
@@ -1217,10 +1217,10 @@ class Payoffs(Page):
 
 
 page_sequence = [
-    # Welcome,
-    # TaskIntro,
-    # Task_Trial,
+    Welcome,
+    TaskIntro,
+    Task_Trial,
     Task,
-    # Questionnaire,
+    Questionnaire,
     Payoffs
 ]
