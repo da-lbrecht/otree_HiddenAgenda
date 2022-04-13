@@ -39,15 +39,13 @@ feedback_order = 999
 result = 999
 hiddenagenda = 999
 hiddenagenda_bonus = 0
-overall_hiddenagenda_bonus = 0
-overall_accuracy_bonus = 0
 reset_required = 0
 
 
 class Constants(BaseConstants):
     name_in_url = 'delphi_hiddenagenda_acc'
     players_per_group = None
-    num_rounds = 10
+    num_rounds = 2
 
     fixed_pay = cu(5)
     avg_pay = cu(17.5)
@@ -346,6 +344,10 @@ def creating_session(subsession: Subsession):
             temp_list = subsession_temp_list
             for i in list_of_round_ids:
                 player.in_round(i).round_displayed = temp_list[i - 1]
+    players = subsession.get_players()
+    for p in players:
+        p.participant.overall_hiddenagenda_bonus = 0
+        p.participant.overall_accuracy_bonus = 0
 
 
 # PAGES
@@ -431,7 +433,7 @@ class Task_Trial(Page):
             group_accuracy_bonus, random_number, feedback_order, result, indivarg_recovery_a, indivarg_recovery_b, \
             indivarg_recovery_c, indivarg_recovery_d, estimate_recovery_a, estimate_recovery_b, \
             estimate_recovery_c, estimate_recovery_d, error_a, error_b, error_c, error_d, hiddenagenda, \
-            overall_hiddenagenda_bonus, hiddenagenda_bonus, overall_accuracy_bonus, reset_required
+            hiddenagenda_bonus, reset_required
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
@@ -463,8 +465,6 @@ class Task_Trial(Page):
                 second_estimate_d = 999
                 hiddenagenda = 999
                 hiddenagenda_bonus = 0
-                overall_hiddenagenda_bonus = 0
-                overall_accuracy_bonus = 0
                 reset_required = 0
                 print("Reset completed")
             player.first_indivestim = data["estimate"]
@@ -785,7 +785,7 @@ class Task(Page):
             group_accuracy_bonus, random_number, feedback_order, result, indivarg_recovery_a, indivarg_recovery_b, \
             indivarg_recovery_c, indivarg_recovery_d, estimate_recovery_a, estimate_recovery_b, \
             estimate_recovery_c, estimate_recovery_d, error_a, error_b, error_c, error_d, hiddenagenda, \
-            overall_hiddenagenda_bonus, hiddenagenda_bonus, overall_accuracy_bonus, reset_required
+            hiddenagenda_bonus, reset_required
         group = player.group
         players = group.get_players()
         if data["information_type"] == "estimate":
@@ -817,8 +817,6 @@ class Task(Page):
                 second_estimate_d = 999
                 hiddenagenda = 999
                 hiddenagenda_bonus = 0
-                overall_hiddenagenda_bonus = 0
-                overall_accuracy_bonus = 0
                 reset_required = 0
                 print("Reset completed")
             player.first_indivestim = data["estimate"]
@@ -1124,14 +1122,11 @@ class Task(Page):
                             hiddenagenda_bonus = Constants.hiddenagenda_bonus
                         elif random_number > pow((1 - (aggregate_estimate / 100)), 2):
                             hiddenagenda_bonus = 0
-                        overall_hiddenagenda_bonus += hiddenagenda_bonus
                     elif hiddenagenda == 100:
                         if random_number <= pow((aggregate_estimate / 100), 2):
                             hiddenagenda_bonus = Constants.hiddenagenda_bonus
                         elif random_number > pow((aggregate_estimate / 100), 2):
                             hiddenagenda_bonus = 0
-                        overall_hiddenagenda_bonus += hiddenagenda_bonus
-                    overall_accuracy_bonus += group_accuracy_bonus
                     return {
                         1: {"information_type": "completion_indicator_a",
                             "group_estimate": aggregate_estimate,
@@ -1170,15 +1165,20 @@ class Task(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
+        global group_accuracy_bonus, hiddenagenda_bonus
+
         player.random_number = random_number
         player.aggregate_estimate = aggregate_estimate
         player.group_accuracy_bonus = group_accuracy_bonus * 0.25
         player.payoff += group_accuracy_bonus * 0.25
         player.feedback_order = feedback_order
 
+        player.participant.overall_accuracy_bonus += group_accuracy_bonus
+
         if player.id_in_group >= 3:
             player.hiddenagenda_bonus = hiddenagenda_bonus
             player.payoff += hiddenagenda_bonus
+            player.participant.overall_hiddenagenda_bonus += hiddenagenda_bonus
 
         if player.round_number == 1:
             player.start_of_round = player.end_of_trial
@@ -1209,19 +1209,18 @@ class Payoffs(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        global overall_hiddenagenda_bonus
         player
         return {
-            "overall_hiddenagenda_bonus": cu(overall_hiddenagenda_bonus),
-            "overall_accuracy_bonus": cu(overall_accuracy_bonus / 4),
+            "overall_hiddenagenda_bonus": cu(player.participant.overall_hiddenagenda_bonus),
+            "overall_accuracy_bonus": cu(player.participant.overall_accuracy_bonus / 4),
         }
 
 
 page_sequence = [
-    Welcome,
-    TaskIntro,
-    Task_Trial,
+    # Welcome,
+    # TaskIntro,
+    # Task_Trial,
     Task,
-    Questionnaire,
+    # Questionnaire,
     Payoffs
 ]
